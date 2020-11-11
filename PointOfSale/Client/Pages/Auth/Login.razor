@@ -33,7 +33,7 @@
                             <p class="text-muted font-weight-bold">Enter your username and password</p>
                         </div>
                         <!--begin::Form-->
-                        <EditForm Model="loginModel" OnValidSubmit="HandleLogin" >
+                        <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
                             <DataAnnotationsValidator />
                             <ValidationSummary />
 
@@ -51,7 +51,7 @@
                                     <span></span>
                                 </label>
                             </div>
-                            <button type="submit"  class="btn btn-primary font-weight-bold px-9 py-4 my-3">Submit</button>
+                            <button type="submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3">Submit</button>
                         </EditForm>
 
                         <!--end::Form-->
@@ -121,16 +121,14 @@
         var loginResult = JsonSerializer.Deserialize<LoginResult>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
 
-        //   var loginResult = JsonSerializer.Deserialize<LoginResult>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-        await _localStorage.SetItemAsync("authToken", loginResult.Token);
-        //  ApiAuthenticationStateProvider apiAuthentication = new ApiAuthenticationStateProvider(Http, _localStorage);
-        //  apiAuthentication.MarkUserAsAuthenticated(loginModel.Email);
-        ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginModel.Email);
-        Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResult.Token);
+
 
 
         if (loginResult.Successful)
         {
+            await _localStorage.SetItemAsync("authToken", loginResult.Token);
+            ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsAuthenticated(loginModel.Email);
+            Http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", loginResult.Token);
             NavigationManager.NavigateTo("/");
         }
         else
