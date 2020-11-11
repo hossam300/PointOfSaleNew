@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView>
+    <Authorized>
+
+        <div class="topbar-item" style="margin-right: -100px;">
+            <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                <div class="d-flex flex-column text-right pr-3">
+                    <span class="text-white  font-weight-bold font-size-sm d-none d-md-inline"> Hello, @context.User.Identity.Name!</span>
+                </div>
+                <span class="symbol symbol-35">
+                    <span class="symbol-label font-size-h5 font-weight-bold text-white bg-white-o-30"><a class="nav-link btn btn-link" href="/LogOut"><i class="flaticon-logout"></i></a></span>
+                </span>
+            </div>
+        </div>
+       
+        
+    </Authorized>
+    <NotAuthorized>
+        <a class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-4"  href="/login"  style="margin-top: 5%;">Log in</a>
+        <a class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-4" href="/register" style="margin-top: 5%;">Register</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+

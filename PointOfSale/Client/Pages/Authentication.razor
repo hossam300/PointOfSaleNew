@@ -1,0 +1,13 @@
+﻿@page "/authentication/{action}"
+@inject NavigationManager navigationManager
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@*<RemoteAuthenticatorView Action="@Action" />*@
+
+@code{
+    [Parameter] public string Action { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        // await AuthService.Logout();
+        navigationManager.NavigateTo("/Login");
+    }
+}

@@ -1,0 +1,73 @@
+﻿ <!--begin::Header-->
+<div id="kt_header" class="header flex-column header-fixed">
+    <!--begin::Top-->
+    <div class="header-top">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Left-->
+            <div class="d-none d-lg-flex align-items-center mr-3">
+                <!--begin::Logo-->
+                <NavLink href="/" class="mr-20 o_menu_brand">
+                    Point Of Sales
+                    @*  <img alt="Logo" src="assets/media/logos/logo-letter-9.png" class="max-h-35px" />*@
+                </NavLink>
+                <!--end::Logo-->
+                <!--begin::Tab Navs(for desktop mode)-->
+                <ul class="header-tabs nav align-self-end font-size-lg" role="tablist">
+                    <!--begin::Item-->
+                    <li class="nav-item">
+                        <NavLink href="#" class="nav-link py-4 px-6 active" data-toggle="tab" data-target="#kt_header_tab_1" role="tab">Home</NavLink>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="nav-item mr-3">
+                        <NavLink href="#" class="nav-link py-4 px-6" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">Orders</NavLink>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="nav-item mr-3">
+                        <NavLink href="#" class="nav-link py-4 px-6" data-toggle="tab" data-target="#kt_header_tab_3" role="tab">Products</NavLink>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="nav-item mr-3">
+                        <NavLink href="#" class="nav-link py-4 px-6" data-toggle="tab" data-target="#kt_header_tab_4" role="tab">Reporting</NavLink>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="nav-item mr-3">
+                        <NavLink href="#" class="nav-link py-4 px-6" data-toggle="tab" data-target="#kt_header_tab_5" role="tab">Configuration</NavLink>
+                    </li>
+                    <!--end::Item-->
+                </ul>
+                <!--begin::Tab Navs-->
+            </div>
+            <!--end::Left-->
+            <!--begin::Topbar-->
+            <div class="topbar bg-primary">
+                <Notifications ></Notifications>
+                <HeaderQuickPanel></HeaderQuickPanel>
+                <QuickPanel></QuickPanel>
+                <Language></Language>
+                <LoginDisplay></LoginDisplay>
+
+
+                <!--end::Quick panel-->
+                <!--begin::User-->
+              
+                <!--end::User-->
+            </div>
+            <!--end::Topbar-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Top-->
+    <!--begin::Bottom-->
+    <Navigation ></Navigation>
+    <!--end::Bottom-->
+</div>
+<!--end::Header-->
+
+@code {
+
+}

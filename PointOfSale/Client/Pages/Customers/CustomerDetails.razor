@@ -1,0 +1,204 @@
+﻿@page "/CustomerDetails/{id:int}"
+<div class="card card-custom">
+    <div class="card-header">
+        @*<div class="card-title">
+                <h3 class="card-label">@customer.Name</h3>
+            </div>*@
+        <div class="card-toolbar">
+            <ul class="nav nav-bold nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_7_1">Customer Details</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_2">Customer Contacts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_3">Customer Sales</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="kt_tab_pane_7_1" role="tabpanel" aria-labelledby="kt_tab_pane_7_1">
+                <div class="flex-row-fluid ml-lg-8">
+                    <!--begin::Card-->
+                    <div class="card card-custom card-stretch">
+                        <!--begin::Header-->
+                        <div class="card-header py-3">
+                            <div class="card-title align-items-start flex-column">
+                                <h3 class="card-label font-weight-bolder text-dark">@customer.Name Information</h3>
+                            </div>
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Form-->
+                            <!--begin::Body-->
+                            <div class="card-body">
+                                <div class="row">
+                                    <label class="col-xl-3"></label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        <h5 class="font-weight-bold mb-6">Customer Info</h5>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-3 col-lg-3 col-form-label text-right">Image</label>
+                                    <div class="col-lg-9 col-xl-6">
+                                        @if (customer.CustomerImage == "" || customer.CustomerImage == null)
+                                        {
+                                            <img src="assets/media/users/300_21.jpg" style="width:200px" />
+                                        }
+                                        else
+                                        { <img src="@customer.CustomerImage" style="width:200px" />}
+
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.Name)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.Name</label>
+                                            @*<InputText id="Name" @bind-Value="customer.Name" class="form-control" />*@
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.AddressTypeId)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@addressType.Type</label>
+                                            @*<RadzenDropDown AllowClear="true" TValue="int" Name="AddressTypeId"
+                                                            FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
+                                                            AllowFiltering="true" Placeholder="Select..."
+                                                            Data="@addressTypes" TextProperty="Type" @bind-Value="@customer.AddressTypeId"
+                                                            ValueProperty="Id"  class="form-control" Style="margin-bottom: 20px">
+                                            </RadzenDropDown>*@
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.Phone)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.Phone</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.Mobile)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.Mobile</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.Email)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.Email</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.CompanyAddressStreet1)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.CompanyAddressStreet1</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.CompanyAddressStreet2)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.CompanyAddressStreet2</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.City)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.City</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.Country)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.Country</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.TaxID)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.TaxID</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.JobPosition)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.JobPosition</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.WebsiteLink)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.WebsiteLink</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.Title)"></DisplayName>
+                                        <div class="col-xl-8">
+                                            <label class="form-control">@customer.Title</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <DisplayName For="@(() => customer.Tags)"></DisplayName>
+                                        @*<label class="col-xl-4 col-lg-4 col-form-label">Tags</label>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@customer.Tags</label>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                        <!--end::Form-->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="kt_tab_pane_7_2" role="tabpanel" aria-labelledby="kt_tab_pane_7_2">
+                <AddCustomerConacts id="@id"></AddCustomerConacts>
+            </div>
+            <div class="tab-pane fade" id="kt_tab_pane_7_3" role="tabpanel" aria-labelledby="kt_tab_pane_7_3">
+
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter] public int id { get; set; }
+    Customer customer = new Customer();
+    AddressType addressType = new AddressType();
+    protected override async Task OnInitializedAsync()
+    {
+        await JSRuntime.InvokeVoidAsync("StartLoading");
+        customer = await Http.GetFromJsonAsync<Customer>("/api/Customers/GetById/" + id);
+        addressType = await Http.GetFromJsonAsync<AddressType>("/api/AddressTypes/GetById/"+ customer.AddressTypeId);
+        await JSRuntime.InvokeVoidAsync("StopLoading");
+    }
+}

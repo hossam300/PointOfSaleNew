@@ -1,0 +1,168 @@
+﻿@page "/AddLoyaltyProgram"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent @ref="content1" Container="main">
+                    <ChildContent>
+
+                        <RadzenTemplateForm @ref="formLoyaltyProgram" Data="@(LoyaltyProgram)" Visible="@(LoyaltyProgram != null)" TItem="LoyaltyProgram" Submit="@FormLoyaltyProgramSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => LoyaltyProgram.Name)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenTextBox @bind-Value="LoyaltyProgram.Name" style="width: 100%" Name="Type">
+                                                </RadzenTextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => LoyaltyProgram.PointPerMoneySpent)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenNumeric @bind-Value="LoyaltyProgram.PointPerMoneySpent" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card card-custom">
+                                        <div class="card-header">
+                                            <div class="card-toolbar">
+                                                <ul class="nav nav-bold nav-pills">
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_7_1">Rewards</a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_2">Rules</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content">
+                                                <div class="tab-pane fade show active" id="kt_tab_pane_7_1" role="tabpanel" aria-labelledby="kt_tab_pane_7_1">
+                                                    <div class="flex-row-fluid ml-lg-8">
+                                                        <!--begin::Card-->
+                                                        <div class="card card-custom card-stretch">
+                                                            <!--begin::Header-->
+                                                            <div class="card-header py-3">
+                                                                <div class="card-title align-items-start flex-column">
+                                                                    <h3 class="card-label font-weight-bolder text-dark">Reward the customer with gifts or discounts for loyalty points</h3>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <RadzenButton Icon="add_circle_outline" class="btn btn-light-primary font-weight-bold ml-2" style="margin-bottom: 10px" Text="Add" Click="@btnRewardsClick">
+                                                                            </RadzenButton>
+                                                                            <RadzenGrid @ref="gridRewards" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(Rewards)" TItem="Reward">
+                                                                                <Columns>
+                                                                                    <RadzenGridColumn TItem="Reward" Context="Reward" Property="Id" Title="Id" Type="integer">
+                                                                                    </RadzenGridColumn>
+                                                                                    <RadzenGridColumn TItem="Reward" Context="Reward" Property="Name" Title="Name" Type="string"></RadzenGridColumn>
+                                                                                        <RadzenGridColumn TItem="Reward" Context="Reward" Property="RewardType" Title="Reward Type" Type="string">
+                                                                                            <Template Context="Reward">
+                                                                                                @Reward.RewardType.ToString()
+                                                                                                @Reward.RewardCost.ToString()
+                                                                                            </Template>
+                                                                                        </RadzenGridColumn>
+                                                                                        <RadzenGridColumn TItem="Reward" Context="Reward" Property="RewardCost" Title="Reward Cost" Type="integer">
+                                                                                        </RadzenGridColumn>
+                                                                                        <RadzenGridColumn TItem="Reward" Context="Reward" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                                                            <Template Context="Reward">
+                                                                                                <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRewardRow(Reward))">
+                                                                                                </RadzenButton>
+                                                                                            </Template>
+                                                                                        </RadzenGridColumn>
+                                                                                        <RadzenGridColumn TItem="Reward" Context="Reward" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                                                            <Template Context="Reward">
+                                                                                                <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteRewardButtonClick(args, Reward))">
+                                                                                                </RadzenButton>
+                                                                                            </Template>
+                                                                                        </RadzenGridColumn>
+                                                                                </Columns>
+                                                                            </RadzenGrid>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade show" id="kt_tab_pane_7_2" role="tabpanel" aria-labelledby="kt_tab_pane_7_2">
+                                                    <div class="flex-row-fluid ml-lg-8">
+                                                        <!--begin::Card-->
+                                                        <div class="card card-custom card-stretch">
+                                                            <!--begin::Header-->
+                                                            <div class="card-header py-3">
+                                                                <div class="card-title align-items-start flex-column">
+                                                                    <h3 class="card-label font-weight-bolder text-dark">Rules change how loyalty points are earned for specific products or categories</h3>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <RadzenButton Icon="add_circle_outline" class="btn btn-light-primary font-weight-bold ml-2" style="margin-bottom: 10px" Text="Add" Click="@btnRulesClick">
+                                                                        </RadzenButton>
+                                                                        <RadzenGrid @ref="gridRules" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(Rules)" TItem="Rules">
+                                                                            <Columns>
+                                                                                <RadzenGridColumn TItem="Rules" Context="Rules" Property="Id" Title="Id" Type="integer">
+                                                                                </RadzenGridColumn>
+                                                                                <RadzenGridColumn TItem="Rules" Context="Rules" Property="Name" Title="Name" Type="string">
+                                                                                   
+                                                                                </RadzenGridColumn>
+                                                                                <RadzenGridColumn TItem="Rules" Context="Rules" Property="PointsPerUnit" Title="Points per Unit" Type="integer">
+                                                                                </RadzenGridColumn> 
+                                                                                <RadzenGridColumn TItem="Rules" Context="Rules" Property="PointsPerMoneySpent" Title="Points per $ spent" Type="integer">
+                                                                                </RadzenGridColumn>
+                                                                                <RadzenGridColumn TItem="Rules" Context="Rules" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                                                    <Template Context="Rules">
+                                                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRulesRow(Rules))">
+                                                                                        </RadzenButton>
+                                                                                    </Template>
+                                                                                </RadzenGridColumn>
+                                                                                <RadzenGridColumn TItem="Rules" Context="Rules" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                                                    <Template Context="Rules">
+                                                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteRulesButtonClick(args, Rules))">
+                                                                                        </RadzenButton>
+                                                                                    </Template>
+                                                                                </RadzenGridColumn>
+                                                                            </Columns>
+                                                                        </RadzenGrid>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

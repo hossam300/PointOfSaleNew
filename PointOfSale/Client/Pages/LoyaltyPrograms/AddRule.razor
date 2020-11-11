@@ -1,0 +1,69 @@
+﻿@page "/AddRule"
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent Container="main">
+                    <ChildContent>
+
+                        <RadzenTemplateForm  Data="@(Rules)" Visible="@(Rules != null)" TItem="Rules" Submit="@FormRulesSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => Rules.Name)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenTextBox @bind-Value="Rules.Name" style="width: 100%" Name="Type">
+                                                </RadzenTextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-9">
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => Rules.PointsPerUnit)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenNumeric @bind-Value="Rules.PointsPerUnit" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body p-9">
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => Rules.PointsPerMoneySpent)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenNumeric @bind-Value="Rules.PointsPerMoneySpent" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

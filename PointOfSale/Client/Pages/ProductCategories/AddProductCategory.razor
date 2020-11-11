@@ -1,0 +1,74 @@
+﻿@page "/AddProductCategory/{Id:int?}"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent @ref="content1" Container="main">
+                    <ChildContent>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <RadzenTemplateForm @ref="form0" Data="@(productcategory)" Visible="@(productcategory != null)" TItem="ProductCategory" Submit="@Form0Submit">
+                                    <ChildContent>
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <div class="col-md-3">
+                                                <RadzenLabel @ref="label2" Text="Category Name" Component="CategoryName" style="width: 100%">
+                                                </RadzenLabel>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <RadzenTextBox @bind-Value="productcategory.CategoryName" style="width: 100%" Name="CategoryName">
+                                                </RadzenTextBox>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <div class="col-md-3">
+                                                <RadzenLabel @ref="label2" Text="Image" Component="CategoryName" style="width: 100%">
+                                                </RadzenLabel>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <input type="file" @ref="_input" @onchange="HandleSelected" accept=".jpg, .jpeg, png" />
+                                                @if (ImgUrl != null)
+                                                {<img src="@ImgUrl" style="width:300px" />}
+                                            </div>
+                                        </div>
+
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <div class="col-md-3">
+                                                <RadzenLabel @ref="label3" Text="Product Category" Component="ParentCategoryId" style="width: 100%">
+                                                </RadzenLabel>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <RadzenDropDown AllowClear="true" TValue="int?" Name="ParentCategoryId"
+                                                                FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
+                                                                AllowFiltering="true" Placeholder="Select..."
+                                                                Data="@getProductCategoriesResult" TextProperty="CategoryName" @bind-Value="@productcategory.ParentCategoryId"
+                                                                ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+
+
+                                                </RadzenDropDown>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col offset-sm-3">
+                                                <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                                </RadzenButton>
+                                                <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
+                                                </RadzenButton>
+                                            </div>
+                                        </div>
+                                    </ChildContent>
+                                </RadzenTemplateForm>
+                            </div>
+                        </div>
+                    </ChildContent>
+                </RadzenContent>
+
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

@@ -1,0 +1,219 @@
+﻿@page "/"
+<!--begin::Subheader-->
+<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
+                <!--end::Page Title-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index" asp-controller="Home" class="text-muted">Home</a>
+                    </li>
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center">
+            <NavLink href="/Shops/AddShop" class="btn btn-primary">
+                Add Shop
+            </NavLink>
+        </div>
+        <!--end::Toolbar-->
+    </div>
+</div>
+<!--end::Subheader-->
+<!--begin::Entry-->
+<div class="d-flex flex-column-fluid">
+    <!--begin::Container-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="card-icon">
+                                <i class="flaticon-graphic-2 text-primary"></i>
+                            </span>
+                            <h3 class="card-label">
+                                Shop 1
+                                <small>Branch : Nasr City</small>
+                            </h3>
+                        </div>
+                        <div class="card-toolbar">
+                            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                <NavLink href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ki ki-bold-more-hor"></i>
+                                </NavLink>
+                                <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
+                                    <!--begin::Navigation-->
+                                    <ul class="navi navi-hover">
+                                        <li class="navi-item">
+                                            <NavLink href="/Sessions/Index/1" class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-success">Sessions</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-item">
+                                            <NavLink href="/SalesOrders/Index/1" class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-danger">Sales Orders</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-item">
+                                            <NavLink href="/Orders/Index/1" class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-warning">Orders</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-item">
+                                            <NavLink href="/Shops/EditShop/1" Match=@NavLinkMatch.All class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-primary">Edit</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-item">
+                                            <NavLink href="/Shops/ShopDetails/1" Match=@NavLinkMatch.All class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-dark">Details</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-separator mt-3 opacity-70"></li>
+                                        <li class="navi-footer py-4">
+                                            <NavLink class="btn btn-clean font-weight-bold btn-sm" href="/Shops/AddShop">
+                                                <i class="ki ki-plus icon-sm"></i>Add new
+                                            </NavLink>
+                                        </li>
+                                    </ul>
+                                    <!--end::Navigation-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+
+                                <NavLink href="/Sessions/Create/1" target="_blank" Match=@NavLinkMatch.Prefix class="btn btn-primary">New Session</NavLink>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Last Closing Cash </p>
+                                <p>5000 EGP </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Last Closing Date </p>
+                                <p>06/22/2020 06:24 PM </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+            @*<div class="col-lg-1"></div>*@
+            <div class="col-lg-6">
+                <!--begin::Card-->
+                <div class="card card-custom">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="card-icon">
+                                <i class="flaticon-graphic-2 text-primary"></i>
+                            </span>
+                            <h3 class="card-label">
+                                Shop 2
+                                <small>Branch : Maadi</small>
+                            </h3>
+                        </div>
+                        <div class="card-toolbar">
+                            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                <NavLink href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ki ki-bold-more-hor"></i>
+                                </NavLink>
+                                <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
+                                    <!--begin::Navigation-->
+                                    <ul class="navi navi-hover">
+                                        <li class="navi-item">
+                                            <NavLink href="/Sessions/Index/2" class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-success">Sessions</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-item">
+                                            <NavLink href="/SalesOrders/Index/2" class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-danger">Sales Orders</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-item">
+                                            <NavLink href="/Orders/Index/1" class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-warning">Orders</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-item">
+                                            <NavLink href="/Shops/EditShop/2" class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-primary">Edit</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-item">
+                                            <NavLink href="/Shops/ShopDetails/2" class="navi-link">
+                                                <span class="navi-text">
+                                                    <span class="label label-xl label-inline label-light-dark">Details</span>
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                        <li class="navi-separator mt-3 opacity-70"></li>
+                                        <li class="navi-footer py-4">
+                                            <NavLink class="btn btn-clean font-weight-bold btn-sm" href="/Shops/AddShop">
+                                                <i class="ki ki-plus icon-sm"></i>Add new
+                                            </NavLink>
+                                        </li>
+                                    </ul>
+                                    <!--end::Navigation-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <NavLink target="_blank" href="/Sessions/Create/2" class="btn btn-primary">New Session</NavLink>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Last Closing Cash </p>
+                                <p>6500 EGP </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p>Last Closing Date </p>
+                                <p>06/22/2020 05:24 PM </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Card-->
+            </div>
+        </div>
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Entry-->
+@code{
+
+}

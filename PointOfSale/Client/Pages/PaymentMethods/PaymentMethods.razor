@@ -1,0 +1,50 @@
+﻿@page "/PaymentMethods"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent @ref="content1" Container="main">
+                            <ChildContent>
+                                <RadzenHeading @ref="pageTitle" Size="H1" Text="Payment Methods">
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getPaymentMethodsResult)" TItem="PaymentMethod" >
+                                            <Columns>
+                                                <RadzenGridColumn TItem="PaymentMethod" Context="paymentMethod" Property="Id" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PaymentMethod" Context="paymentMethod" Property="MehtodName" Title="Mehtod Name" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PaymentMethod" Context="paymentMethod" Property="Cash" Title="Cash" Type="boolean">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PaymentMethod" Context="paymentMethod" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="paymentMethod">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(paymentMethod))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PaymentMethod" Context="paymentMethod" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="paymentMethod">
+                                                        <RadzenButton @ref="gridDeleteButton" ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, paymentMethod))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

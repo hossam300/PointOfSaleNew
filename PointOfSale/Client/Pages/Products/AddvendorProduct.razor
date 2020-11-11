@@ -1,0 +1,57 @@
+﻿@page "/AddvendorProduct/{id:int?}/{VendorProductId:int?}"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent @ref="content1" Container="main">
+                    <ChildContent>
+
+                        <RadzenTemplateForm @ref="formAddressType" Data="@(vendorProduct)" Visible="@(vendorProduct != null)" TItem="VendorProduct" Submit="@FormAddressTypeSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => vendorProduct.VendorId)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenDropDown AllowClear="true" Name="VendorId"
+                                                                FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                AllowFiltering="true" Placeholder="Select..."
+                                                                Data="@vendors" @bind-Value="vendorProduct.VendorId"
+                                                                Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                </RadzenDropDown>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => vendorProduct.Price)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenNumeric @bind-Value="vendorProduct.Price" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

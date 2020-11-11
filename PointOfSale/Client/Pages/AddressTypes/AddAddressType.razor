@@ -1,0 +1,53 @@
+﻿@page "/addAddressType/{Id:int?}"
+@inherits PointOfSale.Pages.AddAddressTypeComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+   
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent @ref="content1" Container="main">
+                    <ChildContent>
+
+                        <RadzenTemplateForm @ref="formAddressType" Data="@(addresstype)" Visible="@(addresstype != null)" TItem="AddressType" Submit="@FormAddressTypeSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                                <DisplayName For="@(() => addresstype.Type)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenTextBox @bind-Value="addresstype.Type" style="width: 100%" Name="Type">
+                                                </RadzenTextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

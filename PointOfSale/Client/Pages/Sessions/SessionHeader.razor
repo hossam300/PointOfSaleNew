@@ -1,0 +1,93 @@
+﻿<header class="main-header">
+    <NavLink href="#" OnClientClick="javascript:window.close();" class="logo">
+        <span class="logo-mini">POS</span>
+        <span class="logo-lg">Sahl<b>POS</b></span>
+    </NavLink>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <ul class="nav navbar-nav pull-left">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="/assets/media/svg/flags/226-united-states.svg"
+                         alt="english">
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="/pos/language/arabic">
+                            <img src="/assets/media/svg/flags/008-saudi-arabia.svg"
+                                 class="language-img"> &nbsp;&nbsp;Arabic
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/pos/language/english">
+                            <img src="/assets/media/svg/flags/226-united-states.svg"
+                                 class="language-img"> &nbsp;&nbsp;English
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+                <li><a href="#" class="clock"></a></li>
+                <li><a href="/"><i class="fa fa-dashboard"></i></a></li>
+                <li><a href="/settings"><i class="fa fa-cogs"></i></a></li>
+                <li>
+                    <a href="/pos/view_bill" target="_blank">
+                        <i class="fa fa-desktop"></i>
+                    </a>
+                </li>
+                <li class="hidden-xs hidden-sm">
+                    <a href="/pos/shortcuts"
+                       data-toggle="ajax"><i class="fa fa-key"></i></a>
+                </li>
+                <li>
+                    <a href="/pos/register_details" data-toggle="ajax">
+                        Register
+                        Details
+                    </a>
+                </li>
+                <li><a href="/pos/today_sale" data-toggle="ajax">Today's Sale</a></li>
+                <li>
+                    <a href="/pos/close_register" data-toggle="ajax">Close Register</a>
+                </li>
+                <li class="dropdown user user-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="/assets/media/users/300_21.jpg" class="user-image"
+                             alt="Avatar" />
+                        <span>Admin Admin</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li class="user-header">
+                            <img src="/assets/media/users/300_21.jpg" class="img-circle"
+                                 alt="Avatar" />
+                            <p>
+                                <a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                   data-cfemail="0a6b6e6763644a7e6f696e636b787324696567">[email&#160;protected]</a>
+                                <small>Member since Thu 25 Jun 2015 11:59 AM</small>
+                            </p>
+                        </li>
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a href="/users/profile/1"
+                                   class="btn btn-default btn-flat">Profile</a>
+                            </div>
+                            <div class="pull-right">
+                                <a href="/logout"
+                                   class="btn btn-default btn-flat sign_out">Sign Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+
+
+@code {
+    void closewindow()
+    {
+
+    }
+}

@@ -1,0 +1,53 @@
+﻿@page "/LoyaltyPrograms"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent  Container="main">
+                            <ChildContent>
+                                <RadzenHeading Size="H1" Text="Loyalty Programs">
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenButton  Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="gridLoyaltyProgram" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductCategoriesResult)" TItem="LoyaltyProgram">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Visible="false" Property="Id" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Property="Name" Title="Name" Type="string">
+                                                    <Template Context="loyaltyProgram">
+                                                       @loyaltyProgram.Name
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                               
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="loyaltyProgram">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(loyaltyProgram))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="loyaltyProgram">
+                                                        <RadzenButton @ref="gridDeleteButton" ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, loyaltyProgram))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

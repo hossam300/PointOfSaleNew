@@ -1,0 +1,154 @@
+﻿@page "/AddReward"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent Container="main">
+                    <ChildContent>
+
+                        <RadzenTemplateForm @ref="formReward" Data="@(Reward)" Visible="@(Reward != null)" TItem="Reward" Submit="@FormRewardSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => Reward.Name)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenTextBox @bind-Value="Reward.Name" style="width: 100%" Name="Type">
+                                                </RadzenTextBox>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => Reward.RewardCost)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenNumeric @bind-Value="Reward.RewardCost" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <DisplayName For="@(() => Reward.MinimumAmount)"></DisplayName>
+                                            <div class="col-md-9">
+                                                <RadzenNumeric @bind-Value="Reward.MinimumAmount" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <div class="col-xl-6">
+                                                <DisplayName For="@(() => Reward.RewardType)"></DisplayName>
+                                                <div class="col-md-9">
+                                                    <RadzenRadioButtonList @bind-Value="Reward.RewardType" TValue="PointOfSale.DAL.Domains.RewardType" Change="@((args) => RadioSelection(args))">
+                                                        <Items>
+                                                            <RadzenRadioButtonListItem Text="@PointOfSale.DAL.Domains.RewardType.FreeProduct.ToString()" Value="@PointOfSale.DAL.Domains.RewardType.FreeProduct" />
+                                                            <RadzenRadioButtonListItem Text="@PointOfSale.DAL.Domains.RewardType.Discount.ToString()" Value="@PointOfSale.DAL.Domains.RewardType.Discount" />
+                                                        </Items>
+                                                    </RadzenRadioButtonList>
+                                                </div>
+                                            </div>
+                                            @if (Reward.RewardType == RewardType.FreeProduct)
+                                            {
+                                                <div class="col-xl-6">
+                                                    <DisplayName For="@(() => Reward.GiftProductId)"></DisplayName>
+                                                    <div class="col-md-9">
+                                                        <RadzenDropDown AllowClear="true" TValue="int?" Name="GiftProductId"
+                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
+                                                                        AllowFiltering="true" Placeholder="Select..."
+                                                                        Data="@giftProducts" TextProperty="Name" @bind-Value="@Reward.GiftProductId"
+                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+
+
+                                                        </RadzenDropDown>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else if (Reward.RewardType == RewardType.Discount)
+                                            {
+                                                <div class="col-xl-6">
+                                                    <label class="col-md-4">Apply Discount</label>
+                                                    <div class="col-md-9">
+                                                        <RadzenDropDown AllowClear="true" Name="ApplyDiscountType"
+                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
+                                                                        AllowFiltering="true" Placeholder="Select..."
+                                                                        Data="@applyDiscountTypes" @bind-Value="@(applyDiscountType)" TextProperty="Name" ValueProperty="Id"
+                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+
+
+                                                        </RadzenDropDown>
+                                                        @if (applyDiscountType == (int)ApplyDiscountType.Percentage)
+                                                        {
+                                                            <RadzenNumeric @bind-Value="Reward.ApplyDiscountPercentage" style="width: 100%" Name="ApplyDiscountPercentage">
+                                                            </RadzenNumeric>
+                                                        }
+
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                        @if (Reward.RewardType == RewardType.Discount)
+                                        {
+                                            <div style="margin-bottom: 1rem" class="row">
+                                                <div class="col-xl-6">
+                                                    <DisplayName For="@(() => Reward.DiscountProductId)"></DisplayName>
+                                                    <div class="col-md-9">
+                                                        <RadzenDropDown AllowClear="true" TValue="int?" Name="GiftProductId"
+                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
+                                                                        AllowFiltering="true" Placeholder="Select..."
+                                                                        Data="@giftProducts" TextProperty="Name" @bind-Value="@Reward.DiscountProductId"
+                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+
+
+                                                        </RadzenDropDown>
+
+                                                    </div>
+                                                </div>
+                                                @if (applyDiscountType == (int)ApplyDiscountType.Percentage)
+                                                {
+                                                    <div class="col-xl-6">
+                                                        <RadzenNumeric @bind-Value="Reward.MaxDiscountAmount" style="width: 100%" Name="MaxDiscountAmount">
+                                                        </RadzenNumeric>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+
+                                            <div class="col-xl-6">
+                                                <DisplayName For="@(() => Reward.FixedAmount)"></DisplayName>
+                                                <div class="col-md-9">
+                                                    <RadzenNumeric @bind-Value="Reward.FixedAmount" style="width: 100%" Name="FixedAmount">
+                                                    </RadzenNumeric>
+                                                </div>
+                                                <DisplayName For="@(() => Reward.MinimumAmount)"></DisplayName>
+                                                <div class="col-md-9">
+                                                    <RadzenNumeric @bind-Value="Reward.MinimumAmount" style="width: 100%" Name="MinimumAmount">
+                                                    </RadzenNumeric>
+                                                </div>
+                                            </div>
+                                                }
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

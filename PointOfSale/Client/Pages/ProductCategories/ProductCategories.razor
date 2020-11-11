@@ -1,0 +1,59 @@
+﻿@page "/ProductCategories"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent @ref="content1" Container="main">
+                            <ChildContent>
+                                <RadzenHeading @ref="pageTitle" Size="H1" Text="Product Categories">
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductCategoriesResult)" TItem="ProductCategory">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="ProductCategory" Context="productCategory" Visible="false" Property="Id" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ProductCategory" Context="productCategory" Property="ImagePath" Title="Image Path" Type="string">
+                                                    <Template Context="productCategory">
+                                                        <img src="@productCategory.ImagePath" class="img-circle" width="100" />
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ProductCategory" Context="productCategory" Property="CategoryName" Title="Category Name" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ProductCategory" Context="productCategory" Property="ParentCategoryId" SortProperty="productCategory.CategoryName" FilterProperty="productCategory.CategoryName" Title="Parent Category" Type="string">
+                                                    <Template Context="data">
+                                                        @data.ParentCategory?.CategoryName
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ProductCategory" Context="productCategory" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="productCategory">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(productCategory))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ProductCategory" Context="productCategory" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="productCategory">
+                                                        <RadzenButton @ref="gridDeleteButton" ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, productCategory))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
