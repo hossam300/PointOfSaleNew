@@ -20,8 +20,6 @@ namespace PointOfSale.Client.Pages.Shops
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
             await Load();
-            await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/css/pages/wizard/wizard-1.css");
-            await JSRuntime.InvokeVoidAsync("loadScript", "/assets/js/pages/custom/projects/add-project.js");
             await JSRuntime.InvokeVoidAsync("StopLoading");
 
         }

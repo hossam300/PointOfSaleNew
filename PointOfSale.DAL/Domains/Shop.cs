@@ -50,7 +50,7 @@ namespace PointOfSale.DAL.Domains
         public bool FiscalPointOfSaleitionPerOrder { get; set; }
         public bool SpecificFiscalPointOfSaleition { get; set; }
         public int? FiscalPointOfSaleitionId { get; set; }
-        public virtual FiscalPointOfSaleition FiscalPointOfSaleition { get; set; }
+        public virtual FiscalPosition FiscalPointOfSaleition { get; set; }
         #endregion
         #region Pricing
         public int? DefaultPricelistId { get; set; }

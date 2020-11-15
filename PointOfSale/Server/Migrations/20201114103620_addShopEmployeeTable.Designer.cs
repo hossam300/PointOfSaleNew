@@ -686,7 +686,7 @@ namespace PointOfSale.Server.Migrations
                     b.ToTable("Emails");
                 });
 
-            modelBuilder.Entity("PointOfSale.DAL.Domains.FiscalPointOfSaleition", b =>
+            modelBuilder.Entity("PointOfSale.DAL.Domains.FiscalPosition", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1701,7 +1701,7 @@ namespace PointOfSale.Server.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("PointOfSale.DAL.Domains.FiscalPointOfSaleition", b =>
+            modelBuilder.Entity("PointOfSale.DAL.Domains.FiscalPosition", b =>
                 {
                     b.HasOne("PointOfSale.DAL.Domains.CountryGroup", "CountryGroup")
                         .WithMany()
@@ -1897,7 +1897,7 @@ namespace PointOfSale.Server.Migrations
                         .WithMany()
                         .HasForeignKey("BranchId");
 
-                    b.HasOne("PointOfSale.DAL.Domains.FiscalPointOfSaleition", "FiscalPointOfSaleition")
+                    b.HasOne("PointOfSale.DAL.Domains.FiscalPosition", "FiscalPosition")
                         .WithMany()
                         .HasForeignKey("FiscalPointOfSaleitionId");
 
@@ -1917,7 +1917,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.Navigation("Branch");
 
-                    b.Navigation("FiscalPointOfSaleition");
+                    b.Navigation("FiscalPosition");
 
                     b.Navigation("Pricelist");
 
@@ -1945,7 +1945,7 @@ namespace PointOfSale.Server.Migrations
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.TaxMapping", b =>
                 {
-                    b.HasOne("PointOfSale.DAL.Domains.FiscalPointOfSaleition", null)
+                    b.HasOne("PointOfSale.DAL.Domains.FiscalPosition", null)
                         .WithMany("TaxMappings")
                         .HasForeignKey("FiscalPointOfSaleitionId");
 
@@ -2018,7 +2018,7 @@ namespace PointOfSale.Server.Migrations
                     b.Navigation("CustomerContacts");
                 });
 
-            modelBuilder.Entity("PointOfSale.DAL.Domains.FiscalPointOfSaleition", b =>
+            modelBuilder.Entity("PointOfSale.DAL.Domains.FiscalPosition", b =>
                 {
                     b.Navigation("TaxMappings");
                 });

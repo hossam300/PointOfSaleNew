@@ -7,12 +7,12 @@ namespace PointOfSale.DAL.Domains
         public Floor()
         {
             Tables = new List<FloorTable>();
+            ShopFloors = new List<ShopFloor>();
         }
         public int Id { get; set; }
         public string FloorName { get; set; }
-        public int ShopId { get; set; }
-        public virtual Shop Shop { get; set; }
         public virtual List<FloorTable> Tables { get; set; }
+        public virtual List<ShopFloor> ShopFloors { get; set; }
 
     }
 }

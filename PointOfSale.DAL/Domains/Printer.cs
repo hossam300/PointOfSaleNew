@@ -9,6 +9,7 @@ namespace PointOfSale.DAL.Domains
             PrintedProductCategories = new List<ProductCategory>();
         }
         public int Id { get; set; }
+        public string PrinterName { get; set; }
         public virtual PrinterType PrinterType { get; set; }
         public string ProxyIPAddress { get; set; }
         public virtual List<ProductCategory> PrintedProductCategories { get; set; }

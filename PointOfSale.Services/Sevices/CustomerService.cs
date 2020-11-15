@@ -19,7 +19,7 @@ namespace PointOfSale.Services.Sevices
         public CustomerService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
             _unitOfWork = unitOfWork;
-           // _rePointOfSaleitory = _unitOfWork.GetRePointOfSaleitory<Customer>();
+           // _rePointOfSaleitory = _unitOfWork.GetRepository<Customer>();
         }
 
         //public bool DeleteCustomers(int id)

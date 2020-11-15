@@ -17,7 +17,6 @@ namespace PointOfSale.Client.Pages.Products
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/css/pages/wizard/wizard-1.css");
             product = await Http.GetFromJsonAsync<Product>("api/Products/GetById/" + id);
             await JSRuntime.InvokeVoidAsync("StopLoading");
 

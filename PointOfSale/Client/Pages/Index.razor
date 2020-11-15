@@ -149,6 +149,8 @@
     List<Shop> shops = new List<Shop>();
     protected override async Task OnInitializedAsync()
     {
+        await JSRuntime.InvokeVoidAsync("StartLoading");
         shops = await Http.GetFromJsonAsync<List<Shop>>("/api/Shops/GetAll");
+        await JSRuntime.InvokeVoidAsync("StopLoading");
     }
 }

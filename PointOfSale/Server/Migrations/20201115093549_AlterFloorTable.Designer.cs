@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PointOfSale.BLL.Contexts;
 
 namespace PointOfSale.Server.Migrations
 {
     [DbContext(typeof(POSContext))]
-    partial class POSContextModelSnapshot : ModelSnapshot
+    [Migration("20201115093549_AlterFloorTable")]
+    partial class AlterFloorTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -700,8 +702,8 @@ namespace PointOfSale.Server.Migrations
                     b.Property<bool>("DetectAutomatically")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FiscalPositionName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("FiscalPointOfSaleitionName")
+                        .HasColumnType("int");
 
                     b.Property<bool>("VATRequired")
                         .HasColumnType("bit");
@@ -861,9 +863,6 @@ namespace PointOfSale.Server.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("PrinterName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("PrinterType")
                         .HasColumnType("int");
 
@@ -872,7 +871,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Printers");
+                    b.ToTable("Printer");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.Product", b =>
@@ -1424,7 +1423,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShopEmployees");
+                    b.ToTable("ShopEmployee");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopFloor", b =>
@@ -1446,7 +1445,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopFloors");
+                    b.ToTable("ShopFloor");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopPaymentMethod", b =>
@@ -1468,7 +1467,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopPaymentMethods");
+                    b.ToTable("ShopPaymentMethod");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopPricelist", b =>
@@ -1490,7 +1489,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopPricelists");
+                    b.ToTable("ShopPricelist");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopPrinter", b =>
@@ -1512,7 +1511,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopPrinters");
+                    b.ToTable("Printers");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopProductCategory", b =>
@@ -1534,7 +1533,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopProductCategories");
+                    b.ToTable("ShopProductCategory");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.Tax", b =>
@@ -1559,7 +1558,7 @@ namespace PointOfSale.Server.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("FiscalPositionId")
+                    b.Property<int?>("FiscalPointOfSaleitionId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TaxOnProductId")
@@ -1570,7 +1569,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FiscalPositionId");
+                    b.HasIndex("FiscalPointOfSaleitionId");
 
                     b.HasIndex("TaxOnProductId");
 
@@ -1953,7 +1952,7 @@ namespace PointOfSale.Server.Migrations
                         .WithMany()
                         .HasForeignKey("BranchId");
 
-                    b.HasOne("PointOfSale.DAL.Domains.FiscalPosition", "FiscalPointOfSaleition")
+                    b.HasOne("PointOfSale.DAL.Domains.FiscalPosition", "FiscalPosition")
                         .WithMany()
                         .HasForeignKey("FiscalPointOfSaleitionId");
 
@@ -1973,7 +1972,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.Navigation("Branch");
 
-                    b.Navigation("FiscalPointOfSaleition");
+                    b.Navigation("FiscalPosition");
 
                     b.Navigation("Pricelist");
 
@@ -2098,7 +2097,7 @@ namespace PointOfSale.Server.Migrations
                 {
                     b.HasOne("PointOfSale.DAL.Domains.FiscalPosition", null)
                         .WithMany("TaxMappings")
-                        .HasForeignKey("FiscalPositionId");
+                        .HasForeignKey("FiscalPointOfSaleitionId");
 
                     b.HasOne("PointOfSale.DAL.Domains.Tax", "TaxOnProduct")
                         .WithMany()

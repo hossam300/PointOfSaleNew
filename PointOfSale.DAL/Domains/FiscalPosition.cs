@@ -2,10 +2,10 @@
 
 namespace PointOfSale.DAL.Domains
 {
-    public class FiscalPointOfSaleition
+    public class FiscalPosition
     {
         public int Id { get; set; }
-        public int FiscalPointOfSaleitionName { get; set; }
+        public string FiscalPositionName { get; set; }
         public bool DetectAutomatically { get; set; }
         public bool VATRequired { get; set; }
         public int? CountryGroupId { get; set; }

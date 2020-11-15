@@ -38,13 +38,19 @@ namespace PointOfSale.Services.Sevices
 
         public virtual List<T> GetAll<T>()
         {
-            IQueryable query = this._UnitOfWork.GetRePointOfSaleitory<TDbEntity>().GetAll();
+            IQueryable query = this._UnitOfWork.GetRepository<TDbEntity>().GetAll();
             if (typeof(TDbEntity) == typeof(T))
                 return query.Cast<T>().ToList();
             else
                 return query.ProjectTo<T>(_Mapper.ConfigurationProvider).ToList();
         }
-
+       
+        public object GetPropertyValue(object car, string propertyName)
+        {
+            return car.GetType().GetProperties()
+               .Single(pi => pi.Name.Contains(propertyName))
+               .GetValue(car, null);
+        }
         public virtual TDbEntity GetDetails(object Id)
         {
             if (Id == null) return null;
@@ -55,7 +61,7 @@ namespace PointOfSale.Services.Sevices
             //    Mapping = _Mapper.ConfigurationProvider.ResolveTypeMap(typeof(TDbEntity), typeof(TDetailsDTO));
             //}
 
-            var EntityObject = this._UnitOfWork.GetRePointOfSaleitory<TDbEntity>().Find(Id);
+            var EntityObject = this._UnitOfWork.GetRepository<TDbEntity>().Find(Id);
             return EntityObject;
             //if (typeof(TDbEntity) == typeof(TDetailsDTO))
             //    return EntityObject as TDetailsDTO;
@@ -66,8 +72,8 @@ namespace PointOfSale.Services.Sevices
         public virtual TDbEntity Insert(TDbEntity entities)
         {
 
-           // var entity = _Mapper.Map(entities, typeof(TDetailsDTO), typeof(TDbEntity)) as TDbEntity;
-            this._UnitOfWork.GetRePointOfSaleitory<TDbEntity>().Insert(entities);
+            // var entity = _Mapper.Map(entities, typeof(TDetailsDTO), typeof(TDbEntity)) as TDbEntity;
+            this._UnitOfWork.GetRepository<TDbEntity>().Insert(entities);
             this._UnitOfWork.SaveChanges();
             //var Newentities = _Mapper.Map(entity, typeof(TDbEntity), typeof(TDetailsDTO)) as TDetailsDTO;
             return entities;
@@ -94,7 +100,7 @@ namespace PointOfSale.Services.Sevices
 
         public virtual int Delete(int Id)
         {
-            this._UnitOfWork.GetRePointOfSaleitory<TDbEntity>().Delete(Id);
+            this._UnitOfWork.GetRepository<TDbEntity>().Delete(Id);
             this._UnitOfWork.SaveChanges();
             return Id;
         }
@@ -105,10 +111,10 @@ namespace PointOfSale.Services.Sevices
             //foreach (var Entity in Entities)
             //{
             //    //To Copy Data not Sent From and To UI
-            var PrimaryKeysValues = this._UnitOfWork.GetRePointOfSaleitory<TDbEntity>().GetKey<TDbEntity>(_Mapper.Map(Entity, typeof(TDetailsDTO), typeof(TDbEntity)) as TDbEntity);
-            var OldEntity = _UnitOfWork.GetRePointOfSaleitory<TDbEntity>().Find(PrimaryKeysValues);
-         //   object MappedEntity = _Mapper.Map(Entity, OldEntity, typeof(TDetailsDTO), typeof(TDbEntity));
-            this._UnitOfWork.GetRePointOfSaleitory<TDbEntity>().Update(Entity as TDbEntity);
+            var PrimaryKeysValues = this._UnitOfWork.GetRepository<TDbEntity>().GetKey<TDbEntity>(_Mapper.Map(Entity, typeof(TDetailsDTO), typeof(TDbEntity)) as TDbEntity);
+            //var OldEntity = _UnitOfWork.GetRepository<TDbEntity>().Find(PrimaryKeysValues);
+            //   object MappedEntity = _Mapper.Map(Entity, OldEntity, typeof(TDetailsDTO), typeof(TDbEntity));
+            this._UnitOfWork.GetRepository<TDbEntity>().Update(Entity as TDbEntity);
             //}
             // this._UnitOfWork.SaveChanges();
             #region commented
@@ -120,14 +126,14 @@ namespace PointOfSale.Services.Sevices
             {
                 throw ex;
             }
-           // var Newentities = _Mapper.Map(MappedEntity, typeof(TDbEntity), typeof(TDetailsDTO)) as TDetailsDTO;
+            // var Newentities = _Mapper.Map(MappedEntity, typeof(TDbEntity), typeof(TDetailsDTO)) as TDetailsDTO;
             #endregion
             return Entity;
         }
 
         //public bool CheckIfExist(object id)
         //{
-        //    return this._UnitOfWork.GetRePointOfSaleitory<TDbEntity>().GetAll().Any(c=>c.)(checkUniqueDTO);
+        //    return this._UnitOfWork.GetRepository<TDbEntity>().GetAll().Any(c=>c.)(checkUniqueDTO);
         //}
 
 

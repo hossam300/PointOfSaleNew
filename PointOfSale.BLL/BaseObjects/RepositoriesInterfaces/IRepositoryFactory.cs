@@ -15,6 +15,6 @@ namespace PointOfSale.BLL.BaseObjects.RePointOfSaleitoriesInterfaces
         /// <param name="hasCustomRePointOfSaleitory"><c>True</c> if providing custom rePointOfSaleitry</param>
         /// <typeparam name="TEntity">The type of the entity.</typeparam>
         /// <returns>An instance of type inherited from <see cref="IRePointOfSaleitory{TEntity}"/> interface.</returns>
-        IRePointOfSaleitory<TEntity> GetRePointOfSaleitory<TEntity>(bool hasCustomRePointOfSaleitory = false) where TEntity : class;
+        IRePointOfSaleitory<TEntity> GetRepository<TEntity>(bool hasCustomRePointOfSaleitory = false) where TEntity : class;
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PointOfSale.BLL.Contexts;
 
 namespace PointOfSale.Server.Migrations
 {
     [DbContext(typeof(POSContext))]
-    partial class POSContextModelSnapshot : ModelSnapshot
+    [Migration("20201115124624_AlterFiscalPositionTable")]
+    partial class AlterFiscalPositionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1424,7 +1426,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ShopEmployees");
+                    b.ToTable("ShopEmployee");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopFloor", b =>
@@ -1446,7 +1448,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopFloors");
+                    b.ToTable("ShopFloor");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopPaymentMethod", b =>
@@ -1468,7 +1470,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopPaymentMethods");
+                    b.ToTable("ShopPaymentMethod");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopPricelist", b =>
@@ -1490,7 +1492,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopPricelists");
+                    b.ToTable("ShopPricelist");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.ShopPrinter", b =>
@@ -1534,7 +1536,7 @@ namespace PointOfSale.Server.Migrations
 
                     b.HasIndex("ShopId");
 
-                    b.ToTable("ShopProductCategories");
+                    b.ToTable("ShopProductCategory");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.Tax", b =>

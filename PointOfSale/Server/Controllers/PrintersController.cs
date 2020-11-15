@@ -12,18 +12,18 @@ namespace PointOfSale.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductCategoriesController : _BaseController<ProductCategory, ProductCategoryDTO>
+    public class PrintersController : _BaseController<Printer, Printer>
     {
-        private readonly IProductCategoriesService _productCategoriesService;
+        private readonly IPrinterService Printer;
 
-        public ProductCategoriesController(IProductCategoriesService businessService) : base(businessService)
+        public PrintersController(IPrinterService businessService) : base(businessService)
         {
-            this._productCategoriesService = businessService;
+            this.Printer = businessService;
         }
         [HttpGet, Route("GetDropDownListAll")]
         public virtual IActionResult GetDropDownListAll()
         {
-            return Ok(this._BusinessService.GetAll<ProductCategory>().Select(x => new DropDownList { Id = x.Id, Name = x.CategoryName }));
+            return Ok(this._BusinessService.GetAll<Printer>().Select(x => new DropDownList { Id = x.Id, Name = x.PrinterName }));
         }
     }
 }

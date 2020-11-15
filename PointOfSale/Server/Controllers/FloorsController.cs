@@ -12,18 +12,19 @@ namespace PointOfSale.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductCategoriesController : _BaseController<ProductCategory, ProductCategoryDTO>
+    public class FloorsController : _BaseController<Floor, Floor>
     {
-        private readonly IProductCategoriesService _productCategoriesService;
+        private readonly IFloorService _floorService;
 
-        public ProductCategoriesController(IProductCategoriesService businessService) : base(businessService)
+        public FloorsController(IFloorService businessService) : base(businessService)
         {
-            this._productCategoriesService = businessService;
+            this._floorService = businessService;
         }
         [HttpGet, Route("GetDropDownListAll")]
         public virtual IActionResult GetDropDownListAll()
         {
-            return Ok(this._BusinessService.GetAll<ProductCategory>().Select(x => new DropDownList { Id = x.Id, Name = x.CategoryName }));
+            return Ok(this._BusinessService.GetAll<Floor>().Select(x => new DropDownList { Id = x.Id, Name = x.FloorName }));
         }
+
     }
 }

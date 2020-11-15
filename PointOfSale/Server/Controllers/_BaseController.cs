@@ -52,7 +52,7 @@ namespace PointOfSale.Server.Controllers
         {
             return Ok(this._BusinessService.GetAll<TDbEntity>());
         }
-
+       
         /// <summary>
         /// البحث بالكود
         /// </summary>

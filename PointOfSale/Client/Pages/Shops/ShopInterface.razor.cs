@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
+using PointOfSale.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,10 @@ namespace PointOfSale.Client.Pages.Shops
     public partial class ShopInterface : ComponentBase
     {
         Shop shop = new Shop();
-        List<SahlUserIdentity> AllowedEmployees = new List<SahlUserIdentity>();
-        List<Floor> Floors = new List<Floor>();
-        List<ShopPrinter> Printers = new List<ShopPrinter>();
-        List<FiscalPointOfSaleition> FiscalPointOfSaleitions = new List<FiscalPointOfSaleition>();
-        List<ProductCategory> AvailableCategories = new List<ProductCategory>();
+        List<DropDownList> Floors = new List<DropDownList>();
+        List<DropDownList> Printers = new List<DropDownList>();
+        List<DropDownList> FiscalPointOfSaleitions = new List<DropDownList>();
+        List<DropDownList> AvailableCategories = new List<DropDownList>();
         IEnumerable<int> multipleFloors = new int[] { };
         IEnumerable<int> multiplePrinters = new int[] { };
         IEnumerable<int> multipleAvailableCategories = new int[] { };
@@ -25,23 +25,22 @@ namespace PointOfSale.Client.Pages.Shops
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            Load();
-            await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/css/pages/wizard/wizard-1.css");
+            await Load();
             await JSRuntime.InvokeVoidAsync("StopLoading");
 
         }
-        async void Load()
+        async Task Load()
         {
-            Floors = await Http.GetFromJsonAsync<List<Floor>>("/api/Floors/GetAll");
-            Printers = await Http.GetFromJsonAsync<List<ShopPrinter>>("/api/Printers/GetAll");
-            FiscalPointOfSaleitions = await Http.GetFromJsonAsync<List<FiscalPointOfSaleition>>("/api/FiscalPointOfSaleitions/GetAll");
-            AvailableCategories = await Http.GetFromJsonAsync<List<ProductCategory>>("/api/ProductCategories/GetAll");
+            Floors = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Floors/GetDropDownListAll");
+            Printers = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Printers/GetDropDownListAll");
+            FiscalPointOfSaleitions = await Http.GetFromJsonAsync<List<DropDownList>>("/api/FiscalPositions/GetDropDownListAll");
+            AvailableCategories = await Http.GetFromJsonAsync<List<DropDownList>>("/api/ProductCategories/GetDropDownListAll");
             if (id != null)
             {
                 shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + id);
-                multipleFloors = shop.Floors.Select(x => x.Id);
-                multiplePrinters = shop.Printers.Select(x => x.Id);
-                multipleAvailableCategories = shop.AvailableCategories.Select(x => x.Id);
+                multipleFloors = shop.Floors.Select(x => x.FloorId);
+                multiplePrinters = shop.Printers.Select(x => x.PrinterId);
+                multipleAvailableCategories = shop.AvailableCategories.Select(x => x.ProductCategoryId);
             }
         }
         void Change(object value, string name)
@@ -61,17 +60,17 @@ namespace PointOfSale.Client.Pages.Shops
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
-            foreach (var item in multipleFloors)
+            foreach (var Floor in multipleFloors)
             {
-                shop.Floors.Add(new ShopFloor { Id = item });
+                shop.Floors.Add(new ShopFloor { FloorId = Floor,ShopId=shop.Id });
             }
-            foreach (var item in multiplePrinters)
+            foreach (var Printer in multiplePrinters)
             {
-                shop.Printers.Add(new ShopPrinter { Id = item });
+                shop.Printers.Add(new ShopPrinter { PrinterId = Printer, ShopId = shop.Id });
             }
             foreach (var item in multipleAvailableCategories)
             {
-                shop.AvailableCategories.Add(new ShopProductCategory { Id = item });
+                shop.AvailableCategories.Add(new ShopProductCategory { ProductCategoryId = item, ShopId = shop.Id });
             }
             //bool formIsValid = model.Validate();
             if (shop.Id == 0)

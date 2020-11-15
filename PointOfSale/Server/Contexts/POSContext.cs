@@ -32,7 +32,7 @@ namespace PointOfSale.BLL.Contexts
         public virtual DbSet<CustomerContact> CustomerContacts { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Email> Emails { get; set; }
-        public virtual DbSet<FiscalPointOfSaleition> FiscalPointOfSaleitions { get; set; }
+        public virtual DbSet<FiscalPosition> FiscalPointOfSaleitions { get; set; }
         public virtual DbSet<Floor> Floors { get; set; }
         public virtual DbSet<FloorTable> FloorTables { get; set; }
         public virtual DbSet<LoyaltyProgram> LoyaltyPrograms { get; set; }
@@ -40,7 +40,7 @@ namespace PointOfSale.BLL.Contexts
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<Pricelist> Pricelists { get; set; }
         public virtual DbSet<PriceRule> PriceRules { get; set; }
-        public virtual DbSet<ShopPrinter> Printers { get; set; }
+        public virtual DbSet<Printer> Printers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Reward> Rewards { get; set; }
@@ -51,7 +51,12 @@ namespace PointOfSale.BLL.Contexts
         public virtual DbSet<Session> Sessions { get; set; }
         public virtual DbSet<Tax> Taxes { get; set; }
         public virtual DbSet<TaxMapping> TaxMappings { get; set; }
-        public virtual DbSet<Shop> Shop { get; set; }
+        public virtual DbSet<ShopEmployee> ShopEmployees { get; set; }
+        public virtual DbSet<ShopFloor> ShopFloors { get; set; }
+        public virtual DbSet<ShopPaymentMethod> ShopPaymentMethods { get; set; }
+        public virtual DbSet<ShopPricelist> ShopPricelists { get; set; }
+        public virtual DbSet<ShopPrinter> ShopPrinters { get; set; }
+        public virtual DbSet<ShopProductCategory> ShopProductCategories { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
         public virtual DbSet<VendorProduct> VendorProducts { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
