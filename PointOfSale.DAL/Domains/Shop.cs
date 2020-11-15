@@ -8,28 +8,30 @@ namespace PointOfSale.DAL.Domains
     {
         public Shop()
         {
-            AllowedEmployees = new List<AspNetUser>();
-            Floors = new List<Floor>();
-            AvailableCategories = new List<ProductCategory>();
-            Printers = new List<Printer>();
-            PaymentMethods = new List<PaymentMethod>();
+            AllowedEmployees = new List<ShopEmployee>();
+            Floors = new List<ShopFloor>();
+            AvailableCategories = new List<ShopProductCategory>();
+            Printers = new List<ShopPrinter>();
+            AvailablePricelists = new List<ShopPricelist>();
+            PaymentMethods = new List<ShopPaymentMethod>();
         }
         #region Main Info
         public int Id { get; set; }
         public string Name { get; set; }
-        public int BranchId { get; set; }
+        public int? BranchId { get; set; }
         public virtual Branch Branch { get; set; }
         public bool IsRestaurant { get; set; }
         public bool LoginWithEmployees { get; set; }
-        public virtual List<AspNetUser> AllowedEmployees { get; set; }
+        public virtual List<ShopEmployee> AllowedEmployees { get; set; }
         #endregion
         #region PointOfSale Interface
         public bool TableManagement { get; set; }
-        public virtual List<Floor> Floors { get; set; }
+        public bool FloorsTables { get; set; }
+        public virtual List<ShopFloor> Floors { get; set; }
         public bool OrderlineNotes { get; set; }
         public bool CategoryPictures { get; set; }
         public bool RestrictAvailableCategories { get; set; }
-        public virtual List<ProductCategory> AvailableCategories { get; set; }
+        public virtual List<ShopProductCategory> AvailableCategories { get; set; }
         public bool VirtualKeyBoard { get; set; }
         public bool SetStartCategory { get; set; }
         public int? StartCategoryId { get; set; }
@@ -42,7 +44,7 @@ namespace PointOfSale.DAL.Domains
         public int? BarcodeScannerId { get; set; }
         public virtual BarcodeScanner BarcodeScanner { get; set; }
         public bool OrderPrinter { get; set; }
-        public virtual List<Printer> Printers { get; set; }
+        public virtual List<ShopPrinter> Printers { get; set; }
         #endregion
         #region Taxes
         public bool FiscalPointOfSaleitionPerOrder { get; set; }
@@ -54,14 +56,14 @@ namespace PointOfSale.DAL.Domains
         public int? DefaultPricelistId { get; set; }
         public virtual Pricelist Pricelist { get; set; }
         public bool AdvancedPricelists { get; set; }
-        public virtual List<Pricelist> AvailablePricelists { get; set; }
-        public virtual ProductPrices ProductPrices { get; set; }
+        public virtual List<ShopPricelist> AvailablePricelists { get; set; }
+        public virtual ProductPrices? ProductPrices { get; set; }
         public bool GlobalDiscounts { get; set; }
         public bool LoyaltyProgram { get; set; }
         public bool PriceControl { get; set; }
         #endregion
         #region Payments
-        public virtual List<PaymentMethod> PaymentMethods { get; set; }
+        public virtual List<ShopPaymentMethod> PaymentMethods { get; set; }
         public bool PrefillCashPayment { get; set; }
         public bool CashControl { get; set; }
         //Default Opening

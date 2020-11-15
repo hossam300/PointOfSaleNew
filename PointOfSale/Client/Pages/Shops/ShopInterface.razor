@@ -1,4 +1,4 @@
-﻿@page "/Shops/ShopInterface/{id:int?}"
+﻿@page "/ShopInterface/{id:int?}"
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
@@ -21,8 +21,9 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Button-->
-                <a href="#" class="btn btn-danger font-weight-bold">Back</a>
+                <a href="/Shops" class="btn btn-danger font-weight-bold">Back</a>
                 <!--end::Button-->
+
             </div>
             <!--end::Toolbar-->
         </div>
@@ -80,7 +81,9 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Inteface & Devices</h3>
+                                            <h3 class="wizard-title">
+                                                Inteface & Devices
+                                            </h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -107,7 +110,9 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Pricing & Payment</h3>
+                                            <h3 class="wizard-title">
+                                                Pricing & Payment
+                                            </h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -182,8 +187,163 @@
                         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
                             <div class="col-xl-12 col-xxl-7">
                                 <!--begin::Form Wizard-->
-                                <div class="form">
-                                  
+                                <div class="form" id="kt_projects_add_form">
+                                    <RadzenContent Container="main">
+                                        <ChildContent>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <RadzenTemplateForm Data="@(shop)" Visible="@(shop != null)" TItem="Shop" Submit="@FormShopSubmit">
+                                                        <ChildContent>
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.TableManagement"></Radzen.Blazor.RadzenCheckBox>  <DisplayName For="@(() => shop.TableManagement )"></DisplayName>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.OrderlineNotes"></Radzen.Blazor.RadzenCheckBox>  <DisplayName For="@(() => shop.OrderlineNotes)"></DisplayName>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.FloorsTables"></Radzen.Blazor.RadzenCheckBox>  <DisplayName For="@(() => shop.FloorsTables )"></DisplayName>
+                                                                </div>
+                                                                @if (shop.FloorsTables)
+                                                                {
+                                                                    <div class="col-xl-6">
+                                                                        <DisplayName For="@(() => shop.Floors)"></DisplayName>
+                                                                        <div class="col-xl-8">
+                                                                            <RadzenDropDown AllowClear="true" Name="Floors"
+                                                                                            FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="CategoryName" ValueProperty="Id"
+                                                                                            AllowFiltering="true" Placeholder="Select..." Multiple="true"
+                                                                                            Data="@Floors" @bind-Value="shop.Floors"
+                                                                                            Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                            </RadzenDropDown>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.CategoryPictures"></Radzen.Blazor.RadzenCheckBox><DisplayName For="@(() => shop.CategoryPictures )"></DisplayName>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.RestrictAvailableCategories"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Restrict Available Categories</label>
+                                                                </div>
+                                                            </div>
+                                                            @if (shop.RestrictAvailableCategories)
+                                                            {
+                                                                <div class="form-group row">
+                                                                    <div class="col-xl-6"></div>
+                                                                    <div class="col-xl-6">
+                                                                        <DisplayName For="@(() => shop.AvailableCategories)"></DisplayName>
+                                                                        <RadzenDropDown AllowClear="true" Name="Floors"
+                                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="CategoryName" ValueProperty="Id"
+                                                                                        AllowFiltering="true" Placeholder="Select..." Multiple="true"
+                                                                                        Data="@AvailableCategories" @bind-Value="shop.AvailableCategories"
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                        </RadzenDropDown>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.SetStartCategory"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Start Category</label>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.LargeScrollbars"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Large Scroll bars</label>
+                                                                </div>
+                                                            </div>
+                                                            @if (shop.SetStartCategory)
+                                                            {
+                                                                <div class="form-group row">
+                                                                    <div class="col-xl-6">
+                                                                        <RadzenDropDown AllowClear="true" Name="StartCategoryId"
+                                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="CategoryName" ValueProperty="Id"
+                                                                                        AllowFiltering="true" Placeholder="Select..."
+                                                                                        Data="@AvailableCategories" @bind-Value="shop.StartCategoryId"
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                        </RadzenDropDown>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            <h3>Connected Devices</h3>
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.ConnectDevices"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Connect Devices</label>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.OrderPrinter"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Order Printer</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                @if (shop.ConnectDevices)
+                                                                {
+                                                                    <div class="col-xl-6">
+                                                                        <label class="col-md-4">Epson Receipt Printer IP Address</label>
+                                                                        <div class="col-xl-8">
+                                                                            <InputText id="Name" @bind-Value="shop.PrinterIPAddress" class="form-control form-control-lg form-control-solid" />
+                                                                            <ValidationMessage For="() => shop.PrinterIPAddress" class="text-danger" />
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (shop.OrderPrinter)
+                                                                {
+                                                                    <div class="col-xl-6">
+                                                                        <RadzenDropDown AllowClear="true" Name="Printers"
+                                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="CategoryName" ValueProperty="Id"
+                                                                                        AllowFiltering="true" Placeholder="Select..." Multiple="true"
+                                                                                        Data="@Printers" @bind-Value="shop.Printers"
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                        </RadzenDropDown>
+                                                                    </div>
+                                                                }
+                                                            </div>
+
+
+
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.FiscalPointOfSaleitionPerOrder"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Fiscal Position per Order</label>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.SpecificFiscalPointOfSaleition"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Fiscal Position</label>
+                                                                </div>
+                                                            </div>
+                                                            @if (shop.FiscalPointOfSaleitionPerOrder || shop.SpecificFiscalPointOfSaleition)
+                                                            {
+                                                                <div class="form-group row">
+                                                                    <div class="col-xl-6">
+                                                                        <label class="col-md-4">Fiscal Position</label>
+                                                                        <div class="col-xl-8">
+                                                                            <RadzenDropDown AllowClear="true" Name="FiscalPointOfSaleitionId"
+                                                                                            FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="CategoryName" ValueProperty="Id"
+                                                                                            AllowFiltering="true" Placeholder="Select..." Multiple="true"
+                                                                                            Data="@FiscalPointOfSaleitions" @bind-Value="shop.FiscalPointOfSaleitionId"
+                                                                                            Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                            </RadzenDropDown>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            }
+                                                            <div class="d-flex justify-content-between border-top mt-5 pt-10">
+                                                                <div class="mr-2">
+                                                                    <a href="/Shops/EditShop/@shop.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">Previous</a>
+                                                                </div>
+                                                                <div>
+                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">Next Step</button>
+                                                                </div>
+                                                            </div>
+                                                        </ChildContent>
+                                                    </RadzenTemplateForm>
+                                                </div>
+                                            </div>
+                                        </ChildContent>
+                                    </RadzenContent>
+
+                                    <!--begin::Actions-->
+                                    <!--end::Actions-->
                                 </div>
                                 <!--end::Form Wizard-->
                             </div>
@@ -201,7 +361,190 @@
 
 
 
-@*<div class="pb-5" data-wizard-type="step-content">
+<!--<<div class="pb-5" data-wizard-type="step-content">
+                            <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
+                                    <div class="col-md-4" style="text-align:left">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="TableManagement" type="checkbox" />Table Management
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="OrderlineNotes" type="checkbox" /> Orderline Notess
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+
+                                    <div class="col-lg-3 col-xl-2"></div>
+                                    <div class="col-lg-4 col-xl-4">
+                                        <label class=" col-form-label"> Floors</label>
+                                        <select multiple asp-for="Floors" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.Floors">
+                                            <option value="International Date Line West">
+                                                Floors
+                                            </option>
+                                            <option value="Midway Island">(GMT-11:00) Midway Island</option>
+                                            <option value="Samoa">(GMT-11:00) Samoa</option>
+                                        </select>
+                                    </div>
+
+                                    <label class="col-lg-4 col-xl-4 col-form-label">&nbsp;</label>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
+                                    <div class="col-md-4" style="text-align:left">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="CategoryPictures" type="checkbox" />Category Pictures
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="RestrictAvailableCategories" type="checkbox" />Restrict Available Shop Categories
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-2 col-xl-2"></div>
+                                    <label class="col-lg-4 col-xl-4 col-form-label"><a href="#"> PoS Shop Categories</a></label>
+
+                                    <div class="col-lg-4 col-xl-4">
+                                        <label col-form-label">Available Shop Categories</label>
+                                        <select multiple asp-for="AvailableCategories" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.Categories">
+                                            <option value="International Date Line West">
+                                                Categories
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
+                                    <div class="col-md-4" style="text-align:left">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="VirtualKeyBoard" type="checkbox" />Virtual KeyBoard
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="SetStartCategory" type="checkbox" /> Set Start Category
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-2 col-xl-2"></div>
+                                    <label class="col-lg-4 col-xl-4 col-form-label">&nbsp;</label>
+
+                                    <div class="col-lg-4 col-xl-4">
+                                        <label class=" col-form-label"> Start selling from a default Shop category</label>
+                                        <select multiple asp-for="StartCategory" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.Categories">
+                                            <option value="">
+                                                Start Category
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
+                                    <div class="col-md-4" style="text-align:left">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="LargeScrollbars" type="checkbox" />Large Scrollbars
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr />
+                                <div class="form-group row">
+                                    <div class="col-lg-9 col-xl-6">
+                                        <h3 class="kt-section__title kt-section__title-md">
+                                            Connected Devices
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
+                                    <div class="col-md-4" style="text-align:left">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="ConnectDevices" type="checkbox" />Connect Devices
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="checkbox-inline">
+                                            <label class="checkbox">
+                                                <input asp-for="OrderPrinter" type="checkbox" />Order Printer
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-2 col-xl-2">Epson Receipt Printer IP Address</div>
+                                    <div class="col-lg-3 col-xl-3">
+                                        <input asp-for="PrinterIPAddress" class="form-control form-control-lg form-control-solid" />
+                                    </div>
+                                    <label class="col-lg-2 col-xl-2 col-form-label">Printers</label>
+                                    <div class="col-lg-3 col-xl-3">
+
+
+                                        <select multiple asp-for="Printers" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.Printers">
+                                            <option value="">
+                                                Printers
+                                            </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-2 col-xl-2"></div>
+                                    <label class="col-lg-4 col-xl-4 col-form-label"> Barcode Scanner</label>
+
+                                    <div class="col-lg-4 col-xl-4">
+                                        <label class=" col-form-label"> Barcode Nomenclature</label>
+                                        <select multiple asp-for="BarcodeScannerId" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.BarcodeScanner">
+                                            <option data-offset="-39600" value="International Date Line West">
+                                                Barcode Scanner
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+<!--end::Card-->
+<!--</div>-->
+<!--end::Container-->
+<!--</div>-->
+<!--end::Entry-->
+<!--</div>-->
+@*
         <div class="row">
             <div class="col-xl-12">
                 <div class="form-group row">
@@ -212,176 +555,6 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
-                    <div class="col-md-4" style="text-align:left">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="TableManagement" type="checkbox" />Table Management
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="OrderlineNotes" type="checkbox" /> Orderline Notess
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-
-                    <div class="col-lg-3 col-xl-2"></div>
-                    <div class="col-lg-4 col-xl-4">
-                        <label class=" col-form-label"> Floors</label>
-                        <select multiple asp-for="Floors" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.Floors">
-                            <option value="International Date Line West">
-                                Floors
-                            </option>
-                            <option value="Midway Island">(GMT-11:00) Midway Island</option>
-                            <option value="Samoa">(GMT-11:00) Samoa</option>
-                        </select>
-                    </div>
-
-                    <label class="col-lg-4 col-xl-4 col-form-label">&nbsp;</label>
-                </div>
-                <div class="form-group row">
-                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
-                    <div class="col-md-4" style="text-align:left">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="CategoryPictures" type="checkbox" />Category Pictures
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="RestrictAvailableCategories" type="checkbox" />Restrict Available Product Categories
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2 col-xl-2"></div>
-                    <label class="col-lg-4 col-xl-4 col-form-label"><a href="#"> PoS Product Categories</a></label>
-
-                    <div class="col-lg-4 col-xl-4">
-                        <label col-form-label">Available Product Categories</label>
-                        <select multiple asp-for="AvailableCategories" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.Categories">
-                            <option value="International Date Line West">
-                                Categories
-                            </option>
-
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
-                    <div class="col-md-4" style="text-align:left">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="VirtualKeyBoard" type="checkbox" />Virtual KeyBoard
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="SetStartCategory" type="checkbox" /> Set Start Category
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2 col-xl-2"></div>
-                    <label class="col-lg-4 col-xl-4 col-form-label">&nbsp;</label>
-
-                    <div class="col-lg-4 col-xl-4">
-                        <label class=" col-form-label"> Start selling from a default product category</label>
-                        <select multiple asp-for="StartCategory" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.Categories">
-                            <option value="">
-                                Start Category
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
-                    <div class="col-md-4" style="text-align:left">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="LargeScrollbars" type="checkbox" />Large Scrollbars
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <hr />
-                <div class="form-group row">
-                    <div class="col-lg-9 col-xl-6">
-                        <h3 class="kt-section__title kt-section__title-md">
-                            Connected Devices
-                        </h3>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-xl-2 col-lg-2 col-form-label">&nbsp;</label>
-                    <div class="col-md-4" style="text-align:left">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="ConnectDevices" type="checkbox" />Connect Devices
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="checkbox-inline">
-                            <label class="checkbox">
-                                <input asp-for="OrderPrinter" type="checkbox" />Order Printer
-                                <span></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2 col-xl-2">Epson Receipt Printer IP Address</div>
-                    <div class="col-lg-3 col-xl-3">
-                        <input asp-for="PrinterIPAddress" class="form-control form-control-lg form-control-solid" />
-                    </div>
-                    <label class="col-lg-2 col-xl-2 col-form-label">Printers</label>
-                    <div class="col-lg-3 col-xl-3">
-
-
-                        <select multiple asp-for="Printers" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.Printers">
-                            <option value="">
-                                Printers
-                            </option>
-
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-2 col-xl-2"></div>
-                    <label class="col-lg-4 col-xl-4 col-form-label"> Barcode Scanner</label>
-
-                    <div class="col-lg-4 col-xl-4">
-                        <label class=" col-form-label"> Barcode Nomenclature</label>
-                        <select multiple asp-for="BarcodeScannerId" class="form-control form-control-lg form-control-solid select2" width="100%" asp-items="ViewBag.BarcodeScanner">
-                            <option data-offset="-39600" value="International Date Line West">
-                                Barcode Scanner
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
 
         </div>
     </div>

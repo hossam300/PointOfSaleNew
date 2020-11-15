@@ -22,9 +22,9 @@
         <!--end::Info-->
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
-            <NavLink href="/Shops/AddShop" class="btn btn-primary">
+            <a href="/Shops/AddShop" class="btn btn-primary">
                 Add Shop
-            </NavLink>
+            </a>
         </div>
         <!--end::Toolbar-->
     </div>
@@ -35,185 +35,120 @@
     <!--begin::Container-->
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <!--begin::Card-->
-                <div class="card card-custom">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <span class="card-icon">
-                                <i class="flaticon-graphic-2 text-primary"></i>
-                            </span>
-                            <h3 class="card-label">
-                                Shop 1
-                                <small>Branch : Nasr City</small>
-                            </h3>
-                        </div>
-                        <div class="card-toolbar">
-                            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
-                                <NavLink href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="ki ki-bold-more-hor"></i>
-                                </NavLink>
-                                <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-                                    <!--begin::Navigation-->
-                                    <ul class="navi navi-hover">
-                                        <li class="navi-item">
-                                            <NavLink href="/Sessions/Index/1" class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-success">Sessions</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-item">
-                                            <NavLink href="/SalesOrders/Index/1" class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-danger">Sales Orders</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-item">
-                                            <NavLink href="/Orders/Index/1" class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-warning">Orders</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-item">
-                                            <NavLink href="/Shops/EditShop/1" Match=@NavLinkMatch.All class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-primary">Edit</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-item">
-                                            <NavLink href="/Shops/ShopDetails/1" Match=@NavLinkMatch.All class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-dark">Details</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-separator mt-3 opacity-70"></li>
-                                        <li class="navi-footer py-4">
-                                            <NavLink class="btn btn-clean font-weight-bold btn-sm" href="/Shops/AddShop">
-                                                <i class="ki ki-plus icon-sm"></i>Add new
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                    <!--end::Navigation-->
+            @if (shops.Count < 0)
+            {
+                <div class="modal-overlay">
+                    <div class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
+                </div>
+            }
+            <Virtualize Context="item" Items="@shops" ItemSize="25">
+                <div class="col-lg-6" style="margin-top: 1%;">
+                    <!--begin::Card-->
+                    <div class="card card-custom">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <span class="card-icon">
+                                    <i class="flaticon-graphic-2 text-primary"></i>
+                                </span>
+                                <h3 class="card-label">
+                                    @item.Name
+                                    @if (item.Branch != null)
+                                    {
+                                        <small> Branch : @item.Branch.Name</small>}
+                                    else
+                                    { <small> Branch : </small>}
+                                </h3>
+                            </div>
+                            <div class="card-toolbar">
+                                <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                                    <a href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="ki ki-bold-more-hor"></i>
+                                    </a>
+                                    <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
+                                        <!--begin::Navigation-->
+                                        <ul class="navi navi-hover">
+                                            <li class="navi-item">
+                                                <a href="/Sessions/Index/@item.Id" class="navi-link">
+                                                    <span class="navi-text">
+                                                        <span class="label label-xl label-inline label-light-success">Sessions</span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li class="navi-item">
+                                                <a href="/SalesOrders/Index/@item.Id" class="navi-link">
+                                                    <span class="navi-text">
+                                                        <span class="label label-xl label-inline label-light-danger">Sales Orders</span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li class="navi-item">
+                                                <a href="/Orders/Index/@item.Id" class="navi-link">
+                                                    <span class="navi-text">
+                                                        <span class="label label-xl label-inline label-light-warning">Orders</span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li class="navi-item">
+                                                <a href="/Shops/EditShop/@item.Id" class="navi-link">
+                                                    <span class="navi-text">
+                                                        <span class="label label-xl label-inline label-light-primary">Edit</span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li class="navi-item">
+                                                <a href="/Shops/ShopDetails/@item.Id" class="navi-link">
+                                                    <span class="navi-text">
+                                                        <span class="label label-xl label-inline label-light-dark">Details</span>
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li class="navi-separator mt-3 opacity-70"></li>
+                                            <li class="navi-footer py-4">
+                                                <a class="btn btn-clean font-weight-bold btn-sm" href="/Shops/AddShop">
+                                                    <i class="ki ki-plus icon-sm"></i>Add new
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <!--end::Navigation-->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
 
-                                <NavLink href="/Sessions/Create/1" target="_blank" Match=@NavLinkMatch.Prefix class="btn btn-primary">New Session</NavLink>
-                            </div>
-                            <div class="col-md-4">
-                                <p>Last Closing Cash </p>
-                                <p>5000 EGP </p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>Last Closing Date </p>
-                                <p>06/22/2020 06:24 PM </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end::Card-->
-            </div>
-            @*<div class="col-lg-1"></div>*@
-            <div class="col-lg-6">
-                <!--begin::Card-->
-                <div class="card card-custom">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <span class="card-icon">
-                                <i class="flaticon-graphic-2 text-primary"></i>
-                            </span>
-                            <h3 class="card-label">
-                                Shop 2
-                                <small>Branch : Maadi</small>
-                            </h3>
-                        </div>
-                        <div class="card-toolbar">
-                            <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
-                                <NavLink href="#" class="btn btn-hover-light-primary btn-sm btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="ki ki-bold-more-hor"></i>
-                                </NavLink>
-                                <div class="dropdown-menu p-0 m-0 dropdown-menu-md dropdown-menu-right">
-                                    <!--begin::Navigation-->
-                                    <ul class="navi navi-hover">
-                                        <li class="navi-item">
-                                            <NavLink href="/Sessions/Index/2" class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-success">Sessions</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-item">
-                                            <NavLink href="/SalesOrders/Index/2" class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-danger">Sales Orders</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-item">
-                                            <NavLink href="/Orders/Index/1" class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-warning">Orders</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-item">
-                                            <NavLink href="/Shops/EditShop/2" class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-primary">Edit</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-item">
-                                            <NavLink href="/Shops/ShopDetails/2" class="navi-link">
-                                                <span class="navi-text">
-                                                    <span class="label label-xl label-inline label-light-dark">Details</span>
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                        <li class="navi-separator mt-3 opacity-70"></li>
-                                        <li class="navi-footer py-4">
-                                            <NavLink class="btn btn-clean font-weight-bold btn-sm" href="/Shops/AddShop">
-                                                <i class="ki ki-plus icon-sm"></i>Add new
-                                            </NavLink>
-                                        </li>
-                                    </ul>
-                                    <!--end::Navigation-->
+                                    <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Last Closing Cash </p>
+                                    <p>5000 EGP </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>Last Closing Date </p>
+                                    <p>06/22/2020 06:24 PM </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <NavLink target="_blank" href="/Sessions/Create/2" class="btn btn-primary">New Session</NavLink>
-                            </div>
-                            <div class="col-md-4">
-                                <p>Last Closing Cash </p>
-                                <p>6500 EGP </p>
-                            </div>
-                            <div class="col-md-4">
-                                <p>Last Closing Date </p>
-                                <p>06/22/2020 05:24 PM </p>
-                            </div>
-                        </div>
-                    </div>
+                    <!--end::Card-->
                 </div>
-                <!--end::Card-->
-            </div>
+            </Virtualize>
         </div>
     </div>
     <!--end::Container-->
 </div>
 <!--end::Entry-->
 @code{
-
+    List<Shop> shops = new List<Shop>();
+    protected override async Task OnInitializedAsync()
+    {
+        shops = await Http.GetFromJsonAsync<List<Shop>>("/api/Shops/GetAll");
+    }
 }

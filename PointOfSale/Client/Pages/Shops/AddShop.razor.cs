@@ -13,16 +13,26 @@ namespace PointOfSale.Client.Pages.Shops
     public partial class AddShop : ComponentBase
     {
         Shop shop = new Shop();
-        List<AspNetUser> AllowedEmployees = new List<AspNetUser>();
+        List<SahlUserIdentity> AllowedEmployees = new List<SahlUserIdentity>();
         IEnumerable<string> multipleValues = new string[] { };
         [Parameter] public int? id { get; set; }
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            // await JSRuntime.InvokeVoidAsync("ChangeToMainTemplate");
+            await Load();
             await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/css/pages/wizard/wizard-1.css");
             await JSRuntime.InvokeVoidAsync("loadScript", "/assets/js/pages/custom/projects/add-project.js");
             await JSRuntime.InvokeVoidAsync("StopLoading");
+
+        }
+        async Task Load()
+        {
+            AllowedEmployees = await Http.GetFromJsonAsync<List<SahlUserIdentity>>("/api/Users/GetAll");
+            if (id != null)
+            {
+                shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + id);
+                multipleValues = shop.AllowedEmployees.Select(x => x.UserId);
+            }
 
         }
         void Change(object value, string name)
@@ -47,9 +57,9 @@ namespace PointOfSale.Client.Pages.Shops
             {
                 foreach (var item in multipleValues)
                 {
-                    shop.AllowedEmployees.Add(new AspNetUser { Id = item });
+                    shop.AllowedEmployees.Add(new ShopEmployee { UserId = item });
                 }
-            
+
                 using (var response = await Http.PostAsJsonAsync<Shop>("/api/Shops/Insert", shop))
                 {
                     // convert response data to JsonElement which can handle any JSON data
@@ -63,11 +73,11 @@ namespace PointOfSale.Client.Pages.Shops
             }
             else
             {
-                shop.AllowedEmployees = new List<AspNetUser>();
+                shop.AllowedEmployees = new List<ShopEmployee>();
                 //product.Company = null;
                 foreach (var item in multipleValues)
                 {
-                    shop.AllowedEmployees.Add(new AspNetUser { Id = item });
+                    shop.AllowedEmployees.Add(new ShopEmployee { UserId = item });
                 }
                 using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
                 {

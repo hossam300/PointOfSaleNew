@@ -40,7 +40,7 @@ namespace PointOfSale.BLL.Contexts
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<Pricelist> Pricelists { get; set; }
         public virtual DbSet<PriceRule> PriceRules { get; set; }
-        public virtual DbSet<Printer> Printers { get; set; }
+        public virtual DbSet<ShopPrinter> Printers { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Reward> Rewards { get; set; }

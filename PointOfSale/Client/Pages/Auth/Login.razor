@@ -38,11 +38,11 @@
                             <ValidationSummary />
 
                             <div class="form-group">
-                                <InputText Id="email" class="form-control h-auto border-0 px-0 placeholder-dark-75" @bind-Value="loginModel.Email" />
+                                <InputText Id="email" class="form-control" @bind-Value="loginModel.Email" palceholder="Email" />
                                 <ValidationMessage For="@(() => loginModel.Email)" />
                             </div>
                             <div class="form-group">
-                                <InputText Id="password" type="password" Class="form-control h-auto border-0 px-0 placeholder-dark-75" @bind-Value="loginModel.Password" />
+                                <InputText Id="password" type="password" Class="form-control" @bind-Value="loginModel.Password" palceholder="Password" />
                                 <ValidationMessage For="@(() => loginModel.Password)" />
                             </div>
                             <div class="form-group d-flex flex-wrap justify-content-between align-items-center mt-3">
@@ -97,33 +97,21 @@
     private LoginModel loginModel = new LoginModel();
     private bool ShowErrors;
     private string Error = "";
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
         await JSRuntime.InvokeVoidAsync("StartLoading");
-        if (firstRender)
-        {
-            //await JSRuntime.InvokeVoidAsync("removeScript");
-            //await JSRuntime.InvokeVoidAsync("ChangeToPosTemplate");
-            await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/css/pages/login/login-4.css");
-            await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/plugins/global/plugins.bundle.css");
-            await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/plugins/custom/prismjs/prismjs.bundle.css");
-            await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/css/style.bundle.css");
-            //await JSRuntime.InvokeAsync<IJSObjectReference>("import", "/assets/js/pages/custom/login/login-general.js");
-
-        }
+        await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/css/pages/login/login-4.css");
+        await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/plugins/global/plugins.bundle.css");
+        await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/plugins/custom/prismjs/prismjs.bundle.css");
+        await JSRuntime.InvokeVoidAsync("loadStyle", "/assets/css/style.bundle.css");
         await JSRuntime.InvokeVoidAsync("StopLoading");
     }
     private async Task HandleLogin()
     {
         await JSRuntime.InvokeVoidAsync("StartLoading");
         await _localStorage.ClearAsync();
-        var response = await Http.PostAsJsonAsync("api/Login", loginModel);
+        var response = await Http.PostAsJsonAsync("api/Login/", loginModel);
         var loginResult = JsonSerializer.Deserialize<LoginResult>(await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-
-
-
-
-
         if (loginResult.Successful)
         {
             await _localStorage.SetItemAsync("authToken", loginResult.Token);

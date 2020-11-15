@@ -222,7 +222,7 @@
                                                                             <RadzenDropDown AllowClear="true" Name="AllowedEmployees"
                                                                                             FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                                                             AllowFiltering="true" Placeholder="Select..."
-                                                                                            Data="@AllowedEmployees" @bind-Value="@(multipleValues)" TextProperty="Name" ValueProperty="Id"
+                                                                                            Data="@AllowedEmployees" @bind-Value="@(multipleValues)" TextProperty="Name" ValueProperty="Id" Multiple="true"
                                                                                             Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
 
 

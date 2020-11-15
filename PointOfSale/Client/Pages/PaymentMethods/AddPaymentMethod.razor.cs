@@ -48,7 +48,7 @@ namespace PointOfSale.Client.Pages.PaymentMethods
 
         protected RadzenButton button2;
 
-      
+
 
         PaymentMethod _paymentmethod;
         protected PaymentMethod paymentmethod

@@ -29,7 +29,7 @@ namespace PointOfSale.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] RegisterModel model)
         {
-            var newUser = new SahlUserIdentity { UserName = model.Email, Email = model.Email, CompanyId = 4 };
+            var newUser = new SahlUserIdentity { UserName = model.Email, Email = model.Email, CompanyId = 10 };
 
             var result = await _userManager.CreateAsync(newUser, model.Password);
 
