@@ -3,7 +3,6 @@
 @using Microsoft.AspNetCore.Components.RenderTree;
 @inject IJSRuntime JSRuntime;
 @page "/Sessions/Create/{id:int}"
-<link rel="shortcut icon" href="~/assets/media/logos/favicon.ico" />
 
 
 <div class="skin-green sidebar-collapse sidebar-mini pos">
@@ -529,7 +528,7 @@
 @code {
     [Parameter]
     public int id { get; set; }
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    protected override async Task OnInitializedAsync()
     {
         await JSRuntime.InvokeVoidAsync("StartLoading");
         await JSRuntime.InvokeVoidAsync("removeScript");
@@ -543,10 +542,6 @@
         await JSRuntime.InvokeVoidAsync("loadScript", "/themes/default/assets/dist/js/libraries.min.js");
         await JSRuntime.InvokeVoidAsync("loadScript", "/themes/default/assets/dist/js/scripts.min.js");
         await JSRuntime.InvokeVoidAsync("loadScript", "/themes/default/assets/dist/js/pos.min.js");
-        await JSRuntime.InvokeVoidAsync("StopLoading");
-    }
-    protected override async Task OnInitializedAsync()
-    {
         await JSRuntime.InvokeVoidAsync("StopLoading");
 
     }

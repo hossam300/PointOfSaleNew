@@ -42,6 +42,8 @@ namespace PointOfSale.Client.Pages.Products
             {
                 product.OptionalProducts.Add(new OptionalProduct { OptionalProductId = item });
             }
+            product.Company = null;
+            
             using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))
             {
 

@@ -155,6 +155,11 @@ namespace PointOfSale.Client.Pages.Products
                     product.CustomerTaxes.Add(new CustomerTax { TaxId = item });
                 }
                 product.ProductType = (ProductType)productType;
+                product.Company = null;
+                foreach (var item in product.OptionalProducts)
+                {
+                    item.Product.Company = null;
+                }
                 using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))
                 {
 

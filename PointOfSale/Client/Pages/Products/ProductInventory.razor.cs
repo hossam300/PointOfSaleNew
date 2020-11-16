@@ -34,7 +34,11 @@ namespace PointOfSale.Client.Pages.Products
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             //bool formIsValid = model.Validate();
-            
+            product.Company = null;
+            foreach (var item in product.OptionalProducts)
+            {
+                item.Product.Company = null;
+            }
             using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))
             {
                 // convert response data to JsonElement which can handle any JSON data

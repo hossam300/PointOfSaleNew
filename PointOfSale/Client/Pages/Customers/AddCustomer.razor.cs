@@ -110,6 +110,10 @@ namespace PointOfSale.Client.Pages.Customers
             }
             else
             {
+                foreach (var item in customer.CustomerContacts)
+                {
+                    item.Customer = null;
+                }
                 using (var response = await Http.PutAsJsonAsync<Customer>("/api/Customers/Update", customer ))
                 {
                     // convert response data to JsonElement which can handle any JSON data
