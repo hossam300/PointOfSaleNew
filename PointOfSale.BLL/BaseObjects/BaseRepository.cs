@@ -506,37 +506,39 @@ namespace PointOfSale.BLL.BaseObjects
 
         public virtual void Update(TEntity entity)
         {
-            var dbEntityEntry = _dbContext.Entry(entity);
 
-            foreach (var property in dbEntityEntry.Properties)
-            {
-                var original = dbEntityEntry.OriginalValues.GetValue<TEntity>(property.Metadata.Name);
-                var current = dbEntityEntry.CurrentValues.GetValue<TEntity>(property.Metadata.Name);
 
-                if (original != null && !original.Equals(current))
-                    dbEntityEntry.Property(property.Metadata.Name).IsModified = true;
-            }
-            var entry = this._dbContext.Entry(entity);
-            var key = this.GetPrimaryKey(entity);
-            if (entry.State == EntityState.Detached)
-            {
-                var currentEntry = this._dbSet.Find(key);
-                if (currentEntry != null)
-                {
-                    var attachedEntry = this._dbContext.Entry(currentEntry);
-                    attachedEntry.CurrentValues.SetValues(entity);
-                }
-                else
-                {
-                    this._dbSet.Attach(entity);
-                    entry.State = EntityState.Modified;
-                }
-            }
-            else
-            {
-                this._dbSet.Attach(entity);
-                entry.State = EntityState.Modified;
-            }
+            //var dbEntityEntry = _dbContext.Entry(entity);
+
+            //foreach (var property in dbEntityEntry.Properties)
+            //{
+            //    var original = dbEntityEntry.OriginalValues.GetValue<TEntity>(property.Metadata.Name);
+            //    var current = dbEntityEntry.CurrentValues.GetValue<TEntity>(property.Metadata.Name);
+
+            //    if (original != null && !original.Equals(current))
+            //        dbEntityEntry.Property(property.Metadata.Name).IsModified = true;
+            //}
+            //var entry = this._dbContext.Entry(entity);
+            //var key = this.GetPrimaryKey(entity);
+            //if (entry.State == EntityState.Detached)
+            //{
+            //    var currentEntry = this._dbSet.Find(key);
+            //    if (currentEntry != null)
+            //    {
+            //        var attachedEntry = this._dbContext.Entry(currentEntry);
+            //        attachedEntry.CurrentValues.SetValues(entity);
+            //    }
+            //    else
+            //    {
+            //        this._dbSet.Attach(entity);
+            //        entry.State = EntityState.Modified;
+            //    }
+            //}
+            //else
+            //{
+            //    this._dbSet.Attach(entity);
+            //    entry.State = EntityState.Modified;
+            //}
 
 
             //var entry = this._dbContext.Entry(entity);
@@ -561,7 +563,7 @@ namespace PointOfSale.BLL.BaseObjects
             //    this._dbSet.Attach(entity);
             //    entry.State = EntityState.Modified;
             //}
-            //_dbSet.Update(entity);
+            this._dbSet.Update(entity);
         }
 
         /// <summary>

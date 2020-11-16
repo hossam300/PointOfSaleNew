@@ -60,49 +60,35 @@ namespace PointOfSale.Client.Pages.Shops
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
+            shop.Floors = new List<ShopFloor>();
+            shop.Printers = new List<ShopPrinter>();
+            shop.AvailableCategories = new List<ShopProductCategory>();
             foreach (var Floor in multipleFloors)
             {
-                shop.Floors.Add(new ShopFloor { FloorId = Floor,ShopId=shop.Id });
+                shop.Floors.Add(new ShopFloor { FloorId = Floor });
             }
             foreach (var Printer in multiplePrinters)
             {
-                shop.Printers.Add(new ShopPrinter { PrinterId = Printer, ShopId = shop.Id });
+                shop.Printers.Add(new ShopPrinter { PrinterId = Printer });
             }
             foreach (var item in multipleAvailableCategories)
             {
-                shop.AvailableCategories.Add(new ShopProductCategory { ProductCategoryId = item, ShopId = shop.Id });
+                shop.AvailableCategories.Add(new ShopProductCategory { ProductCategoryId = item });
             }
-            //bool formIsValid = model.Validate();
-            if (shop.Id == 0)
+            foreach (var item in shop.AllowedEmployees)
+            {
+                item.User = null;
+            }
+            shop.FiscalPointOfSaleition = null;
+            using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
             {
 
+                // convert response data to JsonElement which can handle any JSON data
+                var data = await response.Content.ReadFromJsonAsync<Shop>();
 
-                using (var response = await Http.PostAsJsonAsync<Shop>("/api/Shops/Insert", shop))
-                {
-                    // convert response data to JsonElement which can handle any JSON data
-                    var data = await response.Content.ReadFromJsonAsync<Shop>();
-
-                    // get id property from JSON response data
-                    //  var customerId = data.Id;
-                    uriHelper.NavigateTo("/ShopPricingPayment/" + data.Id);
-                }
-
-            }
-            else
-            {
-                //   shop.AllowedEmployees = new List<AspNetUser>();
-                //product.Company = null;
-
-                using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
-                {
-
-                    // convert response data to JsonElement which can handle any JSON data
-                    var data = await response.Content.ReadFromJsonAsync<Shop>();
-
-                    // get id property from JSON response data
-                    //  var customerId = data[0].Id;
-                    uriHelper.NavigateTo("/ShopPricingPayment/" + data.Id);
-                }
+                // get id property from JSON response data
+                //  var customerId = data[0].Id;
+                uriHelper.NavigateTo("/ShopPricingPayment/" + data.Id);
             }
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }

@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Client.Pages.Products
 {
-    public partial class  Products : ComponentBase
+    public partial class Products : ComponentBase
     {
         private string searchTerm { get; set; } = "";
-        List<Product> Model => ProductList.Where(i => i.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
+        List<Product> Model => ProductList.Where(i => (searchTerm == "") ? i.Name != null : i.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
         List<Product> ProductList = new List<Product>();
         protected override async Task OnInitializedAsync()
         {

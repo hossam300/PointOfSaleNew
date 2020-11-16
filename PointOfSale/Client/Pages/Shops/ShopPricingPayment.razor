@@ -183,6 +183,154 @@
                             <div class="col-xl-12 col-xxl-7">
                                 <!--begin::Form Wizard-->
                                 <div class="form">
+                                    <RadzenContent Container="main">
+                                        <ChildContent>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <RadzenTemplateForm Data="@(shop)" Visible="@(shop != null)" TItem="Shop" Submit="@FormShopSubmit">
+                                                        <ChildContent>
+                                                            <div class="form-group row">
+                                                                <DisplayName For="@(() => shop.Floors)"></DisplayName>
+                                                            </div>
+
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.FloorsTables"></Radzen.Blazor.RadzenCheckBox>  <DisplayName For="@(() => shop.FloorsTables )"></DisplayName>
+                                                                </div>
+                                                                @if (shop.FloorsTables)
+                                                                {
+                                                                    <div class="col-xl-6">
+                                                                        <DisplayName For="@(() => shop.Floors)"></DisplayName>
+                                                                        <div class="col-xl-8">
+                                                                            <RadzenDropDown AllowClear="true" Name="Floors"
+                                                                                            FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                                            AllowFiltering="true" Placeholder="Select..." Multiple="true"
+                                                                                            Data="@Floors" @bind-Value="multipleFloors"
+                                                                                            Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                            </RadzenDropDown>
+                                                                        </div>
+                                                                    </div>
+                                                                }
+
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.CategoryPictures"></Radzen.Blazor.RadzenCheckBox><DisplayName For="@(() => shop.CategoryPictures )"></DisplayName>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.RestrictAvailableCategories"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Restrict Available Categories</label>
+                                                                </div>
+                                                            </div>
+                                                            @if (shop.RestrictAvailableCategories)
+                                                            {
+                                                                <div class="form-group row">
+                                                                    <div class="col-xl-6"></div>
+                                                                    <div class="col-xl-6">
+                                                                        <DisplayName For="@(() => shop.AvailableCategories)"></DisplayName>
+                                                                        <RadzenDropDown AllowClear="true" Name="AvailableCategories"
+                                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                                        AllowFiltering="true" Placeholder="Select..." Multiple="true"
+                                                                                        Data="@AvailableCategories" @bind-Value="multipleAvailableCategories"
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                        </RadzenDropDown>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.SetStartCategory"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Start Category</label>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.LargeScrollbars"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Large Scroll bars</label>
+                                                                </div>
+                                                            </div>
+                                                            @if (shop.SetStartCategory)
+                                                            {
+                                                                <div class="form-group row">
+                                                                    <div class="col-xl-6">
+                                                                        <RadzenDropDown AllowClear="true" Name="StartCategoryId"
+                                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                                        AllowFiltering="true" Placeholder="Select..."
+                                                                                        Data="@AvailableCategories" @bind-Value="shop.StartCategoryId"
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                        </RadzenDropDown>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            <h3>Connected Devices</h3>
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.ConnectDevices"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Connect Devices</label>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.OrderPrinter"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Order Printer</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                @if (shop.ConnectDevices)
+                                                                {
+                                                                    <div class="col-xl-6">
+                                                                        <label class="col-md-4">Epson Receipt Printer IP Address</label>
+                                                                        <div class="col-xl-8">
+                                                                            <InputText id="Name" @bind-Value="shop.PrinterIPAddress" class="form-control form-control-lg form-control-solid" />
+                                                                            <ValidationMessage For="() => shop.PrinterIPAddress" class="text-danger" />
+                                                                        </div>
+                                                                    </div>
+                                                                }
+                                                                @if (shop.OrderPrinter)
+                                                                {
+                                                                    <div class="col-xl-6">
+                                                                        <RadzenDropDown AllowClear="true" Name="Printers"
+                                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                                        AllowFiltering="true" Placeholder="Select..." Multiple="true"
+                                                                                        Data="@Printers" @bind-Value="multiplePrinters"
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                        </RadzenDropDown>
+                                                                    </div>
+                                                                }
+                                                            </div>
+
+
+
+                                                            <div class="form-group row">
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.FiscalPointOfSaleitionPerOrder"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Fiscal Position per Order</label>
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.SpecificFiscalPointOfSaleition"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Fiscal Position</label>
+                                                                </div>
+                                                            </div>
+                                                            @if (shop.FiscalPointOfSaleitionPerOrder || shop.SpecificFiscalPointOfSaleition)
+                                                            {
+                                                                <div class="form-group row">
+                                                                    <div class="col-xl-6">
+                                                                        <label class="col-md-4">Fiscal Position</label>
+                                                                        <div class="col-xl-8">
+                                                                            <RadzenDropDown AllowClear="true" Name="FiscalPointOfSaleitionId"
+                                                                                            FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                                            AllowFiltering="true" Placeholder="Select..."
+                                                                                            Data="@FiscalPointOfSaleitions" @bind-Value="shop.FiscalPointOfSaleitionId"
+                                                                                            Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                            </RadzenDropDown>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            }
+                                                            <div class="d-flex justify-content-between border-top mt-5 pt-10">
+                                                                <div class="mr-2">
+                                                                    <a href="/ShopInterface/@shop.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">Previous</a>
+                                                                </div>
+                                                                <div>
+                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">Next Step</button>
+                                                                </div>
+                                                            </div>
+                                                        </ChildContent>
+                                                    </RadzenTemplateForm>
+                                                </div>
+                                            </div>
+                                        </ChildContent>
+                                    </RadzenContent>
 
                                 </div>
                                 <!--end::Form Wizard-->

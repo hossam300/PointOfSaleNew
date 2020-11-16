@@ -84,7 +84,7 @@ namespace PointOfSale.Server
             services.AddControllersWithViews(options => options.Filters.Add(new AuthorizeFilter()))
                 .AddNewtonsoftJson(options =>
                 {
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
                     options.SerializerSettings.Formatting = Formatting.Indented;
                 }
 
