@@ -119,10 +119,7 @@ namespace PointOfSale.Client.Pages.Products
                 product.VendorTaxes.Add(new VendorTax { TaxId = item });
             }
             product.Company = null;
-            foreach (var item in product.OptionalProducts)
-            {
-                item.Product.Company = null;
-            }
+          
             using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))
             {
 

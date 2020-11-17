@@ -20,7 +20,7 @@ namespace PointOfSale.BLL.BaseObjects
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     public class BaseRePointOfSaleitory<TEntity> : IRePointOfSaleitory<TEntity> where TEntity : class
     {
-        protected readonly DbContext _dbContext;
+        public readonly DbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;
 
         /// <summary>
@@ -56,7 +56,14 @@ namespace PointOfSale.BLL.BaseObjects
         [Obsolete("This method is not recommended, please use GetPagedList or GetPagedListAsync methods")]
         public IQueryable<TEntity> GetAll()
         {
-            return _dbSet;
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+            var navigations = _dbContext.Model.FindEntityType(typeof(TEntity))
+                .GetDerivedTypesInclusive()
+                .SelectMany(type => type.GetNavigations())
+                .Distinct();
+            foreach (var property in navigations)
+                query = query.Include(property.Name);
+            return query;
         }
 
 
@@ -397,15 +404,41 @@ namespace PointOfSale.BLL.BaseObjects
                 return await query.Select(selector).FirstOrDefaultAsync();
             }
         }
-
+        public object GetPropertyValue(object car, string propertyName)
+        {
+            var prop = car.GetType().GetProperties()
+               .Single(pi => pi.Name.Contains(propertyName))
+               .GetValue(car, null);
+            return prop;
+        }
         /// <summary>
         /// Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
         /// </summary>
         /// <param name="keyValues">The values of the primary key for the entity to be found.</param>
         /// <returns>The found entity or null.</returns>
-        public virtual TEntity Find(params object[] keyValues) => _dbSet.Find(keyValues);
+        public virtual TEntity Find(params object[] keyValues)
+        {
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+            var navigations = _dbContext.Model.FindEntityType(typeof(TEntity))
+                .GetDerivedTypesInclusive().SelectMany(type => type.GetNavigations()).Distinct();
+            foreach (var property in navigations)
+                query = query.Include(property.Name);
+            var Id = typeof(TEntity).GetProperties().FirstOrDefault(prop => prop.Name == "Id");
+            TEntity i = null;
+            foreach (var item in query)
+            {
+                var x =(int) Id.GetValue(item);
+                var y = (int)keyValues[0];
+                if (x == y)
+                {
+                    i = item;
+                    return i;
+                }
+            }
+            return i;
+        }
 
-        /// <summary>
+        /// <summary>h
         /// Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
         /// </summary>
         /// <param name="keyValues">The values of the primary key for the entity to be found.</param>

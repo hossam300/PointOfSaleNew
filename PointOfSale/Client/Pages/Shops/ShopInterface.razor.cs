@@ -65,15 +65,15 @@ namespace PointOfSale.Client.Pages.Shops
             shop.AvailableCategories = new List<ShopProductCategory>();
             foreach (var Floor in multipleFloors)
             {
-                shop.Floors.Add(new ShopFloor { FloorId = Floor });
+                shop.Floors.Add(new ShopFloor { FloorId = Floor, ShopId = shop.Id });
             }
             foreach (var Printer in multiplePrinters)
             {
-                shop.Printers.Add(new ShopPrinter { PrinterId = Printer });
+                shop.Printers.Add(new ShopPrinter { PrinterId = Printer, ShopId = shop.Id });
             }
             foreach (var item in multipleAvailableCategories)
             {
-                shop.AvailableCategories.Add(new ShopProductCategory { ProductCategoryId = item });
+                shop.AvailableCategories.Add(new ShopProductCategory { ProductCategoryId = item, ShopId = shop.Id });
             }
             foreach (var item in shop.AllowedEmployees)
             {

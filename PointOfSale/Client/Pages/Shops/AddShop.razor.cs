@@ -50,9 +50,17 @@ namespace PointOfSale.Client.Pages.Shops
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
-            //bool formIsValid = model.Validate();
+            if (shop.Floors!=null)
+            {
+                shop.Floors = shop.Floors.Select(x => new ShopFloor
+                {
+                    FloorId = x.FloorId,
+                    ShopId = x.ShopId
+                }).ToList(); 
+            }
             if (shop.Id == 0)
             {
+                shop.AllowedEmployees = new List<ShopEmployee>();
                 foreach (var item in multipleValues)
                 {
                     shop.AllowedEmployees.Add(new ShopEmployee { UserId = item });
@@ -77,6 +85,7 @@ namespace PointOfSale.Client.Pages.Shops
                 {
                     shop.AllowedEmployees.Add(new ShopEmployee { UserId = item });
                 }
+
                 using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
                 {
 

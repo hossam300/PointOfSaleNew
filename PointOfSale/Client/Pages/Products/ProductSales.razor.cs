@@ -42,6 +42,15 @@ namespace PointOfSale.Client.Pages.Products
             {
                 product.OptionalProducts.Add(new OptionalProduct { OptionalProductId = item });
             }
+          
+            foreach (var item in product.CustomerTaxes)
+            {
+                item.Tax = null;
+            }
+            foreach (var item in product.VendorTaxes)
+            {
+                item.Tax = null;
+            }
             product.Company = null;
             
             using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))

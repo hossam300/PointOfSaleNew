@@ -37,9 +37,13 @@ namespace PointOfSale.Client.Pages.Products
             await JSRuntime.InvokeVoidAsync("StartLoading");
             //bool formIsValid = model.Validate(); 
             product.Company = null;
-            foreach (var item in product.OptionalProducts)
+            foreach (var item in product.CustomerTaxes)
             {
-                item.Product.Company = null;
+                item.Tax = null;
+            }
+            foreach (var item in product.VendorTaxes)
+            {
+                item.Tax = null;
             }
             using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))
             {

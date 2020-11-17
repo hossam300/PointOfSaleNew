@@ -38,7 +38,7 @@ namespace PointOfSale.Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<POSContext>(options =>
-          options.UseLazyLoadingProxies().UseSqlServer(
+          options.UseSqlServer(
               Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
           //  services.AddDbContext<ApplicationDbContext>(options =>
           //options.UseLazyLoadingProxies().UseSqlServer(
@@ -84,7 +84,7 @@ namespace PointOfSale.Server
             services.AddControllersWithViews(options => options.Filters.Add(new AuthorizeFilter()))
                 .AddNewtonsoftJson(options =>
                 {
-                    options.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.Formatting = Formatting.Indented;
                 }
 
