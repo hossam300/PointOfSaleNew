@@ -17,5 +17,10 @@ namespace PointOfSale.Server.Controllers
         public PaymentMethodsController(IPaymentMethodService businessService) : base(businessService)
         {
         }
+        [HttpGet, Route("GetDropDownListAll")]
+        public virtual IActionResult GetDropDownListAll()
+        {
+            return Ok(this._BusinessService.GetAll<PaymentMethod>().Select(x => new DropDownList { Id = x.Id, Name = x.MehtodName }));
+        }
     }
 }

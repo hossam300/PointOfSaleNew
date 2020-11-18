@@ -57,8 +57,9 @@ namespace PointOfSale.DAL.Domains
         public virtual Pricelist Pricelist { get; set; }
         public bool AdvancedPriceICollections { get; set; }
         public virtual ICollection<ShopPricelist> AvailablePriceLists { get; set; }
-        public virtual ProductPrices? ProductPrices { get; set; }
+        public virtual ProductPrices ProductPrices { get; set; }
         public bool GlobalDiscounts { get; set; }
+        public bool ManualDiscounts { get; set; }
         public bool LoyaltyProgram { get; set; }
         public bool PriceControl { get; set; }
         #endregion

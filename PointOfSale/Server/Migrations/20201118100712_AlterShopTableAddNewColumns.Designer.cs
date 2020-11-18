@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PointOfSale.BLL.Contexts;
 
 namespace PointOfSale.Server.Migrations
 {
     [DbContext(typeof(POSContext))]
-    partial class POSContextModelSnapshot : ModelSnapshot
+    [Migration("20201118100712_AlterShopTableAddNewColumns")]
+    partial class AlterShopTableAddNewColumns
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1358,7 +1360,7 @@ namespace PointOfSale.Server.Migrations
                     b.Property<string>("PrinterIPAddress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ProductPrices")
+                    b.Property<int?>("ProductPrices")
                         .HasColumnType("int");
 
                     b.Property<bool>("ReprintReceipt")

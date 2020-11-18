@@ -85,7 +85,10 @@ namespace PointOfSale.Client.Pages.Shops
                 {
                     shop.AllowedEmployees.Add(new ShopEmployee { UserId = item });
                 }
-
+                foreach (var item in shop.AvailableCategories)
+                {
+                    item.ProductCategory = null;
+                }
                 using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
                 {
 

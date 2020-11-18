@@ -14,13 +14,9 @@ namespace PointOfSale.Client.Pages.Shops
     public partial class ShopPricingPayment : ComponentBase
     {
         Shop shop = new Shop();
-        List<DropDownList> Floors = new List<DropDownList>();
-        List<DropDownList> Printers = new List<DropDownList>();
-        List<DropDownList> FiscalPointOfSaleitions = new List<DropDownList>();
-        List<DropDownList> AvailableCategories = new List<DropDownList>();
-        IEnumerable<int> multipleFloors = new int[] { };
-        IEnumerable<int> multiplePrinters = new int[] { };
-        IEnumerable<int> multipleAvailableCategories = new int[] { };
+        List<DropDownList> PaymentMethods = new List<DropDownList>();
+       
+        IEnumerable<int> multipleValues = new int[] { };
         [Parameter] public int? id { get; set; }
         protected override async Task OnInitializedAsync()
         {
@@ -31,16 +27,11 @@ namespace PointOfSale.Client.Pages.Shops
         }
         async Task Load()
         {
-            Floors = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Floors/GetDropDownListAll");
-            Printers = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Printers/GetDropDownListAll");
-            FiscalPointOfSaleitions = await Http.GetFromJsonAsync<List<DropDownList>>("/api/FiscalPositions/GetDropDownListAll");
-            AvailableCategories = await Http.GetFromJsonAsync<List<DropDownList>>("/api/ProductCategories/GetDropDownListAll");
+            PaymentMethods = await Http.GetFromJsonAsync<List<DropDownList>>("/api/PaymentMethods/GetDropDownListAll");
             if (id != null)
             {
                 shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + id);
-                multipleFloors = shop.Floors.Select(x => x.FloorId);
-                multiplePrinters = shop.Printers.Select(x => x.PrinterId);
-                multipleAvailableCategories = shop.AvailableCategories.Select(x => x.ProductCategoryId);
+                multipleValues = shop.PaymentMethods.Select(x => x.PaymentMethodId);
             }
         }
         void Change(object value, string name)
@@ -60,35 +51,26 @@ namespace PointOfSale.Client.Pages.Shops
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
-            shop.Floors = new List<ShopFloor>();
-            shop.Printers = new List<ShopPrinter>();
-            shop.AvailableCategories = new List<ShopProductCategory>();
-            foreach (var Floor in multipleFloors)
+            shop.PaymentMethods = new List<ShopPaymentMethod>();
+            foreach (var paymentMethod in multipleValues)
             {
-                shop.Floors.Add(new ShopFloor { FloorId = Floor });
-            }
-            foreach (var Printer in multiplePrinters)
-            {
-                shop.Printers.Add(new ShopPrinter { PrinterId = Printer });
-            }
-            foreach (var item in multipleAvailableCategories)
-            {
-                shop.AvailableCategories.Add(new ShopProductCategory { ProductCategoryId = item });
+                shop.PaymentMethods.Add(new ShopPaymentMethod { PaymentMethodId = paymentMethod });
             }
             foreach (var item in shop.AllowedEmployees)
             {
                 item.User = null;
             }
-            shop.FiscalPointOfSaleition = null;
+            foreach (var item in shop.AvailableCategories)
+            {
+                item.ProductCategory = null;
+            }
             using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
             {
-
                 // convert response data to JsonElement which can handle any JSON data
                 var data = await response.Content.ReadFromJsonAsync<Shop>();
-
                 // get id property from JSON response data
                 //  var customerId = data[0].Id;
-                uriHelper.NavigateTo("/ShopPricingPayment/" + data.Id);
+                uriHelper.NavigateTo("/ShopBillsReceipts/" + data.Id);
             }
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }
