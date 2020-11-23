@@ -15,7 +15,7 @@ namespace PointOfSale.DAL.Domains
         public DateTime CreationDate { get; set; }
         public string CosedById { get; set; }
         public virtual SahlUserIdentity CosedBy { get; set; }
-        public DateTime ClosedDate { get; set; }
+        public DateTime? ClosedDate { get; set; }
         public Status Status { get; set; }
     }
     public enum Status

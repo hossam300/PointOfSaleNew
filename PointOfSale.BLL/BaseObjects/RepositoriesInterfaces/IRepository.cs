@@ -200,6 +200,7 @@ namespace PointOfSale.BLL.BaseObjects.RePointOfSaleitoriesInterfaces
         /// <returns>The <see cref="IQueryable{TEntity}"/>.</returns>
         //[Obsolete("This method is not recommended, please use GetPagedList or GetPagedListAsync methods")]
         IQueryable<TEntity> GetAll();
+        IQueryable<TEntity> GetAllWithoutInclude();
 
         /// <summary>
         /// Gets the count based on a predicate.

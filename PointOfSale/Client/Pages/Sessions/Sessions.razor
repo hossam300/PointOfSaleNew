@@ -19,7 +19,22 @@
                                                 </RadzenGridColumn>
                                                 <RadzenGridColumn TItem="Session" Context="Session" Property="SessionNo" Title="Session Number" Type="string">
                                                 </RadzenGridColumn>
-
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="Shop.Name" Title="Point Of Sale" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="Creator.Username" Title="Open By" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="CreationDate" Title="Creation Date">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="ClosedDate" Title="Closed Date">
+                                                    <Template Context="Session">
+                                                        @if (Session.Status == Status.Open)
+                                                        {
+                                                            Session.ClosedDate = null;
+                                                        }
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="Status" Title="Status">
+                                                </RadzenGridColumn>
                                             </Columns>
                                         </RadzenGrid>
                                     </div>

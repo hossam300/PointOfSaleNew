@@ -44,6 +44,11 @@ namespace PointOfSale.Services.Sevices
             else
                 return query.ProjectTo<T>(_Mapper.ConfigurationProvider).ToList();
         }
+        public virtual List<TDbEntity> GetAllWithoutInclude()
+        {
+            IQueryable query = this._UnitOfWork.GetRepository<TDbEntity>().GetAllWithoutInclude();
+            return query.Cast<TDbEntity>().ToList(); ;
+        }
        
         public object GetPropertyValue(object car, string propertyName)
         {
@@ -51,6 +56,7 @@ namespace PointOfSale.Services.Sevices
                .Single(pi => pi.Name.Contains(propertyName))
                .GetValue(car, null);
         }
+
         public virtual TDbEntity GetDetails(object Id)
         {
             if (Id == null) return null;

@@ -239,9 +239,8 @@
             {
                 item.Product = new Product { Id = item.Id, Name = Products.FirstOrDefault(p => p.Id == item.ProductId).Name };
             }
-            Order.Customer = new Customer { Id = Order.CustomerId, Name = Customers.FirstOrDefault(c => c.Id == Order.CustomerId).Name };
-            await DialogService.OpenAsync<PrintOrder>("Print Order", new Dictionary<string, object>() { { "Order", Order } },
-                   new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+            await DialogService.OpenAsync<PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", Order } },
+                     new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
             await InvokeAsync(() => { StateHasChanged(); });
             //  await JSRuntime.InvokeVoidAsync("StopLoading");
 

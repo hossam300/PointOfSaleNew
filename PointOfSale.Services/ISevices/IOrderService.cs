@@ -8,6 +8,7 @@ namespace PointOfSale.Services.ISevices
 {
     public interface IOrderService : IBusinessService<Order, Order>
     {
+        List<Order> GetAllWithInclude();
         Task<Order> GetOrderByNo(string id);
     }
 }

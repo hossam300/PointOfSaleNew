@@ -9,6 +9,7 @@ namespace PointOfSale.Services.ISevices
       where TDbEntity : class
     {
         List<T> GetAll<T>();
+        List<TDbEntity> GetAllWithoutInclude();
         TDbEntity GetDetails(object Id);
         TDbEntity Insert(TDbEntity entities);
         int Delete(int Ids);

@@ -24,7 +24,17 @@ namespace PointOfSale.Server.Controllers
         public IActionResult GetByIdWithoutInclude(int id)
         {
             var shop = _shopService.GetDetails(id);
-            return Ok(new ShopDTO { Id = shop.Id, ShopName = shop.Name, Footer = shop.Footer, Header = shop.Header });
-          }
+            return Ok(new ShopDTO { Id = shop.Id, ShopName = shop.Name, Footer = shop.Footer, Header = shop.Header,Branch=null });
+        }
+        [HttpGet("GetAllWithoutInclude")]
+        public IActionResult GetAllWithoutInclude()
+        {
+            var shop = _shopService.GetAllWithoutInclude().Select(c => new ShopDTO { Id = c.Id, ShopName = c.Name, Footer = c.Footer, Header = c.Header ,Branch=null}).ToList();
+            return Ok(shop);
+        }
+        BranchDTo GetBranch(Branch branch)
+        {
+            return new BranchDTo { Id = branch.Id, Name = branch.Name };
+        }
     }
 }

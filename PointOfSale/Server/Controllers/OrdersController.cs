@@ -19,12 +19,24 @@ namespace PointOfSale.Server.Controllers
         {
             this._orderService = businessService;
         }
+        [HttpGet("GetAllWithInclude")]
+
+        public async Task<IActionResult> GetAllWithInclude()
+        {
+            return Ok(_orderService.GetAllWithInclude());
+        }
+        [HttpGet("GetAllWithIncludeByShopId/{id}")]
+
+        public async Task<IActionResult> GetAllWithIncludeByShopId(int id)
+        {
+            return Ok(_orderService.GetAllWithInclude().Where(c => c.ShopId == id));
+        }
         [HttpGet("GetOrderByNo/{id}")]
         public async Task<IActionResult> GetOrderByNo(string id)
         {
 
             var order = await _orderService.GetOrderByNo(id);
-            if (order==null)
+            if (order == null)
             {
                 order = new Order();
             }

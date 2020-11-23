@@ -1,4 +1,5 @@
 ﻿@page "/Orders"
+@page "/Orders/{id:int?}"
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
@@ -21,7 +22,32 @@
                                                 <RadzenGridColumn Width="200px" TItem="Order" Property="Customer.Name" Title="Customer" />
                                                 <RadzenGridColumn TItem="Order" Property="OrderDate" Title="Order Date"></RadzenGridColumn>
                                                 <RadzenGridColumn TItem="Order" Property="Total" Title="Total"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Context="order" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px"  Title="Print Bill">
+                                                    <Template Context="order">
+                                                        <RadzenButton Icon="print" Size="Radzen.ButtonSize.Small" Click="@(args => PrintBill(order.OrderNumber))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Context="order" Filterable="false" Sortable="false" Bubble="false" Width="70px" Title="Print Order">
+                                                    <Template Context="order">
+                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="print" Size="Radzen.ButtonSize.Small" Click="@((args) =>PrintOrder(order.OrderNumber))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
                                             </Columns>
+                                            <Template Context="order">
+                                                <RadzenGrid  AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(order.OrderItem)" TItem="OrderItem">
+                                                    <Columns>
+                                                        <RadzenGridColumn TItem="OrderItem" Context="Order" Property="Id" Title="Id" Type="integer">
+                                                        </RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="Product.Name" Title="Product"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="Quantity" Title="Quantity"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="Price" Title="Price"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="SubTotal" Title="SubTotal"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="ProductDiscount" Title="Discoun"></RadzenGridColumn>
+                                                    </Columns>
+                                                </RadzenGrid>
+                                            </Template>
                                         </RadzenGrid>
                                     </div>
                                 </div>

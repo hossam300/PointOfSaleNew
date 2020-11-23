@@ -23,7 +23,7 @@ namespace PointOfSale.Client.Pages.Orders
         [Inject]
         protected NotificationService NotificationService { get; set; }
 
-
+        [Parameter] public int? id { get; set; }
 
         protected RadzenContent content1;
 
@@ -73,11 +73,31 @@ namespace PointOfSale.Client.Pages.Orders
         }
         protected async void Load()
         {
-            var sahlErpGetOrdersResult = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAll");
+            if (id != null)
+            {
+                orders = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAllWithIncludeByShopId");
+            }
+            else
+            {
+                var sahlErpGetOrdersResult = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAllWithInclude");
 
-            orders = sahlErpGetOrdersResult;
+                orders = sahlErpGetOrdersResult;
+            }
         }
-
+        async void PrintOrder(string id)
+        {
+            var order = await Http.GetFromJsonAsync<Order>("/api/Orders/GetOrderByNo/" + id);
+            var result = await DialogService.OpenAsync<Sessions.PrintOrder>("Print Order", new Dictionary<string, object>() { { "Order", order } },
+                    new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+            await InvokeAsync(() => { StateHasChanged(); });
+        }
+        async void PrintBill(string id)
+        {
+            var order = await Http.GetFromJsonAsync<Order>("/api/Orders/GetOrderByNo/" + id);
+            var result = await DialogService.OpenAsync<Sessions.PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", order } },
+                 new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+            await InvokeAsync(() => { StateHasChanged(); });
+        }
         //protected async void btnOrdersClick(MouseEventArgs args)
         //{
         //    var result = await DialogService.OpenAsync<AddOrder>("Add Address Type", null);

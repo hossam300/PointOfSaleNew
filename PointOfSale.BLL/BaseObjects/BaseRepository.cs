@@ -66,7 +66,11 @@ namespace PointOfSale.BLL.BaseObjects
             return query;
         }
 
-
+        public IQueryable<TEntity> GetAllWithoutInclude()
+        {
+            var query = _dbContext.Set<TEntity>().AsQueryable();
+            return query;
+        }
         /// <summary>
         /// Gets the <see cref="IPagedList{TEntity}"/> based on a predicate, orderby delegate and page information. This method default no-tracking query.
         /// </summary>

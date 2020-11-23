@@ -5,6 +5,7 @@ using PointOfSale.DAL.Domains;
 using PointOfSale.Services.ISevices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,6 +19,11 @@ namespace PointOfSale.Services.Sevices
         {
             _unitOfWork = unitOfWork;
             _rePointOfSaleitory = _unitOfWork.GetRepository<Order>();
+        }
+
+        public List<Order> GetAllWithInclude()
+        {
+            return  _rePointOfSaleitory.GetAll().Include(c => c.OrderItem).ThenInclude(o => o.Product).ToList();
         }
 
         public async Task<Order> GetOrderByNo(string id)

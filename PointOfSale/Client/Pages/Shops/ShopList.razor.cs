@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
+using PointOfSale.DAL.ViewModels;
 using Radzen;
 using Radzen.Blazor;
 using System;
@@ -31,12 +32,12 @@ namespace PointOfSale.Client.Pages.Shops
 
         protected RadzenButton button0;
 
-        protected RadzenGrid<Shop> grid0;
+        protected RadzenGrid<ShopDTO> grid0;
 
         protected RadzenButton gridDeleteButton;
 
-        IEnumerable<Shop> _getShopsResult;
-        protected IEnumerable<Shop> getShopsResult
+        IEnumerable<ShopDTO> _getShopsResult;
+        protected IEnumerable<ShopDTO> getShopsResult
         {
             get
             {
@@ -70,7 +71,7 @@ namespace PointOfSale.Client.Pages.Shops
         }
         protected async void Load()
         {
-            var sahlErpGetShopsResult = await Http.GetFromJsonAsync<List<Shop>>("/api/Shops/GetAll");
+            var sahlErpGetShopsResult = await Http.GetFromJsonAsync<List<ShopDTO>>("/api/Shops/GetAllWithoutInclude");
             getShopsResult = sahlErpGetShopsResult;
         }
 
@@ -79,12 +80,12 @@ namespace PointOfSale.Client.Pages.Shops
             UriHelper.NavigateTo("/Shops/AddShop");
         }
 
-        protected async void EditRow(Shop args)
+        protected async void EditRow(ShopDTO args)
         {
             UriHelper.NavigateTo("/Shops/EditShop/"+ args.Id);
         }
 
-        protected async void GridDeleteButtonClick(MouseEventArgs args, Shop data)
+        protected async void GridDeleteButtonClick(MouseEventArgs args, ShopDTO data)
         {
             try
             {
