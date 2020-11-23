@@ -1,13 +1,13 @@
 ﻿@page "/Payments"
 <RadzenGrid @ref="grid" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" RowRender="@RowRender" ExpandMode="Radzen.DataGridExpandMode.Single"
-            Data="@orders" TItem="Order">
-    <Template Context="order">
-        <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@order.OrderPayments" TItem="OrderPayment">
+            Data="@OrderPayments" TItem="OrderPayment">
+    <Template Context="OrderPayment">
+        <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@OrderPayments" TItem="OrderPayment">
             <Columns>
-                <RadzenGridColumn Width="100px" TItem="Order" Property="Id" Title="Order ID" />
-                <RadzenGridColumn Width="200px" TItem="Order" Property="Customer.Name" Title="Customer" />
-                <RadzenGridColumn TItem="Order" Property="order.OrderDate" Title="Order Date"></RadzenGridColumn>
-                <RadzenGridColumn TItem="Order" Property="Total" Title="Total"></RadzenGridColumn>
+                <RadzenGridColumn Width="100px" TItem="OrderPayment" Property="OrderPayment.Order.Id" Title="Order ID" />
+                <RadzenGridColumn Width="200px" TItem="OrderPayment" Property="OrderPayment.Order.Customer.Name" Title="Customer" />
+                <RadzenGridColumn TItem="OrderPayment" Property="OrderPayment.Order.OrderDate" Title="Order Date"></RadzenGridColumn>
+                <RadzenGridColumn TItem="OrderPayment" Property="OrderPayment.Order.Total" Title="Total"></RadzenGridColumn>
             </Columns>
         </RadzenGrid>
     </Template>
@@ -20,26 +20,26 @@
     </Columns>
 </RadzenGrid>
 @code {
-    List<Order> orders;
-    RadzenGrid<Order> grid;
+    List<OrderPayment> OrderPayments;
+    RadzenGrid<OrderPayment> grid;
 
     protected override async Task OnInitializedAsync()
     {
         await JSRuntime.InvokeVoidAsync("StartLoading");
-        orders = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAll");
+        OrderPayments = await Http.GetFromJsonAsync<List<OrderPayment>>("/api/OrderPayments/GetAll");
         await JSRuntime.InvokeVoidAsync("StopLoading");
     }
 
-    void RowRender(Radzen.RowRenderEventArgs<Order> args)
+    void RowRender(Radzen.RowRenderEventArgs<OrderPayment> args)
     {
-        //args.Expandable = args.Data. == "France" || args.Data.ShipCountry == "Brazil";
+        args.Expandable = args.Data.PaymentMethod.MehtodName == "Cash" ;
     }
 
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender)
         {
-           // grid.ExpandRow(orders.FirstOrDefault());
+            // grid.ExpandRow(orders.FirstOrDefault());
             StateHasChanged();
         }
 

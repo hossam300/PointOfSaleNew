@@ -18,7 +18,9 @@
                                                 </RadzenGridColumn>
                                                 <RadzenGridColumn TItem="Order" Context="Order" Property="OrderNumber" Title="Order Number" Type="string">
                                                 </RadzenGridColumn>
-                                              
+                                                <RadzenGridColumn Width="200px" TItem="Order" Property="Customer.Name" Title="Customer" />
+                                                <RadzenGridColumn TItem="Order" Property="OrderDate" Title="Order Date"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Property="Total" Title="Total"></RadzenGridColumn>
                                             </Columns>
                                         </RadzenGrid>
                                     </div>
