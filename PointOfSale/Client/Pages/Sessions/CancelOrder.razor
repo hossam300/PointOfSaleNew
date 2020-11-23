@@ -1,0 +1,99 @@
+﻿<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenTemplateForm TItem="Order" Data="@Order" Submit="@OnSubmit" InvalidSubmit="@OnInvalidSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="card-body p-9">
+                        <div class="col-md-12">
+                            <div style="margin-bottom: 1rem" class="row">
+                                Are you sure?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col offset-sm-3">
+                                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Yes" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                </RadzenButton>
+                                <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="No" Click="@btnCancelClick">
+                                </RadzenButton>
+                            </div>
+                        </div>
+                    </div>
+                </RadzenTemplateForm>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    [Inject]
+    protected Radzen.DialogService DialogService { get; set; }
+    [Parameter] public Order Order { get; set; }
+    Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
+    Session session = new Session();
+    protected override async Task OnInitializedAsync()
+    {
+        session = await Http.GetFromJsonAsync<Session>("/api/Sessions/GetByShopId/" + Order.ShopId);
+    }
+    void Log(string eventName, string value)
+    {
+        events.Add(DateTime.Now, $"{eventName}: {value}");
+    }
+    void OnInvalidSubmit(Radzen.FormInvalidSubmitEventArgs args)
+    {
+        Log("InvalidSubmit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+    }
+    async void OnSubmit(Order model)
+    {
+        await JSRuntime.InvokeVoidAsync("StartLoading");
+        foreach (var item in Order.OrderItem)
+        {
+            item.Product = null;
+        }
+        Order.SessionId = session.Id;
+        Order.Customer = null;
+        Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
+        //bool formIsValid = model.Validate();
+        if (Order.Id == 0)
+        {
+
+            using (var response = await Http.PostAsJsonAsync<Order>("/api/Orders/Insert", Order))
+            {
+                // convert response data to JsonElement which can handle any JSON data
+                var data = await response.Content.ReadFromJsonAsync<Order>();
+
+                // get id property from JSON response data
+                //  var customerId = data.Id;
+                //  uriHelper.NavigateTo("/AddCustomerConacts/" + data.Id);
+            }
+
+        }
+        else
+        {
+            //foreach (var item in order.CustomerContacts)
+            //{
+            //    item.Customer = null;
+            //}
+            using (var response = await Http.PutAsJsonAsync<Order>("/api/Orders/Update", Order))
+            {
+                // convert response data to JsonElement which can handle any JSON data
+                var data = await response.Content.ReadFromJsonAsync<Order>();
+
+                // get id property from JSON response data
+                //  var customerId = data[0].Id;
+                // uriHelper.NavigateTo("/AddCustomerConacts/" + data.Id);
+            }
+        }
+        DialogService.Close(Order);
+        await JSRuntime.InvokeVoidAsync("StopLoading");
+    }
+    protected void btnCancelClick(MouseEventArgs args)
+    {
+        DialogService.Close(null);
+    }
+}

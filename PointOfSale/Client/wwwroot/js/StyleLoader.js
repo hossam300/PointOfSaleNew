@@ -76,6 +76,7 @@ window.removeStyle = function () {
             sheets[i].remove();
     }
 }
+
 window.RemoveStyle = function (StylePath) {
     if (StylePath) {
         var sheets = document.getElementsByTagName('link');

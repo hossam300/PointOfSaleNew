@@ -3,9 +3,11 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using PointOfSale.DAL.Domains;
 using PointOfSale.Services.ISevices;
 using Radzen;
 using System;
@@ -40,7 +42,6 @@ namespace PointOfSale.Client
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddFileReaderService(o => o.UseWasmSharedBuffer = true);
             builder.Services.AddLanguageContainer(Assembly.GetExecutingAssembly());
-
             await builder.Build().RunAsync();
         }
     }

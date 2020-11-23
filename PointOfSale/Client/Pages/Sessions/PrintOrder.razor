@@ -1,0 +1,51 @@
+﻿<div class="card-content">
+    <button type="button" class="close mr10" @Print"><i class="fa fa-print"></i></button>
+
+    <div class="card-body">
+        <div id="printOrder-body">
+            <div id="order_span">
+                <div style="text-align:center;">
+                    <h3>@shop.ShopName</h3>
+                    <h4>@shop.Header</h4>
+                </div>
+                <h5>Customer: @Order.Customer.Name</h5>
+                <h5>Cashir: @userName</h5>
+                <h5>Time: @Order.OrderDate.ToString("f")</h5>
+            </div>
+            <table id="order-table" class="prT table table-condensed" style="width:100%;margin-bottom:0;">
+                <tbody>
+                    @for (int i = 0; i < Order.OrderItem.Count; i++)
+                    {
+                        <tr class="bb row_1" data-item-id="1">
+                            <td>#@(i+1) @Order.OrderItem[i].Product.Name</td>
+                            <td>[ @Order.OrderItem[i].Quantity ]</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="text-align:center">
+                <h4>@shop.Footer</h4>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter] public Order Order { get; set; }
+    [Inject]
+    AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+    ShopDTO shop = new ShopDTO();
+    string userName = "";
+    protected override async Task OnInitializedAsync()
+    {
+        shop = await Http.GetFromJsonAsync<ShopDTO>("/api/Shops/GetByIdWithoutInclude/" + Order.ShopId);
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        userName = user.Identity.Name;
+        await JSRuntime.InvokeVoidAsync("PrintElem", "printOrder-body");
+    }
+    async void Print()
+    {
+
+        await JSRuntime.InvokeVoidAsync("PrintElem", "printOrder-body");
+    }
+}

@@ -1,0 +1,33 @@
+﻿@page "/Orders"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main">
+                            <ChildContent>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenGrid @ref="gridOrders" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(orders)" TItem="Order">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="Order" Context="Order" Property="Id" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Context="Order" Property="OrderNumber" Title="Order Number" Type="string">
+                                                </RadzenGridColumn>
+                                              
+                                            </Columns>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

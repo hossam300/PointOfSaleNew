@@ -427,7 +427,7 @@ namespace PointOfSale.BLL.BaseObjects
             TEntity i = null;
             foreach (var item in query)
             {
-                var x =(int) Id.GetValue(item);
+                var x = (int)Id.GetValue(item);
                 var y = (int)keyValues[0];
                 if (x == y)
                 {
@@ -573,13 +573,22 @@ namespace PointOfSale.BLL.BaseObjects
             //    entry.State = EntityState.Modified;
             //}
 
+            //var dbEntityEntry = _dbContext.Entry(entity);
 
+            //foreach (var property in dbEntityEntry.Properties)
+            //{
+            //    var original = dbEntityEntry.OriginalValues.GetValue<TEntity>(property.Metadata.Name);
+            //    var current = dbEntityEntry.CurrentValues.GetValue<TEntity>(property.Metadata.Name);
+
+            //    if (original != null && !original.Equals(current))
+            //        dbEntityEntry.Property(property.Metadata.Name).IsModified = true;
+            //}
             //var entry = this._dbContext.Entry(entity);
             //var key = this.GetPrimaryKey(entity);
 
             //if (entry.State == EntityState.Detached)
             //{
-            //    var currentEntry = this._dbSet.Find(key);
+            //    var currentEntry = this.Find(key);
             //    if (currentEntry != null)
             //    {
             //        var attachedEntry = this._dbContext.Entry(currentEntry);
@@ -596,7 +605,35 @@ namespace PointOfSale.BLL.BaseObjects
             //    this._dbSet.Attach(entity);
             //    entry.State = EntityState.Modified;
             //}
-            this._dbSet.Update(entity);
+            var key = this.GetPrimaryKey(entity);
+            var entry = this._dbContext.Entry(entity);
+            foreach (var property in entry.Properties)
+            {
+                var original = entry.OriginalValues[property.Metadata.Name];
+                var current = entry.CurrentValues[property.Metadata.Name];
+                if (original != null && !original.Equals(current))
+                    entry.Property(property.Metadata.Name).IsModified = true;
+            }
+            if (entry.State == EntityState.Detached)
+            {
+                var currentEntry = this._dbSet.Find(key);
+                if (currentEntry != null)
+                {
+                    var attachedEntry = this._dbContext.Entry(currentEntry);
+                    attachedEntry.CurrentValues.SetValues(entity);
+                }
+                else
+                {
+                    this._dbSet.Attach(entity);
+                    entry.State = EntityState.Modified;
+                }
+            }
+            else
+            {
+                this._dbSet.Attach(entity);
+                entry.State = EntityState.Modified;
+            }
+
         }
 
         /// <summary>

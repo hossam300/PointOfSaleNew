@@ -17345,18 +17345,18 @@ body {
     padding-right: 65px
 }
 
-.pos .contents #item-list .btn {
+ #item-list .btn {
     width: 230px;
     text-align: center
 }
 
-.pos .contents #item-list .items {
+#item-list .items {
     height: 100%;
     position: relative;
     overflow: hidden
 }
 
-.pos .contents #item-list .btn-name {
+#item-list .btn-name {
     width: 116px;
     height: 60px;
     line-height: 16px;
@@ -17364,22 +17364,22 @@ body {
     margin: 2px
 }
 
-.pos .contents #item-list .btn-both, .pos .contents #item-list .btn-img {
+ #item-list .btn-both, #item-list .btn-img {
     background: 0 0;
     padding: 3px
 }
 
-    .pos .contents #item-list .btn-both:hover, .pos .contents #item-list .btn-img:hover {
+     #item-list .btn-both:hover,#item-list .btn-img:hover {
         background: #CCC
     }
 
-    .pos .contents #item-list .btn-both .bg-img {
+    #item-list .btn-both .bg-img {
         background: #FFF;
         height: 160px;
         padding: 5px
     }
 
-    .pos .contents #item-list .btn-both span {
+    #item-list .btn-both span {
         display: block;
         width: 200px;
         background: #E5E5E5;
@@ -17389,7 +17389,7 @@ body {
         margin-left: 1px
     }
 
-        .pos .contents #item-list .btn-both span span {
+       #item-list .btn-both span span {
             display: table-cell;
             vertical-align: middle;
             overflow: hidden;

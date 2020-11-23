@@ -1,0 +1,48 @@
+﻿@page "/Payments"
+<RadzenGrid @ref="grid" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" RowRender="@RowRender" ExpandMode="Radzen.DataGridExpandMode.Single"
+            Data="@orders" TItem="Order">
+    <Template Context="order">
+        <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@order.OrderPayments" TItem="OrderPayment">
+            <Columns>
+                <RadzenGridColumn Width="100px" TItem="Order" Property="Id" Title="Order ID" />
+                <RadzenGridColumn Width="200px" TItem="Order" Property="Customer.Name" Title="Customer" />
+                <RadzenGridColumn TItem="Order" Property="order.OrderDate" Title="Order Date"></RadzenGridColumn>
+                <RadzenGridColumn TItem="Order" Property="Total" Title="Total"></RadzenGridColumn>
+            </Columns>
+        </RadzenGrid>
+    </Template>
+    <Columns>
+        <RadzenGridColumn TItem="OrderPayment" Title="Method">
+            <Template Context="Method">
+                @Method.PaymentMethod.MehtodName
+            </Template>
+        </RadzenGridColumn>
+    </Columns>
+</RadzenGrid>
+@code {
+    List<Order> orders;
+    RadzenGrid<Order> grid;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await JSRuntime.InvokeVoidAsync("StartLoading");
+        orders = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAll");
+        await JSRuntime.InvokeVoidAsync("StopLoading");
+    }
+
+    void RowRender(Radzen.RowRenderEventArgs<Order> args)
+    {
+        //args.Expandable = args.Data. == "France" || args.Data.ShipCountry == "Brazil";
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+           // grid.ExpandRow(orders.FirstOrDefault());
+            StateHasChanged();
+        }
+
+        base.OnAfterRender(firstRender);
+    }
+}

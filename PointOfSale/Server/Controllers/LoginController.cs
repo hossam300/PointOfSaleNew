@@ -37,10 +37,11 @@ namespace PointOfSale.Server.Controllers
             var result = await _signInManager.PasswordSignInAsync(login.Email, login.Password, login.RememberMe, false);
 
             if (!result.Succeeded) return BadRequest(new LoginResult { Successful = false, Error = "Username and password are invalid." });
-
+            var user =await _signInManager.UserManager.FindByNameAsync(login.Email);
             var claims = new[]
             {
-            new Claim(ClaimTypes.Name, login.Email)
+            new Claim(ClaimTypes.Name, login.Email),
+            new Claim("UserId", user.Id)
         };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));

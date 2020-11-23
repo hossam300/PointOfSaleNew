@@ -1,0 +1,102 @@
+﻿<div class="card-content">
+    <button type="button" class="close mr10" @onclick="Print"><i class="fa fa-print"></i></button>
+
+    <div class="card-body">
+        <div id="print-body">
+            <div id="order_span">
+                <div style="text-align:center;">
+                    <h3>@shop.Name</h3>
+                    <h4>@shop.Header</h4>
+                </div>
+                <h5>Customer: @order.Customer.Name</h5>
+                <h5>Cashir: @userName</h5>
+                <h5>Time: @order.OrderDate.ToString("f")</h5>
+            </div>
+            <table id="order-table" class="prT table table-condensed" style="width:100%;margin-bottom:0;">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Sub Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < order.OrderItem.Count; i++)
+                    {
+                        <tr class="bb row_1">
+                            <td>#@(i + 1) @order.OrderItem[i].Product.Name</td>
+                            <td>[ @order.OrderItem[i].Quantity ]</td>
+                            <td>[ @order.OrderItem[i].Price ]</td>
+                            <td>[ @{ var total = order.OrderItem[i].Quantity * order.OrderItem[i].Price;} @total  ]</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            <label class="control-label">Total Items</label>
+                        </th>
+                        <th>
+                            <label class="control-label">@order.OrderItem.Count</label>
+                        </th>
+                        <th>
+                            <label class="control-label">Total</label>
+                        </th>
+                        <th colspan="2">
+                            <label class="control-label">@order.OrderItem.Sum(c => c.Price)</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label class="control-label">Discount</label>
+                        </th>
+                        <th>
+                            <label class="control-label">@order.Discount</label>
+
+                        </th>
+                        <th>
+                            <label class="control-label">Order Tax</label>
+                        </th>
+                        <th colspan="2">
+                            <label class="control-label">@order.OrderTax %</label>
+
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                            <label class="control-label">Total Payable</label>
+                        </th>
+                        <th colspan="3">
+                            <label class="control-label">@order.Total</label>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div style="text-align:center">
+                <h4>@shop.Footer</h4>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    [Parameter] public Order order { get; set; }
+    [Inject]
+    AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+    Shop shop = new Shop();
+    string userName = "";
+    protected override async Task OnInitializedAsync()
+    {
+        shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + order.ShopId);
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        userName = user.Identity.Name;
+        await JSRuntime.InvokeVoidAsync("PrintElem", "print-body");
+    }
+    async void Print()
+    {
+        await JSRuntime.InvokeVoidAsync("PrintElem", "print-body");
+
+    }
+}

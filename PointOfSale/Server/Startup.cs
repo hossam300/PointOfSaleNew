@@ -50,7 +50,7 @@ namespace PointOfSale.Server
             services.AddScoped<TooltipService>();
             services.AddBlazoredLocalStorage();
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            services.AddHttpContextAccessor();
             services.AddIdentity<SahlUserIdentity, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;

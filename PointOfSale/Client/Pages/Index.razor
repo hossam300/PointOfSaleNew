@@ -126,14 +126,18 @@
 
                                     <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
                                 </div>
-                                <div class="col-md-4">
-                                    <p>Last Closing Cash </p>
-                                    <p>5000 EGP </p>
-                                </div>
-                                <div class="col-md-4">
-                                    <p>Last Closing Date </p>
-                                    <p>06/22/2020 06:24 PM </p>
-                                </div>
+                                @if (session.Status == Status.Colsed)
+                                {
+                                    <div class="col-md-4">
+                                        <p>Last Closing Cash </p>
+                                        <p>5000 EGP </p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p>Last Closing Date </p>
+                                        <p>06/22/2020 06:24 PM </p>
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -146,6 +150,7 @@
 </div>
 <!--end::Entry-->
 @code{
+    Session session = new Session();
     List<Shop> shops = new List<Shop>();
     protected override async Task OnInitializedAsync()
     {

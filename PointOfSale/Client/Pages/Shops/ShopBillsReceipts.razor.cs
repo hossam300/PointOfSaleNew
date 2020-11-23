@@ -56,28 +56,14 @@ namespace PointOfSale.Client.Pages.Shops
                 shop.AvailableCategories.Add(new ShopProductCategory { Id = item });
             }
             //bool formIsValid = model.Validate();
-            if (shop.Id == 0)
-            {
-                using (var response = await Http.PostAsJsonAsync<Shop>("/api/Shops/Insert", shop))
-                {
-                    // convert response data to JsonElement which can handle any JSON data
-                    var data = await response.Content.ReadFromJsonAsync<Shop>();
 
-                    // get id property from JSON response data
-                    //  var customerId = data.Id;
-                    uriHelper.NavigateTo("/");
-                }
-            }
-            else
+            using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
             {
-                using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
-                {
-                    // convert response data to JsonElement which can handle any JSON data
-                    var data = await response.Content.ReadFromJsonAsync<Shop>();
-                    // get id property from JSON response data
-                    //  var customerId = data[0].Id;
-                    uriHelper.NavigateTo("/");
-                }
+                // convert response data to JsonElement which can handle any JSON data
+                var data = await response.Content.ReadFromJsonAsync<Shop>();
+                // get id property from JSON response data
+                //  var customerId = data[0].Id;
+                uriHelper.NavigateTo("/");
             }
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }

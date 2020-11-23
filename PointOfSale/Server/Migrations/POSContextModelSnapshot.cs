@@ -796,6 +796,135 @@ namespace PointOfSale.Server.Migrations
                     b.ToTable("OptionalProducts");
                 });
 
+            modelBuilder.Entity("PointOfSale.DAL.Domains.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Discount")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("LastModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("LoyaltyProgramId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ModifiedByID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("OrderNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("OrderTax")
+                        .HasColumnType("float");
+
+                    b.Property<int>("OrderType")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShopId")
+                        .HasColumnType("int");
+
+                    b.Property<double?>("Total")
+                        .HasColumnType("float");
+
+                    b.Property<int>("TotalItemCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("LoyaltyProgramId");
+
+                    b.HasIndex("ModifiedByID");
+
+                    b.HasIndex("SessionId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("PointOfSale.DAL.Domains.OrderItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<double>("ProductDiscount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<double>("SubTotal")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderItems");
+                });
+
+            modelBuilder.Entity("PointOfSale.DAL.Domains.OrderPayment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("PaymentMethodId");
+
+                    b.ToTable("OrderPayments");
+                });
+
             modelBuilder.Entity("PointOfSale.DAL.Domains.PaymentMethod", b =>
                 {
                     b.Property<int>("Id")
@@ -1253,10 +1382,34 @@ namespace PointOfSale.Server.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("Name")
+                    b.Property<DateTime>("ClosedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CosedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SessionNo")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ShopId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("CosedById");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("ShopId");
 
                     b.ToTable("Sessions");
                 });
@@ -1833,6 +1986,79 @@ namespace PointOfSale.Server.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("PointOfSale.DAL.Domains.Order", b =>
+                {
+                    b.HasOne("PointOfSale.DAL.Domains.SahlUserIdentity", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("PointOfSale.DAL.Domains.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PointOfSale.DAL.Domains.LoyaltyProgram", "LoyaltyProgram")
+                        .WithMany()
+                        .HasForeignKey("LoyaltyProgramId");
+
+                    b.HasOne("PointOfSale.DAL.Domains.SahlUserIdentity", "ModifiedBy")
+                        .WithMany()
+                        .HasForeignKey("ModifiedByID");
+
+                    b.HasOne("PointOfSale.DAL.Domains.Session", "Session")
+                        .WithMany()
+                        .HasForeignKey("SessionId");
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("LoyaltyProgram");
+
+                    b.Navigation("ModifiedBy");
+
+                    b.Navigation("Session");
+                });
+
+            modelBuilder.Entity("PointOfSale.DAL.Domains.OrderItem", b =>
+                {
+                    b.HasOne("PointOfSale.DAL.Domains.Order", "Order")
+                        .WithMany("OrderItem")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PointOfSale.DAL.Domains.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("PointOfSale.DAL.Domains.OrderPayment", b =>
+                {
+                    b.HasOne("PointOfSale.DAL.Domains.Order", "Order")
+                        .WithMany("OrderPayments")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PointOfSale.DAL.Domains.PaymentMethod", "PaymentMethod")
+                        .WithMany()
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("PaymentMethod");
+                });
+
             modelBuilder.Entity("PointOfSale.DAL.Domains.PriceRule", b =>
                 {
                     b.HasOne("PointOfSale.DAL.Domains.Pricelist", null)
@@ -1941,6 +2167,29 @@ namespace PointOfSale.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("PointOfSale.DAL.Domains.Session", b =>
+                {
+                    b.HasOne("PointOfSale.DAL.Domains.SahlUserIdentity", "CosedBy")
+                        .WithMany()
+                        .HasForeignKey("CosedById");
+
+                    b.HasOne("PointOfSale.DAL.Domains.SahlUserIdentity", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId");
+
+                    b.HasOne("PointOfSale.DAL.Domains.Shop", "Shop")
+                        .WithMany()
+                        .HasForeignKey("ShopId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CosedBy");
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("Shop");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.Shop", b =>
@@ -2186,6 +2435,13 @@ namespace PointOfSale.Server.Migrations
                     b.Navigation("Rewards");
 
                     b.Navigation("Rules");
+                });
+
+            modelBuilder.Entity("PointOfSale.DAL.Domains.Order", b =>
+                {
+                    b.Navigation("OrderItem");
+
+                    b.Navigation("OrderPayments");
                 });
 
             modelBuilder.Entity("PointOfSale.DAL.Domains.Pricelist", b =>

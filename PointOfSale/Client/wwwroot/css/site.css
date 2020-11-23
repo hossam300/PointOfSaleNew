@@ -85,3 +85,143 @@
     flex-direction: column;
     --sk-color: white;
 }
+#item-list .btn {
+    width: 230px;
+    text-align: center
+}
+
+#item-list .items {
+    height: 100%;
+    position: relative;
+    overflow: hidden
+}
+
+#item-list .btn-name {
+    width: 116px;
+    height: 60px;
+    line-height: 16px;
+    white-space: pre-wrap;
+    margin: 2px
+}
+
+#item-list .btn-both, #item-list .btn-img {
+    background: 0 0;
+    padding: 3px
+}
+
+    #item-list .btn-both:hover, #item-list .btn-img:hover {
+        background: #CCC
+    }
+
+    #item-list .btn-both .bg-img {
+        background: #FFF;
+        height: 160px;
+        padding: 5px
+    }
+
+    #item-list .btn-both span {
+        display: block;
+        width: 100%;
+        background: #e5e5e5;
+        height: 40px;
+        overflow: hidden;
+        white-space: pre-wrap;
+        margin-left: 1px;
+        text-align: -webkit-center;
+    }
+
+        #item-list .btn-both span span {
+            display: table-cell;
+            vertical-align: middle;
+            overflow: hidden;
+            white-space: pre-wrap;
+            line-height: 16px;
+           /* padding: 10px 38%;*/
+        }
+.product-nav {
+    position: absolute;
+    bottom: 0;
+    padding-right: 65px
+}
+
+.btn-group-justified {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: separate
+}
+
+    .btn-group-justified > .btn, .btn-group-justified > .btn-group {
+        display: table-cell;
+        float: none;
+        width: 1%
+    }
+
+        .btn-group-justified > .btn-group .btn {
+            width: 100%
+        }
+
+        .btn-group-justified > .btn-group .dropdown-menu {
+            left: auto
+        }
+.btn.btn-flat {
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border-width: 1px
+}
+
+.btn-group-lg > .btn, .btn-lg {
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px
+}
+
+.btn-group-sm > .btn, .btn-sm {
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px
+}
+
+.btn-group-xs > .btn, .btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px
+}
+
+.btn-block {
+    display: block;
+    width: 100%
+}
+
+    .btn-block + .btn-block {
+        margin-top: 5px
+    }
+
+input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].btn-block {
+    width: 100%
+}
+.row {
+    padding-bottom: 2%;
+    padding: 2%;
+}
+.bg-purple {
+    background-color: #605ca8 !important;
+    color:#fff;
+}
+.bg-navy {
+    background-color: #001f3f !important;
+    color: #fff;
+}
+.project {
+    border: 1px solid #eaeaea;
+    margin: 20px;
+    padding: 20px;
+}
+.btn-group > .btn:not(:first-child), .btn-group > .btn-group:not(:first-child) {
+    margin-left: 2%;
+}

@@ -26,8 +26,11 @@ namespace PointOfSale.Client.Pages.Customers
         List<AddressType> addressTypes = new List<AddressType>();
         bool popup = false;
         [Inject]
+        public DialogService DialogService { get; set; }
+        [Inject]
         public IFileReaderService FileReaderService { get; set; }
-        [Parameter] public int? id { get; set; }
+        [Parameter] public int? id { get; set; } 
+        [Parameter] public bool? Modal { get; set; }
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
@@ -103,7 +106,11 @@ namespace PointOfSale.Client.Pages.Customers
                     var data = await response.Content.ReadFromJsonAsync<Customer>();
 
                     // get id property from JSON response data
-                  //  var customerId = data.Id;
+                    //  var customerId = data.Id;
+                    if (Modal==true)
+                    {
+                        DialogService.Close(data);
+                    }
                     uriHelper.NavigateTo("/AddCustomerConacts/" + data.Id);
                 }
              

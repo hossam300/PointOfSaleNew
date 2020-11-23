@@ -1,0 +1,266 @@
+﻿<div class="card" style="opacity: 1; display: block;">
+    <RadzenTemplateForm TItem="Order" Data="@Order" Submit="@OnSubmit" InvalidSubmit="@OnInvalidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="card-content">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="font16">
+                            <table class="table table-bordered table-condensed" style="margin-bottom: 0;">
+                                <tbody>
+                                    <tr>
+                                        <td width="25%" style="border-right-color: #FFF !important;">Total Items</td>
+                                        <td width="25%" class="text-right"><span id="item_count">@Order.OrderItem.Count</span></td>
+                                        <td width="25%" style="border-right-color: #FFF !important;">Total Payable</td>
+                                        <td width="25%" class="text-right"><span id="twt">@Order.Total (0.00)</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border-right-color: #FFF !important;">Total Paying</td>
+                                        <td class="text-right"><span id="total_paying">@{var pay = (Order.Total - Order.Discount) * Order.OrderTax / 100;}@pay</span></td>
+                                        <td style="border-right-color: #FFF !important;">Balance</td>
+                                        <td class="text-right"><span id="balance">@balance</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="form-group">
+                                    <label for="note">Note</label>
+                                    <Radzen.Blazor.RadzenTextArea @bind-Value="@Order.Notes" class="pa form-control kb-text"></Radzen.Blazor.RadzenTextArea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <Radzen.Blazor.RadzenNumeric @bind-Value="@Amount" class="pa form-control kb-pad amount"></Radzen.Blazor.RadzenNumeric>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label for="paid_by">Paying by</label>
+                                    <RadzenDropDown AllowClear="true" TValue="int" Name="CustomerId"
+                                                    FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
+                                                    AllowFiltering="true" Placeholder="Select Customer"
+                                                    Data="@PaymentMethods" TextProperty="Name" @bind-Value="@PaymentMethodId"
+                                                    ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+
+                                        <option value="0">Walk-in Client</option>
+                                    </RadzenDropDown>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <button type="button" class="btn btn-primary" @onclick="AddPayment">Add</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <hr />
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Payment Method</th>
+                            <th>Amount</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in orderPayments)
+                        {
+                            <tr>
+                                <td>@getPayment(item.PaymentMethodId).Name</td>
+                                <td>@item.Amount</td>
+
+                                <td><button class="btn btn-sm btn-danger" @onclick="()=>DeleteItem(item)"><i class="fa fa-trash"></i></button></td>
+                            </tr>
+                        }
+                        @*<Virtualize Context="item" Items="@orderPayments">
+                                <tr>
+                                    <td>@getPayment(item.PaymentMethodId).Name</td>
+                                    <td>@item.Amount</td>
+
+                                    <td><button class="btn btn-sm btn-danger" @onclick="()=>DeleteItem(item)"><i class="fa fa-trash"></i></button></td>
+                                </tr>
+                            </Virtualize>*@
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Total</td>
+                            <td>@orderPayments.Sum(c => c.Amount)</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col offset-sm-3">
+                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                        </RadzenButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </RadzenTemplateForm>
+</div>
+
+@code {
+    [Inject] protected Radzen.DialogService DialogService { get; set; }
+    [Parameter] public Order Order { get; set; }
+    List<DropDownList> PaymentMethods = new List<DropDownList>();
+    List<DropDownList> Customers = new List<DropDownList>();
+    List<DropDownList> Products = new List<DropDownList>();
+    List<OrderPayment> orderPayments = new List<OrderPayment>();
+    public int PaymentMethodId { get; set; }
+    double balance = 0.00;
+    double Amount = 0.00;
+    Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
+    Session session = new Session();
+    DropDownList getPayment(int id)
+    {
+        return PaymentMethods.FirstOrDefault(c => c.Id == id);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        Products = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Products/GetDropDownListAll");
+        Customers = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Customers/GetDropDownListAll");
+        orderPayments = Order.OrderPayments;
+        PaymentMethods = await Http.GetFromJsonAsync<List<DropDownList>>("/api/PaymentMethods/GetDropDownListAll");
+        session = await Http.GetFromJsonAsync<Session>("/api/Sessions/GetByShopId/" + Order.ShopId);
+    }
+    void Log(string eventName, string value)
+    {
+        events.Add(DateTime.Now, $"{eventName}: {value}");
+    }
+    async void AddPayment()
+    {
+        if (orderPayments == null)
+        {
+            orderPayments = new List<OrderPayment>();
+        }
+        OrderPayment orderPayment = new OrderPayment();
+        if (orderPayments.Any(c => c.PaymentMethodId == PaymentMethodId))
+        {
+            orderPayment = orderPayments.FirstOrDefault(c => c.PaymentMethodId == PaymentMethodId);
+            orderPayments.Remove(orderPayment);
+            orderPayment.Amount = orderPayment.Amount + Amount;
+            orderPayments.Add(orderPayment);
+
+        }
+        else
+        {
+            orderPayment = new OrderPayment()
+            {
+                PaymentMethodId = PaymentMethodId,
+                Amount = Amount,
+            };
+            orderPayments.Add(orderPayment);
+        }
+        if (Order.Id != 0)
+        {
+            orderPayment.OrderId = Order.Id;
+            if (orderPayment.Id != 0)
+                await Http.PutAsJsonAsync<OrderPayment>("/api/OrderPayments/Update", orderPayment);
+            else
+                await Http.PostAsJsonAsync<OrderPayment>("/api/OrderPayments/Insert", orderPayment);
+        }
+
+    }
+    void Change(object value, string name)
+    {
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+
+        events.Add(DateTime.Now, $"{name} value changed to {str}");
+        InvokeAsync(StateHasChanged);
+    }
+    void OnInvalidSubmit(Radzen.FormInvalidSubmitEventArgs args)
+    {
+        Log("InvalidSubmit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+    }
+    private static Random random = new Random((int)DateTime.Now.Ticks);
+    private static string RandomString(int length)
+    {
+        const string pool = "0123456789";
+        var builder = new StringBuilder();
+
+        for (var i = 0; i < length; i++)
+        {
+            var c = pool[random.Next(0, pool.Length)];
+            builder.Append(c);
+        }
+
+        return builder.ToString();
+    }
+    async void OnSubmit(Order model)
+    {
+        if (orderPayments.Sum(c => c.Amount) < Order.Total)
+        {
+            await JSRuntime.InvokeVoidAsync("requied", "Total < Payment Total");
+        }
+        else
+        {
+            //  await JSRuntime.InvokeVoidAsync("StartLoading");
+            Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
+            //bool formIsValid = model.Validate();
+            Order.OrderPayments = orderPayments;
+            Order.OrderType = OrderType.Payed;
+            Order.OrderNumber = RandomString(5).ToString();
+            foreach (var item in Order.OrderItem)
+            {
+                item.Product = null;
+            }
+            Order.Customer = null;
+            Order.SessionId = session.Id;
+            if (Order.Id == 0)
+            {
+
+                await Http.PostAsJsonAsync<Order>("/api/Orders/Insert", Order);
+
+
+            }
+            else
+            {
+                //foreach (var item in order.CustomerContacts)
+                //{
+                //    item.Customer = null;
+                //}
+                await Http.PutAsJsonAsync<Order>("/api/Orders/Update", Order);
+
+            }
+            foreach (var item in Order.OrderItem)
+            {
+                item.Product = new Product { Id = item.Id, Name = Products.FirstOrDefault(p => p.Id == item.ProductId).Name };
+            }
+            Order.Customer = new Customer { Id = Order.CustomerId, Name = Customers.FirstOrDefault(c => c.Id == Order.CustomerId).Name };
+            await DialogService.OpenAsync<PrintOrder>("Print Order", new Dictionary<string, object>() { { "Order", Order } },
+                   new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+            await InvokeAsync(() => { StateHasChanged(); });
+            //  await JSRuntime.InvokeVoidAsync("StopLoading");
+
+
+            DialogService.Close(Order);
+
+
+        }
+    }
+    protected void btnCancelClick(MouseEventArgs args)
+    {
+        DialogService.Close(null);
+    }
+    async void DeleteItem(OrderPayment item)
+    {
+        orderPayments.Remove(item);
+        if (Order.Id != 0)
+        {
+            var response = await Http.DeleteAsync("/api/OrderPayments/Delete/" + item.Id);
+        }
+    }
+}

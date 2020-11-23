@@ -25,6 +25,11 @@ namespace PointOfSale.Server.Controllers
             _customerService = businessService;
             this.env = env;
         }
+        [HttpGet("GetDropDownListAll")]
+        public IActionResult GetDropDownListAll()
+        {
+            return Ok(this._BusinessService.GetAll<Customer>().Select(x => new DropDownList { Id = x.Id, Name = x.Name }).ToList());
+        }
         [HttpPost("Upload")]
         public IActionResult Upload()
         {

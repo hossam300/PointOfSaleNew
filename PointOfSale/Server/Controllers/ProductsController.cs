@@ -20,5 +20,10 @@ namespace PointOfSale.Server.Controllers
         {
             this._productsService = businessService;
         }
+        [HttpGet, Route("GetDropDownListAll")]
+        public virtual IActionResult GetDropDownListAll()
+        {
+            return Ok(this._BusinessService.GetAll<Product>().Select(x => new DropDownList { Id = x.Id, Name = x.Name }));
+        }
     }
 }
