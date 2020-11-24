@@ -21,15 +21,15 @@ namespace PointOfSale.Server.Controllers
         }
         [HttpGet("GetAllWithInclude")]
 
-        public async Task<IActionResult> GetAllWithInclude()
+        public IActionResult GetAllWithInclude()
         {
             return Ok(_orderService.GetAllWithInclude());
         }
         [HttpGet("GetAllWithIncludeByShopId/{id}")]
 
-        public async Task<IActionResult> GetAllWithIncludeByShopId(int id)
+        public IActionResult GetAllWithIncludeByShopId(int id)
         {
-            return Ok(_orderService.GetAllWithInclude().Where(c => c.ShopId == id));
+            return Ok(_orderService.GetAllWithInclude().Where(c => c.ShopId == id).ToList());
         }
         [HttpGet("GetOrderByNo/{id}")]
         public async Task<IActionResult> GetOrderByNo(string id)

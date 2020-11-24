@@ -48,9 +48,7 @@
                 </div>
             }
             <Virtualize Context="item" Items="@shops" ItemSize="25">
-                @{
-                    LoadSession(item.Id);
-                }
+
                 <div class="col-lg-6" style="margin-top: 1%;">
                     <!--begin::Card-->
                     <div class="card card-custom">
@@ -77,7 +75,7 @@
                                         <!--begin::Navigation-->
                                         <ul class="navi navi-hover">
                                             <li class="navi-item">
-                                                <a href="/Sessions/Index/@item.Id" class="navi-link">
+                                                <a href="/Sessions/@item.Id" class="navi-link">
                                                     <span class="navi-text">
                                                         <span class="label label-xl label-inline label-light-success">Sessions</span>
                                                     </span>
@@ -125,32 +123,42 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                @if (session.Status == Status.Colsed)
+                                @if (item.session == null)
                                 {
-                                    <div class="col-md-4">
+                                    <div class="col-xl-4">
                                         <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
                                     </div>
-
-                                    <div class="col-md-4">
+                                }
+                                else if (item.session.Status == Status.Colsed)
+                                {
+                                    <div class="col-xl-4">
+                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
+                                    </div>
+                                    <div class="col-xl-4">
                                         <p>Last Closing Cash </p>
-                                        <p>5000 EGP </p>
+                                        <p>@item.session.Cash EGP </p>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-xl-4">
                                         <p>Last Closing Date </p>
-                                        <p>06/22/2020 06:24 PM </p>
+                                        <p>@item.session.ClosedDate.Value.ToString("G") </p>
                                     </div>
+                                }
+                                else if (item.session.Status == Status.Open)
+                                {
+                                    <div class="col-xl-3">
+                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">Resume</a>
+                                    </div>
+                                    <div class="col-xl-3">
+                                        <button @onclick="()=>CloseSession(item.session)" target="_blank" class="btn btn-danger">Colse</button>
+                                    </div>
+
                                 }
                                 else
                                 {
-                                    <div class="col-md-2">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">Resume</a>
+                                    <div class="col-xl-3">
+                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
                                     </div>
-                                    <div class="col-md-2">
-                                        <button @onclick="()=>CloseSession(item.Id)" target="_blank" class="btn btn-danger">Colse</button>
-                                    </div>
-
                                 }
-
                             </div>
                         </div>
                     </div>
@@ -163,26 +171,36 @@
 </div>
 <!--end::Entry-->
 @code{
-    Session session = new Session();
     List<ShopDTO> shops = new List<ShopDTO>();
+    [Inject]
+    AuthenticationStateProvider AuthenticationStateProvider { get; set; }
     protected override async Task OnInitializedAsync()
     {
         await JSRuntime.InvokeVoidAsync("StartLoading");
         shops = await Http.GetFromJsonAsync<List<ShopDTO>>("/api/Shops/GetAllWithoutInclude");
         await JSRuntime.InvokeVoidAsync("StopLoading");
     }
-    async void LoadSession(int shopId)
-    {
-        session = await Http.GetFromJsonAsync<Session>("/api/Sessions/GetByShopId/" + shopId);
-    }
-    async void CloseSession(int ShopId)
+    async void CloseSession(SessionDTO session)
     {
         await JSRuntime.InvokeVoidAsync("StartLoading");
-        LoadSession(ShopId);
         session.ClosedDate = DateTime.Now;
-        session.CosedById = "";
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+        session.CosedById = users;
         session.Status = Status.Colsed;
-        await Http.PutAsJsonAsync<Session>("/api/Sessions/Update/", session);
+        Session _session = new Session
+        {
+            ClosedDate = session.ClosedDate,
+            CosedById = session.CosedById,
+            CreationDate = session.CreationDate,
+            ShopId = session.ShopId,
+            Id = session.Id,
+            CreatorId = session.CreatorId,
+            SessionNo = session.SessionNo,
+            Status = session.Status
+        };
+        await Http.PutAsJsonAsync<Session>("/api/Sessions/Update/", _session);
         InvokeAsync(StateHasChanged);
         await JSRuntime.InvokeVoidAsync("StopLoading");
     }

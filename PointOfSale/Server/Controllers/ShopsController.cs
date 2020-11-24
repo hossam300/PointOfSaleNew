@@ -24,17 +24,36 @@ namespace PointOfSale.Server.Controllers
         public IActionResult GetByIdWithoutInclude(int id)
         {
             var shop = _shopService.GetDetails(id);
-            return Ok(new ShopDTO { Id = shop.Id, ShopName = shop.Name, Footer = shop.Footer, Header = shop.Header,Branch=null });
+            return Ok(new ShopDTO { Id = shop.Id, ShopName = shop.Name, Footer = shop.Footer, Header = shop.Header, Branch = null });
         }
         [HttpGet("GetAllWithoutInclude")]
         public IActionResult GetAllWithoutInclude()
         {
-            var shop = _shopService.GetAllWithoutInclude().Select(c => new ShopDTO { Id = c.Id, ShopName = c.Name, Footer = c.Footer, Header = c.Header ,Branch=null}).ToList();
+            var shop = _shopService.GetAllWithoutInclude().Select(c => new ShopDTO
+            {
+                Id = c.Id,
+                ShopName = c.Name,
+                Footer = c.Footer,
+                Header = c.Header,
+                Branch = null,
+                session = _shopService.GetAllSessionByShopId(c.Id).Select(x => new SessionDTO
+                {
+                    Id = x.Id,
+                    SessionNo = x.SessionNo,
+                    Status = x.Status,
+                    ClosedDate = x.ClosedDate,
+                    Cash = _shopService.GetOrderCashBySessionId(x.Id),
+                    CosedById = x.CosedById,
+                    CreationDate = x.CreationDate,
+                    CreatorId = x.CreatorId,
+                    ShopId = x.ShopId
+                }).OrderByDescending(x => x.Id).FirstOrDefault()
+            });
             return Ok(shop);
         }
-        BranchDTo GetBranch(Branch branch)
+        BranchDTO GetBranch(Branch branch)
         {
-            return new BranchDTo { Id = branch.Id, Name = branch.Name };
+            return new BranchDTO { Id = branch.Id, Name = branch.Name };
         }
     }
 }

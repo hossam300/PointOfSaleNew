@@ -1,48 +1,118 @@
 ﻿@page "/Payments"
-<RadzenGrid @ref="grid" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" RowRender="@RowRender" ExpandMode="Radzen.DataGridExpandMode.Single"
-            Data="@OrderPayments" TItem="OrderPayment">
-    <Template Context="OrderPayment">
-        <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@OrderPayments" TItem="OrderPayment">
-            <Columns>
-                <RadzenGridColumn Width="100px" TItem="OrderPayment" Property="OrderPayment.Order.Id" Title="Order ID" />
-                <RadzenGridColumn Width="200px" TItem="OrderPayment" Property="OrderPayment.Order.Customer.Name" Title="Customer" />
-                <RadzenGridColumn TItem="OrderPayment" Property="OrderPayment.Order.OrderDate" Title="Order Date"></RadzenGridColumn>
-                <RadzenGridColumn TItem="OrderPayment" Property="OrderPayment.Order.Total" Title="Total"></RadzenGridColumn>
-            </Columns>
-        </RadzenGrid>
-    </Template>
-    <Columns>
-        <RadzenGridColumn TItem="OrderPayment" Title="Method">
-            <Template Context="Method">
-                @Method.PaymentMethod.MehtodName
-            </Template>
-        </RadzenGridColumn>
-    </Columns>
-</RadzenGrid>
-@code {
-    List<OrderPayment> OrderPayments;
-    RadzenGrid<OrderPayment> grid;
+@using Radzen
+@using System.IO
+<!--begin::Subheader-->
+<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
+                <!--end::Page Title-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                    <li class="breadcrumb-item">
+                        <a href="/Payments" class="text-muted">Order Payments</a>
+                    </li>
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <!--end::Toolbar-->
+    </div>
+</div>
+<!--end::Subheader-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom" style="width: 100%;">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main">
+                            <ChildContent>
+                                <RadzenHeading Size="H1" Text="Order Payments">
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenTree Data=@OrderPayments Style="width:100%;height:100%">
+                                            <RadzenTreeLevel TextProperty="MehtodName" ChildrenProperty="Orders">
+                                                <Template>
+                                                    <table class="table">
+                                                        <tr>
+                                                            <td>
+                                                                <strong>@((context.Value as PaymentMethodDTO).MehtodName)</strong>
+                                                            </td>
+                                                            <td>
+                                                                <strong>@((context.Value as PaymentMethodDTO).Cash)</strong>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </Template>
+                                            </RadzenTreeLevel>
 
+                                            <RadzenTreeLevel TextProperty="OrderNumber" HasChildren=@(product => false)>
+                                                <Template>
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Customer</th>
+                                                                <th>Order Number</th>
+                                                                <th>Order Date</th>
+                                                                <th>Total</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <strong>@((context.Value as OrderDTO).CustomerName)</strong>
+                                                                </td>
+                                                                <td>
+                                                                    <strong>@((context.Value as OrderDTO).OrderNumber)</strong>
+                                                                </td>
+                                                                <td>
+                                                                    <strong>@((context.Value as OrderDTO).OrderDate)</strong>
+                                                                </td>
+                                                                <td>
+                                                                    <strong>@((context.Value as OrderDTO).Total)</strong>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </Template>
+                                            </RadzenTreeLevel>
+
+                                            @*<RadzenTreeLevel TextProperty="CustomerName">
+                                                </RadzenTreeLevel>
+                                                <RadzenTreeLevel TextProperty="OrderDate">
+                                                </RadzenTreeLevel>
+                                                <RadzenTreeLevel TextProperty="Total">
+                                                </RadzenTreeLevel>*@
+                                        </RadzenTree>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    List<PaymentMethodDTO> OrderPayments;
     protected override async Task OnInitializedAsync()
     {
         await JSRuntime.InvokeVoidAsync("StartLoading");
-        OrderPayments = await Http.GetFromJsonAsync<List<OrderPayment>>("/api/OrderPayments/GetAll");
+        OrderPayments = await Http.GetFromJsonAsync<List<PaymentMethodDTO>>("/api/OrderPayments/GetAllGroubByMethod");
         await JSRuntime.InvokeVoidAsync("StopLoading");
     }
 
-    void RowRender(Radzen.RowRenderEventArgs<OrderPayment> args)
-    {
-        args.Expandable = args.Data.PaymentMethod.MehtodName == "Cash" ;
-    }
-
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-            // grid.ExpandRow(orders.FirstOrDefault());
-            StateHasChanged();
-        }
-
-        base.OnAfterRender(firstRender);
-    }
 }

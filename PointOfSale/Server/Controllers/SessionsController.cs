@@ -25,5 +25,11 @@ namespace PointOfSale.Server.Controllers
             var session = _sessionService.GetAll<Session>().FirstOrDefault(c => c.ShopId == id&&c.Status==Status.Open);
             return Ok(session ?? new Session());
         }
+        [HttpGet("GetAllByShopId/{id}")]
+        public IActionResult GetAllByShopId(int id)
+        {
+            var session = _sessionService.GetAll<Session>().Where(c => c.ShopId == id ).ToList();
+            return Ok(session);
+        }
     }
 }

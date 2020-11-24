@@ -22,7 +22,7 @@ namespace PointOfSale.Client.Pages.Sessions
         [Inject]
         protected NotificationService NotificationService { get; set; }
 
-
+        [Parameter] public int? id { get; set; }
 
         protected RadzenContent content1;
 
@@ -72,11 +72,21 @@ namespace PointOfSale.Client.Pages.Sessions
         }
         protected async void Load()
         {
-            var sahlErpGetSessionsResult = await Http.GetFromJsonAsync<List<Session>>("/api/Sessions/GetAll");
+            if (id != null)
+            {
+                sessions = await Http.GetFromJsonAsync<List<Session>>("/api/Sessions/GetAllByShopId/" + id);
+            }
+            else
+            {
+                var sahlErpGetSessionsResult = await Http.GetFromJsonAsync<List<Session>>("/api/Sessions/GetAll");
 
-            sessions = sahlErpGetSessionsResult;
+                sessions = sahlErpGetSessionsResult;
+            }
         }
-
+        void OrderBySession(int id)
+        {
+            uriHelper.NavigateTo("/Orders/" + id);
+        }
         //protected async void btnSessionsClick(MouseEventArgs args)
         //{
         //    var result = await DialogService.OpenAsync<AddSession>("Add Address Type", null);

@@ -75,7 +75,7 @@ namespace PointOfSale.Client.Pages.Orders
         {
             if (id != null)
             {
-                orders = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAllWithIncludeByShopId");
+                orders = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAllWithIncludeByShopId/" + id);
             }
             else
             {

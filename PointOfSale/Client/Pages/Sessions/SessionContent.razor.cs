@@ -105,7 +105,8 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
-                // order.CreatorId = user.Identity.Name;
+                var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                order.CreatorId = users;
                 order.OrderItem = new List<OrderItem>();
                 order.OrderItem = orderItems;
                 order.OrderType = OrderType.Draft;
@@ -141,8 +142,8 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.ShopId = Id;
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
-                order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
-                // order.CreatorId = user.Identity.Name;
+                var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                order.CreatorId = users;
                 order.OrderItem = orderItems;
                 order.OrderType = OrderType.Cancled;
                 foreach (var item in order.OrderItem)
@@ -177,7 +178,8 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
-                // order.CreatorId = user.Identity.Name;
+                var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                order.CreatorId = users;
                 order.OrderItem = orderItems;
                 var result = await DialogService.OpenAsync<PrintOrder>("Print Order", new Dictionary<string, object>() { { "Order", order } },
                         new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
@@ -206,7 +208,8 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
-                // order.CreatorId = user.Identity.Name;
+                var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                order.CreatorId = users;
                 order.OrderItem = orderItems;
                 var result = await DialogService.OpenAsync<PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", order } },
                      new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
