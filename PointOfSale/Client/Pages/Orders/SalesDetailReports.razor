@@ -1,6 +1,10 @@
 ﻿@page  "/SalesDetailReports"
-@page  "/SalesDetailReports/{id:int}"
+@*@page  "/SalesDetailReports/{id:int?}"*@
 
-@code {
+<h1>Code 39 Barcode</h1>
 
-}
+<p>Barcode</p>
+<div id="barcode">@barcode</div>
+<div id="barcode_text">@barcode_text</div>
+
+<button class="btn btn-primary" @onclick="GenerateBarcode">Generate Barcode</button>

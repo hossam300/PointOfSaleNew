@@ -25,7 +25,6 @@ namespace PointOfSale.Client.Pages.Sessions
             await JSRuntime.InvokeVoidAsync("StartLoading");
             await JSRuntime.InvokeVoidAsync("removeScript");
             await JSRuntime.InvokeVoidAsync("loadScript", "/js/jQuery-2.1.4.min.js");
-
             await JSRuntime.InvokeVoidAsync("loadScript", "/themes/default/assets/dist/js/libraries.min.js");
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
@@ -43,6 +42,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 };
                 await Http.PostAsJsonAsync<Session>("/api/Sessions/Insert", session);
             }
+            await JSRuntime.InvokeVoidAsync("FullScreen");
             await JSRuntime.InvokeVoidAsync("StopLoading");
 
         }
