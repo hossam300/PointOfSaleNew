@@ -1,4 +1,5 @@
-﻿<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+﻿@using Net.ConnectCode.Barcode
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
@@ -25,10 +26,10 @@
                     </div>
                 </div>
                 <div id="printdiv">
-                    <table class="table" >
+                    <table class="table">
                         @for (int i = 0; i < count; i++)
                         {
-                           
+
                             <tr>
                                 <td>
                                     <div style="font-family: 'Libre Barcode 39 Extended Text', cursive;font-size: 40px;"> @barcode</div>
@@ -55,19 +56,19 @@
 
     }
     string barcode = "";
-    //string barcode_text = "";
-    //void GenerateBarcode()
-    //{
-    //    BarcodeFonts bcf = new BarcodeFonts();
-    //    bcf.BarcodeType = BarcodeFonts.BarcodeEnum.Code39;
-    //    bcf.CheckDigit = BarcodeFonts.YesNoEnum.Yes;
-    //    bcf.Data = Id;
-    //    bcf.encode();
-    //    barcode = bcf.EncodedData;
-    //    barcode_text = bcf.HumanText;
-    //}
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    GenerateBarcode();
-    //}
+    string barcode_text = "";
+    void GenerateBarcode()
+    {
+        BarcodeFonts bcf = new BarcodeFonts();
+        bcf.BarcodeType = BarcodeFonts.BarcodeEnum.Code39;
+        bcf.CheckDigit = BarcodeFonts.YesNoEnum.Yes;
+        bcf.Data = Id;
+        bcf.encode();
+        barcode = bcf.EncodedData;
+        barcode_text = bcf.HumanText;
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        GenerateBarcode();
+    }
 }

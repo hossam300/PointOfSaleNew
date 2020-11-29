@@ -32,6 +32,7 @@ namespace PointOfSale.Client.Pages.Sessions
         List<ProductCategory> ProductCategories = new List<ProductCategory>();
         Radzen.Blazor.RadzenLabel CustomerVaildation;
         Radzen.Blazor.RadzenLabel ItemsVaildation;
+        Radzen.Blazor.RadzenAutoComplete BarcodeId;
         Order order = new Order();
         int TotalItems = 0;
         double Total = 0;
@@ -39,7 +40,6 @@ namespace PointOfSale.Client.Pages.Sessions
         double OrderTax = 0;
         double TotalPayable = 0;
         int i = 1;
-        Radzen.Blazor.RadzenAutoComplete Barcode;
         [Inject] DialogService DialogService { get; set; }
         private Random random = new Random((int)DateTime.Now.Ticks);
         private string RandomString(int length)
@@ -65,6 +65,8 @@ namespace PointOfSale.Client.Pages.Sessions
             ProductCategories = GetProductCategories(0, 2, 0);
             DialogService.OnOpen += Open;
             DialogService.OnClose += Close;
+            await BarcodeId.Element.FocusAsync();
+            await JSRuntime.InvokeVoidAsync("Setfocus", "barcode2");
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
             var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
@@ -265,10 +267,10 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.CreationDate = DateTime.Now;
                 order.OrderDate = DateTime.Now;
                 order.ShopId = Id;
-              //  order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
+                //  order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
-               var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
                 order.CreatorId = users;
                 order.OrderItem = orderItems;
                 var result = await DialogService.OpenAsync<Payment>("Payment", new Dictionary<string, object>() { { "Order", order } },
@@ -291,7 +293,7 @@ namespace PointOfSale.Client.Pages.Sessions
         {
             var product = Products.FirstOrDefault(c => c.Barcode == value.ToString() || c.Name == value.ToString());
             AddOrderItem(product, 1);
-            Barcode.Value = "";
+            BarcodeId.Value = "";
             Log($"{name} value changed to {value}", name);
         }
         async void ChangeOrderNo()
@@ -343,7 +345,7 @@ namespace PointOfSale.Client.Pages.Sessions
             events.Add(DateTime.Now, "Dialog closed. Result: " + result);
             if (result != null)
             {
-               
+
                 order = new Order();
                 orderItems = new List<OrderItem>();
                 UpdateTotals();

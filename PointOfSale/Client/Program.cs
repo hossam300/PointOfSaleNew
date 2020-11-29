@@ -33,6 +33,7 @@ namespace PointOfSale.Client
                 // For more information, see https://aka.ms/blazor-standalone-auth
                 builder.Configuration.Bind("Local", options.ProviderOptions);
             });
+            builder.Services.AddLocalization();
             builder.Services.AddApiAuthorization();
             builder.Services.AddScoped<DialogService>();
             builder.Services.AddScoped<NotificationService>();
