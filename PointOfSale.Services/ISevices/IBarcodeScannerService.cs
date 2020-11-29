@@ -5,8 +5,7 @@ using System.Text;
 
 namespace PointOfSale.Services.ISevices
 {
-    public interface IOrderItemService : IBusinessService<OrderItem, OrderItem>
+    public interface IBarcodeScannerService : IBusinessService<BarcodeScanner, BarcodeScanner>
     {
-        List<OrderItem> GetAllWithInclude();
     }
 }

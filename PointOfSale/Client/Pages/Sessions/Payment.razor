@@ -44,7 +44,7 @@
                             <div class="col-xl-4">
                                 <div class="form-group">
                                     <label for="paid_by">Paying by</label>
-                                    <RadzenDropDown AllowClear="true" TValue="int" Name="CustomerId"
+                                    <RadzenDropDown @ref="PaymentMethod" AllowClear="true" TValue="int" Name="CustomerId"
                                                     FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                     AllowFiltering="true" Placeholder="Select Customer"
                                                     Data="@PaymentMethods" TextProperty="Name" @bind-Value="@PaymentMethodId"
@@ -124,6 +124,7 @@
     double Amount = 0.00;
     Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
     Session session = new Session();
+    RadzenDropDown<int> PaymentMethod;
     DropDownList getPayment(int id)
     {
         return PaymentMethods.FirstOrDefault(c => c.Id == id);
@@ -135,6 +136,8 @@
         orderPayments = Order.OrderPayments;
         PaymentMethods = await Http.GetFromJsonAsync<List<DropDownList>>("/api/PaymentMethods/GetDropDownListAll");
         session = await Http.GetFromJsonAsync<Session>("/api/Sessions/GetByShopId/" + Order.ShopId);
+        Amount =(double) Order.Total;
+        PaymentMethod.SelectedItem = PaymentMethods.First();
     }
     void Log(string eventName, string value)
     {
@@ -217,7 +220,7 @@
             {
                 item.Product = null;
             }
-            Order.Customer = null;
+            //   Order.Customer = null;
             Order.SessionId = session.Id;
             if (Order.Id == 0)
             {
@@ -239,8 +242,9 @@
             {
                 item.Product = new Product { Id = item.Id, Name = Products.FirstOrDefault(p => p.Id == item.ProductId).Name };
             }
+            Order.Customer = new Customer { Id = Order.CustomerId, Name = Customers.FirstOrDefault(p => p.Id == Order.CustomerId).Name };
             await DialogService.OpenAsync<PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", Order } },
-                     new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+                 new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
             await InvokeAsync(() => { StateHasChanged(); });
             //  await JSRuntime.InvokeVoidAsync("StopLoading");
 

@@ -1,0 +1,46 @@
+﻿@page "/BarcodeScanners"
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main">
+                            <ChildContent>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenButton Icon="add_circle_outline" class="btn btn-light-primary font-weight-bold ml-2" style="margin-bottom: 10px" Text="Add" Click="@btnBarcodeScannersClick">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="gridBarcodeScanners" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(barcodeScanners)" TItem="BarcodeScanner">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="BarcodeScanner" Context="BarcodeScanner" Property="Id" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="BarcodeScanner" Context="BarcodeScanner" Property="Type" Title="Type" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="BarcodeScanner" Context="BarcodeScanner" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="BarcodeScanner">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(BarcodeScanner))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="BarcodeScanner" Context="BarcodeScanner" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="BarcodeScanner">
+                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, BarcodeScanner))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

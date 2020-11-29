@@ -1,5 +1,79 @@
-﻿<h3>CloseRegister</h3>
+﻿<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <div class="card-body p-9">
+                    <div class="col-md-12">
+                        <div style="margin-bottom: 1rem" class="row">
+                            Are you sure?
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col offset-sm-3">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Button" Click="OnSubmit" Icon="save" Text="Yes" ButtonStyle="Radzen.ButtonStyle.Primary">
+                            </RadzenButton>
+                            <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="No" Click="@btnCancelClick">
+                            </RadzenButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
-
+    [Inject]
+    AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+    [Inject]
+    protected Radzen.DialogService DialogService { get; set; }
+    [Parameter] public int Id { get; set; }
+    Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
+    Session session = new Session();
+    protected override async Task OnInitializedAsync()
+    {
+        session = await Http.GetFromJsonAsync<Session>("/api/Sessions/GetByShopId/" + Id);
+    }
+    void Log(string eventName, string value)
+    {
+        events.Add(DateTime.Now, $"{eventName}: {value}");
+    }
+    void OnInvalidSubmit(Radzen.FormInvalidSubmitEventArgs args)
+    {
+        Log("InvalidSubmit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+    }
+    async void OnSubmit()
+    {
+        await JSRuntime.InvokeVoidAsync("StartLoading");
+        session.ClosedDate = DateTime.Now;
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+        session.CosedById = users;
+        session.Status = Status.Colsed;
+        Session _session = new Session
+        {
+            ClosedDate = session.ClosedDate,
+            CosedById = session.CosedById,
+            CreationDate = session.CreationDate,
+            ShopId = session.ShopId,
+            Id = session.Id,
+            CreatorId = session.CreatorId,
+            SessionNo = session.SessionNo,
+            Status = session.Status
+        };
+        await Http.PutAsJsonAsync<Session>("/api/Sessions/Update/", _session);
+        uriHelper.NavigateTo("/");
+        InvokeAsync(StateHasChanged);
+        await JSRuntime.InvokeVoidAsync("StopLoading");
+    }
+    protected void btnCancelClick(MouseEventArgs args)
+    {
+        DialogService.Close(null);
+    }
 }

@@ -51,7 +51,11 @@
                                                             @loyaltyProgram.Name
                                                         </Template>
                                                     </RadzenGridColumn>
-
+                                                    <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Property="PointPerMoneySpent" Title="Points" >
+                                                        <Template Context="loyaltyProgram">
+                                                            @loyaltyProgram.PointPerMoneySpent
+                                                        </Template>
+                                                    </RadzenGridColumn>
                                                     <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
                                                         <Template Context="loyaltyProgram">
                                                             <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(loyaltyProgram))">

@@ -32,5 +32,28 @@ namespace PointOfSale.Server.Controllers
             });
             return Ok(OrderPayment);
         }
+        [HttpGet("GetAllGroubByMethodOnPeriod")]
+        public IActionResult GetAllGroubByMethodOnPeriod(DateTime StartDate, DateTime EndDate)
+        {
+            var OrderPayment = _orderPaymentService.GetAll<OrderPayment>().Where(c => c.Order.OrderDate >= StartDate && c.Order.OrderDate <= EndDate).GroupBy(x => x.PaymentMethod).Select(x => new PaymentMethodDTO
+            {
+                Id = x.Key.Id,
+                MehtodName = x.Key.MehtodName,
+                Cash = x.Sum(c => c.Amount),
+                // Orders = _orderPaymentService.GetOdersByMethod(x.Key.Id)
+            });
+            return Ok(OrderPayment);
+        }
+        [HttpGet("GetChartGroubByMethodOnPeriod")]
+        public IActionResult GetChartGroubByMethodOnPeriod(DateTime? StartDate, DateTime? EndDate)
+        {
+            var OrderPayment = _orderPaymentService.GetAll<OrderPayment>().Where(c => (c.Order.OrderDate >= StartDate || StartDate == null) && (c.Order.OrderDate <= EndDate || EndDate == null)).GroupBy(x => x.PaymentMethod).Select(x => new PiChartsDTO
+            {
+                Text = x.Key.MehtodName,
+                Value = x.Sum(c => c.Amount)
+            });
+            return Ok(OrderPayment);
+        }
+
     }
 }

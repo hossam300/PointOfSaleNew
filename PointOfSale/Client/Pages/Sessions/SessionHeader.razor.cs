@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using PointOfSale.DAL.Domains;
 using Radzen;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,10 @@ namespace PointOfSale.Client.Pages.Sessions
 {
     public partial class SessionHeader : ComponentBase
     {
+        [Parameter] public int Id { get; set; }
         [Inject] SignOutSessionStateManager SignOutManager { get; set; }
         [Inject] DialogService DialogService { get; set; }
-
+        Order order = new Order();
         string Date = DateTime.Now.ToString("f");
         protected override async Task OnInitializedAsync()
         {
@@ -35,7 +37,7 @@ namespace PointOfSale.Client.Pages.Sessions
         }
         public async void Closeregiste()
         {
-            var result = await DialogService.OpenAsync<CloseRegister>("Close Registe", null);
+            var result = await DialogService.OpenAsync<CloseRegister>("Close Registe",  new Dictionary<string, object>() { { "Id", Id } });
             await InvokeAsync(() => { StateHasChanged(); });
         }
         public void Open(string title, Type type, Dictionary<string, object> parameters, DialogOptions options)

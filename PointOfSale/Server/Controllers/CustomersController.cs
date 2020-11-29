@@ -30,6 +30,12 @@ namespace PointOfSale.Server.Controllers
         {
             return Ok(this._BusinessService.GetAll<Customer>().Select(x => new DropDownList { Id = x.Id, Name = x.Name }).ToList());
         }
+        [HttpGet("GetChartGroubByDate")]
+        public IActionResult GetChartGroubByDate(DateTime? StartDate, DateTime? EndDate)
+        {
+            return Ok(this._BusinessService.GetAll<Customer>().Where(c => (c.CreationDate >= StartDate || StartDate == null) && (c.CreationDate <= EndDate || EndDate == null)).GroupBy(u => new { year = u.CreationDate.Year, month = u.CreationDate.Month })
+                .Select(x => new PiChartsDTO { Text = x.Key.year + "-" + x.Key.month, Value = x.Count() }).ToList());
+        }
         [HttpPost("Upload")]
         public IActionResult Upload()
         {

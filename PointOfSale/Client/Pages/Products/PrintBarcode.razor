@@ -1,5 +1,4 @@
-﻿@using Net.ConnectCode.Barcode
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+﻿<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
@@ -53,22 +52,22 @@
     async void Print()
     {
         await JSRuntime.InvokeVoidAsync("PrintElemWithBarcod", "printdiv");
-        
+
     }
     string barcode = "";
-    string barcode_text = "";
-    void GenerateBarcode()
-    {
-        BarcodeFonts bcf = new BarcodeFonts();
-        bcf.BarcodeType = BarcodeFonts.BarcodeEnum.Code39;
-        bcf.CheckDigit = BarcodeFonts.YesNoEnum.Yes;
-        bcf.Data = Id;
-        bcf.encode();
-        barcode = bcf.EncodedData;
-        barcode_text = bcf.HumanText;
-    }
-    protected override async Task OnInitializedAsync()
-    {
-        GenerateBarcode();
-    }
+    //string barcode_text = "";
+    //void GenerateBarcode()
+    //{
+    //    BarcodeFonts bcf = new BarcodeFonts();
+    //    bcf.BarcodeType = BarcodeFonts.BarcodeEnum.Code39;
+    //    bcf.CheckDigit = BarcodeFonts.YesNoEnum.Yes;
+    //    bcf.Data = Id;
+    //    bcf.encode();
+    //    barcode = bcf.EncodedData;
+    //    barcode_text = bcf.HumanText;
+    //}
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    GenerateBarcode();
+    //}
 }

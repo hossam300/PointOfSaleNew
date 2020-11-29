@@ -48,6 +48,8 @@ namespace PointOfSale.DAL.Domains
         public string Title { get; set; }
         [Display(Name = "Tags")]
         public string Tags { get; set; }
+        public string CreatorId { get; set; } 
+        public DateTime CreationDate { get; set; } = DateTime.Now;
         public virtual List<CustomerContact> CustomerContacts { get; set; }
     }
     public enum CustomerType

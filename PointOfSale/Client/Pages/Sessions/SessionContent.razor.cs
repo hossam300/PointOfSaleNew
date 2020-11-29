@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -40,7 +41,20 @@ namespace PointOfSale.Client.Pages.Sessions
         int i = 1;
         Radzen.Blazor.RadzenAutoComplete Barcode;
         [Inject] DialogService DialogService { get; set; }
+        private Random random = new Random((int)DateTime.Now.Ticks);
+        private string RandomString(int length)
+        {
+            const string pool = "0123456789";
+            var builder = new StringBuilder();
 
+            for (var i = 0; i < length; i++)
+            {
+                var c = pool[random.Next(0, pool.Length)];
+                builder.Append(c);
+            }
+
+            return builder.ToString();
+        }
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
@@ -51,6 +65,22 @@ namespace PointOfSale.Client.Pages.Sessions
             ProductCategories = GetProductCategories(0, 2, 0);
             DialogService.OnOpen += Open;
             DialogService.OnClose += Close;
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+            var sessions = await Http.GetFromJsonAsync<Session>("/api/Sessions/GetByShopId/" + Id);
+            if (sessions.Id == 0)
+            {
+                Session session = new Session()
+                {
+                    SessionNo = RandomString(5),
+                    CreationDate = DateTime.Now,
+                    ShopId = Id,
+                    Status = Status.Open,
+                    CreatorId = users
+                };
+                await Http.PostAsJsonAsync<Session>("/api/Sessions/Insert", session);
+            }
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }
         Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();

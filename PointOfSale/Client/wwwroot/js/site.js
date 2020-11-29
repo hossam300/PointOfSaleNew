@@ -12,7 +12,7 @@ window.requied = (ele) => {
     alert(ele);
 }
 window.PrintElem = (elem) => {
-    var mywindow = window.open('', 'PRINT');
+    var mywindow = window.open('', 'PRINT', 'height=600,width=900');
 
     mywindow.document.write('<html><head><title>' + document.title + '</title>');
     mywindow.document.write('</head><body >');
@@ -30,7 +30,7 @@ window.PrintElem = (elem) => {
 }
 
 window.PrintElemWithBarcod = (elem) => {
-    var mywindow = window.open('', 'PRINT');
+    var mywindow = window.open('', 'PRINT', 'height=600,width=900');
 
     mywindow.document.write('<html><head><title>' + document.title + '</title><link media="screen, print" href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Extended+Text&display=swap" rel="stylesheet">');
     mywindow.document.write('</head><body >');
@@ -47,7 +47,7 @@ window.PrintElemWithBarcod = (elem) => {
     return true;
 }
 window.FullScreen = () => {
-    toggleFullScreen();
+   // toggleFullScreen();
 }
 function StartLoding() {
     document.getElementById("loader").style.display = "block";

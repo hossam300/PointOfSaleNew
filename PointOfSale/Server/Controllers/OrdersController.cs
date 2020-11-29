@@ -42,5 +42,10 @@ namespace PointOfSale.Server.Controllers
             }
             return Ok(order);
         }
-    }
+        [HttpGet("GetAllOrderOnPeriod")]
+        public IActionResult GetAllOrderOnPeriod(DateTime? StartDate, DateTime? EndDate)
+        {
+            return Ok(_orderService.GetAllWithInclude().Where(c => (c.OrderDate >= StartDate || StartDate == null) && (c.OrderDate <= EndDate || EndDate == null)).ToList());
+        }
+}
 }

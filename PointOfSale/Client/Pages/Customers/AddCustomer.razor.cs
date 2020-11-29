@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
@@ -25,6 +26,8 @@ namespace PointOfSale.Client.Pages.Customers
         Customer customer = new Customer();
         List<AddressType> addressTypes = new List<AddressType>();
         bool popup = false;
+        [Inject]
+        AuthenticationStateProvider AuthenticationStateProvider { get; set; }
         [Inject]
         public DialogService DialogService { get; set; }
         [Inject]
@@ -97,6 +100,11 @@ namespace PointOfSale.Client.Pages.Customers
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
             //bool formIsValid = model.Validate();
+            customer.CreationDate = DateTime.Now;
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+            var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+            customer.CreatorId = users;
             if (customer.Id == 0)
             {
 
@@ -111,6 +119,7 @@ namespace PointOfSale.Client.Pages.Customers
                     {
                         DialogService.Close(data);
                     }
+                    else 
                     uriHelper.NavigateTo("/AddCustomerConacts/" + data.Id);
                 }
              
@@ -127,8 +136,13 @@ namespace PointOfSale.Client.Pages.Customers
                     var data = await response.Content.ReadFromJsonAsync<Customer>();
 
                     // get id property from JSON response data
-                  //  var customerId = data[0].Id;
-                    uriHelper.NavigateTo("/AddCustomerConacts/" + data.Id);
+                    //  var customerId = data[0].Id;
+                    if (Modal == true)
+                    {
+                        DialogService.Close(data);
+                    }
+                    else
+                        uriHelper.NavigateTo("/AddCustomerConacts/" + data.Id);
                 }
             }
             await JSRuntime.InvokeVoidAsync("StopLoading");

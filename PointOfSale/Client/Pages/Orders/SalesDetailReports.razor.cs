@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using Net.ConnectCode.Barcode;
+using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
+using PointOfSale.DAL.ViewModels;
 using Radzen;
 using Radzen.Blazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
 
 namespace PointOfSale.Client.Pages.Orders
@@ -22,17 +24,50 @@ namespace PointOfSale.Client.Pages.Orders
         [Inject]
         protected NotificationService NotificationService { get; set; }
         public int? id { get; set; }
-        string barcode = "";
-        string barcode_text = "";
-        void GenerateBarcode()
+        DateTime StartDate;
+        DateTime EndDate;
+        protected RadzenGrid<Order> gridOrders;
+
+        protected RadzenButton gridDeleteButton;
+
+        IEnumerable<Order> _Orders;
+        List<PaymentMethodDTO> OrderPayments;
+        protected IEnumerable<Order> orders
         {
-            BarcodeFonts bcf = new BarcodeFonts();
-            bcf.BarcodeType = BarcodeFonts.BarcodeEnum.Code39;
-            bcf.CheckDigit = BarcodeFonts.YesNoEnum.Yes;
-            bcf.Data = "1234567";
-            bcf.encode();
-            barcode = bcf.EncodedData;
-            barcode_text = bcf.HumanText;
+            get
+            {
+                return _Orders;
+            }
+            set
+            {
+                if (_Orders != value)
+                {
+                    _Orders = value;
+                    InvokeAsync(() => { StateHasChanged(); });
+                }
+            }
+        }
+        protected override async Task OnInitializedAsync()
+        {
+            await JSRuntime.InvokeVoidAsync("StartLoading");
+            StartDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            EndDate = DateTime.Now;
+            _Orders = new List<Order>();
+            OrderPayments = new List<PaymentMethodDTO>();
+            await JSRuntime.InvokeVoidAsync("StopLoading");
+        }
+        void OnChange(DateTime? value, string name, string format)
+        {
+            //  console.Log($"{name} value changed to {value?.ToString(format)}");
+        }
+        async void Search()
+        {
+            await JSRuntime.InvokeVoidAsync("StartLoading");
+            orders = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAllOrderOnPeriod/?StartDate=" + StartDate + "&&EndDate=" + EndDate);
+            OrderPayments = await Http.GetFromJsonAsync<List<PaymentMethodDTO>>("/api/OrderPayments/GetAllGroubByMethodOnPeriod/?StartDate=" + StartDate + "&&EndDate=" + EndDate);
+            gridOrders.Reload();
+            InvokeAsync(() => { StateHasChanged(); });
+            await JSRuntime.InvokeVoidAsync("StopLoading");
         }
     }
 }
