@@ -63,9 +63,9 @@ namespace PointOfSale.Client.Pages.Resource {
         /// <summary>
         ///   Looks up a localized string similar to لوحة التحكم.
         /// </summary>
-        public static string Dashboard {
+        public static string DashboardText {
             get {
-                return ResourceManager.GetString("Dashboard", resourceCulture);
+                return ResourceManager.GetString("DashboardText", resourceCulture);
             }
         }
         
