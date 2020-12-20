@@ -1,4 +1,5 @@
 ﻿@page  "/Dashboard"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Dashboard> Loc
     <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
     <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -12,7 +13,7 @@
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
-                        <a href="/Dashboard" class="text-muted">Dashboard</a>
+                        <a href="/Dashboard" class="text-muted">@Loc["Dashboard"]</a>
                     </li>
                 </ul>
                 <!--end::Breadcrumb-->
@@ -34,8 +35,8 @@
                 <div class="card-header border-0 pt-5">
                     <div class="card-title">
                         <div class="card-label">
-                            <div class="font-weight-bolder">Orders Per Category</div>
-                            <div class="font-size-sm text-muted mt-2">@Categories.Sum(c => c.Value) Eg</div>
+                            <div class="font-weight-bolder">@Loc["OrdersPerCategory"]</div>
+                            <div class="font-size-sm text-muted mt-2">@Categories.Sum(c => c.Value) @Loc["Eg"] </div>
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                         <RadzenColumnOptions Radius="5" />
                         <RadzenValueAxis Formatter="@FormatAsUSD">
                             <RadzenGridLines Visible="true" />
-                            <RadzenAxisTitle Text="Revenue in USD" />
+                            <RadzenAxisTitle Text="@Loc["RevenueInEG"]" />
                         </RadzenValueAxis>
                     </RadzenChart>
                 </div>
@@ -57,9 +58,10 @@
                 <div class="card-header border-0 pt-5">
                     <div class="card-title">
                         <div class="card-label">
-                            <div class="font-weight-bolder"> Orders Per Payment Method</div>
-                            <div class="font-size-sm text-muted mt-2">@OrderPayments.Sum(p => p.Value) Eg</div>
-                        </div>
+                            <div class="font-weight-bolder"> @Loc["OrdersPerPaymentMethod"]</div>
+                            <div class="font-size-sm text-muted mt-2">
+                                @OrderPayments.Sum(p => p.Value) @Loc["Eg"]</div>
+                            </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -75,9 +77,10 @@
                 <div class="card-header border-0 pt-5">
                     <div class="card-title">
                         <div class="card-label">
-                            <div class="font-weight-bolder"> Number Of Customer</div>
-                            <div class="font-size-sm text-muted mt-2">@Customers.Sum(p => p.Value) </div>
-                        </div>
+                            <div class="font-weight-bolder">
+                                @Loc["NumberOfCustomer"]</div>
+                                <div class="font-size-sm text-muted mt-2">@Customers.Sum(p => p.Value) </div>
+                            </div>
                     </div>
                 </div>
                 <div class="card-body">

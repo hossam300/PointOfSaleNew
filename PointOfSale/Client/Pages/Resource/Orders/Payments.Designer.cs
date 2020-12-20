@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PointOfSale.Client.Pages.Resource {
+namespace PointOfSale.Client.Pages.Resource.Orders {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace PointOfSale.Client.Pages.Resource {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resource {
+    public class Payments {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource() {
+        internal Payments() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PointOfSale.Client.Pages.Resource {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.Orders.Payments", typeof(Payments).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,15 +57,6 @@ namespace PointOfSale.Client.Pages.Resource {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to مرحباً.
-        /// </summary>
-        public static string Greetings {
-            get {
-                return ResourceManager.GetString("Greetings", resourceCulture);
             }
         }
     }

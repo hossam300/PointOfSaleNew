@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Resource> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Index> Loc
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
     <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -14,7 +14,7 @@
                 <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
                         <a asp-action="Index" asp-controller="Home" class="text-muted">
-                            <h1>@Loc["Greetings"]</h1>
+                            <h1>@Loc["Home"]</h1>
                         </a>
                     </li>
                 </ul>
@@ -26,7 +26,7 @@
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
             <a href="/Shops/AddShop" class="btn btn-primary">
-                Add Shop
+                @Loc["AddShop"]   
             </a>
         </div>
         <!--end::Toolbar-->
@@ -64,9 +64,9 @@
                                     @item.ShopName
                                     @if (item.Branch != null)
                                     {
-                                        <small> Branch : @item.Branch.Name</small>}
+                                    <small> @Loc["Branch"]    : @item.Branch.Name</small>}
                                     else
-                                    { <small> Branch : </small>}
+                                    { <small> @Loc["Branch"] : </small>}
                                 </h3>
                             </div>
                             <div class="card-toolbar">
@@ -80,42 +80,42 @@
                                             <li class="navi-item">
                                                 <a href="/Sessions/@item.Id" class="navi-link">
                                                     <span class="navi-text">
-                                                        <span class="label label-xl label-inline label-light-success">Sessions</span>
+                                                        <span class="label label-xl label-inline label-light-success">@Loc["Sessions"]</span>
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class="navi-item">
                                                 <a href="/SalesDetailReports/@item.Id" class="navi-link">
                                                     <span class="navi-text">
-                                                        <span class="label label-xl label-inline label-light-danger">Sales Orders</span>
+                                                        <span class="label label-xl label-inline label-light-danger">@Loc["SalesOrders"]</span>
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class="navi-item">
                                                 <a href="/Orders/@item.Id" class="navi-link">
                                                     <span class="navi-text">
-                                                        <span class="label label-xl label-inline label-light-warning">Orders</span>
+                                                        <span class="label label-xl label-inline label-light-warning">@Loc["Orders"]</span>
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class="navi-item">
                                                 <a href="/Shops/EditShop/@item.Id" class="navi-link">
                                                     <span class="navi-text">
-                                                        <span class="label label-xl label-inline label-light-primary">Edit</span>
+                                                        <span class="label label-xl label-inline label-light-primary">@Loc["Edit"]</span>
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class="navi-item">
                                                 <a href="/Shops/EditShop/@item.Id" class="navi-link">
                                                     <span class="navi-text">
-                                                        <span class="label label-xl label-inline label-light-dark">Details</span>
+                                                        <span class="label label-xl label-inline label-light-dark">@Loc["Details"]</span>
                                                     </span>
                                                 </a>
                                             </li>
                                             <li class="navi-separator mt-3 opacity-70"></li>
                                             <li class="navi-footer py-4">
                                                 <a class="btn btn-clean font-weight-bold btn-sm" href="/Shops/AddShop">
-                                                    <i class="ki ki-plus icon-sm"></i>Add new
+                                                    <i class="ki ki-plus icon-sm"></i>@Loc["AddNew"]
                                                 </a>
                                             </li>
                                         </ul>
@@ -129,37 +129,37 @@
                                 @if (item.session == null)
                                 {
                                     <div class="col-xl-4">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
+                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">@Loc["NewSession"]</a>
                                     </div>
                                 }
                                 else if (item.session.Status == Status.Colsed)
                                 {
                                     <div class="col-xl-4">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
+                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary"> @Loc["NewSession"]</a>
                                     </div>
                                     <div class="col-xl-4">
-                                        <p>Last Closing Cash </p>
-                                        <p>@item.session.Cash EGP </p>
+                                        <p> @Loc["LastClosingCash"] </p>
+                                        <p>@item.session.Cash @Loc["EGP"] </p>
                                     </div>
                                     <div class="col-xl-4">
-                                        <p>Last Closing Date </p>
+                                        <p>@Loc["LastClosingDate"] </p>
                                         <p>@item.session.ClosedDate.Value.ToString("G") </p>
                                     </div>
                                 }
                                 else if (item.session.Status == Status.Open)
                                 {
                                     <div class="col-xl-3">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">Resume</a>
+                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">@Loc["Resume"]</a>
                                     </div>
                                     <div class="col-xl-3">
-                                        <button @onclick="()=>CloseSession(item.session)" target="_blank" class="btn btn-danger">Colse</button>
+                                        <button @onclick="()=>CloseSession(item.session)" target="_blank" class="btn btn-danger">@Loc["Colse"]</button>
                                     </div>
 
                                 }
                                 else
                                 {
                                     <div class="col-xl-3">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
+                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">@Loc["NewSession"]</a>
                                     </div>
                                 }
                             </div>
