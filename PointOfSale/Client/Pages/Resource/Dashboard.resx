@@ -123,6 +123,9 @@
   <data name="Eg" xml:space="preserve">
     <value>جنيه مصرى</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
   <data name="NumberOfCustomer" xml:space="preserve">
     <value>عدد العملاء</value>
   </data>

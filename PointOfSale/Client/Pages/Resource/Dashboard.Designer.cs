@@ -79,6 +79,15 @@ namespace PointOfSale.Client.Pages.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الرئيسية.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عدد العملاء.
         /// </summary>
         public static string NumberOfCustomer {
