@@ -37,10 +37,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\Resource\Customers\AddCustomerConacts.Designer.cs">
+    <Compile Update="Pages\Resource\Customers\AddCustomer.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AddCustomerConacts.resx</DependentUpon>
+      <DependentUpon>AddCustomer.resx</DependentUpon>
     </Compile>
     <Compile Update="Pages\Resource\Customers\AddCustomerContact.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -261,12 +261,12 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerConacts.resx">
-      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
+      <LastGenOutput>AddCustomer.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Customers\AddCustomer.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
+      <LastGenOutput>AddCustomer.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerContact.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
