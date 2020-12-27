@@ -59,5 +59,32 @@ namespace PointOfSale.Client.Pages.Resource.PaymentMethods {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة طريقة دفع.
+        /// </summary>
+        public static string AddPaymentMethod {
+            get {
+                return ResourceManager.GetString("AddPaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تعديل طريقة الدفع.
+        /// </summary>
+        public static string EditPaymentMethod {
+            get {
+                return ResourceManager.GetString("EditPaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طرق الدفع.
+        /// </summary>
+        public static string PaymentMethod {
+            get {
+                return ResourceManager.GetString("PaymentMethod", resourceCulture);
+            }
+        }
     }
 }

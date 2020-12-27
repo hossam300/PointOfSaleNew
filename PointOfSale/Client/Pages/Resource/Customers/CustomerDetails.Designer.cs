@@ -59,5 +59,50 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اتصالات العميل.
+        /// </summary>
+        public static string CustomerContacts {
+            get {
+                return ResourceManager.GetString("CustomerContacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تفاصيل العميل.
+        /// </summary>
+        public static string CustomerDetail {
+            get {
+                return ResourceManager.GetString("CustomerDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معلومات العميل.
+        /// </summary>
+        public static string CustomerInfo {
+            get {
+                return ResourceManager.GetString("CustomerInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مبيعات العميل.
+        /// </summary>
+        public static string CustomerSales {
+            get {
+                return ResourceManager.GetString("CustomerSales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to معلومات.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
     }
 }

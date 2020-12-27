@@ -1,89 +1,91 @@
 ﻿@page "/Orders"
 @page "/Orders/{id:int?}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Orders.Orders> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
     <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
-        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-1">
-                <!--begin::Page Heading-->
-                <div class="d-flex align-items-baseline mr-5">
-                    <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
-                    <!--end::Page Title-->
-                    <!--begin::Breadcrumb-->
-                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["Order"]</h5>
+                <!--end::Page Title-->
+                <!--begin::Breadcrumb-->
+                @*<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                         <li class="breadcrumb-item">
-                            <a href="/Orders" class="text-muted">Orders</a>
+                            <a href="/Orders" class="text-muted"></a>
                         </li>
-                    </ul>
-                    <!--end::Breadcrumb-->
-                </div>
-                <!--end::Page Heading-->
+                    </ul>*@
+                <!--end::Breadcrumb-->
             </div>
-            <!--end::Info-->
-            <!--begin::Toolbar-->
-            <!--end::Toolbar-->
+            <!--end::Page Heading-->
         </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <!--end::Toolbar-->
     </div>
-    <!--end::Subheader-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Entry-->
-        <div class="d-flex flex-column-fluid">
-            <!--begin::Container-->
-            <!--begin::Card-->
-            <div class="card card-custom">
-                <div class="card-body p-9">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <RadzenContent Container="main">
-                                <ChildContent>
-                                    <RadzenHeading Size="H1" Text="Orders">
-                                    </RadzenHeading>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <RadzenGrid @ref="gridOrders" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(orders)" TItem="Order">
-                                                <Columns>
-                                                    <RadzenGridColumn TItem="Order" Context="Order" Property="Id" Title="Id" Type="integer">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Order" Context="Order" Property="OrderNumber" Title="Order Number" Type="string">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn Width="200px" TItem="Order" Property="Customer.Name" Title="Customer" />
-                                                    <RadzenGridColumn TItem="Order" Property="OrderDate" Title="Order Date"></RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Order" Property="Total" Title="Total"></RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Order" Context="order" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px" Title="Print Bill">
-                                                        <Template Context="order">
-                                                            <RadzenButton Icon="print" Size="Radzen.ButtonSize.Small" Click="@(args => PrintBill(order.OrderNumber))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Order" Context="order" Filterable="false" Sortable="false" Bubble="false" Width="70px" Title="Print Order">
-                                                        <Template Context="order">
-                                                            <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="print" Size="Radzen.ButtonSize.Small" Click="@((args) =>PrintOrder(order.OrderNumber))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                </Columns>
-                                                <Template Context="order">
-                                                    <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(order.OrderItem)" TItem="OrderItem">
-                                                        <Columns>
-                                                            <RadzenGridColumn TItem="OrderItem" Context="Order" Property="Id" Title="Id" Type="integer">
-                                                            </RadzenGridColumn>
-                                                            <RadzenGridColumn TItem="OrderItem" Property="Product.Name" Title="Product"></RadzenGridColumn>
-                                                            <RadzenGridColumn TItem="OrderItem" Property="Quantity" Title="Quantity"></RadzenGridColumn>
-                                                            <RadzenGridColumn TItem="OrderItem" Property="Price" Title="Price"></RadzenGridColumn>
-                                                            <RadzenGridColumn TItem="OrderItem" Property="SubTotal" Title="SubTotal"></RadzenGridColumn>
-                                                            <RadzenGridColumn TItem="OrderItem" Property="ProductDiscount" Title="Discoun"></RadzenGridColumn>
-                                                        </Columns>
-                                                    </RadzenGrid>
-                                                </Template>
-                                            </RadzenGrid>
-                                        </div>
+</div>
+<!--end::Subheader-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main">
+                            <ChildContent>
+                                <RadzenHeading Size="H1" Text="@Loc["Order"]" Style="text-align:right">
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenGrid @ref="gridOrders" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(orders)" TItem="Order">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="Order" Context="Order" Property="Id" Title="Id" Visible="false" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Context="Order" Property="OrderNumber" Title="@Loc2["OrderNumber"]" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn Width="200px" TItem="Order" Property="Customer.Name" Title="@Loc2["Customer"]" />
+                                                <RadzenGridColumn TItem="Order" Property="OrderDate" Title="@Loc2["OrderDate"]"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Property="Total" Title="@Loc2["Total"]" ></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Context="order" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px" Title="@Loc["PrintBill"]">
+                                                    <Template Context="order">
+                                                        <RadzenButton Icon="print" Size="Radzen.ButtonSize.Small" Click="@(args => PrintBill(order.OrderNumber))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Context="order" Filterable="false" Sortable="false" Bubble="false" Width="70px" Title="@Loc["PrintOrder"]">
+                                                    <Template Context="order">
+                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="print" Size="Radzen.ButtonSize.Small" Click="@((args) =>PrintOrder(order.OrderNumber))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                            <Template Context="order">
+                                                <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(order.OrderItem)" TItem="OrderItem">
+                                                    <Columns>
+                                                        <RadzenGridColumn TItem="OrderItem" Context="Order" Property="Id" Visible="false" Title="Id" Type="integer">
+                                                        </RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="Product.Name" Title="@Loc2["Product"]"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="Quantity" Title="@Loc2["Quantity"]"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="Price" Title="@Loc2["Price"]"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="SubTotal" Title="@Loc2["SubTotal"]"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="OrderItem" Property="ProductDiscount" Title="@Loc2["ProductDiscount"]"></RadzenGridColumn>
+                                                    </Columns>
+                                                </RadzenGrid>
+                                            </Template>
+                                        </RadzenGrid>
                                     </div>
-                                </ChildContent>
-                            </RadzenContent>
-                        </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

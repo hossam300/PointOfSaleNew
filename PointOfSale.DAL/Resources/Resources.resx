@@ -120,6 +120,15 @@
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
+  <data name="AddressType" xml:space="preserve">
+    <value>نوع العنوان</value>
+  </data>
+  <data name="AdvancedPriceICollections" xml:space="preserve">
+    <value>مجموعات الأسعار المتقدمة</value>
+  </data>
+  <data name="AllowedEmployees" xml:space="preserve">
+    <value>الموظفين المتاحين </value>
+  </data>
   <data name="AllProducts" xml:space="preserve">
     <value>كل المنتجات</value>
   </data>
@@ -129,8 +138,20 @@
   <data name="ApplyOn" xml:space="preserve">
     <value>قدم الطلب</value>
   </data>
+  <data name="AuthorizedDifference" xml:space="preserve">
+    <value>تفويض الاختلاف</value>
+  </data>
+  <data name="AutomaticReceiptPrinting" xml:space="preserve">
+    <value>طباعة الايصالات تلقائى</value>
+  </data>
+  <data name="AvailableCategories" xml:space="preserve">
+    <value>الفئات المتاحة</value>
+  </data>
   <data name="AvailableInPOS" xml:space="preserve">
     <value>متاح فى نقاط البيع</value>
+  </data>
+  <data name="AvailablePriceLists" xml:space="preserve">
+    <value>قوائم الأسعار المتاحة</value>
   </data>
   <data name="Barcode" xml:space="preserve">
     <value>باركود</value>
@@ -142,8 +163,20 @@
   <data name="BarcodePattern" xml:space="preserve">
     <value>نمط الباركود</value>
   </data>
+  <data name="BarcodeScanner" xml:space="preserve">
+    <value>ماسح الباركود</value>
+  </data>
   <data name="BarcodeType" xml:space="preserve">
     <value>نوع الباركود</value>
+  </data>
+  <data name="BillPrinting" xml:space="preserve">
+    <value>طباعة الفاتورة</value>
+  </data>
+  <data name="BillSpliitting" xml:space="preserve">
+    <value>تقسيم الفاتورة</value>
+  </data>
+  <data name="Branch" xml:space="preserve">
+    <value>الفرع</value>
   </data>
   <data name="Buy" xml:space="preserve">
     <value>مشترى</value>
@@ -166,11 +199,17 @@
   <data name="Cash" xml:space="preserve">
     <value>نقدى</value>
   </data>
+  <data name="CashControl" xml:space="preserve">
+    <value>مراقبة النقد</value>
+  </data>
   <data name="Category" xml:space="preserve">
     <value>الفئة</value>
   </data>
   <data name="CategoryName" xml:space="preserve">
     <value>اسم الفئة</value>
+  </data>
+  <data name="CategoryPictures" xml:space="preserve">
+    <value>تعين صوره للفئة</value>
   </data>
   <data name="City" xml:space="preserve">
     <value>المدينة</value>
@@ -190,8 +229,14 @@
   <data name="CompanyAddressStreet2" xml:space="preserve">
     <value>عنوان 2</value>
   </data>
+  <data name="ConnectDevices" xml:space="preserve">
+    <value>توصيل الأجهزة</value>
+  </data>
   <data name="Consumable" xml:space="preserve">
     <value>مستهلك</value>
+  </data>
+  <data name="ContactImage" xml:space="preserve">
+    <value>صورة </value>
   </data>
   <data name="ContactName" xml:space="preserve">
     <value>الاسم</value>
@@ -286,8 +331,14 @@
   <data name="FirstName" xml:space="preserve">
     <value>الاسم الاول</value>
   </data>
+  <data name="Fiscalposition" xml:space="preserve">
+    <value>الموقف المالي</value>
+  </data>
   <data name="FiscalPositionName" xml:space="preserve">
     <value>اسم الوظيفة المالية</value>
+  </data>
+  <data name="FiscalpositionPerOrder" xml:space="preserve">
+    <value>طلب مسبق للوضع المالي</value>
   </data>
   <data name="Floor" xml:space="preserve">
     <value>الدور</value>
@@ -295,8 +346,26 @@
   <data name="FloorName" xml:space="preserve">
     <value>اسم الدور</value>
   </data>
+  <data name="Floors" xml:space="preserve">
+    <value>الادوار</value>
+  </data>
+  <data name="FloorsTables" xml:space="preserve">
+    <value>طاولات الدور</value>
+  </data>
+  <data name="Footer" xml:space="preserve">
+    <value>اسفل الايصال</value>
+  </data>
   <data name="GenerateBarcode" xml:space="preserve">
     <value>إنشاء باركود</value>
+  </data>
+  <data name="GlobalDiscounts" xml:space="preserve">
+    <value>خصم عام</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>رأس الايصال</value>
+  </data>
+  <data name="HeaderFooter" xml:space="preserve">
+    <value>اضافة رأس و اسفل الايصال</value>
   </data>
   <data name="HSCode" xml:space="preserve">
     <value>رمز النظام المنسق</value>
@@ -313,6 +382,9 @@
   <data name="InternalReference" xml:space="preserve">
     <value>المرجع الداخلي</value>
   </data>
+  <data name="Invoicing" xml:space="preserve">
+    <value>الفواتير</value>
+  </data>
   <data name="InvoicingPolicy" xml:space="preserve">
     <value>سياسة الفواتير</value>
   </data>
@@ -328,8 +400,14 @@
   <data name="IsEventTicket" xml:space="preserve">
     <value>تذكرة حدث</value>
   </data>
+  <data name="IsRestaurant" xml:space="preserve">
+    <value>مطعم</value>
+  </data>
   <data name="JobPosition" xml:space="preserve">
     <value>الوظيفة</value>
+  </data>
+  <data name="LargeScrollbars" xml:space="preserve">
+    <value>أشرطة التمرير الكبيرة</value>
   </data>
   <data name="LastModifiedDate" xml:space="preserve">
     <value>اخر تاريخ تعديل</value>
@@ -337,8 +415,14 @@
   <data name="LastName" xml:space="preserve">
     <value>الاسم الاخير</value>
   </data>
+  <data name="LoginWithEmployees" xml:space="preserve">
+    <value>الدخول للموظفين</value>
+  </data>
   <data name="LoyaltyProgram" xml:space="preserve">
     <value>برنامج النقاط</value>
+  </data>
+  <data name="ManualDiscounts" xml:space="preserve">
+    <value>الخصم يدوي</value>
   </data>
   <data name="Manufacture" xml:space="preserve">
     <value>مصنع</value>
@@ -385,8 +469,14 @@
   <data name="OrderedQuantities" xml:space="preserve">
     <value>الكميات المطلوبة</value>
   </data>
+  <data name="OrderlineNotes" xml:space="preserve">
+    <value>ملاحظات الطلب</value>
+  </data>
   <data name="OrderNumber" xml:space="preserve">
     <value>رقم الطلب</value>
+  </data>
+  <data name="OrderPrinter" xml:space="preserve">
+    <value>طباعة الطلب</value>
   </data>
   <data name="OrderTax" xml:space="preserve">
     <value>الضرائب</value>
@@ -409,17 +499,38 @@
   <data name="PaymentMethod" xml:space="preserve">
     <value>طريقة الدفع</value>
   </data>
+  <data name="PaymentMethods" xml:space="preserve">
+    <value>طرق الدفع</value>
+  </data>
   <data name="Phone" xml:space="preserve">
     <value>الهاتف</value>
   </data>
   <data name="PointPerMoneySpent" xml:space="preserve">
     <value>عدد النقاط المطلوبة</value>
   </data>
+  <data name="PrefillCashPayment" xml:space="preserve">
+    <value>الدفع المسبق</value>
+  </data>
   <data name="PrefixName" xml:space="preserve">
     <value>اسم البادئة</value>
   </data>
   <data name="Price" xml:space="preserve">
     <value>السعر</value>
+  </data>
+  <data name="PriceControl" xml:space="preserve">
+    <value>التحكم في السعر</value>
+  </data>
+  <data name="Pricelist" xml:space="preserve">
+    <value>قائمة الاسعار</value>
+  </data>
+  <data name="Printer" xml:space="preserve">
+    <value>طابعه</value>
+  </data>
+  <data name="PrinterIPAddress" xml:space="preserve">
+    <value>عنوان IP للطابعة</value>
+  </data>
+  <data name="Printers" xml:space="preserve">
+    <value>الطابعات</value>
   </data>
   <data name="PrinterType" xml:space="preserve">
     <value>نوع الطابعة</value>
@@ -438,6 +549,9 @@
   </data>
   <data name="ProductImage" xml:space="preserve">
     <value>صورة المنتج</value>
+  </data>
+  <data name="ProductPrices" xml:space="preserve">
+    <value>أسعار المنتجات</value>
   </data>
   <data name="ProductType" xml:space="preserve">
     <value>نوع المنتج</value>
@@ -460,6 +574,12 @@
   <data name="RegistrationDate" xml:space="preserve">
     <value>تاريخ التسجيل</value>
   </data>
+  <data name="ReprintReceipt" xml:space="preserve">
+    <value>طباعة الايصال</value>
+  </data>
+  <data name="RestrictAvailableCategories" xml:space="preserve">
+    <value>تقيد الفئات المتاحه</value>
+  </data>
   <data name="SalesDescription" xml:space="preserve">
     <value>وصف المبيعات</value>
   </data>
@@ -481,8 +601,17 @@
   <data name="SessionNo" xml:space="preserve">
     <value>رقم الجلسة</value>
   </data>
+  <data name="SetStartCategory" xml:space="preserve">
+    <value>تعيين فئة البداية</value>
+  </data>
   <data name="Shop" xml:space="preserve">
     <value>المتجر</value>
+  </data>
+  <data name="SpecificFiscalPOSition" xml:space="preserve">
+    <value>الموقف المالي المحدد</value>
+  </data>
+  <data name="StartCategory" xml:space="preserve">
+    <value>فئة البدء</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>الحالة</value>
@@ -496,14 +625,35 @@
   <data name="SubTotal" xml:space="preserve">
     <value>المجموع</value>
   </data>
+  <data name="TableManagement" xml:space="preserve">
+    <value>ادارة الطاولات</value>
+  </data>
   <data name="TableName" xml:space="preserve">
     <value>اسم الطاولة</value>
   </data>
   <data name="Tags" xml:space="preserve">
     <value>العلامات</value>
   </data>
+  <data name="TaxExcludedPrice" xml:space="preserve">
+    <value>السعر غير شامل</value>
+  </data>
   <data name="TaxID" xml:space="preserve">
     <value>كود الضريبة</value>
+  </data>
+  <data name="TaxIncludedPrice" xml:space="preserve">
+    <value>السعر شامل الضريبة</value>
+  </data>
+  <data name="TaxOnProduct" xml:space="preserve">
+    <value>الضريبة على المنتج</value>
+  </data>
+  <data name="TaxToApply" xml:space="preserve">
+    <value>الضريبة المطبقة</value>
+  </data>
+  <data name="TipProduct" xml:space="preserve">
+    <value>المنتجات المرشحه</value>
+  </data>
+  <data name="Tips" xml:space="preserve">
+    <value>ترشيح</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>اللقب الوظيفى</value>
@@ -520,11 +670,17 @@
   <data name="Type" xml:space="preserve">
     <value>النوع</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>الموظف</value>
+  </data>
   <data name="UserImage" xml:space="preserve">
     <value>صوره المستخدم</value>
   </data>
   <data name="VATRequired" xml:space="preserve">
     <value>ضريبة القيمة المضافة مطلوبة</value>
+  </data>
+  <data name="VirtualKeyBoard" xml:space="preserve">
+    <value>لوحة مفاتيح افتراضية</value>
   </data>
   <data name="Volume" xml:space="preserve">
     <value>حجم</value>

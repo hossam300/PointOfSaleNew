@@ -59,5 +59,104 @@ namespace PointOfSale.Client.Pages.Resource.Orders {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عميل.
+        /// </summary>
+        public static string Customer {
+            get {
+                return ResourceManager.GetString("Customer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to جنيه مصرى.
+        /// </summary>
+        public static string Eg {
+            get {
+                return ResourceManager.GetString("Eg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاريخ الانتهاء.
+        /// </summary>
+        public static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدد العملاء.
+        /// </summary>
+        public static string NumberOfCustomer {
+            get {
+                return ResourceManager.GetString("NumberOfCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الطلبات لكل فئة.
+        /// </summary>
+        public static string OrdersPerCategory {
+            get {
+                return ResourceManager.GetString("OrdersPerCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الطلبات لكل طريقة دفع.
+        /// </summary>
+        public static string OrdersPerPaymentMethod {
+            get {
+                return ResourceManager.GetString("OrdersPerPaymentMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المدفوعات.
+        /// </summary>
+        public static string Payments {
+            get {
+                return ResourceManager.GetString("Payments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الايرادات بالجنيه.
+        /// </summary>
+        public static string RevenueInUSD {
+            get {
+                return ResourceManager.GetString("RevenueInUSD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تقرير المبيعات.
+        /// </summary>
+        public static string SalesDetails {
+            get {
+                return ResourceManager.GetString("SalesDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to بحث.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاريخ البدأ.
+        /// </summary>
+        public static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
     }
 }

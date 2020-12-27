@@ -2,191 +2,251 @@
 @page "/AddCustomer/{Modal:bool?}"
 @page "/EditCustomer/{id:int}"
 @attribute [Authorize]
-@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Customers.AddCustomer> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Customers.AddCustomerContact> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<!--begin::Subheader-->
+<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc2["Home"]</h5>
+                <!--end::Page Title-->
+                <!--begin::Breadcrumb-->
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+      
+    </div>
+</div>
+<!--end::Subheader-->
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
         <div class="container">
-            <!--begin::Card-->
-            <div class="card card-custom">
-                <RadzenTemplateForm TItem="Customer" Data="@customer" Submit="@OnSubmit" InvalidSubmit="@OnInvalidSubmit">
-                    <DataAnnotationsValidator />
-                    <ValidationSummary />
-
-                    <div class="card-body p-9">
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <label  class="col-xl-4 col-lg-4 col-form-label">@Loc["CustomerType"]</label>
-                                <div class="col-md-8" style="text-align:left">
-                                    <RadzenRadioButtonList @bind-Value="customer.CustomerType" TValue="PointOfSale.DAL.Domains.CustomerType" Change="@((args) => RadioSelection(args))">
-                                        <Items>
-                                            <RadzenRadioButtonListItem Text="@PointOfSale.DAL.Domains.CustomerType.Individual.ToString()" Value="@PointOfSale.DAL.Domains.CustomerType.Individual" />
-                                            <RadzenRadioButtonListItem Text="@PointOfSale.DAL.Domains.CustomerType.Company.ToString()" Value="@PointOfSale.DAL.Domains.CustomerType.Company" />
-                                        </Items>
-                                    </RadzenRadioButtonList>
-                                </div>
-                            </div>
+            <RadzenContent Container="main" Style="direction:rtl">
+                <ChildContent>
+                    <!--begin::Card-->
+                    <div class="card card-custom">
+                        <div class="card-header">
+                            <div class="card-title"> <h5>@Loc["AddCustomers"]</h5></div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.Name)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="Name" @bind-Value="customer.Name" class="form-control" />
-                                    <ValidationMessage For="() => customer.Name" class="text-danger" />
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.CustomerImage)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <input type="file" @ref="_input" @onchange="HandleSelected" accept=".jpg, .jpeg, png" />
-                                    @if (ImgUrl != null)
-                                    {
-                                        <div>
-                                            <img src="@ImgUrl" style="width:300px" />
+                        <RadzenTemplateForm TItem="Customer" Data="@customer" Submit="@OnSubmit" InvalidSubmit="@OnInvalidSubmit">
+                            <DataAnnotationsValidator />
+                            <ValidationSummary />
+
+                            <div class="card-body p-9" style="text-align: right;">
+                                <div class="col-md-12">
+                                    <div style="margin-bottom: 1rem" class="row">
+                                        <RadzenLabel Text="@Loc["CustomerType"]" Component="CustomerType" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.CustomerType)"></DisplayName>*@
+                                        <div class="col-md-9">
+                                            <RadzenRadioButtonList @bind-Value="customer.CustomerType" TValue="PointOfSale.DAL.Domains.CustomerType" Change="@((args) => RadioSelection(args))">
+                                                <Items>
+                                                    <RadzenRadioButtonListItem Text="@Loc2[PointOfSale.DAL.Domains.CustomerType.Individual.ToString()]" Value="@PointOfSale.DAL.Domains.CustomerType.Individual" />
+                                                    <RadzenRadioButtonListItem Text="@Loc2[PointOfSale.DAL.Domains.CustomerType.Company.ToString()]" Value="@PointOfSale.DAL.Domains.CustomerType.Company" />
+                                                </Items>
+                                            </RadzenRadioButtonList>
                                         </div>
-                                    }
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.AddressTypeId)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <RadzenDropDown AllowClear="true" TValue="int" Name="AddressTypeId"
-                                                    FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
-                                                    AllowFiltering="true" Placeholder="Select..."
-                                                    Data="@addressTypes" TextProperty="Type" @bind-Value="@customer.AddressTypeId"
-                                                    ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
-
-
-                                    </RadzenDropDown>
-
-                                    <RadzenRequiredValidator DefaultValue="0" Component="AddressTypeId" Text="Address Type is required" Popup="@popup" Style="position: absolute" />
-                                    @*<ValidationMessage For="() => customer.AddressTypeId" class="text-danger" />*@
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["Name"]" Component="Name" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() =>Loc customer.Name)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="Name" @bind-Value="customer.Name" class="form-control" />
+                                            <ValidationMessage For="() => customer.Name" class="text-danger" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["CustomerImage"]" Component="CustomerImage" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.CustomerImage)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <input type="file" @ref="_input" @onchange="HandleSelected" accept=".jpg, .jpeg, png" />
+                                            @if (ImgUrl != null)
+                                            {
+                                                <div>
+                                                    <img src="@ImgUrl" style="width:300px" />
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.Phone)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="Phone" @bind-Value="customer.Phone" class="form-control" />
-                                    <ValidationMessage For="() => customer.Phone" class="text-danger" />
 
+
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["AddressType"]" Component="AddressTypeId" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.AddressTypeId)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <RadzenDropDown AllowClear="true" TValue="int" Name="AddressTypeId"
+                                                            FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
+                                                            AllowFiltering="true" Placeholder="Select..."
+                                                            Data="@addressTypes" TextProperty="Type" @bind-Value="@customer.AddressTypeId"
+                                                            ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+
+
+                                            </RadzenDropDown>
+
+                                            <RadzenRequiredValidator DefaultValue="0" Component="AddressTypeId" Text="Address Type is required" Popup="@popup" Style="position: absolute" />
+                                            @*<ValidationMessage For="() => customer.AddressTypeId" class="text-danger" />*@
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["Phone"]" Component="Phone" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.Phone)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="Phone" @bind-Value="customer.Phone" class="form-control" />
+                                            <ValidationMessage For="() => customer.Phone" class="text-danger" />
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.Mobile)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="Mobile" @bind-Value="customer.Mobile" class="form-control" />
-                                    <ValidationMessage For="() => customer.Mobile" class="text-danger" />
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["Mobile"]" Component="Phone" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.Mobile)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="Mobile" @bind-Value="customer.Mobile" class="form-control" />
+                                            <ValidationMessage For="() => customer.Mobile" class="text-danger" />
 
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["EmailAddress"]" Component="Email" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.Email)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="Email" @bind-Value="customer.Email" class="form-control" />
+                                            <ValidationMessage For="() => customer.Email" class="text-danger" />
+
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.Email)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="Email" @bind-Value="customer.Email" class="form-control" />
-                                    <ValidationMessage For="() => customer.Email" class="text-danger" />
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.CompanyAddressStreet1)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputTextArea id="CompanyAddressStreet1" @bind-Value="customer.CompanyAddressStreet1" class="form-control" />
-                                    <ValidationMessage For="() => customer.CompanyAddressStreet1" class="text-danger" />
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.CompanyAddressStreet2)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputTextArea id="CompanyAddressStreet2" @bind-Value="customer.CompanyAddressStreet2" class="form-control" />
-                                    <ValidationMessage For="() => customer.CompanyAddressStreet2" class="text-danger" />
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.City)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="City" @bind-Value="customer.City" class="form-control" />
-                                    <ValidationMessage For="() => customer.City" class="text-danger" />
-
-
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.Country)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="Country" @bind-Value="customer.Country" class="form-control" />
-                                    <ValidationMessage For="() => customer.Country" class="text-danger" />
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.TaxID)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="TaxID" @bind-Value="customer.TaxID" class="form-control" />
-                                    <ValidationMessage For="() => customer.TaxID" class="text-danger" />
-
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.JobPosition)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="JobPosition" @bind-Value="customer.JobPosition" class="form-control" />
-                                    <ValidationMessage For="() => customer.JobPosition" class="text-danger" />
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.WebsiteLink)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="WebsiteLink" @bind-Value="customer.WebsiteLink" class="form-control" />
-                                    <ValidationMessage For="() => customer.WebsiteLink" class="text-danger" />
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["CompanyAddressStreet1"]" Component="CompanyAddressStreet1" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.CompanyAddressStreet1)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputTextArea id="CompanyAddressStreet1" @bind-Value="customer.CompanyAddressStreet1" class="form-control" />
+                                            <ValidationMessage For="() => customer.CompanyAddressStreet1" class="text-danger" />
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["CompanyAddressStreet2"]" Component="CompanyAddressStreet2" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.CompanyAddressStreet2)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputTextArea id="CompanyAddressStreet2" @bind-Value="customer.CompanyAddressStreet2" class="form-control" />
+                                            <ValidationMessage For="() => customer.CompanyAddressStreet2" class="text-danger" />
+                                        </div>
+                                    </div>
 
                                 </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.Title)"></DisplayName>
-                                <div class="col-xl-8">
-                                    <InputText id="Title" @bind-Value="customer.Title" class="form-control" />
-                                    <ValidationMessage For="() => customer.Title" class="text-danger" />
 
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["City"]" Component="City" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.City)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="City" @bind-Value="customer.City" class="form-control" />
+                                            <ValidationMessage For="() => customer.City" class="text-danger" />
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["Country"]" Component="Country" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.Country)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="Country" @bind-Value="customer.Country" class="form-control" />
+                                            <ValidationMessage For="() => customer.Country" class="text-danger" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["TaxID"]" Component="TaxID" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.TaxID)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="TaxID" @bind-Value="customer.TaxID" class="form-control" />
+                                            <ValidationMessage For="() => customer.TaxID" class="text-danger" />
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["JobPosition"]" Component="JobPosition" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.JobPosition)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="JobPosition" @bind-Value="customer.JobPosition" class="form-control" />
+                                            <ValidationMessage For="() => customer.JobPosition" class="text-danger" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["Website"]" Component="WebsiteLink" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.WebsiteLink)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="WebsiteLink" @bind-Value="customer.WebsiteLink" class="form-control" />
+                                            <ValidationMessage For="() => customer.WebsiteLink" class="text-danger" />
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["Title"]" Component="Title" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.Title)"></DisplayName>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="Title" @bind-Value="customer.Title" class="form-control" />
+                                            <ValidationMessage For="() => customer.Title" class="text-danger" />
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-xl-6">
+                                        <RadzenLabel Text="@Loc2["Tags"]" Component="Title" style="width: 100%">
+                                        </RadzenLabel>
+                                        @*<DisplayName For="@(() => customer.Tags)"></DisplayName>*@
+                                        @*<label class="col-xl-4 col-lg-4 col-form-label">Tags</label>*@
+                                        <div class="col-xl-8">
+                                            <InputText id="Tags" @bind-Value="customer.Tags" class="form-control" />
+                                            <ValidationMessage For="() => customer.Tags" class="text-danger" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-xl-6">
-                                <DisplayName For="@(() => customer.Tags)"></DisplayName>
-                                @*<label class="col-xl-4 col-lg-4 col-form-label">Tags</label>*@
-                                <div class="col-xl-8">
-                                    <InputText id="Tags" @bind-Value="customer.Tags" class="form-control" />
-                                    <ValidationMessage For="() => customer.Tags" class="text-danger" />
-                                </div>
+                            <div class="card-footer">
+                                <input type="submit" class="btn btn-primary" value="@Loc["Save"]" />
                             </div>
-                        </div>
+                        </RadzenTemplateForm>
                     </div>
-                    <div class="card-footer">
-                        <input type="submit" class="btn btn-primary" value="@Loc["Save"]"/>
-                    </div>
-                </RadzenTemplateForm>
-            </div>
-            <!--end::Card-->
+                    <!--end::Card-->
+                </ChildContent>
+            </RadzenContent>
         </div>
         <!--end::Container-->
     </div>

@@ -1,4 +1,5 @@
-﻿ <!--begin::Bottom-->
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.Client.Pages.Resource.Index> Loc
+    <!--begin::Bottom-->
 <div class="header-bottom">
     <!--begin::Container-->
     <div class="container">
@@ -8,27 +9,27 @@
             <ul class="header-tabs p-5 p-lg-0 d-flex d-lg-none nav nav-bold nav-tabs" role="tablist">
                 <!--begin::Item-->
                 <li class="nav-item mr-3">
-                    <NavLink href="/" class="nav-link btn btn-clean active" data-toggle="tab" data-target="#kt_header_tab_1" role="tab">Home</NavLink>
+                    <NavLink href="/" class="nav-link btn btn-clean active" data-toggle="tab" data-target="#kt_header_tab_1" role="tab">@Loc["Home"]</NavLink>
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <li class="nav-item mr-3">
-                    <NavLink href="#" class="nav-link btn btn-clean" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">Orders</NavLink>
+                    <NavLink href="#" class="nav-link btn btn-clean" data-toggle="tab" data-target="#kt_header_tab_2" role="tab">@Loc["Orders"]Orders</NavLink>
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <li class="nav-item mr-3">
-                    <NavLink href="#" class="nav-link btn btn-clean" data-toggle="tab" data-target="#kt_header_tab_3" role="tab">Products</NavLink>
+                    <NavLink href="#" class="nav-link btn btn-clean" data-toggle="tab" data-target="#kt_header_tab_3" role="tab">@Loc["Products"]</NavLink>
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <li class="nav-item mr-3">
-                    <NavLink href="#" class="nav-link btn btn-clean" data-toggle="tab" data-target="#kt_header_tab_4" role="tab">Reporting</NavLink>
+                    <NavLink href="#" class="nav-link btn btn-clean" data-toggle="tab" data-target="#kt_header_tab_4" role="tab">@Loc["Reporting"]Reporting</NavLink>
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <li class="nav-item mr-3">
-                    <a href="#" class="nav-link btn btn-clean" data-toggle="tab" data-target="#kt_header_tab_5" role="tab">Configuration</a>
+                    <a href="#" class="nav-link btn btn-clean" data-toggle="tab" data-target="#kt_header_tab_5" role="tab">@Loc["Configuration"]</a>
                 </li>
                 <!--end::Item-->
             </ul>
@@ -43,12 +44,12 @@
                         <ul class="menu-nav">
                             <li class="menu-item menu-item-active" aria-haspopup="true">
                                 <NavLink href="/" class="menu-link">
-                                    <span class="menu-text">Home</span>
+                                    <span class="menu-text">@Loc["Home"]</span>
                                 </NavLink>
                             </li>
                             <li class="menu-item menu-item" aria-haspopup="true">
                                 <NavLink href="/Dashboard" class="menu-link">
-                                    <span class="menu-text">Dashboard</span>
+                                    <span class="menu-text">@Loc["Dashboard"]</span>
                                 </NavLink>
                             </li>
                         </ul>
@@ -67,22 +68,22 @@
 
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/Orders" class="menu-link">
-                                        <span class="menu-text">Orders</span>
+                                        <span class="menu-text">@Loc["Orders"]</span>
                                     </NavLink>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/Sessions" class="menu-link">
-                                        <span class="menu-text">Sessions</span>
+                                        <span class="menu-text">@Loc["Sessions"]</span>
                                     </NavLink>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/Payments" class="menu-link">
-                                        <span class="menu-text">Payments</span>
+                                        <span class="menu-text">@Loc["Payments"]</span>
                                     </NavLink>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/CustomersList" class="menu-link">
-                                        <span class="menu-text">Customers</span>
+                                        <span class="menu-text">@Loc["Customers"]</span>
                                     </NavLink>
                                 </li>
                             </ul>
@@ -100,12 +101,12 @@
                             <ul class="menu-nav">
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/Products" class="menu-link">
-                                        <span class="menu-text">Products</span>
+                                        <span class="menu-text">@Loc["Products"]</span>
                                     </NavLink>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
-                                    <NavLink href="/LoyaltyPrograms"  class="menu-link">
-                                        <span class="menu-text">Loyalty Programs</span>
+                                    <NavLink href="/LoyaltyPrograms" class="menu-link">
+                                        <span class="menu-text">@Loc["LoyaltyPrograms"]</span>
                                     </NavLink>
                                 </li>
                             </ul>
@@ -122,12 +123,12 @@
                             <ul class="menu-nav">
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/OrderReports" class="menu-link">
-                                        <span class="menu-text">Orders</span>
+                                        <span class="menu-text">@Loc["Orders"]</span>
                                     </NavLink>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/SalesDetailReports" class="menu-link">
-                                        <span class="menu-text">Sales Details</span>
+                                        <span class="menu-text">@Loc["SalesDetails"]</span>
                                     </NavLink>
                                 </li>
                             </ul>
@@ -145,22 +146,22 @@
 
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/Settings" class="menu-link">
-                                        <span class="menu-text">Settings</span>
+                                        <span class="menu-text">@Loc["Settings"]</span>
                                     </NavLink>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/PoinOfSale" class="menu-link">
-                                        <span class="menu-text">Point of Sale</span>
+                                        <span class="menu-text">@Loc["PointOfSale"]</span>
                                     </NavLink>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/PaymentMethods" class="menu-link">
-                                        <span class="menu-text">Payment Methods</span>
+                                        <span class="menu-text">@Loc["PaymentMethods"]</span>
                                     </NavLink>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
                                     <NavLink href="/ProductCategories" class="menu-link">
-                                        <span class="menu-text">POS Product Categories</span>
+                                        <span class="menu-text">@Loc["POSProductCategories"]</span>
                                     </NavLink>
                                 </li>
                             </ul>

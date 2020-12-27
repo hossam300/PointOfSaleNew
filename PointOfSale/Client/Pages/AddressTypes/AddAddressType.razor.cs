@@ -64,7 +64,6 @@ namespace PointOfSale.Pages
             Load();
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }
-
         protected async void Load()
         {
             if (Id != null)

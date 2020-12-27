@@ -42,7 +42,7 @@ namespace PointOfSale.Client.Pages.Customers
 
         public async void btnAddCustomerContactClick()
         {
-            dialogService.Open<DialogCardPage>("Add Customer Contact",
+            dialogService.Open<DialogCardPage>(Loc["AddCustomerContact"],
                          new Dictionary<string, object>() { { "id", id } },
                          new Radzen.DialogOptions() { Width = "700px", Height = "530px" });
             await customerContactGrid.Reload();
@@ -53,7 +53,7 @@ namespace PointOfSale.Client.Pages.Customers
 
         async void EditRow(CustomerContact customerContact)
         {
-            dialogService.Open<DialogCardPage>("Edit Customer Contact", new Dictionary<string, object>() { { "id", id }, { "CustomerContactId", customerContact.Id } },
+            dialogService.Open<DialogCardPage>(Loc["EditCustomerContact"], new Dictionary<string, object>() { { "id", id }, { "CustomerContactId", customerContact.Id } },
                          new Radzen.DialogOptions() { Width = "700px", Height = "530px" });
             await InvokeAsync(() => { StateHasChanged(); });
         }

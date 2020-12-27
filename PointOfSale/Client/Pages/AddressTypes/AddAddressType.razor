@@ -14,7 +14,7 @@
         <div class="container">
             <!--begin::Card-->
             <div class="card card-custom">
-                <RadzenContent @ref="content1" Container="main">
+                <RadzenContent @ref="content1" Container="main" Style="direction:rtl">
                     <ChildContent>
 
                         <RadzenTemplateForm @ref="formAddressType" Data="@(addresstype)" Visible="@(addresstype != null)" TItem="AddressType" Submit="@FormAddressTypeSubmit">

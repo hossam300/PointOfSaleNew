@@ -1,4 +1,6 @@
 ﻿@page "/AddProductCategory/{Id:int?}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.ProductCategories.AddProductCategory> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
@@ -14,7 +16,7 @@
                                     <ChildContent>
                                         <div style="margin-bottom: 1rem" class="row">
                                             <div class="col-md-3">
-                                                <RadzenLabel @ref="label2" Text="Category Name" Component="CategoryName" style="width: 100%">
+                                                <RadzenLabel @ref="label2" Text="@Loc2["CategoryName"]" Component="CategoryName" style="width: 100%">
                                                 </RadzenLabel>
                                             </div>
                                             <div class="col-md-9">
@@ -24,7 +26,7 @@
                                         </div>
                                         <div style="margin-bottom: 1rem" class="row">
                                             <div class="col-md-3">
-                                                <RadzenLabel @ref="label2" Text="Image" Component="CategoryName" style="width: 100%">
+                                                <RadzenLabel @ref="label2" Text="@Loc2["CategoryName"]" Component="CategoryName" style="width: 100%">
                                                 </RadzenLabel>
                                             </div>
                                             <div class="col-md-9">
@@ -36,7 +38,7 @@
 
                                         <div style="margin-bottom: 1rem" class="row">
                                             <div class="col-md-3">
-                                                <RadzenLabel @ref="label3" Text="Product Category" Component="ParentCategoryId" style="width: 100%">
+                                                <RadzenLabel @ref="label3" Text="@Loc2["ProductCategory"]" Component="ParentCategoryId" style="width: 100%">
                                                 </RadzenLabel>
                                             </div>
                                             <div class="col-md-9">
@@ -52,9 +54,9 @@
                                         </div>
                                         <div class="row">
                                             <div class="col offset-sm-3">
-                                                <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                                <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
                                                 </RadzenButton>
-                                                <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
+                                                <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@Button2Click">
                                                 </RadzenButton>
                                             </div>
                                         </div>

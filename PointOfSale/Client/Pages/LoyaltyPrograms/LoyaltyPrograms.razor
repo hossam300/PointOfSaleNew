@@ -1,83 +1,81 @@
 ﻿@page "/LoyaltyPrograms"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.LoyaltyPrograms.LoyaltyPrograms> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
     <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
-        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-1">
-                <!--begin::Page Heading-->
-                <div class="d-flex align-items-baseline mr-5">
-                    <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
-                    <!--end::Page Title-->
-                    <!--begin::Breadcrumb-->
-                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-                        <li class="breadcrumb-item">
-                            <a href="/LoyaltyPrograms" class="text-muted">Loyalty Programs</a>
-                        </li>
-                    </ul>
-                    <!--end::Breadcrumb-->
-                </div>
-                <!--end::Page Heading-->
+<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["LoyaltyProgram"]</h5>
+                <!--end::Page Title-->
+                <!--begin::Breadcrumb-->
+             
+                <!--end::Breadcrumb-->
             </div>
-            <!--end::Info-->
-            <!--begin::Toolbar-->
-            <!--end::Toolbar-->
+            <!--end::Page Heading-->
         </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <!--end::Toolbar-->
     </div>
-    <!--end::Subheader-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Entry-->
-        <div class="d-flex flex-column-fluid">
-            <!--begin::Container-->
-            <!--begin::Card-->
-            <div class="card card-custom">
-                <div class="card-body p-9">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <RadzenContent Container="main">
-                                <ChildContent>
-                                    <RadzenHeading Size="H1" Text="Loyalty Programs">
-                                    </RadzenHeading>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
-                                            </RadzenButton>
-                                            <RadzenGrid @ref="gridLoyaltyProgram" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductCategoriesResult)" TItem="LoyaltyProgram">
-                                                <Columns>
-                                                    <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Visible="false" Property="Id" Title="Id" Type="integer">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Property="Name" Title="Name" Type="string">
-                                                        <Template Context="loyaltyProgram">
-                                                            @loyaltyProgram.Name
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Property="PointPerMoneySpent" Title="Points" >
-                                                        <Template Context="loyaltyProgram">
-                                                            @loyaltyProgram.PointPerMoneySpent
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
-                                                        <Template Context="loyaltyProgram">
-                                                            <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(loyaltyProgram))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Filterable="false" Sortable="false" Bubble="false" Width="70px">
-                                                        <Template Context="loyaltyProgram">
-                                                            <RadzenButton @ref="gridDeleteButton" ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, loyaltyProgram))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                </Columns>
-                                            </RadzenGrid>
-                                        </div>
+</div>
+<!--end::Subheader-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main" Style=" text-align: right; ">
+                            <ChildContent>
+                                <RadzenHeading Size="H1" Text="@Loc["LoyaltyProgram"]">
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12" style="direction:rtl">
+                                        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@Button0Click">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="gridLoyaltyProgram" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductCategoriesResult)" TItem="LoyaltyProgram">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Visible="false" Property="Id" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Property="Name" Title="@Loc2["Name"]" Type="string">
+                                                    <Template Context="loyaltyProgram">
+                                                        @loyaltyProgram.Name
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Property="PointPerMoneySpent" Title="@Loc2["PointPerMoneySpent"]">
+                                                    <Template Context="loyaltyProgram">
+                                                        @loyaltyProgram.PointPerMoneySpent
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="loyaltyProgram">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(loyaltyProgram))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="LoyaltyProgram" Context="loyaltyProgram" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="loyaltyProgram">
+                                                        <RadzenButton @ref="gridDeleteButton" ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, loyaltyProgram))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
                                     </div>
-                                </ChildContent>
-                            </RadzenContent>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
 
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

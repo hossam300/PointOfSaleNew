@@ -59,5 +59,32 @@ namespace PointOfSale.Client.Pages.Resource.Orders {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الطلبات.
+        /// </summary>
+        public static string Order {
+            get {
+                return ResourceManager.GetString("Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طباعة الفاتورة.
+        /// </summary>
+        public static string PrintBill {
+            get {
+                return ResourceManager.GetString("PrintBill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طياعة الطلب.
+        /// </summary>
+        public static string PrintOrder {
+            get {
+                return ResourceManager.GetString("PrintOrder", resourceCulture);
+            }
+        }
     }
 }

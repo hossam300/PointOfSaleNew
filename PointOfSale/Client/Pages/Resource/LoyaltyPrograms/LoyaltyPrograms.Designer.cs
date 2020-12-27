@@ -59,5 +59,41 @@ namespace PointOfSale.Client.Pages.Resource.LoyaltyPrograms {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة نظام النقاط.
+        /// </summary>
+        public static string AddLoyaltyProgram {
+            get {
+                return ResourceManager.GetString("AddLoyaltyProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تعديل نظام النقاط.
+        /// </summary>
+        public static string EditLoyaltyProgram {
+            get {
+                return ResourceManager.GetString("EditLoyaltyProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نظام النقاط.
+        /// </summary>
+        public static string LoyaltyProgram {
+            get {
+                return ResourceManager.GetString("LoyaltyProgram", resourceCulture);
+            }
+        }
     }
 }

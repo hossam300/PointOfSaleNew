@@ -59,5 +59,14 @@ namespace PointOfSale.Client.Pages.Resource.ProductCategories {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الفئات.
+        /// </summary>
+        public static string ProductCategory {
+            get {
+                return ResourceManager.GetString("ProductCategory", resourceCulture);
+            }
+        }
     }
 }

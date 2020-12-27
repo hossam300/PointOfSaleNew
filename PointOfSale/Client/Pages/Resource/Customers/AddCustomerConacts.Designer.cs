@@ -22,14 +22,14 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AddCustomer {
+    public class AddCustomerConacts {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AddCustomer() {
+        internal AddCustomerConacts() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.Customers.AddCustomer", typeof(AddCustomer).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.Customers.AddCustomerConacts", typeof(AddCustomerConacts).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,56 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to نوع العميل.
+        ///   Looks up a localized string similar to اضافة.
         /// </summary>
-        public static string CustomerType {
+        public static string Add {
             get {
-                return ResourceManager.GetString("CustomerType", resourceCulture);
+                return ResourceManager.GetString("Add", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حفظ.
+        ///   Looks up a localized string similar to اضافة اتصال جديد.
         /// </summary>
-        public static string Save {
+        public static string AddCustomerContact {
             get {
-                return ResourceManager.GetString("Save", resourceCulture);
+                return ResourceManager.GetString("AddCustomerContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة عميل جديد.
+        /// </summary>
+        public static string AddNewCustomer {
+            get {
+                return ResourceManager.GetString("AddNewCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الرجوع للقائمة.
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اتصالات العملاء.
+        /// </summary>
+        public static string CustomerContacts {
+            get {
+                return ResourceManager.GetString("CustomerContacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تعديل اتصال العميل.
+        /// </summary>
+        public static string EditCustomerContact {
+            get {
+                return ResourceManager.GetString("EditCustomerContact", resourceCulture);
             }
         }
     }

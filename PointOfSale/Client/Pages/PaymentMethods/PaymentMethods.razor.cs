@@ -83,7 +83,7 @@ namespace PointOfSale.Client.Pages.PaymentMethods
 
         protected async void Button0Click(MouseEventArgs args)
         {
-            var result = await DialogService.OpenAsync<AddPaymentMethod>("Add Payment Method", null);
+            var result = await DialogService.OpenAsync<AddPaymentMethod>(Loc["AddPaymentMethod"], null);
             await grid0.Reload();
 
             await InvokeAsync(() => { StateHasChanged(); });
@@ -91,7 +91,7 @@ namespace PointOfSale.Client.Pages.PaymentMethods
 
         protected async void EditRow(PaymentMethod args)
         {
-            DialogService.Open<AddPaymentMethod>("Edit Payment Method", new Dictionary<string, object>() { { "Id", args.Id } },
+            DialogService.Open<AddPaymentMethod>(Loc["EditPaymentMethod"], new Dictionary<string, object>() { { "Id", args.Id } },
                      new Radzen.DialogOptions() { Width = "700px", Height = "530px" });
             await InvokeAsync(() => { StateHasChanged(); });
         }

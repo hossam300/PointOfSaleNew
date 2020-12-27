@@ -129,6 +129,15 @@
   <data name="Colse" xml:space="preserve">
     <value>اغلاق</value>
   </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>التهيئة</value>
+  </data>
+  <data name="Customers" xml:space="preserve">
+    <value>العملاء</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>لوحة التحكم</value>
+  </data>
   <data name="Details" xml:space="preserve">
     <value>التفاصيل</value>
   </data>
@@ -147,19 +156,49 @@
   <data name="LastClosingDate" xml:space="preserve">
     <value>تاريخ نهاية الجلسه</value>
   </data>
+  <data name="LoyaltyPrograms" xml:space="preserve">
+    <value>نظام النقاط</value>
+  </data>
   <data name="NewSession" xml:space="preserve">
     <value>جلسه جديدة</value>
   </data>
   <data name="Orders" xml:space="preserve">
     <value>الطلبات</value>
   </data>
+  <data name="PaymentMethods" xml:space="preserve">
+    <value>طرق الدفع</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>الدفع</value>
+  </data>
+  <data name="PointOfSale" xml:space="preserve">
+    <value>نقاط البيع</value>
+  </data>
+  <data name="POS" xml:space="preserve">
+    <value>نقاط البيع</value>
+  </data>
+  <data name="POSProductCategories" xml:space="preserve">
+    <value>فئات المنتجات</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>المنتجات</value>
+  </data>
+  <data name="Reporting" xml:space="preserve">
+    <value>التقراير</value>
+  </data>
   <data name="Resume" xml:space="preserve">
     <value>استمرار</value>
+  </data>
+  <data name="SalesDetails" xml:space="preserve">
+    <value>تقرير المبيعات</value>
   </data>
   <data name="SalesOrders" xml:space="preserve">
     <value>طلبات المبيعات</value>
   </data>
   <data name="Sessions" xml:space="preserve">
     <value>الشيفتات</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>الاعدادات</value>
   </data>
 </root>

@@ -1,4 +1,6 @@
 ﻿@page "/OrderReports"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Orders.OrderReports> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
     <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
     <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -7,15 +9,8 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["SalesDetails"]</h5>
                 <!--end::Page Title-->
-                <!--begin::Breadcrumb-->
-                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-                    <li class="breadcrumb-item">
-                        <a href="/Orders" class="text-muted">Sales Details</a>
-                    </li>
-                </ul>
-                <!--end::Breadcrumb-->
             </div>
             <!--end::Page Heading-->
         </div>
@@ -30,22 +25,22 @@
         <!--begin::Container-->
         <!--begin::Card-->
         <div class="card card-custom" style="width:100%">
-            <div class="card-body p-9">
+            <div class="card-body p-9" style="text-align:right">
                 <div class="row">
                     <div class="col-xl-4">
-                        <label class="col-xl-4 control-label">Start Date</label>
+                        <label class="col-xl-4 control-label">@Loc["StartDate"]</label>
                         <div class="col-xl-8">
                             <RadzenDatePicker @bind-Value=@StartDate DateFormat="d" Change=@(args => OnChange(args, "DatePicker", "MM/dd/yyyy")) />
                         </div>
                     </div>
                     <div class="col-xl-4">
-                        <label class="col-xl-4 control-label">End Date</label>
+                        <label class="col-xl-4 control-label">@Loc["EndDate"]</label>
                         <div class="col-xl-8">
                             <RadzenDatePicker @bind-Value=@EndDate DateFormat="d" Change=@(args => OnChange(args, "DatePicker", "MM/dd/yyyy")) />
                         </div>
                     </div>
                     <div class="col-xl-4">
-                        <button type="button" class="btn btn-primary" @onclick="Search">Search</button>
+                        <button type="button" class="btn btn-primary" @onclick="Search">@Loc["Search"]</button>
                     </div>
                 </div>
             </div>
@@ -66,9 +61,10 @@
                             <div class="card-header border-0 pt-5">
                                 <div class="card-title">
                                     <div class="card-label">
-                                        <div class="font-weight-bolder">Orders Per Category</div>
-                                        <div class="font-size-sm text-muted mt-2">@Categories.Sum(c => c.Value) Eg</div>
-                                    </div>
+                                        <div class="font-weight-bolder">@Loc["OrdersPerCategory"]</div>
+                                        <div class="font-size-sm text-muted mt-2">
+                                            @Categories.Sum(c => c.Value) @Loc["Eg"]</div>
+                                        </div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -77,7 +73,7 @@
                                     <RadzenColumnOptions Radius="5" />
                                     <RadzenValueAxis Formatter="@FormatAsUSD">
                                         <RadzenGridLines Visible="true" />
-                                        <RadzenAxisTitle Text="Revenue in USD" />
+                                        <RadzenAxisTitle Text="@Loc["RevenueInUSD"]" />
                                     </RadzenValueAxis>
                                 </RadzenChart>
                             </div>
@@ -89,14 +85,15 @@
                             <div class="card-header border-0 pt-5">
                                 <div class="card-title">
                                     <div class="card-label">
-                                        <div class="font-weight-bolder"> Orders Per Payment Method</div>
-                                        <div class="font-size-sm text-muted mt-2">@OrderPayments.Sum(p => p.Value) Eg</div>
-                                    </div>
+                                        <div class="font-weight-bolder">
+                                            @Loc["OrdersPerPaymentMethod"]</div>
+                                        <div class="font-size-sm text-muted mt-2">@OrderPayments.Sum(p => p.Value) @Loc["Eg"]</div>
+                                        </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <RadzenChart>
-                                    <RadzenPieSeries Data="@OrderPayments" Title="Payments" CategoryProperty="Text" ValueProperty="Value" />
+                                    <RadzenPieSeries Data="@OrderPayments" Title="@Loc["Payments"]" CategoryProperty="Text" ValueProperty="Value" />
                                 </RadzenChart>
                             </div>
                         </div>
@@ -107,14 +104,14 @@
                             <div class="card-header border-0 pt-5">
                                 <div class="card-title">
                                     <div class="card-label">
-                                        <div class="font-weight-bolder"> Number Of Customer</div>
+                                        <div class="font-weight-bolder">@Loc["NumberOfCustomer"]</div>
                                         <div class="font-size-sm text-muted mt-2">@Customers.Sum(p => p.Value) </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <RadzenChart>
-                                    <RadzenPieSeries Data="@Customers" Title="Customer" CategoryProperty="Text" ValueProperty="Value" />
+                                    <RadzenPieSeries Data="@Customers" Title="@Loc["Customer"]" CategoryProperty="Text" ValueProperty="Value" />
                                 </RadzenChart>
                             </div>
                         </div>
