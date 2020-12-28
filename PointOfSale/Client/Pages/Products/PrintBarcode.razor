@@ -1,4 +1,6 @@
 ﻿@using Net.ConnectCode.Barcode
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Products.PrintBarcode> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
     <!--begin::Entry-->
@@ -9,10 +11,10 @@
             <div class="card card-custom">
 
 
-                <div class="card-body p-9">
+                <div class="card-body p-9" style="text-align:right">
                     <div class="col-md-12">
                         <div style="margin-bottom: 1rem" class="row">
-                            <label class="col-xl-3">Number of Lables</label>
+                            <label class="col-xl-3">@Loc["NumberOfLables"]</label>
                             <div class="col-md-6">
                                 <RadzenNumeric @bind-Value="@count" style="width: 100%" Name="Type">
                                 </RadzenNumeric>

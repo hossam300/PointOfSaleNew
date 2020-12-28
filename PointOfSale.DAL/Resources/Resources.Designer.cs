@@ -584,6 +584,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ضرائب العملاء.
+        /// </summary>
+        public static string CustomerTaxes {
+            get {
+                return ResourceManager.GetString("CustomerTaxes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to نوع العميل.
         /// </summary>
         public static string CustomerType {

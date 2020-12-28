@@ -1,4 +1,6 @@
-﻿<h3>Type Reference Note</h3>
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Sessions.HoldOrder> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<h3>@Loc["TypeReferenceNote"]</h3>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
@@ -12,7 +14,9 @@
                     <div class="card-body p-9">
                         <div class="col-md-12">
                             <div style="margin-bottom: 1rem" class="row">
-                                <DisplayName For="@(() => Order.OrderNumber)"></DisplayName>
+                                <RadzenLabel Text="@Loc2["OrderNumber"]" Component="OrderNumber" style="width: 100%">
+                                </RadzenLabel>
+                                @*<DisplayName For="@(() => Order.OrderNumber)"></DisplayName>*@
                                 <div class="col-md-9">
                                     <RadzenTextBox @bind-Value="Order.OrderNumber" style="width: 100%" Name="Type">
                                     </RadzenTextBox>
@@ -23,9 +27,9 @@
                     <div class="card-footer">
                         <div class="row">
                             <div class="col offset-sm-3">
-                                <RadzenButton  ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
                                 </RadzenButton>
-                                <RadzenButton  ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                                <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
                                 </RadzenButton>
                             </div>
                         </div>
@@ -61,7 +65,7 @@
 
         foreach (var item in Order.OrderItem)
         {
-            item.Product= null;
+            item.Product = null;
         }
         Order.Customer = null;
         Order.SessionId = session.Id;

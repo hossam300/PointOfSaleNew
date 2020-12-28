@@ -59,5 +59,14 @@ namespace PointOfSale.Client.Pages.Resource.Products {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدد الملصقات.
+        /// </summary>
+        public static string NumberOfLables {
+            get {
+                return ResourceManager.GetString("NumberOfLables", resourceCulture);
+            }
+        }
     }
 }

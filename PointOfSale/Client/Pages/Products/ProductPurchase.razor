@@ -1,5 +1,7 @@
 ﻿@page "/ProductPurchase/{id:int}"
 @inject Radzen.DialogService dialogService
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Products.AddProduct> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
@@ -7,14 +9,14 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Product</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["AddProducts"]</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter Product details and submit</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Loc["AddProductDescription"]</span>
                 </div>
                 <!--end::Search Form-->
             </div>
@@ -22,7 +24,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Button-->
-                <a href="/Products" class="btn btn-default font-weight-bold">Back</a>
+                <a href="/Products" class="btn btn-default font-weight-bold">@Loc["Back"]</a>
                 <!--end::Button-->
             </div>
             <!--end::Toolbar-->
@@ -54,7 +56,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Product Details</h3>
+                                            <h3 class="wizard-title">@Loc["ProductDetails"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -81,7 +83,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Sales</h3>
+                                            <h3 class="wizard-title">@Loc["Sales"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -108,7 +110,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Point of Sale</h3>
+                                            <h3 class="wizard-title">@Loc["PointOfSale"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -135,7 +137,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Purchase</h3>
+                                            <h3 class="wizard-title">@Loc["Purchase"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -162,7 +164,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Inventory</h3>
+                                            <h3 class="wizard-title">@Loc["Inventory"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -191,61 +193,65 @@
                                                     <RadzenTemplateForm Data="@(product)" Visible="@(product != null)" TItem="Product" Submit="@FormProductSubmit">
                                                         <ChildContent>
                                                             @*<div class="row">
-                                                                <div class="col-md-12">
-                                                                    <RadzenHeading Size="H1" Text="Vendor Products">
-                                                                    </RadzenHeading>
-                                                                    <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@btnAddvendorProducClick">
-                                                                    </RadzenButton>
-                                                                    <RadzenGrid @ref="vendorProducGrid" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="vendorProducs" TItem="VendorProduct">
-                                                                        <Columns>
-                                                                            <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Property="Id" Title="Id" Visible="false" Type="integer">
-                                                                            </RadzenGridColumn>
-                                                                            <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Property="VendorId" Title="Vendor" Type="string">
-                                                                                <Template Context="vendorProduct">
-                                                                                    @vendorProduct.Vendor.Name
-                                                                                </Template>
-                                                                            </RadzenGridColumn>
-                                                                            <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Property="Price" Title="Price" Type="string">
+                                                                    <div class="col-md-12">
+                                                                        <RadzenHeading Size="H1" Text="Vendor Products">
+                                                                        </RadzenHeading>
+                                                                        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@btnAddvendorProducClick">
+                                                                        </RadzenButton>
+                                                                        <RadzenGrid @ref="vendorProducGrid" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="vendorProducs" TItem="VendorProduct">
+                                                                            <Columns>
+                                                                                <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Property="Id" Title="Id" Visible="false" Type="integer">
+                                                                                </RadzenGridColumn>
+                                                                                <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Property="VendorId" Title="Vendor" Type="string">
+                                                                                    <Template Context="vendorProduct">
+                                                                                        @vendorProduct.Vendor.Name
+                                                                                    </Template>
+                                                                                </RadzenGridColumn>
+                                                                                <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Property="Price" Title="Price" Type="string">
 
-                                                                            </RadzenGridColumn>
-                                                                            <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
-                                                                                <Template Context="vendorProduct">
-                                                                                    <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(vendorProduct))">
-                                                                                    </RadzenButton>
-                                                                                </Template>
-                                                                            </RadzenGridColumn>
-                                                                            <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="70px">
-                                                                                <Template Context="vendorProduct">
-                                                                                    <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(vendorProduct))">
-                                                                                    </RadzenButton>
-                                                                                </Template>
-                                                                                <EditTemplate Context="vendorProduct">
-                                                                                    <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(vendorProduct))">
-                                                                                    </RadzenButton>
-                                                                                </EditTemplate>
-                                                                            </RadzenGridColumn>
-                                                                        </Columns>
-                                                                    </RadzenGrid>
+                                                                                </RadzenGridColumn>
+                                                                                <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                                                    <Template Context="vendorProduct">
+                                                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(vendorProduct))">
+                                                                                        </RadzenButton>
+                                                                                    </Template>
+                                                                                </RadzenGridColumn>
+                                                                                <RadzenGridColumn TItem="VendorProduct" Context="vendorProduct" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="70px">
+                                                                                    <Template Context="vendorProduct">
+                                                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(vendorProduct))">
+                                                                                        </RadzenButton>
+                                                                                    </Template>
+                                                                                    <EditTemplate Context="vendorProduct">
+                                                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(vendorProduct))">
+                                                                                        </RadzenButton>
+                                                                                    </EditTemplate>
+                                                                                </RadzenGridColumn>
+                                                                            </Columns>
+                                                                        </RadzenGrid>
 
-                                                                </div>
-                                                            </div>*@
+                                                                    </div>
+                                                                </div>*@
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
                                                                     <label class="col-md-4">Routes</label>
                                                                     <div class="col-xl-8">
-                                                                        <DisplayName For="@(() => product.Procurement)"></DisplayName>
+                                                                        <RadzenLabel Text="@Loc2["Procurement"]" Component="Procurement" style="width: 100%">
+                                                                        </RadzenLabel>
+                                                                        @*<DisplayName For="@(() => product.Procurement)"></DisplayName>*@
                                                                         <div class="col-md-8" style="text-align:left">
                                                                             <RadzenRadioButtonList @bind-Value="product.Procurement" TValue="PointOfSale.DAL.Domains.Procurement">
                                                                                 <Items>
-                                                                                    <RadzenRadioButtonListItem Text="@Procurement.CreateADraftPurchaseOrder.ToString()" Value="@Procurement.CreateADraftPurchaseOrder" />
-                                                                                    <RadzenRadioButtonListItem Text="@Procurement.ProposeACallForTenders.ToString()" Value="@Procurement.ProposeACallForTenders" />
+                                                                                    <RadzenRadioButtonListItem Text="@Loc2[Procurement.CreateADraftPurchaseOrder.ToString()]" Value="@Procurement.CreateADraftPurchaseOrder" />
+                                                                                    <RadzenRadioButtonListItem Text="@Loc2[Procurement.ProposeACallForTenders.ToString()]" Value="@Procurement.ProposeACallForTenders" />
                                                                                 </Items>
                                                                             </RadzenRadioButtonList>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.VendorTaxes)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["VendorTaxes"]" Component="VendorTaxes" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.VendorTaxes)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <RadzenDropDown AllowClear="true" Name="CustomerTaxes"
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="TaxName" ValueProperty="TaxId"
@@ -258,19 +264,23 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.PurchaseDescription)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["PurchaseDescription"]" Component="PurchaseDescription" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.PurchaseDescription)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <RadzenTextArea id="Name" @bind-Value="product.PurchaseDescription" class="form-control" />
                                                                         <ValidationMessage For="() => product.PurchaseDescription" class="text-danger" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.ControlPolicy)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["ControlPolicy"]" Component="PurchaseDescription" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.ControlPolicy)"></DisplayName>*@
                                                                     <div class="col-md-8" style="text-align:left">
                                                                         <RadzenRadioButtonList @bind-Value="product.ControlPolicy" TValue="PointOfSale.DAL.Domains.ControlPolicy">
                                                                             <Items>
-                                                                                <RadzenRadioButtonListItem Text="@ControlPolicy.OnOrderedQuantities.ToString()" Value="@ControlPolicy.OnOrderedQuantities" />
-                                                                                <RadzenRadioButtonListItem Text="@ControlPolicy.OnReceivedQuantities.ToString()" Value="@ControlPolicy.OnReceivedQuantities" />
+                                                                                <RadzenRadioButtonListItem Text="@Loc2[ControlPolicy.OnOrderedQuantities.ToString()]" Value="@ControlPolicy.OnOrderedQuantities" />
+                                                                                <RadzenRadioButtonListItem Text="@Loc2[ControlPolicy.OnReceivedQuantities.ToString()]" Value="@ControlPolicy.OnReceivedQuantities" />
                                                                             </Items>
                                                                         </RadzenRadioButtonList>
                                                                     </div>
@@ -280,10 +290,10 @@
 
                                                             <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                                                 <div class="mr-2">
-                                                                    <a href="/ProductPOS/@product.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">Previous</a>
+                                                                    <a href="/ProductPOS/@product.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">@Loc["Previous"]</a>
                                                                 </div>
                                                                 <div>
-                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">Next</button>
+                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">@Loc["NextStep"]</button>
                                                                 </div>
                                                             </div>
                                                         </ChildContent>

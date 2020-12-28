@@ -292,6 +292,9 @@
   <data name="CustomerLeadTime" xml:space="preserve">
     <value>مهلة العميل</value>
   </data>
+  <data name="CustomerTaxes" xml:space="preserve">
+    <value>ضرائب العملاء</value>
+  </data>
   <data name="CustomerType" xml:space="preserve">
     <value>نوع العميل</value>
   </data>

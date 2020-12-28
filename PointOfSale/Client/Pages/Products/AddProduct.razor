@@ -9,14 +9,14 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["AddProduct"]</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["AddProducts"]</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Loc["AddProductDescription"]Enter Product details and submit</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Loc["AddProductDescription"]</span>
                 </div>
                 <!--end::Search Form-->
             </div>
@@ -218,25 +218,25 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group row">
+                                                            <div class="form-group row" style="line-height:2.3">
                                                                 <div class="col-xl-12">
                                                                     <div class="col-md-8 col-md-offset-4" style="text-align:right;margin-left:2%;">
-                                                                        <div class="row">
+                                                                        <div class="col-md-3">
                                                                             <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeSold"></Radzen.Blazor.RadzenCheckBox>
-                                                                            <RadzenLabel Text="@Loc2["CanBeSold"]" Component="CanBeSold" style="width: 100%">
+                                                                            <RadzenLabel Text="@Loc2["CanBeSold"]" Component="CanBeSold" >
                                                                             </RadzenLabel>
                                                                         </div>
-                                                                        <div class="row">
+                                                                        <div class="col-md-3">
                                                                             <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBePurchased"></Radzen.Blazor.RadzenCheckBox>
-                                                                            <RadzenLabel Text="@Loc2["CanBePurchased"]" Component="CanBePurchased" style="width: 100%">
+                                                                            <RadzenLabel Text="@Loc2["CanBePurchased"]" Component="CanBePurchased" >
                                                                             </RadzenLabel>
                                                                         </div>
-                                                                        <div class="row">
-                                                                            <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeExpensed"></Radzen.Blazor.RadzenCheckBox> <RadzenLabel Text="@Loc2["CanBeExpensed"]" Component="CanBePurchased" style="width: 100%">
+                                                                        <div class="col-md-3">
+                                                                            <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeExpensed"></Radzen.Blazor.RadzenCheckBox> <RadzenLabel Text="@Loc2["CanBeExpensed"]" Component="CanBePurchased" >
                                                                             </RadzenLabel> 
                                                                         </div>
-                                                                        <div class="row">
-                                                                            <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeRented"></Radzen.Blazor.RadzenCheckBox>  <RadzenLabel Text="@Loc2["CanBeRented"]" Component="CanBePurchased" style="width: 100%">
+                                                                        <div class="col-md-3">
+                                                                            <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeRented"></Radzen.Blazor.RadzenCheckBox>  <RadzenLabel Text="@Loc2["CanBeRented"]" Component="CanBePurchased" >
                                                                             </RadzenLabel> 
                                                                         </div>
                                                                     </div>
@@ -252,7 +252,7 @@
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                                                         AllowFiltering="true" Placeholder="Select..."
                                                                                         Data="@productTypes" @bind-Value="@(productType)" TextProperty="Name" ValueProperty="Id"
-                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align:right">
 
 
                                                                         </RadzenDropDown>
@@ -289,7 +289,7 @@
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="TaxName" ValueProperty="TaxId"
                                                                                         AllowFiltering="true" Placeholder="Select..."
                                                                                         Data="@customerTaxes" @bind-Value="multipleValues" Multiple="true"
-                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align: right">
                                                                         </RadzenDropDown>
                                                                     </div>
                                                                 </div>
@@ -323,7 +323,7 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <RadzenLabel Text="@Loc2["ProductCategoryId"]" Component="ProductCategoryId" style="width: 100%">
+                                                                    <RadzenLabel Text="@Loc2["ProductCategory"]" Component="ProductCategoryId" style="width: 100%">
                                                                     </RadzenLabel>
                                                                     @*<DisplayName For="@(() => product.ProductCategoryId)"></DisplayName>*@
                                                                     <div class="col-xl-8">
@@ -331,7 +331,7 @@
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                                                         AllowFiltering="true" Placeholder="Select..."
                                                                                         Data="@productCategory" TextProperty="CategoryName" @bind-Value="@product.ProductCategoryId"
-                                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align:right">
 
 
                                                                         </RadzenDropDown>
@@ -341,14 +341,14 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <RadzenLabel Text="@Loc2["CompanyId"]" Component="CompanyId" style="width: 100%">
+                                                                    <RadzenLabel Text="@Loc2["Company"]" Component="CompanyId" style="width: 100%">
                                                                     </RadzenLabel>
                                                                     <div class="col-xl-8">
                                                                         <RadzenDropDown AllowClear="true" TValue="int" Name="CompanyId"
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                                                         AllowFiltering="true" Placeholder="Select..."
                                                                                         Data="@companies" TextProperty="Name" @bind-Value="@product.CompanyId"
-                                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align:right">
 
 
                                                                         </RadzenDropDown>

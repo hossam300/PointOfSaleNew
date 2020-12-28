@@ -1,4 +1,6 @@
 ﻿@page "/ProductPOS/{id:int}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Products.AddProduct> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
@@ -6,14 +8,14 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Product</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["AddProducts"]</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter Product details and submit</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Loc["AddProductDescription"]</span>
                 </div>
                 <!--end::Search Form-->
             </div>
@@ -21,9 +23,9 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Button-->
-                <a href="/Products" class="btn btn-danger font-weight-bold">Back</a>
+                <a href="/Products" class="btn btn-danger font-weight-bold">@Loc["Back"]</a>
                 <!--end::Button-->
-               
+
             </div>
             <!--end::Toolbar-->
         </div>
@@ -41,7 +43,7 @@
                             <!--begin::Wizard Nav-->
                             <div class="wizard-nav border-bottom">
                                 <div class="wizard-steps p-8 p-lg-10">
-                                    <div class="wizard-step" data-wizard-type="step" >
+                                    <div class="wizard-step" data-wizard-type="step">
                                         <div class="wizard-label">
                                             <span class="svg-icon svg-icon-4x wizard-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Chat-check.svg-->
@@ -54,7 +56,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Product Details</h3>
+                                            <h3 class="wizard-title">@Loc["ProductDetails"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -81,7 +83,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Sales</h3>
+                                            <h3 class="wizard-title">@Loc["Sales"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -108,7 +110,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Point of Sale</h3>
+                                            <h3 class="wizard-title">@Loc["PointOfSale"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -135,7 +137,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Purchase</h3>
+                                            <h3 class="wizard-title">@Loc["Purchase"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -162,7 +164,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Inventory</h3>
+                                            <h3 class="wizard-title">@Loc["Inventory"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -192,39 +194,45 @@
                                                         <ChildContent>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.AvailableInPOS)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["AvailableInPOS"]" Component="AvailableInPOS" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.AvailableInPOS)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <Radzen.Blazor.RadzenCheckBox @bind-Value="product.AvailableInPOS"></Radzen.Blazor.RadzenCheckBox>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.ToWeighWithScale)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["ToWeighWithScale"]" Component="ToWeighWithScale" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.ToWeighWithScale)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <Radzen.Blazor.RadzenCheckBox @bind-Value="product.ToWeighWithScale"></Radzen.Blazor.RadzenCheckBox>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                               
+
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.CategoryId)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["Category"]" Component="CategoryId" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.CategoryId)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <RadzenDropDown AllowClear="true" Name="CustomerTaxes"
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="CategoryName" ValueProperty="Id"
                                                                                         AllowFiltering="true" Placeholder="Select..."
-                                                                                        Data="@categories" @bind-Value="product.CategoryId" 
+                                                                                        Data="@categories" @bind-Value="product.CategoryId"
                                                                                         Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
                                                                         </RadzenDropDown>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                          
+
                                                             <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                                                 <div class="mr-2">
-                                                                    <a href="/ProductSales/@product.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">Previous</a>
+                                                                    <a href="/ProductSales/@product.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">@Loc["Previous"]</a>
                                                                 </div>
                                                                 <div>
-                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">Next Step</button>
+                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">@Loc["NextStep"]</button>
                                                                 </div>
                                                             </div>
                                                         </ChildContent>

@@ -142,30 +142,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>PrintBarcode.resx</DependentUpon>
     </Compile>
-    <Compile Update="Pages\Resource\Products\ProductInventory.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ProductInventory.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Resource\Products\ProductPOS.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ProductPOS.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Resource\Products\ProductPurchase.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ProductPurchase.resx</DependentUpon>
-    </Compile>
     <Compile Update="Pages\Resource\Products\Products.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Products.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Resource\Products\ProductSales.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ProductSales.resx</DependentUpon>
     </Compile>
     <Compile Update="Pages\Resource\Sessions\CancelOrder.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -348,25 +328,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrintBarcode.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Resource\Products\ProductInventory.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProductInventory.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Resource\Products\ProductPOS.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProductPOS.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Resource\Products\ProductPurchase.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProductPurchase.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Products\Products.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Products.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Resource\Products\ProductSales.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ProductSales.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Sessions\CancelOrder.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
