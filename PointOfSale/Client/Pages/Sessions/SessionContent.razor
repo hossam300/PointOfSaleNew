@@ -175,11 +175,11 @@
                             <div class="btn-group"></div>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-outline-secondary" @onclick="()=>GetProductsVyCategoryId(null)">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <img src="/StaticFiles/Images/25694.svg" class="img-circle" width="100" />
+                                    <div class="card" style="border:none">
+                                        <div class="card-body" style="padding:1% 1% !important">
+                                            <img src="/StaticFiles/Images/25694.svg" class="img-circle" width="100" style="height:100px" />
                                         </div>
-                                        <div class="card-footer">
+                                        <div class="card-footer"  style="padding:1% 1% !important">
                                             <span>All</span>
                                         </div>
                                     </div>
@@ -190,12 +190,12 @@
                             {
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-outline-secondary" @onclick="()=>GetProductsVyCategoryId(item.Id)">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <img src="@item.ImagePath" class="img-circle" alt="@item.CategoryName" width="100" />
+                                        <div class="card" style="border:none">
+                                            <div class="card-body"  style="padding:1% 1% !important">
+                                                <img src="@item.ImagePath" class="img-circle" alt="@item.CategoryName" width="100" style="height:100px" />
 
                                             </div>
-                                            <div class="card-footer">
+                                            <div class="card-footer"  style="padding:1% 1% !important">
                                                 <span>@item.CategoryName</span>
                                             </div>
                                         </div>

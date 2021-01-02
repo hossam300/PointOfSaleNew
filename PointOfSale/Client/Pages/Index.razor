@@ -129,13 +129,13 @@
                                 @if (item.session == null)
                                 {
                                     <div class="col-xl-4">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
+                                        <a href="/Sessions/Create/@item.Id"  class="btn btn-primary">New Session</a>
                                     </div>
                                 }
                                 else if (item.session.Status == Status.Colsed)
                                 {
                                     <div class="col-xl-4">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
+                                        <a href="/Sessions/Create/@item.Id"  class="btn btn-primary">New Session</a>
                                     </div>
                                     <div class="col-xl-4">
                                         <p>Last Closing Cash </p>
@@ -149,17 +149,17 @@
                                 else if (item.session.Status == Status.Open)
                                 {
                                     <div class="col-xl-3">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">Resume</a>
+                                        <a href="/Sessions/Create/@item.Id"  class="btn btn-primary">Resume</a>
                                     </div>
                                     <div class="col-xl-3">
-                                        <button @onclick="()=>CloseSession(item.session)" target="_blank" class="btn btn-danger">Colse</button>
+                                        <button @onclick="()=>CloseSession(item.session)" class="btn btn-danger">Colse</button>
                                     </div>
 
                                 }
                                 else
                                 {
                                     <div class="col-xl-3">
-                                        <a href="/Sessions/Create/@item.Id" target="_blank" class="btn btn-primary">New Session</a>
+                                        <a href="/Sessions/Create/@item.Id"  class="btn btn-primary">New Session</a>
                                     </div>
                                 }
                             </div>

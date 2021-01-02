@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
+using PointOfSale.DAL.ViewModels;
 using Radzen;
 using System;
 using System.Collections.Generic;
@@ -24,12 +25,12 @@ namespace PointOfSale.Client.Pages.Sessions
         //[Inject]
         //UserManager<SahlApplication> UserManager { get; set; }
 
-        List<Product> Products = new List<Product>();
-        List<Product> ProductCats = new List<Product>();
+        List<ProductDTO> Products = new List<ProductDTO>();
+        List<ProductDTO> ProductCats = new List<ProductDTO>();
         List<OrderItem> orderItems = new List<OrderItem>();
-        List<Customer> customers = new List<Customer>();
-        List<ProductCategory> Categories = new List<ProductCategory>();
-        List<ProductCategory> ProductCategories = new List<ProductCategory>();
+        List<CustomerDTO> customers = new List<CustomerDTO>();
+        List<ProductCategoryDTO> Categories = new List<ProductCategoryDTO>();
+        List<ProductCategoryDTO> ProductCategories = new List<ProductCategoryDTO>();
         Radzen.Blazor.RadzenLabel CustomerVaildation;
         Radzen.Blazor.RadzenLabel ItemsVaildation;
         Radzen.Blazor.RadzenAutoComplete BarcodeId;
@@ -58,11 +59,11 @@ namespace PointOfSale.Client.Pages.Sessions
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            Products = await Http.GetFromJsonAsync<List<Product>>("/api/Products/GetAll");
-            customers = await Http.GetFromJsonAsync<List<Customer>>("/api/Customers/GetAll");
-            Categories = await Http.GetFromJsonAsync<List<ProductCategory>>("/api/ProductCategories/GetAll");
+            Products = await Http.GetFromJsonAsync<List<ProductDTO>>("/api/Products/GetAllProductDTO");
+            customers = await Http.GetFromJsonAsync<List<CustomerDTO>>("/api/Customers/GetAllCustomerDTO");
+            Categories = await Http.GetFromJsonAsync<List<ProductCategoryDTO>>("/api/ProductCategories/GetAllProductCategory");
             ProductCats = GetProductsVyCategoryId(null);
-            ProductCategories = GetProductCategories(0, 2, 0);
+            ProductCategories = GetProductCategories(0, 3, 0);
             DialogService.OnOpen += Open;
             DialogService.OnClose += Close;
             await BarcodeId.Element.FocusAsync();
@@ -86,7 +87,7 @@ namespace PointOfSale.Client.Pages.Sessions
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }
         Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
-        List<Product> GetProductsVyCategoryId(int? CatId)
+        List<ProductDTO> GetProductsVyCategoryId(int? CatId)
         {
             if (CatId != null)
                 ProductCats = Products.Where(p => p.ProductCategoryId == CatId).ToList();
@@ -95,7 +96,7 @@ namespace PointOfSale.Client.Pages.Sessions
 
             return ProductCats;
         }
-        List<ProductCategory> GetProductCategories(int start, int count, int preNext)
+        List<ProductCategoryDTO> GetProductCategories(int start, int count, int preNext)
         {
             if (preNext == 1)
             {
@@ -134,7 +135,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.CreationDate = DateTime.Now;
                 order.OrderDate = DateTime.Now;
                 order.ShopId = Id;
-                order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
+                order.Customer =new Customer { Id = order.CustomerId, Name = customers.FirstOrDefault(c => c.Id == order.CustomerId).Name };
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
                 var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
@@ -207,7 +208,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.CreationDate = DateTime.Now;
                 order.OrderDate = DateTime.Now;
                 order.ShopId = Id;
-                order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
+                order.Customer = new Customer { Id = order.CustomerId, Name = customers.FirstOrDefault(c => c.Id == order.CustomerId).Name };
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
                 var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
@@ -237,7 +238,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.CreationDate = DateTime.Now;
                 order.OrderDate = DateTime.Now;
                 order.ShopId = Id;
-                order.Customer = customers.FirstOrDefault(c => c.Id == order.CustomerId);
+                order.Customer = new Customer { Id = order.CustomerId, Name = customers.FirstOrDefault(c => c.Id == order.CustomerId).Name };
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
                 var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
@@ -352,7 +353,7 @@ namespace PointOfSale.Client.Pages.Sessions
             }
             await InvokeAsync(() => { StateHasChanged(); });
         }
-        public async void AddOrderItem(Product item, int Qyt)
+        public async void AddOrderItem(ProductDTO item, int Qyt)
         {
             if (orderItems == null)
             {
@@ -374,7 +375,7 @@ namespace PointOfSale.Client.Pages.Sessions
                     else
                         await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
                 }
-                orderItem.Product = item;
+                orderItem.Product =new Product { Id = item.Id, Name = item.Name };
                 orderItems.Add(orderItem);
             }
             else
@@ -382,7 +383,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 orderItem = new OrderItem
                 {
                     Price = item.SalesPrice,
-                    Product = item,
+                    Product = new Product { Id = item.Id, Name = item.Name },
                     ProductId = item.Id,
                     Quantity = Qyt,
                 };
@@ -396,7 +397,7 @@ namespace PointOfSale.Client.Pages.Sessions
                     else
                         await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
                 }
-                orderItem.Product = item;
+                orderItem.Product = new Product { Id = item.Id, Name = item.Name };
                 orderItems.Add(orderItem);
             }
 
