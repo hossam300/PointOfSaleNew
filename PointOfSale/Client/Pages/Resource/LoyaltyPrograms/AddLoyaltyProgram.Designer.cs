@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PointOfSale.Client.Pages.Resource {
+namespace PointOfSale.Client.Pages.Resource.LoyaltyPrograms {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace PointOfSale.Client.Pages.Resource {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resource {
+    public class AddLoyaltyProgram {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource() {
+        internal AddLoyaltyProgram() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PointOfSale.Client.Pages.Resource {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.Resource", typeof(Resource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.LoyaltyPrograms.AddLoyaltyProgram", typeof(AddLoyaltyProgram).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +61,20 @@ namespace PointOfSale.Client.Pages.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to مرحباً.
+        ///   Looks up a localized string similar to الغاء.
         /// </summary>
-        public static string Greetings {
+        public static string Cancel {
             get {
-                return ResourceManager.GetString("Greetings", resourceCulture);
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حفظ.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
     }

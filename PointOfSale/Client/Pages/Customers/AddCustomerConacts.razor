@@ -1,85 +1,91 @@
 ﻿@page "/AddCustomerConacts/{id:int}"
 @inject Radzen.DialogService dialogService
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Customers.AddCustomerConacts> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
         <!--begin::Card-->
-        <div class="card card-custom">
-            <div class="card-body p-9">
-                <div class="row">
-                    <div class="col-md-12">
-                        <RadzenHeading Size="H1" Text="Customer Contacts">
-                        </RadzenHeading>
-                        <RadzenButton @ref="btnAddCustomerContact" Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@btnAddCustomerContactClick">
-                        </RadzenButton>
-                        <RadzenGrid @ref="customerContactGrid" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="customerContacts" TItem="CustomerContact">
-                            <Columns>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Id" Title="Id" Visible="false" Type="integer">
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="ContactImage" Title="Contact Image" Type="string">
-                                    <Template Context="data">
-                                        <img src="@data.ContactImage" class="img-circle" width="100" />
-                                    </Template>
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="CustomerId" SortProperty="Customer.Name" FilterProperty="Customer.Name" Title="Customer" Type="string">
-                                    <Template Context="data">
-                                        @data.Customer?.Name
-                                    </Template>
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="ContactTypeId" SortProperty="ContactType.Type" FilterProperty="ContactType.Type" Title="Contact Type" Type="string">
-                                    <Template Context="data">
-                                        @data.ContactType?.Type
-                                    </Template>
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="ContactName" Title="Contact Name" Type="string">
-                                </RadzenGridColumn>
+        <RadzenContent Container="main" Style="direction:rtl">
+            <ChildContent>
+                <div class="card card-custom">
+                    <div class="card-body p-9" style="text-align: right;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <RadzenHeading Size="H1" Text="@Loc["CustomerContacts"]">
+                                </RadzenHeading>
+                                <RadzenButton @ref="btnAddCustomerContact" Icon="add_circle_outline" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@btnAddCustomerContactClick">
+                                </RadzenButton>
+                                <RadzenGrid @ref="customerContactGrid" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="customerContacts" TItem="CustomerContact">
+                                    <Columns>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Id" Title="Id" Visible="false" Type="integer">
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="ContactImage" Title="@Loc2["ContactImage"]" Type="string">
+                                            <Template Context="data">
+                                                <img src="@data.ContactImage" class="img-circle" width="100" />
+                                            </Template>
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="CustomerId" SortProperty="Customer.Name" FilterProperty="Customer.Name" Title="@Loc2["Customer"]" Type="string">
+                                            <Template Context="data">
+                                                @data.Customer?.Name
+                                            </Template>
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="ContactTypeId" SortProperty="ContactType.Type" FilterProperty="ContactType.Type" Title="@Loc2["ContactType"]" Type="string">
+                                            <Template Context="data">
+                                                @data.ContactType?.Type
+                                            </Template>
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="ContactName" Title="@Loc2["ContactName"]" Type="string">
+                                        </RadzenGridColumn>
 
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Phone" Title="Phone" Type="string">
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Mobile" Title="Mobile" Type="string">
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Email" Title="Email" Type="string">
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="CompanyAddressStreet1" Title="Company Address Street 1" Type="string">
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="CompanyAddressStreet2" Title="Company Address Street 2" Type="string">
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="City" Title="City" Type="string">
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Country" Title="Country" Type="string">
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
-                                    <Template Context="order">
-                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(order))">
-                                        </RadzenButton>
-                                    </Template>
-                                </RadzenGridColumn>
-                                <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="70px">
-                                    <Template Context="order">
-                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(order))">
-                                        </RadzenButton>
-                                    </Template>
-                                    <EditTemplate Context="order">
-                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(order))">
-                                        </RadzenButton>
-                                    </EditTemplate>
-                                </RadzenGridColumn>
-                            </Columns>
-                        </RadzenGrid>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Phone" Title="@Loc2["Phone"]" Type="string">
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Mobile" Title="@Loc2["Mobile"]" Type="string">
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Email" Title="@Loc2["EmailAddress"]" Type="string">
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="CompanyAddressStreet1" Title="@Loc2["CompanyAddressStreet1"]" Type="string">
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="CompanyAddressStreet2" Title="@Loc2["CompanyAddressStreet2"]" Type="string">
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="City" Title="@Loc2["City"]" Type="string">
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Property="Country" Title="@Loc2["Country"]" Type="string">
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                            <Template Context="order">
+                                                <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(order))">
+                                                </RadzenButton>
+                                            </Template>
+                                        </RadzenGridColumn>
+                                        <RadzenGridColumn TItem="CustomerContact" Context="customerContact" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="70px">
+                                            <Template Context="order">
+                                                <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(order))">
+                                                </RadzenButton>
+                                            </Template>
+                                            <EditTemplate Context="order">
+                                                <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(order))">
+                                                </RadzenButton>
+                                            </EditTemplate>
+                                        </RadzenGridColumn>
+                                    </Columns>
+                                </RadzenGrid>
 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-4 col-md-offset-8">
+                                <NavLink href="/AddCustomer" class="btn btn-primary">@Loc["AddNewCustomer"]</NavLink>
+                                <NavLink href="/CustomersList" class="btn btn-danger">@Loc["BackToList"]</NavLink>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-8">
-                        <NavLink href="/AddCustomer" class="btn btn-primary">Add New Customer</NavLink>
-                        <NavLink href="/CustomersList" class="btn btn-danger">Back To List</NavLink>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </ChildContent>
+            </RadzenContent>
     </div>
 </div>

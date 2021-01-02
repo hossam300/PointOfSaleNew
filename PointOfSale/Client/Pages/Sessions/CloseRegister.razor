@@ -1,4 +1,5 @@
-﻿<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Sessions.CancelOrder> Loc
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
@@ -8,16 +9,16 @@
                 <div class="card-body p-9">
                     <div class="col-md-12">
                         <div style="margin-bottom: 1rem" class="row">
-                            Are you sure?
+                            @Loc["AreYouSure"]
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
                     <div class="row">
                         <div class="col offset-sm-3">
-                            <RadzenButton ButtonType="Radzen.ButtonType.Button" Click="OnSubmit" Icon="save" Text="Yes" ButtonStyle="Radzen.ButtonStyle.Primary">
+                            <RadzenButton ButtonType="Radzen.ButtonType.Button" Click="OnSubmit" Icon="save" Text="@Loc["Yes"]" ButtonStyle="Radzen.ButtonStyle.Primary">
                             </RadzenButton>
-                            <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="No" Click="@btnCancelClick">
+                            <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["No"]" Click="@btnCancelClick">
                             </RadzenButton>
                         </div>
                     </div>

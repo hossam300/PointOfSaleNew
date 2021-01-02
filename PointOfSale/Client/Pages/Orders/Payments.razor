@@ -1,6 +1,8 @@
 ﻿@page "/Payments"
 @using Radzen
 @using System.IO
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Orders.Payments> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
     <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -9,15 +11,8 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["OrderPayments"]</h5>
                 <!--end::Page Title-->
-                <!--begin::Breadcrumb-->
-                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-                    <li class="breadcrumb-item">
-                        <a href="/Payments" class="text-muted">Order Payments</a>
-                    </li>
-                </ul>
-                <!--end::Breadcrumb-->
             </div>
             <!--end::Page Heading-->
         </div>
@@ -36,9 +31,9 @@
             <div class="card-body p-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <RadzenContent Container="main">
+                        <RadzenContent Container="main" Style="text-align:right">
                             <ChildContent>
-                                <RadzenHeading Size="H1" Text="Order Payments">
+                                <RadzenHeading Size="H1" Text="@Loc["OrderPayments"]">
                                 </RadzenHeading>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -63,10 +58,10 @@
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
-                                                                <th>Customer</th>
-                                                                <th>Order Number</th>
-                                                                <th>Order Date</th>
-                                                                <th>Total</th>
+                                                                <th> @Loc["Customer"]</th>
+                                                                <th> @Loc["OrderNumber"]</th>
+                                                                <th> @Loc["OrderDate"]</th>
+                                                                <th> @Loc["Total"]</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>

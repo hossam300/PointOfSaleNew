@@ -14,14 +14,19 @@ namespace PointOfSale.DAL.Domains
         {
             UserRoles = new List<ApplicationUserRole>();
         }
-        [Display(Name = "First Name")]
+        [Display(Name = "FirstName", ResourceType = typeof(Resources.Resources))]
         public string FirstName { get; set; }
-        [Display(Name = "Last Name")]
+        [Display(Name = "LastName", ResourceType = typeof(Resources.Resources))]
         public string LastName { get; set; }
+        [Display(Name = "Phone", ResourceType = typeof(Resources.Resources))]
         public string Phone { get; set; }
+        [Display(Name = "UserImage", ResourceType = typeof(Resources.Resources))]
         public string UserImage { get; set; }
+        [Display(Name = "CreationDate", ResourceType = typeof(Resources.Resources))]
         public DateTime CreationDate { get; set; } = DateTime.Now;
+        [Display(Name = "LastModifiedDate", ResourceType = typeof(Resources.Resources))]
         public DateTime LastModifiedDate { get; set; } = DateTime.Now;
+        [Display(Name = "IsActive", ResourceType = typeof(Resources.Resources))]
         public bool IsActive { get; set; } = true;
         public virtual List<ApplicationUserRole> UserRoles { get; set; }
         

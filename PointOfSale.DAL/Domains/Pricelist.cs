@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace PointOfSale.DAL.Domains
 {
@@ -10,7 +11,9 @@ namespace PointOfSale.DAL.Domains
             PriceRules = new List<PriceRule>();
         }
         public int Id { get; set; }
+        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
+        [Display(Name = "Currency", ResourceType = typeof(Resources.Resources))]
         public int CurrencyId { get; set; }
         public virtual Currency Currency { get; set; }
         // TODO Add Addtional Fields

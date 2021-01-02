@@ -37,17 +37,372 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Pages\Resource\Resource.Designer.cs">
+    <Compile Update="Pages\Resource\Customers\AddCustomerConacts.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Resource.resx</DependentUpon>
+      <DependentUpon>AddCustomerConacts.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Customers\AddCustomerContact.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddCustomerContact.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Customers\CustomerDetails.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CustomerDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Customers\CustomersList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CustomersList.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Dashboard.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Dashboard.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Index.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\LoyaltyPrograms\AddLoyaltyProgram.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddLoyaltyProgram.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\LoyaltyPrograms\AddReward.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddReward.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\LoyaltyPrograms\AddRule.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddRule.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\LoyaltyPrograms\LoyaltyPrograms.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LoyaltyPrograms.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Orders\OrderReports.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>OrderReports.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Orders\Orders.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Orders.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Orders\Payments.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Payments.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Orders\SalesDetailReports.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SalesDetailReports.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\PaymentMethods\AddPaymentMethod.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddPaymentMethod.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\PaymentMethods\PaymentMethods.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PaymentMethods.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\ProductCategories\AddProductCategory.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddProductCategory.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\ProductCategories\ProductCategories.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ProductCategories.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Products\AddProduct.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddProduct.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Products\AddvendorProduct.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddvendorProduct.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Products\PrintBarcode.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PrintBarcode.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Products\Products.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Products.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\CancelOrder.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CancelOrder.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\CloseRegister.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CloseRegister.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\Create.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Create.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\HoldOrder.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>HoldOrder.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\Payment.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Payment.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\PrintBill.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PrintBill.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\PrintOrder.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PrintOrder.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\RegisterDetail.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>RegisterDetail.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\SessionContent.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SessionContent.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\SessionHeader.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SessionHeader.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\Sessions.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Sessions.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Sessions\TodaySale.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TodaySale.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Shops\AddShop.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddShop.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Shops\ShopBillsReceipts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShopBillsReceipts.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Shops\ShopInterface.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShopInterface.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Shops\ShopList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShopList.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Shops\ShopModuleIntegration.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShopModuleIntegration.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Shops\ShopPricingPayment.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShopPricingPayment.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Pages\Resource\Resource.resx">
+    <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerConacts.resx">
+      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Customers\AddCustomer.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerContact.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddCustomerContact.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Customers\CustomerDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomerDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Customers\CustomersList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomersList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Dashboard.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Dashboard.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\LoyaltyPrograms\AddLoyaltyProgram.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddLoyaltyProgram.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\LoyaltyPrograms\AddReward.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddReward.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\LoyaltyPrograms\AddRule.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddRule.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\LoyaltyPrograms\LoyaltyPrograms.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LoyaltyPrograms.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Orders\OrderReports.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>OrderReports.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Orders\Orders.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Orders.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Orders\Payments.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Payments.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Orders\SalesDetailReports.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SalesDetailReports.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\PaymentMethods\AddPaymentMethod.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddPaymentMethod.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\PaymentMethods\PaymentMethods.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentMethods.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\ProductCategories\AddProductCategory.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddProductCategory.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\ProductCategories\ProductCategories.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProductCategories.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Products\AddProduct.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddProduct.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Products\AddvendorProduct.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddvendorProduct.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Products\PrintBarcode.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrintBarcode.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Products\Products.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Products.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\CancelOrder.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelOrder.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\CloseRegister.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CloseRegister.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\Create.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Create.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\HoldOrder.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HoldOrder.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\Payment.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Payment.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\PrintBill.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrintBill.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\PrintOrder.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrintOrder.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\RegisterDetail.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegisterDetail.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\SessionContent.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SessionContent.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\SessionHeader.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SessionHeader.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\Sessions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Sessions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Sessions\TodaySale.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TodaySale.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Shops\AddShop.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddShop.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Shops\ShopBillsReceipts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShopBillsReceipts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Shops\ShopInterface.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShopInterface.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Shops\ShopList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShopList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Shops\ShopModuleIntegration.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShopModuleIntegration.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Shops\ShopPricingPayment.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShopPricingPayment.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

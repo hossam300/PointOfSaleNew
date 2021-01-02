@@ -17,14 +17,15 @@ namespace  PointOfSale.DAL.Domains
 
         [StringLength(500)]
         [Required]
+        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
-
+        [Display(Name = "Company", ResourceType = typeof(Resources.Resources))]
         public int CompanyId { get; set; }
 
         [ForeignKey("CompanyId")]
         public virtual Company Company { get; set; }
 
-        
+        [Display(Name = "IsActive", ResourceType = typeof(Resources.Resources))]
         public bool isActive { get; set; }
     }
 }

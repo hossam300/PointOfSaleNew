@@ -1,4 +1,6 @@
 ﻿@page "/ProductInventory/{id:int}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Products.AddProduct> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
@@ -6,14 +8,14 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Product</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["AddProducts"]</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter Product details and submit</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Loc["AddProductDescription"]</span>
                 </div>
                 <!--end::Search Form-->
             </div>
@@ -21,7 +23,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Button-->
-                <a href="/Products" class="btn btn-danger font-weight-bold">Back</a>
+                <a href="/Products" class="btn btn-danger font-weight-bold">@Loc["Back"]</a>
                 <!--end::Button-->
             </div>
             <!--end::Toolbar-->
@@ -53,7 +55,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Product Details</h3>
+                                            <h3 class="wizard-title">@Loc["ProductDetails"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -80,7 +82,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Sales</h3>
+                                            <h3 class="wizard-title">@Loc["Sales"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -107,7 +109,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Point of Sale</h3>
+                                            <h3 class="wizard-title">@Loc["PointOfSale"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -134,7 +136,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Purchase</h3>
+                                            <h3 class="wizard-title">@Loc["Purchase"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -148,7 +150,7 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </div>
-                                    <div class="wizard-step" data-wizard-type="step"  data-wizard-state="current">
+                                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                                         <div class="wizard-label">
                                             <span class="svg-icon svg-icon-4x wizard-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/General/Notification2.svg-->
@@ -161,7 +163,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Inventory</h3>
+                                            <h3 class="wizard-title">@Loc["Inventory"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -191,30 +193,39 @@
                                                         <ChildContent>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <label class="col-md-4">Routes</label>
+                                                                    <label class="col-md-4">@Loc["Routes"]</label>
                                                                     <div class="col-xl-8">
-                                                                        <Radzen.Blazor.RadzenCheckBox @bind-Value="product.Manufacture"></Radzen.Blazor.RadzenCheckBox><DisplayName For="@(() => product.Manufacture)"></DisplayName>
-                                                                        <Radzen.Blazor.RadzenCheckBox @bind-Value="product.Buy"></Radzen.Blazor.RadzenCheckBox><DisplayName For="@(() => product.Buy)"></DisplayName>
+                                                                        <Radzen.Blazor.RadzenCheckBox @bind-Value="product.Manufacture"></Radzen.Blazor.RadzenCheckBox>
+                                                                        <RadzenLabel Text="@Loc2["Manufacture"]" Component="Manufacture" style="width: 100%">
+                                                                        </RadzenLabel>
+                                                                        <Radzen.Blazor.RadzenCheckBox @bind-Value="product.Buy"></Radzen.Blazor.RadzenCheckBox><RadzenLabel Text="@Loc2["Buy"]" Component="Manufacture" style="width: 100%">
+</RadzenLabel>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.Weight)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["Weight"]" Component="Weight" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.Weight)"></DisplayName>*@
                                                                     <div class="col-xl-8">
-                                                                        <InputNumber  @bind-Value="product.Weight" class="form-control" />
+                                                                        <InputNumber @bind-Value="product.Weight" class="form-control" />
                                                                         <ValidationMessage For="() => product.Weight" class="text-danger" />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.Volume)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["Volume"]" Component="Volume" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.Volume)"></DisplayName>*@
                                                                     <div class="col-xl-8">
-                                                                        <InputNumber  @bind-Value="product.Volume" class="form-control" />
+                                                                        <InputNumber @bind-Value="product.Volume" class="form-control" />
                                                                         <ValidationMessage For="() => product.Volume" class="text-danger" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.ManufacturingLeadTime)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["ManufacturingLeadTime"]" Component="Volume" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.ManufacturingLeadTime)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <InputNumber id="Name" @bind-Value="product.ManufacturingLeadTime" class="form-control" />
                                                                         <ValidationMessage For="() => product.ManufacturingLeadTime" class="text-danger" />
@@ -223,32 +234,40 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.CustomerLeadTime)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["CustomerLeadTime"]" Component="Volume" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                  @*  <DisplayName For="@(() => product.CustomerLeadTime)"></DisplayName>*@
                                                                     <div class="col-xl-8">
-                                                                        <InputNumber  @bind-Value="product.CustomerLeadTime" class="form-control" />
+                                                                        <InputNumber @bind-Value="product.CustomerLeadTime" class="form-control" />
                                                                         <ValidationMessage For="() => product.CustomerLeadTime" class="text-danger" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.HSCode)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["HSCode"]" Component="Volume" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.HSCode)"></DisplayName>*@
                                                                     <div class="col-xl-8">
-                                                                        <InputText  @bind-Value="product.HSCode" class="form-control" />
+                                                                        <InputText @bind-Value="product.HSCode" class="form-control" />
                                                                         <ValidationMessage For="() => product.HSCode" class="text-danger" />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.DescriptionForDeliveryOrders)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["DescriptionForDeliveryOrders"]" Component="Volume" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.DescriptionForDeliveryOrders)"></DisplayName>*@
                                                                     <div class="col-xl-8">
-                                                                        <RadzenTextArea  @bind-Value="product.DescriptionForDeliveryOrders" class="form-control" />
+                                                                        <RadzenTextArea @bind-Value="product.DescriptionForDeliveryOrders" class="form-control" />
                                                                         <ValidationMessage For="() => product.DescriptionForDeliveryOrders" class="text-danger" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.DescriptionForReceipts)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["DescriptionForReceipts"]" Component="Volume" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.DescriptionForReceipts)"></DisplayName>*@
                                                                     <div class="col-xl-8">
-                                                                        <RadzenTextArea  @bind-Value="product.DescriptionForReceipts" class="form-control" />
+                                                                        <RadzenTextArea @bind-Value="product.DescriptionForReceipts" class="form-control" />
                                                                         <ValidationMessage For="() => product.DescriptionForReceipts" class="text-danger" />
                                                                     </div>
                                                                 </div>
@@ -256,10 +275,10 @@
 
                                                             <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                                                 <div class="mr-2">
-                                                                    <a href="/ProductPurchase/@product.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">Previous</a>
+                                                                    <a href="/ProductPurchase/@product.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">@Loc["Previous"]</a>
                                                                 </div>
                                                                 <div>
-                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">Finish</button>
+                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">@Loc["Finish"]</button>
                                                                 </div>
                                                             </div>
                                                         </ChildContent>

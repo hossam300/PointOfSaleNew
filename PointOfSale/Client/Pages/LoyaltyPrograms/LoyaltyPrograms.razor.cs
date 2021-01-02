@@ -80,7 +80,7 @@ namespace PointOfSale.Client.Pages.LoyaltyPrograms
 
         protected async void Button0Click(MouseEventArgs args)
         {
-            var result = await DialogService.OpenAsync<AddLoyaltyProgram>("Add Loyalty Program", null, new Radzen.DialogOptions() { Width = "80%", Height = "80%" });
+            var result = await DialogService.OpenAsync<AddLoyaltyProgram>(Loc["AddLoyaltyProgram"], null, new Radzen.DialogOptions() { Width = "80%", Height = "80%" });
             await gridLoyaltyProgram.Reload();
 
             await InvokeAsync(() => { StateHasChanged(); });
@@ -88,7 +88,7 @@ namespace PointOfSale.Client.Pages.LoyaltyPrograms
 
         protected async void EditRow(LoyaltyProgram args)
         {
-            DialogService.Open<AddLoyaltyProgram>("Edit Loyalty Program", new Dictionary<string, object>() { { "Id", args.Id } },
+            DialogService.Open<AddLoyaltyProgram>(Loc["EditLoyaltyProgram"], new Dictionary<string, object>() { { "Id", args.Id } },
                       new Radzen.DialogOptions() { Width = "80%", Height = "80%" });
             await InvokeAsync(() => { StateHasChanged(); });
         }

@@ -1,5 +1,7 @@
 ﻿@page "/AddProduct"
 @page "/EditProduct/{id:int?}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Products.AddProduct> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
@@ -7,14 +9,14 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Product</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["AddProducts"]</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter Product details and submit</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Loc["AddProductDescription"]</span>
                 </div>
                 <!--end::Search Form-->
             </div>
@@ -22,7 +24,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Button-->
-                <a href="/Products" class="btn btn-danger font-weight-bold">Back</a>
+                <a href="/Products" class="btn btn-danger font-weight-bold">@Loc["Back"]</a>
                 <!--end::Button-->
 
             </div>
@@ -55,7 +57,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Product Details</h3>
+                                            <h3 class="wizard-title">@Loc["ProductDetails"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -82,7 +84,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Sales</h3>
+                                            <h3 class="wizard-title">@Loc["Sales"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -109,7 +111,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Point of Sale</h3>
+                                            <h3 class="wizard-title">@Loc["PointOfSale"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -136,7 +138,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Purchase</h3>
+                                            <h3 class="wizard-title">@Loc["Purchase"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -163,7 +165,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Inventory</h3>
+                                            <h3 class="wizard-title">@Loc["Inventory"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -185,7 +187,7 @@
                             <div class="col-xl-12 col-xxl-7">
                                 <!--begin::Form Wizard-->
                                 <div class="form" id="kt_projects_add_form">
-                                    <RadzenContent Container="main">
+                                    <RadzenContent Container="main" Style="text-align:right">
                                         <ChildContent>
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -193,14 +195,18 @@
                                                         <ChildContent>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.Name)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["Name"]" Component="Name" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.Name)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <InputText id="Name" @bind-Value="product.Name" class="form-control" />
                                                                         <ValidationMessage For="() => product.Name" class="text-danger" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.ProductImage)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["ProductImage"]" Component="ProductImage" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.ProductImage)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <input type="file" @ref="_input" @onchange="HandleSelected" accept=".jpg, .jpeg, png" />
                                                                         @if (ImgUrl != null)
@@ -212,25 +218,41 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group row">
+                                                            <div class="form-group row" style="line-height:2.3">
                                                                 <div class="col-xl-12">
-                                                                    <div class="col-md-8 col-md-offset-4" style="text-align:left;margin-left:2%;">
-                                                                        <div class="row">  <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeSold"></Radzen.Blazor.RadzenCheckBox>  <label class="col-xl-6">Can Be Sold</label></div>
-                                                                        <div class="row"><Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBePurchased"></Radzen.Blazor.RadzenCheckBox> <label class="col-xl-6">Can Be Purchased</label></div>
-                                                                        <div class="row"><Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeExpensed"></Radzen.Blazor.RadzenCheckBox> <label class="col-xl-6">Can Be Expensed</label></div>
-                                                                        <div class="row"><Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeRented"></Radzen.Blazor.RadzenCheckBox> <label class="col-xl-6">Can Be Rented</label></div>
+                                                                    <div class="col-md-8 col-md-offset-4" style="text-align:right;margin-left:2%;">
+                                                                        <div class="col-md-3">
+                                                                            <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeSold"></Radzen.Blazor.RadzenCheckBox>
+                                                                            <RadzenLabel Text="@Loc2["CanBeSold"]" Component="CanBeSold" >
+                                                                            </RadzenLabel>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBePurchased"></Radzen.Blazor.RadzenCheckBox>
+                                                                            <RadzenLabel Text="@Loc2["CanBePurchased"]" Component="CanBePurchased" >
+                                                                            </RadzenLabel>
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeExpensed"></Radzen.Blazor.RadzenCheckBox> <RadzenLabel Text="@Loc2["CanBeExpensed"]" Component="CanBePurchased" >
+                                                                            </RadzenLabel> 
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeRented"></Radzen.Blazor.RadzenCheckBox>  <RadzenLabel Text="@Loc2["CanBeRented"]" Component="CanBePurchased" >
+                                                                            </RadzenLabel> 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.ProductType)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["ProductType"]" Component="ProductType" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.ProductType)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <RadzenDropDown AllowClear="true" Name="ProductType"
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                                                         AllowFiltering="true" Placeholder="Select..."
                                                                                         Data="@productTypes" @bind-Value="@(productType)" TextProperty="Name" ValueProperty="Id"
-                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align:right">
 
 
                                                                         </RadzenDropDown>
@@ -239,7 +261,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.SalesPrice)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["SalesPrice"]" Component="SalesPrice" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.SalesPrice)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <InputNumber id="SalesPrice" @bind-Value="product.SalesPrice" class="form-control" />
                                                                         <ValidationMessage For="() => product.SalesPrice" class="text-danger" />
@@ -249,27 +273,32 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.InternalReference)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["InternalReference"]" Component="InternalReference" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                  @*  <DisplayName For="@(() => product.InternalReference)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <InputText id="Name" @bind-Value="product.InternalReference" class="form-control" />
                                                                         <ValidationMessage For="() => product.InternalReference" class="text-danger" />
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.CustomerTaxes)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["CustomerTaxes"]" Component="CustomerTaxes" style="width: 100%">
+                                                                    </RadzenLabel>
                                                                     <div class="col-xl-8">
                                                                         <RadzenDropDown AllowClear="true" Name="CustomerTaxes"
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="TaxName" ValueProperty="TaxId"
                                                                                         AllowFiltering="true" Placeholder="Select..."
                                                                                         Data="@customerTaxes" @bind-Value="multipleValues" Multiple="true"
-                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align: right">
                                                                         </RadzenDropDown>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.Barcode)"></DisplayName>  <Radzen.Blazor.RadzenCheckBox @bind-Value="product.GenerateBarcode" Change="@(args => changeBarCode(args, "TriState CheckBox"))" TValue="bool"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6">Generate Barcode</label>
+                                                                    <RadzenLabel Text="@Loc2["Barcode"]" Component="CustomerTaxes" style="width: 100%">
+                                                                    </RadzenLabel>  <Radzen.Blazor.RadzenCheckBox @bind-Value="product.GenerateBarcode" Change="@(args => changeBarCode(args, "TriState CheckBox"))" TValue="bool"></Radzen.Blazor.RadzenCheckBox><RadzenLabel Text="@Loc2["GenerateBarcode"]" Component="GenerateBarcode" style="width: 100%">
+                                                                    </RadzenLabel>
                                                                     <div class="col-xl-8">
                                                                         @if (product.GenerateBarcode)
                                                                         {
@@ -283,7 +312,9 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.Cost)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["Cost"]" Component="Cost" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.Cost)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <InputNumber id="Name" @bind-Value="product.Cost" class="form-control" />
                                                                         <ValidationMessage For="() => product.Cost" class="text-danger" />
@@ -292,13 +323,15 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.ProductCategoryId)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["ProductCategory"]" Component="ProductCategoryId" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.ProductCategoryId)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <RadzenDropDown AllowClear="true" Name="ProductCategoryId"
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                                                         AllowFiltering="true" Placeholder="Select..."
                                                                                         Data="@productCategory" TextProperty="CategoryName" @bind-Value="@product.ProductCategoryId"
-                                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align:right">
 
 
                                                                         </RadzenDropDown>
@@ -308,13 +341,14 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <DisplayName For="@(() => product.CompanyId)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["Company"]" Component="CompanyId" style="width: 100%">
+                                                                    </RadzenLabel>
                                                                     <div class="col-xl-8">
                                                                         <RadzenDropDown AllowClear="true" TValue="int" Name="CompanyId"
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                                                         AllowFiltering="true" Placeholder="Select..."
                                                                                         Data="@companies" TextProperty="Name" @bind-Value="@product.CompanyId"
-                                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                                        ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align:right">
 
 
                                                                         </RadzenDropDown>
@@ -326,7 +360,9 @@
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-12">
-                                                                    <DisplayName For="@(() => product.Notes)"></DisplayName>
+                                                                    <RadzenLabel Text="@Loc2["Notes"]" Component="Notes" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => product.Notes)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <RadzenTextArea id="Name" @bind-Value="product.Notes" class="form-control" />
                                                                         <ValidationMessage For="() => product.Notes" class="text-danger" />
@@ -335,10 +371,10 @@
                                                             </div>
                                                             <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                                                 <div class="mr-2">
-                                                                    <a href="/Products" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">Previous</a>
+                                                                    <a href="/Products" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">@Loc["Previous"]</a>
                                                                 </div>
                                                                 <div>
-                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">Next Step</button>
+                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">@Loc["NextStep"]</button>
                                                                 </div>
                                                             </div>
                                                             @*<div class="card-footer">

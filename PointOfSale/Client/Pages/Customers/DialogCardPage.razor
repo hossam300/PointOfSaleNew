@@ -1,27 +1,30 @@
 ﻿@page "/dialogcard/{id:int?}/{CustomerContactId:int?}"
 
 @inject Radzen.DialogService dialogService
-
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Customers.AddCustomerContact> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="row">
     <div class="col-md-12">
         <RadzenTemplateForm Data="@(customercontact)" Visible="@(customercontact != null)" TItem="CustomerContact" Submit="@customercontactFormSubmit">
             <ChildContent>
                 @*<div style="margin-bottom: 1rem;display:none" class="row">
-                    <div class="col-md-3">
-                        <RadzenLabel Text="Customer" Component="CustomerId" style="width: 100%">
-                        </RadzenLabel>
-                    </div>
-                    <div class="col-md-9">
-                        <InputNumber @bind-Value="customercontasct.CustomerId" type="hidden" Name="CustomerId"></InputNumber>
+                        <div class="col-md-3">
+                            <RadzenLabel Text="Customer" Component="CustomerId" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <InputNumber @bind-Value="customercontasct.CustomerId" type="hidden" Name="CustomerId"></InputNumber>
 
-                    </div>
-                </div>*@
+                        </div>
+                    </div>*@
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.ContactTypeId)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["ContactType"]" Component="ContactTypeId" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => customercontact.ContactTypeId)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
-                        <RadzenDropDown @bind-Value="customercontact.ContactTypeId" Data="@(getContactTypesResult)" TextProperty="Type" ValueProperty="Id" Placeholder="Choose ContactType" style="display: block; width: 100%" Name="ContactTypeId">
+                        <RadzenDropDown @bind-Value="customercontact.ContactTypeId" Data="@(getContactTypesResult)" TextProperty="Type" ValueProperty="Id" Placeholder="@Loc["ChooseContactType"]" style="display: block; width: 100%" Name="ContactTypeId">
                         </RadzenDropDown>
                         <RadzenRequiredValidator Component="ContactTypeId" Text="ContactTypeId is required" style="position: absolute">
                         </RadzenRequiredValidator>
@@ -29,7 +32,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.ContactName)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["ContactName"]" Component="ContactName" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => customercontact.ContactName)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <RadzenTextBox @bind-Value="customercontact.ContactName" style="width: 100%" Name="ContactName">
@@ -38,7 +43,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.ContactImage)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["ContactImage"]" Component="ContactImage" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => customercontact.ContactImage)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <input type="file" @ref="_input" @onchange="HandleSelected" accept=".jpg, .jpeg, png" />
@@ -52,7 +59,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.Phone)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["Phone"]" Component="Phone" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => customercontact.Phone)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <RadzenTextBox @bind-Value="customercontact.Phone" style="width: 100%" Name="Phone">
@@ -61,7 +70,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.Mobile)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["Mobile"]" Component="Mobile" style="width: 100%">
+                        </RadzenLabel>
+                      @*  <DisplayName For="@(() => customercontact.Mobile)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <RadzenTextBox @bind-Value="customercontact.Mobile" style="width: 100%" Name="Mobile">
@@ -70,7 +81,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.Email)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["EmailAddress"]" Component="Email" style="width: 100%">
+                        </RadzenLabel>
+                       @* <DisplayName For="@(() => customercontact.Email)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <RadzenTextBox @bind-Value="customercontact.Email" style="width: 100%" Name="Email">
@@ -79,7 +92,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.CompanyAddressStreet1)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["CompanyAddressStreet1"]" Component="CompanyAddressStreet1" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => customercontact.CompanyAddressStreet1)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <RadzenTextBox @bind-Value="customercontact.CompanyAddressStreet1" style="width: 100%" Name="CompanyAddressStreet1">
@@ -88,7 +103,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.CompanyAddressStreet2)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["CompanyAddressStreet2"]" Component="CompanyAddressStreet2" style="width: 100%">
+                        </RadzenLabel>
+                       @* <DisplayName For="@(() => customercontact.CompanyAddressStreet2)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <RadzenTextBox @bind-Value="customercontact.CompanyAddressStreet2" style="width: 100%" Name="CompanyAddressStreet2">
@@ -97,7 +114,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.City)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["City"]" Component="City" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => customercontact.City)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <RadzenTextBox @bind-Value="customercontact.City" style="width: 100%" Name="City">
@@ -106,7 +125,9 @@
                 </div>
                 <div style="margin-bottom: 1rem" class="row">
                     <div class="col-md-3">
-                        <DisplayName For="@(() => customercontact.Country)"></DisplayName>
+                        <RadzenLabel Text="@Loc2["Country"]" Component="Country" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => customercontact.Country)"></DisplayName>*@
                     </div>
                     <div class="col-md-9">
                         <RadzenTextBox @bind-Value="customercontact.Country" style="width: 100%" Name="Country">
@@ -115,9 +136,9 @@
                 </div>
                 <div class="row">
                     <div class="col offset-sm-3">
-                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
                         </RadzenButton>
-                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
                         </RadzenButton>
                     </div>
                 </div>

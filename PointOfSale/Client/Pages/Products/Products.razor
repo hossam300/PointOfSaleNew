@@ -1,4 +1,6 @@
 ﻿@page "/Products"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Products.Products> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
@@ -7,17 +9,17 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Products</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["Product"]</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Model.Count() Total</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Model.Count() @Loc["Total"] </span>
                     <form class="ml-5">
                         <div class="input-group input-group-sm input-group-solid" style="max-width: 175px">
-                            <input @bind-value="searchTerm" @bind-value:event="oninput" class="form-control" id="kt_subheader_search_form" placeholder="Search..." />
+                            <input @bind-value="searchTerm" @bind-value:event="oninput" class="form-control" id="kt_subheader_search_form" placeholder="@Loc["Search"]..." />
                             <div class="input-group-append">
                                 <span class="input-group-text">
                                     <span class="svg-icon">
@@ -41,16 +43,16 @@
                 <!--begin::Group Actions-->
                 <div class="d-flex- align-items-center flex-wrap mr-2 d-none" id="kt_subheader_group_actions">
                     <div class="text-dark-50 font-weight-bold">
-                        <span id="kt_subheader_group_selected_rows">23</span>Selected:
+                        <span id="kt_subheader_group_selected_rows">23</span> @Loc["Selected"] :
                     </div>
                     <div class="d-flex ml-6">
                         <div class="dropdown mr-2" id="kt_subheader_group_actions_status_change">
-                            <button type="button" class="btn btn-light-primary font-weight-bolder btn-sm dropdown-toggle" data-toggle="dropdown">Update Status</button>
+                            <button type="button" class="btn btn-light-primary font-weight-bolder btn-sm dropdown-toggle" data-toggle="dropdown">@Loc["UpdateStatus"]</button>
                             <div class="dropdown-menu p-0 m-0 dropdown-menu-sm">
                             </div>
                         </div>
-                        <button class="btn btn-light-success font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_fetch" data-toggle="modal" data-target="#kt_datatable_records_fetch_modal">Fetch Selected</button>
-                        <button class="btn btn-light-danger font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_delete_all">Delete All</button>
+                        <button class="btn btn-light-success font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_fetch" data-toggle="modal" data-target="#kt_datatable_records_fetch_modal">@Loc["FetchSelected"]</button>
+                        <button class="btn btn-light-danger font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_delete_all">@Loc["DeleteAll"]</button>
                     </div>
                 </div>
                 <!--end::Group Actions-->
@@ -62,7 +64,7 @@
                 <a href="#" class=""></a>
                 <!--end::Button-->
                 <!--begin::Button-->
-                <NavLink href="/AddProduct" class="btn btn-light-primary font-weight-bold ml-2">Add Product</NavLink>
+                <NavLink href="/AddProduct" class="btn btn-light-primary font-weight-bold ml-2">@Loc["AddProduct"]</NavLink>
                 <!--end::Button-->
 
             </div>
@@ -107,35 +109,35 @@
                                                 <li class="navi-item">
                                                     <a href="/EditProduct/@item.Id" class="navi-link">
                                                         <span class="navi-text">
-                                                            <a href="/EditProduct/@item.Id" class="label label-xl label-inline label-light-success">Edit Product</a>
+                                                            <a href="/EditProduct/@item.Id" class="label label-xl label-inline label-light-success">@Loc["EditProduct"]</a>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="navi-item">
                                                     <a href="#" class="navi-link">
                                                         <span class="navi-text">
-                                                            <a href="/ProductPOS/@item.Id" class="label label-xl label-inline label-light-success">Edit Product Point Of Sale</a>
+                                                            <a href="/ProductPOS/@item.Id" class="label label-xl label-inline label-light-success">@Loc["EditProductPOS"]</a>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="navi-item">
                                                     <a href="#" class="navi-link">
                                                         <span class="navi-text">
-                                                            <a href="/ProductPurchase/@item.Id" class="label label-xl label-inline label-light-success">Edit Product Purchase</a>
+                                                            <a href="/ProductPurchase/@item.Id" class="label label-xl label-inline label-light-success">@Loc["EditProductPurchase"]</a>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="navi-item">
                                                     <a href="#" class="navi-link">
                                                         <span class="navi-text">
-                                                            <a href="/ProductInventory/@item.Id" class="label label-xl label-inline label-light-success">Edit Product Inventory</a>
+                                                            <a href="/ProductInventory/@item.Id" class="label label-xl label-inline label-light-success"> @Loc["EditProductInventory"] </a>
                                                         </span>
                                                     </a>
                                                 </li>
                                                 <li class="navi-item">
-                                                    <a  class="navi-link">
+                                                    <a class="navi-link">
                                                         <span class="navi-text">
-                                                            <button type="button" @onclick="()=>PrintBarcode(item.Barcode)" class="label label-xl label-inline label-light-danger">Print Barcode</button>
+                                                            <button type="button" @onclick="()=>PrintBarcode(item.Barcode)" class="label label-xl label-inline label-light-danger">@Loc["PrintBarcode"] </button>
                                                         </span>
                                                     </a>
                                                 </li>
@@ -143,7 +145,7 @@
                                                 <li class="navi-separator mt-3 opacity-70"></li>
                                                 <li class="navi-footer py-4">
                                                     <NavLink href="/AddProduct" class="btn btn-clean font-weight-bold btn-sm">
-                                                        <i class="ki ki-plus icon-sm"></i>Add new
+                                                        <i class="ki ki-plus icon-sm"></i> @Loc["AddProduct"]
                                                     </NavLink>
                                                 </li>
                                             </ul>
@@ -172,11 +174,11 @@
                                 </div>
                                 <!--end::Name-->
                                 <!--begin::Label-->
-                                <span class="btn btn-text btn-light-warning btn-sm font-weight-bold">Active</span>
+                                <span class="btn btn-text btn-light-warning btn-sm font-weight-bold">@Loc["Active"] </span>
                                 <!--end::Label-->
                                 <!--begin::Buttons-->
                                 <div class="mt-9">
-                                    <a href="/EditProduct/@item.Id" class="btn btn-light-primary font-weight-bolder btn-sm py-3 px-6 text-uppercase">view Product</a>
+                                    <a href="/EditProduct/@item.Id" class="btn btn-light-primary font-weight-bolder btn-sm py-3 px-6 text-uppercase">@Loc["ViewProduct"]</a>
                                 </div>
                                 <!--end::Buttons-->
                             </div>

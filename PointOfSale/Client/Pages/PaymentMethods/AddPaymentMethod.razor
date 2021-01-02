@@ -1,5 +1,7 @@
 ﻿@page "/AddPaymentMethod"
-<RadzenContent @ref="content1" Container="main">
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.PaymentMethods.AddPaymentMethod> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<RadzenContent @ref="content1" Container="main" Style="direction:rtl">
     <ChildContent>
         <div class="row">
             <div class="col-md-12">
@@ -7,17 +9,17 @@
                     <ChildContent>
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
-                                <RadzenLabel @ref="label1" Text="Mehtod Name" Component="MehtodName" style="width: 100%">
+                                <RadzenLabel @ref="label1" Text="@Loc2["MehtodName"]" Component="MehtodName" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
-                                <RadzenTextBox  @bind-Value="paymentmethod.MehtodName" style="width: 100%" Name="MehtodName">
+                                <RadzenTextBox @bind-Value="paymentmethod.MehtodName" style="width: 100%" Name="MehtodName">
                                 </RadzenTextBox>
                             </div>
                         </div>
                         <div style="margin-bottom: 1rem" class="row">
                             <div class="col-md-3">
-                                <RadzenLabel @ref="label2" Text="Cash" Component="Cash" style="width: 100%">
+                                <RadzenLabel @ref="label2" Text="@Loc2["Cash"]" Component="Cash" style="width: 100%">
                                 </RadzenLabel>
                             </div>
                             <div class="col-md-9">
@@ -25,12 +27,12 @@
                                 </RadzenCheckBox>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col offset-sm-3">
-                                <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
                                 </RadzenButton>
-                                <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@Button2Click">
+                                <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@Button2Click">
                                 </RadzenButton>
                             </div>
                         </div>
