@@ -167,5 +167,14 @@ namespace PointOfSale.Client.Pages.Resource.Products {
                 return ResourceManager.GetString("Sales", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ضراءب المورد.
+        /// </summary>
+        public static string VendorTaxes {
+            get {
+                return ResourceManager.GetString("VendorTaxes", resourceCulture);
+            }
+        }
     }
 }

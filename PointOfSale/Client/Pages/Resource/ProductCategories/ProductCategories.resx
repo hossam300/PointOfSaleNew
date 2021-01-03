@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add" xml:space="preserve">
+    <value>اضافة</value>
+  </data>
+  <data name="AddProductCategory" xml:space="preserve">
+    <value>اضافة فئة منتج</value>
+  </data>
+  <data name="EditProductCategory" xml:space="preserve">
+    <value>تعديل فئة منتج </value>
+  </data>
   <data name="ProductCategory" xml:space="preserve">
     <value>الفئات</value>
   </data>

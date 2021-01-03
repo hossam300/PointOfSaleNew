@@ -127,7 +127,7 @@
     <value>الطلبات</value>
   </data>
   <data name="OrdersPayments" xml:space="preserve">
-    <value>مدقفوعات الطلبات</value>
+    <value>مدفوعات الطلبات</value>
   </data>
   <data name="SalesDetails" xml:space="preserve">
     <value>تقرير المبيعات</value>

@@ -1,5 +1,6 @@
 ﻿@page "/Orders"
-@page "/Orders/{id:int?}"
+@page "/Orders/{id:int?}/{CustomerId:int?}"
+
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Orders.Orders> Loc
 @inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
     <!--begin::Subheader-->
@@ -37,7 +38,7 @@
             <div class="card-body p-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <RadzenContent Container="main">
+                        <RadzenContent Container="main" Style="direction:rtl;text-align:right">
                             <ChildContent>
                                 <RadzenHeading Size="H1" Text="@Loc["Order"]" Style="text-align:right">
                                 </RadzenHeading>
@@ -51,7 +52,7 @@
                                                 </RadzenGridColumn>
                                                 <RadzenGridColumn Width="200px" TItem="Order" Property="Customer.Name" Title="@Loc2["Customer"]" />
                                                 <RadzenGridColumn TItem="Order" Property="OrderDate" Title="@Loc2["OrderDate"]"></RadzenGridColumn>
-                                                <RadzenGridColumn TItem="Order" Property="Total" Title="@Loc2["Total"]" ></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Order" Property="Total" Title="@Loc2["Total"]"></RadzenGridColumn>
                                                 <RadzenGridColumn TItem="Order" Context="order" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px" Title="@Loc["PrintBill"]">
                                                     <Template Context="order">
                                                         <RadzenButton Icon="print" Size="Radzen.ButtonSize.Small" Click="@(args => PrintBill(order.OrderNumber))">

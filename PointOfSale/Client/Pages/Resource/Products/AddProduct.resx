@@ -153,4 +153,7 @@
   <data name="Sales" xml:space="preserve">
     <value>المبيعات</value>
   </data>
+  <data name="VendorTaxes" xml:space="preserve">
+    <value>ضراءب المورد</value>
+  </data>
 </root>

@@ -31,6 +31,11 @@ namespace PointOfSale.Server.Controllers
         {
             return Ok(_orderService.GetAllWithInclude().Where(c => c.ShopId == id).ToList());
         }
+
+        public IActionResult GetAllWithIncludeByCustomerId(int id)
+        {
+            return Ok(_orderService.GetAllWithInclude().Where(c => c.CustomerId == id).ToList());
+        }
         [HttpGet("GetOrderByNo/{id}")]
         public async Task<IActionResult> GetOrderByNo(string id)
         {
@@ -47,5 +52,5 @@ namespace PointOfSale.Server.Controllers
         {
             return Ok(_orderService.GetAllWithInclude().Where(c => (c.OrderDate >= StartDate || StartDate == null) && (c.OrderDate <= EndDate || EndDate == null)).ToList());
         }
-}
+    }
 }

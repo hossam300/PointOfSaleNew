@@ -59,5 +59,32 @@ namespace PointOfSale.Client.Pages.Resource.Shops {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الاسم.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المتاجر.
+        /// </summary>
+        public static string PointOfSale {
+            get {
+                return ResourceManager.GetString("PointOfSale", resourceCulture);
+            }
+        }
     }
 }

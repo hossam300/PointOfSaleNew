@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Globalization;
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Index> Loc
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
@@ -11,7 +12,6 @@
                 <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["Home"]</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
-               
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page Heading-->
@@ -20,7 +20,7 @@
         <!--begin::Toolbar-->
         <div class="d-flex align-items-center">
             <a href="/Shops/AddShop" class="btn btn-primary">
-                @Loc["AddShop"]   
+                @Loc["AddShop"]
             </a>
         </div>
         <!--end::Toolbar-->
@@ -58,9 +58,9 @@
                                     @item.ShopName
                                     @if (item.Branch != null)
                                     {
-                                    <small> @Loc["Branch"]    : @item.Branch.Name</small>}
+                                        <small> @Loc["Branch"]    : @item.Branch.Name</small>}
                                     else
-                                    { <small> @Loc["Branch"] : </small>}
+                                    { @*<small> @Loc["Branch"] : </small>*@}
                                 </h3>
                             </div>
                             <div class="card-toolbar">
@@ -137,7 +137,10 @@
                                     </div>
                                     <div class="col-xl-4">
                                         <p>@Loc["LastClosingDate"] </p>
-                                        <p>@item.session.ClosedDate.Value.ToString("G") </p>
+                                        @*@if (item.session.ClosedDate != null)
+                                        {*@
+                                            <p>@item.session.ClosedDate.Value.ToString("R") </p>
+                                        @*}*@
                                     </div>
                                 }
                                 else if (item.session.Status == Status.Open)

@@ -9,14 +9,14 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["ProductCategory"]</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
-                <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                @*<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                     <li class="breadcrumb-item">
                         <a href="/ProductCategories" class="text-muted">@Loc["ProductCategory"]</a>
                     </li>
-                </ul>
+                </ul>*@
                 <!--end::Breadcrumb-->
             </div>
             <!--end::Page Heading-->
@@ -36,13 +36,13 @@
             <div class="card-body p-9">
                 <div class="row">
                     <div class="col-md-12">
-                        <RadzenContent @ref="content1" Container="main">
+                        <RadzenContent @ref="content1" Container="main" Style="direction:rtl;text-align:right">
                             <ChildContent>
                                 <RadzenHeading @ref="pageTitle" Size="H1" Text="@Loc["ProductCategory"]">
                                 </RadzenHeading>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+                                        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@Button0Click">
                                         </RadzenButton>
                                         <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getProductCategoriesResult)" TItem="ProductCategory">
                                             <Columns>

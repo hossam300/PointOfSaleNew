@@ -147,6 +147,9 @@
   <data name="Selected" xml:space="preserve">
     <value />
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Total" xml:space="preserve">
     <value>العدد الكلى</value>
   </data>

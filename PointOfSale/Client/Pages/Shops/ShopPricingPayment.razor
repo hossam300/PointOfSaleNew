@@ -1,4 +1,6 @@
 ﻿@page "/ShopPricingPayment/{id:int?}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Shops.AddShop> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
     <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
@@ -6,14 +8,14 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Add Shop</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["AddShops"]</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
                 <!--end::Separator-->
                 <!--begin::Search Form-->
                 <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">Enter Shop details and submit</span>
+                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">@Loc["EnterShopDetailsAndSubmit"]</span>
                 </div>
                 <!--end::Search Form-->
             </div>
@@ -21,7 +23,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
                 <!--begin::Button-->
-                <a href="#" class="btn btn-danger font-weight-bold">Back</a>
+                <a href="#" class="btn btn-danger font-weight-bold">@Loc["Back"]</a>
                 <!--end::Button-->
             </div>
             <!--end::Toolbar-->
@@ -53,7 +55,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Shop Details</h3>
+                                            <h3 class="wizard-title">@Loc["ShopDetails"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -80,7 +82,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Inteface & Devices</h3>
+                                            <h3 class="wizard-title">@Loc["IntefaceDevices"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -94,7 +96,7 @@
                                             <!--end::Svg Icon-->
                                         </span>
                                     </div>
-                                    <div class="wizard-step" data-wizard-type="step"  data-wizard-state="current">
+                                    <div class="wizard-step" data-wizard-type="step" data-wizard-state="current">
                                         <div class="wizard-label">
                                             <span class="svg-icon svg-icon-4x wizard-icon">
                                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Home/Globe.svg-->
@@ -107,7 +109,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Pricing & Payment</h3>
+                                            <h3 class="wizard-title">@Loc["PricingPayment"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -134,7 +136,7 @@
                                                 </svg>
                                                 <!--end::Svg Icon-->
                                             </span>
-                                            <h3 class="wizard-title">Bills & Receipts</h3>
+                                            <h3 class="wizard-title">@Loc["BillsReceipts"]</h3>
                                         </div>
                                         <span class="svg-icon svg-icon-xl wizard-arrow last">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
@@ -151,29 +153,29 @@
                                     <!--<div class="wizard-step" data-wizard-type="step">
                                         <div class="wizard-label">
                                             <span class="svg-icon svg-icon-4x wizard-icon">-->
-                                                <!--begin::Svg Icon | path:assets/media/svg/icons/General/Notification2.svg-->
-                                                <!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24" />
-                                                        <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
-                                                        <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
-                                                    </g>
-                                                </svg>-->
-                                                <!--end::Svg Icon-->
-                                            <!--</span>
-                                            <h3 class="wizard-title">Module Integration</h3>
-                                        </div>
-                                        <span class="svg-icon svg-icon-xl wizard-arrow last">-->
-                                            <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
-                                            <!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <polygon points="0 0 24 0 24 24 0 24" />
-                                                    <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
-                                                    <path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
-                                                </g>
-                                            </svg>-->
-                                            <!--end::Svg Icon-->
-                                        <!--</span>
+                                    <!--begin::Svg Icon | path:assets/media/svg/icons/General/Notification2.svg-->
+                                    <!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
+                                            <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
+                                        </g>
+                                    </svg>-->
+                                    <!--end::Svg Icon-->
+                                    <!--</span>
+                                        <h3 class="wizard-title">Module Integration</h3>
+                                    </div>
+                                    <span class="svg-icon svg-icon-xl wizard-arrow last">-->
+                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Arrow-right.svg-->
+                                    <!--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <polygon points="0 0 24 0 24 24 0 24" />
+                                            <rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-90.000000) translate(-12.000000, -12.000000)" x="11" y="5" width="2" height="14" rx="1" />
+                                            <path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
+                                        </g>
+                                    </svg>-->
+                                    <!--end::Svg Icon-->
+                                    <!--</span>
                                     </div>-->
                                 </div>
                             </div>
@@ -183,45 +185,59 @@
                             <div class="col-xl-12 col-xxl-7">
                                 <!--begin::Form Wizard-->
                                 <div class="form">
-                                    <RadzenContent Container="main">
+                                    <RadzenContent Container="main" Style="text-align: right; direction: rtl;">
                                         <ChildContent>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <RadzenTemplateForm Data="@(shop)" Visible="@(shop != null)" TItem="Shop" Submit="@FormShopSubmit">
                                                         <ChildContent>
                                                             <div class="form-group row">
-                                                                <DisplayName For="@(() => shop.ProductPrices)"></DisplayName>
+                                                                <RadzenLabel Text="@Loc2["ProductPrices"]" Component="ProductPrices" style="width: 100%">
+                                                                </RadzenLabel>
+                                                                @*<DisplayName For="@(() => shop.ProductPrices)"></DisplayName>*@
                                                             </div>
 
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
                                                                     <RadzenRadioButtonList @bind-Value="shop.ProductPrices" TValue="PointOfSale.DAL.Domains.ProductPrices">
                                                                         <Items>
-                                                                            <RadzenRadioButtonListItem Text="@ProductPrices.TaxExcludedPrice.ToString()" Value="@ProductPrices.TaxExcludedPrice" />
-                                                                            <RadzenRadioButtonListItem Text="@ProductPrices.TaxIncludedPrice.ToString()" Value="@ProductPrices.TaxIncludedPrice" />
+                                                                            <RadzenRadioButtonListItem Text="@Loc2[ProductPrices.TaxExcludedPrice.ToString()]" Value="@ProductPrices.TaxExcludedPrice" />
+                                                                            <RadzenRadioButtonListItem Text="@Loc2[ProductPrices.TaxIncludedPrice.ToString()]" Value="@ProductPrices.TaxIncludedPrice" />
                                                                         </Items>
                                                                     </RadzenRadioButtonList>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.GlobalDiscounts"></Radzen.Blazor.RadzenCheckBox><DisplayName For="@(() => shop.GlobalDiscounts )"></DisplayName>
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.GlobalDiscounts"></Radzen.Blazor.RadzenCheckBox>
+                                                                    <RadzenLabel Text="@Loc2["GlobalDiscounts"]" Component="GlobalDiscounts" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => shop.GlobalDiscounts )"></DisplayName>*@
                                                                 </div>
 
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.ManualDiscounts"></Radzen.Blazor.RadzenCheckBox><DisplayName For="@(() => shop.ManualDiscounts )"></DisplayName>
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.ManualDiscounts"></Radzen.Blazor.RadzenCheckBox>
+                                                                    <RadzenLabel Text="@Loc2["ManualDiscounts"]" Component="ManualDiscounts" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<DisplayName For="@(() => shop.ManualDiscounts )"></DisplayName>*@
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.LoyaltyProgram"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Loyalty Program</label>
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.LoyaltyProgram"></Radzen.Blazor.RadzenCheckBox>
+                                                                    <RadzenLabel Text="@Loc2["LoyaltyProgram"]" Component="LoyaltyProgram" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<label class="col-xl-6 col-lg-6 col-form-label">Loyalty Program</label>*@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.PriceControl"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Price Control</label>
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.PriceControl"></Radzen.Blazor.RadzenCheckBox>
+                                                                    <RadzenLabel Text="@Loc2["PriceControl"]" Component="PriceControl" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<label class="col-xl-6 col-lg-6 col-form-label">Price Control</label>*@
                                                                 </div>
                                                             </div>
                                                             <hr />
-                                                            <h3>Payments</h3>
+                                                            <h3>@Loc["Payments"]</h3>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
                                                                     <RadzenDropDown AllowClear="true" Name="StartCategoryId"
@@ -232,20 +248,26 @@
                                                                     </RadzenDropDown>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.AdvancedPriceICollections"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Advanced Cash Control</label>
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.AdvancedPriceICollections"></Radzen.Blazor.RadzenCheckBox>
+                                                                    <RadzenLabel Text="@Loc["AdvancedCashControl"]" Component="AdvancedPriceICollections" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<label class="col-xl-6 col-lg-6 col-form-label">Advanced Cash Control</label>*@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.Tips"></Radzen.Blazor.RadzenCheckBox><label class="col-xl-6 col-lg-6 col-form-label">Tips</label>
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.Tips"></Radzen.Blazor.RadzenCheckBox>
+                                                                    <RadzenLabel Text="@Loc2["Tips"]" Component="Tips" style="width: 100%">
+                                                                    </RadzenLabel>
+                                                                    @*<label class="col-xl-6 col-lg-6 col-form-label">Tips</label>*@
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                                                 <div class="mr-2">
-                                                                    <a href="/ShopInterface/@shop.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">Previous</a>
+                                                                    <a href="/ShopInterface/@shop.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">@Loc["Previous"]</a>
                                                                 </div>
                                                                 <div>
-                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">Next Step</button>
+                                                                    <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">@Loc["NextStep"]</button>
                                                                 </div>
                                                             </div>
                                                         </ChildContent>

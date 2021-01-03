@@ -61,6 +61,15 @@ namespace PointOfSale.Client.Pages.Resource.PaymentMethods {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اضافة.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اضافة طريقة دفع.
         /// </summary>
         public static string AddPaymentMethod {

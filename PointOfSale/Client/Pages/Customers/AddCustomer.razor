@@ -2,7 +2,7 @@
 @page "/AddCustomer/{Modal:bool?}"
 @page "/EditCustomer/{id:int}"
 @attribute [Authorize]
-@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Customers.AddCustomerContact> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Customers.AddCustomer> Loc
 @inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
@@ -12,7 +12,7 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc2["Home"]</h5>
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc2["AddCustomers"]</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <!--end::Breadcrumb-->
@@ -29,7 +29,7 @@
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
         <div class="container">
-            <RadzenContent Container="main" Style="direction:rtl">
+            <RadzenContent Container="main" Style="direction:rtl;text-align:right">
                 <ChildContent>
                     <!--begin::Card-->
                     <div class="card card-custom">

@@ -88,7 +88,7 @@ namespace PointOfSale.Client.Pages.Resource.Orders {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to مدقفوعات الطلبات.
+        ///   Looks up a localized string similar to مدفوعات الطلبات.
         /// </summary>
         public static string OrdersPayments {
             get {

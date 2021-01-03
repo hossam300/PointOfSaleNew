@@ -1,4 +1,6 @@
-﻿<div class="card" style="opacity: 1; display: block;">
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Sessions.Payment> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="card" style="opacity: 1; display: block;">
     <RadzenTemplateForm TItem="Order" Data="@Order" Submit="@OnSubmit" InvalidSubmit="@OnInvalidSubmit">
         <DataAnnotationsValidator />
         <ValidationSummary />
@@ -10,15 +12,15 @@
                             <table class="table table-bordered table-condensed" style="margin-bottom: 0;">
                                 <tbody>
                                     <tr>
-                                        <td width="25%" style="border-right-color: #FFF !important;">Total Items</td>
+                                        <td width="25%" style="border-right-color: #FFF !important;">@Loc["TotalItems"]</td>
                                         <td width="25%" class="text-right"><span id="item_count">@Order.OrderItem.Count</span></td>
-                                        <td width="25%" style="border-right-color: #FFF !important;">Total Payable</td>
+                                        <td width="25%" style="border-right-color: #FFF !important;">@Loc["TotalPayable"] </td>
                                         <td width="25%" class="text-right"><span id="twt">@Order.Total (0.00)</span></td>
                                     </tr>
                                     <tr>
-                                        <td style="border-right-color: #FFF !important;">Total Paying</td>
+                                        <td style="border-right-color: #FFF !important;">@Loc["TotalPaying"] </td>
                                         <td class="text-right"><span id="total_paying">@{var pay = (Order.Total - Order.Discount) * Order.OrderTax / 100;}@pay</span></td>
-                                        <td style="border-right-color: #FFF !important;">Balance</td>
+                                        <td style="border-right-color: #FFF !important;">@Loc["Balance"] </td>
                                         <td class="text-right"><span id="balance">@balance</span></td>
                                     </tr>
                                 </tbody>
@@ -29,7 +31,7 @@
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="form-group">
-                                    <label for="note">Note</label>
+                                    <label for="note">@Loc["Note"]</label>
                                     <Radzen.Blazor.RadzenTextArea @bind-Value="@Order.Notes" class="pa form-control kb-text"></Radzen.Blazor.RadzenTextArea>
                                 </div>
                             </div>
@@ -37,25 +39,25 @@
                         <div class="row">
                             <div class="col-xl-4">
                                 <div class="form-group">
-                                    <label for="amount">Amount</label>
+                                    <label for="amount">@Loc["Amount"]</label>
                                     <Radzen.Blazor.RadzenNumeric @bind-Value="@Amount" class="pa form-control kb-pad amount"></Radzen.Blazor.RadzenNumeric>
                                 </div>
                             </div>
                             <div class="col-xl-4">
                                 <div class="form-group">
-                                    <label for="paid_by">Paying by</label>
+                                    <label for="paid_by">@Loc["Payingby"]</label>
                                     <RadzenDropDown @ref="PaymentMethod" AllowClear="true" TValue="int" Name="CustomerId"
                                                     FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                     AllowFiltering="true" Placeholder="Select Customer"
                                                     Data="@PaymentMethods" TextProperty="Name" @bind-Value="@PaymentMethodId"
                                                     ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
 
-                                        <option value="0">Walk-in Client</option>
+                                        <option value="0">@Loc["WalkInClient"]</option>
                                     </RadzenDropDown>
                                 </div>
                             </div>
                             <div class="col-xl-4">
-                                <button type="button" class="btn btn-primary" @onclick="AddPayment">Add</button>
+                                <button type="button" class="btn btn-primary" @onclick="AddPayment">@Loc["Add"]</button>
                             </div>
                         </div>
 
@@ -66,8 +68,8 @@
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>Payment Method</th>
-                            <th>Amount</th>
+                            <th>@Loc["PaymentMethod"]</th>
+                            <th>@Loc["Amount"]</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -101,9 +103,9 @@
             <div class="card-footer">
                 <div class="row">
                     <div class="col offset-sm-3">
-                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
                         </RadzenButton>
-                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
                         </RadzenButton>
                     </div>
                 </div>
@@ -136,7 +138,7 @@
         orderPayments = Order.OrderPayments;
         PaymentMethods = await Http.GetFromJsonAsync<List<DropDownList>>("/api/PaymentMethods/GetDropDownListAll");
         session = await Http.GetFromJsonAsync<Session>("/api/Sessions/GetByShopId/" + Order.ShopId);
-        Amount =(double) Order.Total;
+        Amount = (double)Order.Total;
         PaymentMethod.SelectedItem = PaymentMethods.First();
     }
     void Log(string eventName, string value)

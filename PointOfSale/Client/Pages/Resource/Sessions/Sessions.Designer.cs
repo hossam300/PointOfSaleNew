@@ -59,5 +59,77 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاريخ الاغلاق.
+        /// </summary>
+        public static string ClosedDate {
+            get {
+                return ResourceManager.GetString("ClosedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاريخ الاضافة.
+        /// </summary>
+        public static string CreationDate {
+            get {
+                return ResourceManager.GetString("CreationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to انشأت بواسطة.
+        /// </summary>
+        public static string OpenBy {
+            get {
+                return ResourceManager.GetString("OpenBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نقاط البيع.
+        /// </summary>
+        public static string PointOfSale {
+            get {
+                return ResourceManager.GetString("PointOfSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طباعة الفاتورة.
+        /// </summary>
+        public static string PrintBill {
+            get {
+                return ResourceManager.GetString("PrintBill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الجلسات.
+        /// </summary>
+        public static string Session {
+            get {
+                return ResourceManager.GetString("Session", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رقم الجلسه.
+        /// </summary>
+        public static string SessionNumber {
+            get {
+                return ResourceManager.GetString("SessionNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الحالة.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
     }
 }

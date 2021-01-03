@@ -1,4 +1,6 @@
-﻿<div class="card-content">
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Sessions.PrintBill> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="card-content" style="direction:rtl;text-align:right">
     <button type="button" class="close mr10" @onclick="Print"><i class="fa fa-print"></i></button>
 
     <div class="card-body">
@@ -8,17 +10,17 @@
                     <h3>@shop.Name</h3>
                     <h4>@shop.Header</h4>
                 </div>
-                <h5>Customer: @order.Customer.Name</h5>
-                <h5>Cashir: @userName</h5>
-                <h5>Time: @order.OrderDate.ToString("f")</h5>
+                <h5>@Loc["Customer"]: @order.Customer.Name</h5>
+                <h5>@Loc["Cashir"]: @userName</h5>
+                <h5>@Loc["Time"]: @order.OrderDate.ToString("f")</h5>
             </div>
             <table id="order-table" class="prT table table-condensed" style="width:100%;margin-bottom:0;">
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                        <th>Sub Total</th>
+                        <th>@Loc["Product"]</th>
+                        <th>@Loc["Qty"]</th>
+                        <th>@Loc["Price"]</th>
+                        <th>@Loc["SubTotal"]</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,13 +37,13 @@
                 <tfoot>
                     <tr>
                         <th>
-                            <label class="control-label">Total Items</label>
+                            <label class="control-label">@Loc["TotalItems"]</label>
                         </th>
                         <th>
                             <label class="control-label">@order.OrderItem.Count</label>
                         </th>
                         <th>
-                            <label class="control-label">Total</label>
+                            <label class="control-label">@Loc["Total"]</label>
                         </th>
                         <th colspan="2">
                             <label class="control-label">@order.OrderItem.Sum(c => c.Price)</label>
@@ -49,14 +51,14 @@
                     </tr>
                     <tr>
                         <th>
-                            <label class="control-label">Discount</label>
+                            <label class="control-label">@Loc["Discount"]</label>
                         </th>
                         <th>
                             <label class="control-label">@order.Discount</label>
 
                         </th>
                         <th>
-                            <label class="control-label">Order Tax</label>
+                            <label class="control-label">@Loc["OrderTax"]</label>
                         </th>
                         <th colspan="2">
                             <label class="control-label">@order.OrderTax %</label>
@@ -66,7 +68,7 @@
                     </tr>
                     <tr>
                         <th colspan="2">
-                            <label class="control-label">Total Payable</label>
+                            <label class="control-label">@Loc["TotalPayable"]</label>
                         </th>
                         <th colspan="3">
                             <label class="control-label">@order.Total</label>

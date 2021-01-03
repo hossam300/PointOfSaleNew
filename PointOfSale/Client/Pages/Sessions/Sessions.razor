@@ -1,79 +1,74 @@
 ﻿@page "/Sessions"
 @page "/Sessions/{id:int}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Sessions.Sessions> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
     <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
-        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-1">
-                <!--begin::Page Heading-->
-                <div class="d-flex align-items-baseline mr-5">
-                    <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
-                    <!--end::Page Title-->
-                    <!--begin::Breadcrumb-->
-                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-                        <li class="breadcrumb-item">
-                            <a href="/Sessions" class="text-muted">Sessions</a>
-                        </li>
-                    </ul>
-                    <!--end::Breadcrumb-->
-                </div>
-                <!--end::Page Heading-->
+<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["Session"]</h5>
+                <!--end::Page Title-->
             </div>
-            <!--end::Info-->
-            <!--begin::Toolbar-->
-            <!--end::Toolbar-->
+            <!--end::Page Heading-->
         </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <!--end::Toolbar-->
     </div>
-    <!--end::Subheader-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Entry-->
-        <div class="d-flex flex-column-fluid">
-            <!--begin::Container-->
-            <!--begin::Card-->
-            <div class="card card-custom">
-                <div class="card-body p-9">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <RadzenContent Container="main">
-                                <ChildContent>
-                                    <RadzenHeading Size="H1" Text="Sessions">
-                                    </RadzenHeading>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <RadzenGrid @ref="gridSessions" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(sessions)" TItem="Session">
-                                                <Columns>
-                                                    <RadzenGridColumn TItem="Session" Context="Session" Property="Id" Title="Id" Type="integer">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Session" Context="Session" Property="SessionNo" Title="Session Number" Type="string">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Session" Context="Session" Property="Shop.Name" Title="Point Of Sale" Type="string">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Session" Context="Session" Property="Creator.Username" Title="Open By" Type="string">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Session" Context="Session" Property="CreationDate" Title="Creation Date">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Session" Context="Session" Property="ClosedDate" Title="Closed Date">
+</div>
+<!--end::Subheader-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main" Style="text-align: right; direction: rtl;">
+                            <ChildContent>
+                                <RadzenHeading Size="H1" Text="@Loc["Session"]" >
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenGrid @ref="gridSessions" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(sessions)" TItem="Session">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="Id" Title="Id" Visible="false" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="SessionNo" Title="@Loc["SessionNumber"]" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="Shop.Name" Title="@Loc["PointOfSale"]" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="Creator.Username" Title="@Loc["OpenBy"]" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="CreationDate" Title="@Loc["CreationDate"]">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="ClosedDate" Title="@Loc["ClosedDate"]">
 
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Session" Context="Session" Property="Status" Title="Status">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="Session" Context="order" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px" Title="Print Bill">
-                                                        <Template Context="session">
-                                                            <RadzenButton Icon="print" Size="Radzen.ButtonSize.Small" Click="@(args => OrderBySession(session.ShopId))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="Session" Property="Status" Title="@Loc["Status"]">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Session" Context="order" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px" Title="@Loc["PrintBill"]">
+                                                    <Template Context="session">
+                                                        <RadzenButton Icon="print" Size="Radzen.ButtonSize.Small" Click="@(args => OrderBySession(session.ShopId))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
 
-                                                </Columns>
-                                            </RadzenGrid>
-                                        </div>
+                                            </Columns>
+                                        </RadzenGrid>
                                     </div>
-                                </ChildContent>
-                            </RadzenContent>
-                        </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

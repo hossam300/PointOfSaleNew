@@ -9,7 +9,7 @@
         <div class="container">
             <!--begin::Card-->
             <div class="card card-custom">
-                <RadzenContent @ref="content1" Container="main" Style="direction:rtl">
+                <RadzenContent @ref="content1" Container="main" Style="text-align:right">
                     <ChildContent>
 
                         <RadzenTemplateForm @ref="formAddressType" Data="@(vendorProduct)" Visible="@(vendorProduct != null)" TItem="VendorProduct" Submit="@FormAddressTypeSubmit">

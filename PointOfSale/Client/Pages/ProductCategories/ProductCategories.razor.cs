@@ -82,7 +82,7 @@ namespace PointOfSale.Client.Pages.ProductCategories
 
         protected async void Button0Click(MouseEventArgs args)
         {
-            var result = await DialogService.OpenAsync<AddProductCategory>("Add Product Category", null);
+            var result = await DialogService.OpenAsync<AddProductCategory>(Loc["AddProductCategory"], null);
            await grid0.Reload();
 
             await InvokeAsync(() => { StateHasChanged(); });
@@ -90,7 +90,7 @@ namespace PointOfSale.Client.Pages.ProductCategories
 
         protected async void EditRow(ProductCategory args)
         {
-            DialogService.Open<AddProductCategory>("Edit Product Category", new Dictionary<string, object>() { { "Id", args.Id } },
+            DialogService.Open<AddProductCategory>(Loc["EditProductCategory"], new Dictionary<string, object>() { { "Id", args.Id } },
                       new Radzen.DialogOptions() { Width = "700px", Height = "530px" });
             await InvokeAsync(() => { StateHasChanged(); });
         }

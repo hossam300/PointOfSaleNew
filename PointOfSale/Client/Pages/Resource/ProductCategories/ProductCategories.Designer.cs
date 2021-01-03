@@ -61,6 +61,33 @@ namespace PointOfSale.Client.Pages.Resource.ProductCategories {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اضافة.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة فئة منتج.
+        /// </summary>
+        public static string AddProductCategory {
+            get {
+                return ResourceManager.GetString("AddProductCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تعديل فئة منتج .
+        /// </summary>
+        public static string EditProductCategory {
+            get {
+                return ResourceManager.GetString("EditProductCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الفئات.
         /// </summary>
         public static string ProductCategory {

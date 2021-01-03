@@ -59,5 +59,41 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اغلاق الجلسه.
+        /// </summary>
+        public static string CloseRegister {
+            get {
+                return ResourceManager.GetString("CloseRegister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نقاط البيع.
+        /// </summary>
+        public static string PointOfSales {
+            get {
+                return ResourceManager.GetString("PointOfSales", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to السجل.
+        /// </summary>
+        public static string RegisterDetails {
+            get {
+                return ResourceManager.GetString("RegisterDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مبيعات اليوم.
+        /// </summary>
+        public static string TodaySale {
+            get {
+                return ResourceManager.GetString("TodaySale", resourceCulture);
+            }
+        }
     }
 }

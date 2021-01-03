@@ -1,10 +1,11 @@
-﻿
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Sessions.SessionContent> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Entry-->
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
         <!--begin::Card-->
-        <div class="card card-custom" style="width: 100%;">
+        <div class="card card-custom"  style="width: 100%;direction:rtl;text-align:right">
             <div class="card-body p-9">
                 <div class="row">
                     <div class="col-xl-5">
@@ -27,9 +28,9 @@
                                                                         Data="@customers" TextProperty="Name" @bind-Value="@order.CustomerId"
                                                                         ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
 
-                                                            <option value="0">Walk-in Client</option>
+                                                            <option value="0">@Loc["WalkInClient"]</option>
                                                         </RadzenDropDown>
-                                                        <RadzenLabel @ref="CustomerVaildation" Text="Customer is required" Visible="false" />
+                                                        <RadzenLabel @ref="CustomerVaildation" Text="@Loc["CustomerIsRequired"]" Visible="false" />
                                                     </div>
                                                     <div class="col-xl-4">
                                                         <div class="input-group-addon no-print" style="padding: 2px 5px;">
@@ -41,25 +42,25 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row" style="width: 140%;">
-                                                    <div class="col-xl-8"> <InputText id="OrderNumber" @bind-Value="order.OrderNumber" class="form-control kb-text" Placeholder="Order No" @onblur="ChangeOrderNo" /></div>
+                                                    <div class="col-xl-8"> <InputText id="OrderNumber" @bind-Value="order.OrderNumber" class="form-control kb-text" Placeholder="@Loc["OrderNo"]" @onblur="ChangeOrderNo" /></div>
                                                 </div>
                                                 <div class="form-group row" style="width: 140%;">
                                                     <div class="col-xl-8">
-                                                        <RadzenAutoComplete @ref="BarcodeId"  Data=@Products TextProperty="Barcode"  Placeholder="Enter Barcode Or Product Name" id="barcode2"
+                                                        <RadzenAutoComplete @ref="BarcodeId" Data=@Products TextProperty="Barcode" Placeholder="@Loc["EnterBarcodeOrProductName"]" id="barcode2"
                                                                             Style="margin-bottom: 20px;width:100%" Change=@(args => OnChange(args, "AutoComplete")) />
                                                     </div>
 
                                                 </div>
                                                 <hr />
-                                                <RadzenLabel  @ref="ItemsVaildation" Text="Choose One Product" Visible="false" />
+                                                <RadzenLabel @ref="ItemsVaildation" Text="@Loc["ChooseOneProduct"]" Visible="false" />
                                                 <table class="table table-bordered table-striped table-hover">
                                                     <thead>
                                                         <tr>
-                                                            <th>Product</th>
-                                                            <th>Price</th>
-                                                            <th>Qty</th>
-                                                            <th>Subtotal</th>
-                                                            <th></th>
+                                                            <th>@Loc["Product"]</th>
+                                                            <th>@Loc["Price"]</th>
+                                                            <th>@Loc["Qty"]</th>
+                                                            <th>@Loc["Subtotal"]</th>
+                                                        <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -73,18 +74,18 @@
                                                                 <td><button class="btn btn-sm btn-danger" @onclick="()=>DeleteItem(item)"><i class="fa fa-trash"></i></button></td>
                                                             </tr>
                                                         }
-                                                      
+
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
                                                             <th>
-                                                                <label class="control-label">Total Items</label>
+                                                                <label class="control-label">@Loc["TotalItems"]</label>
                                                             </th>
                                                             <th>
                                                                 <label class="control-label">@TotalItems</label>
                                                             </th>
                                                             <th>
-                                                                <label class="control-label">Total</label>
+                                                                <label class="control-label">@Loc["Total"]</label>
                                                             </th>
                                                             <th colspan="2">
                                                                 <label class="control-label">@Total</label>
@@ -92,14 +93,14 @@
                                                         </tr>
                                                         <tr>
                                                             <th>
-                                                                <label class="control-label">Discount</label>
+                                                                <label class="control-label">@Loc["Discount"]</label>
                                                             </th>
                                                             <th>
                                                                 <RadzenNumeric TValue="double" @bind-Value="@Discount" Change="UpdateTotals" />
 
                                                             </th>
                                                             <th>
-                                                                <label class="control-label">Order Tax</label>
+                                                                <label class="control-label">@Loc["OrderTax"]</label>
                                                             </th>
                                                             <th colspan="2">
                                                                 <RadzenNumeric TValue="double" @bind-Value="@OrderTax" Change="UpdateTotals" /> %
@@ -108,7 +109,7 @@
                                                         </tr>
                                                         <tr>
                                                             <th colspan="2">
-                                                                <label class="control-label">Total Payable</label>
+                                                                <label class="control-label">@Loc["TotalPayable"]</label>
                                                             </th>
                                                             <th colspan="3">
                                                                 <label class="control-label">@TotalPayable</label>
@@ -125,13 +126,13 @@
                                                         <div class="row">
                                                             <button type="button" class="btn btn-warning btn-block btn-flat" @onclick="HoldOrder"
                                                                     id="suspend">
-                                                                Hold
+                                                                @Loc["Hold"] 
                                                             </button>
                                                         </div>
                                                         <div class="row">
                                                             <button type="button" class="btn btn-danger btn-block btn-flat" @onclick="CancelOrder"
                                                                     id="reset">
-                                                                Cancel
+                                                                @Loc["Cancel"] 
                                                             </button>
                                                         </div>
 
@@ -140,20 +141,20 @@
                                                         <div class="row">
                                                             <button type="button" class="btn bg-purple btn-block btn-flat" @onclick="PrintOrder"
                                                                     id="print_order">
-                                                                Print Order
+                                                                @Loc["PrintOrder"]  
                                                             </button>
                                                         </div>
                                                         <div class="row">
                                                             <button type="button" class="btn bg-navy btn-block btn-flat" @onclick="PrintBill"
                                                                     id="print_bill">
-                                                                Print Bill
+                                                                @Loc["PrintBill"] 
                                                             </button>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-4">
                                                         <button type="button" class="btn btn-success btn-block btn-flat" @onclick="Payment"
                                                                 id="payment" style="height: 100%;">
-                                                            Payment
+                                                            @Loc["Payment"]  
                                                         </button>
                                                     </div>
                                                 </div>
@@ -179,8 +180,8 @@
                                         <div class="card-body" style="padding:1% 1% !important">
                                             <img src="/StaticFiles/Images/25694.svg" class="img-circle" width="100" style="height:100px" />
                                         </div>
-                                        <div class="card-footer"  style="padding:1% 1% !important">
-                                            <span>All</span>
+                                        <div class="card-footer" style="padding:1% 1% !important">
+                                            <span>@Loc["All"]</span>
                                         </div>
                                     </div>
 
@@ -191,11 +192,11 @@
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-outline-secondary" @onclick="()=>GetProductsVyCategoryId(item.Id)">
                                         <div class="card" style="border:none">
-                                            <div class="card-body"  style="padding:1% 1% !important">
+                                            <div class="card-body" style="padding:1% 1% !important">
                                                 <img src="@item.ImagePath" class="img-circle" alt="@item.CategoryName" width="100" style="height:100px" />
 
                                             </div>
-                                            <div class="card-footer"  style="padding:1% 1% !important">
+                                            <div class="card-footer" style="padding:1% 1% !important">
                                                 <span>@item.CategoryName</span>
                                             </div>
                                         </div>

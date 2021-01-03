@@ -24,6 +24,7 @@ namespace PointOfSale.Client.Pages.Orders
         protected NotificationService NotificationService { get; set; }
 
         [Parameter] public int? id { get; set; }
+        [Parameter] public int? CustomerId { get; set; }
 
         protected RadzenContent content1;
 
@@ -76,6 +77,10 @@ namespace PointOfSale.Client.Pages.Orders
             if (id != null)
             {
                 orders = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAllWithIncludeByShopId/" + id);
+            }
+            else if (CustomerId!=null)
+            {
+                orders = await Http.GetFromJsonAsync<List<Order>>("/api/Orders/GetAllWithIncludeByCustomerId/" + CustomerId);
             }
             else
             {

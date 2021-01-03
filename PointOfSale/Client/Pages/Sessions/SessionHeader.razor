@@ -1,4 +1,6 @@
-﻿<div id="kt_header" class="header flex-column header-fixed">
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Sessions.SessionHeader> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div id="kt_header" class="header flex-column header-fixed">
     <!--begin::Top-->
     <div class="header-top">
         <!--begin::Container-->
@@ -7,13 +9,13 @@
             <div class="d-none d-lg-flex align-items-center mr-3">
                 <!--begin::Logo-->
                 <NavLink href="/" class="mr-20 o_menu_brand">
-                    Point Of Sales
+                   @Loc["PointOfSales"]
                     @*  <img alt="Logo" src="assets/media/logos/logo-letter-9.png" class="max-h-35px" />*@
                 </NavLink>
                 <!--end::Logo-->
                 <ul class="header-tabs nav align-self-end font-size-lg" role="tablist">
                     <li class="nav-item">
-                        <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2" >
+                        <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2">
                             <a @onclick="@StartCountdown">
                                 <div class="d-flex flex-column text-right pr-3">
                                     <span class="text-white  font-weight-bold font-size-sm d-none d-md-inline"> @Date</span>
@@ -25,7 +27,7 @@
                         <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2">
                             <a @onclick="@OpenRegisterDetails">
                                 <div class="d-flex flex-column text-right pr-3">
-                                    <span class="text-white  font-weight-bold font-size-sm d-none d-md-inline"> Register Details</span>
+                                    <span class="text-white  font-weight-bold font-size-sm d-none d-md-inline">@Loc["RegisterDetails"]</span>
                                 </div>
                             </a>
                         </div>
@@ -34,7 +36,7 @@
                         <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2">
                             <a @onclick="@OpenTodaySale">
                                 <div class="d-flex flex-column text-right pr-3">
-                                    <span class="text-white  font-weight-bold font-size-sm d-none d-md-inline"> Today's Sale</span>
+                                    <span class="text-white  font-weight-bold font-size-sm d-none d-md-inline">@Loc["TodaySale"]</span>
                                 </div>
                             </a>
                         </div>
@@ -43,7 +45,7 @@
                         <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2">
                             <a @onclick="@Closeregiste">
                                 <div class="d-flex flex-column text-right pr-3">
-                                    <span class="text-white  font-weight-bold font-size-sm d-none d-md-inline">Close Register</span>
+                                    <span class="text-white  font-weight-bold font-size-sm d-none d-md-inline">@Loc["CloseRegister"]</span>
                                 </div>
                             </a>
                         </div>

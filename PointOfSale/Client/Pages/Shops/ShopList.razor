@@ -1,76 +1,78 @@
 ﻿@page "/PoinOfSale"
 @page "/Shops"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Shops.ShopList> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
     <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
-        <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-1">
-                <!--begin::Page Heading-->
-                <div class="d-flex align-items-baseline mr-5">
-                    <!--begin::Page Title-->
-                    <h5 class="text-dark font-weight-bold my-2 mr-5">Home</h5>
-                    <!--end::Page Title-->
-                    <!--begin::Breadcrumb-->
-                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
-                        <li class="breadcrumb-item">
-                            <a href="/Shops" class="text-muted">Point of Sale</a>
-                        </li>
-                    </ul>
-                    <!--end::Breadcrumb-->
-                </div>
-                <!--end::Page Heading-->
+<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["PointOfSale"]</h5>
+                <!--end::Page Title-->
+                <!--begin::Breadcrumb-->
+                @*<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                    <li class="breadcrumb-item">
+                        <a href="/Shops" class="text-muted">Point of Sale</a>
+                    </li>
+                </ul>*@
+                <!--end::Breadcrumb-->
             </div>
-            <!--end::Info-->
-            <!--begin::Toolbar-->
-            <!--end::Toolbar-->
+            <!--end::Page Heading-->
         </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <!--end::Toolbar-->
     </div>
-    <!--end::Subheader-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Entry-->
-        <div class="d-flex flex-column-fluid">
-            <!--begin::Container-->
-            <!--begin::Card-->
-            <div class="card card-custom">
-                <div class="card-body p-9">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <RadzenContent @ref="content1" Container="main">
-                                <ChildContent>
-                                    <RadzenHeading @ref="pageTitle" Size="H1" Text="Point of Sale">
-                                    </RadzenHeading>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
-                                            </RadzenButton>
-                                            <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getShopsResult)" TItem="ShopDTO">
-                                                <Columns>
-                                                    <RadzenGridColumn TItem="ShopDTO" Context="Shop" Property="Id" Title="Id" Type="integer">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="ShopDTO" Context="Shop" Property="ShopName" Title="Name" Type="string">
-                                                    </RadzenGridColumn>
+</div>
+<!--end::Subheader-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent @ref="content1" Container="main" Style="direction:rtl;text-align:right">
+                            <ChildContent>
+                                <RadzenHeading @ref="pageTitle" Size="H1" Text="@Loc["PointOfSale"]">
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenButton @ref="button0" Icon="add_circle_outline" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@Button0Click">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="grid0" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(getShopsResult)" TItem="ShopDTO">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="ShopDTO" Context="Shop" Property="Id" Visible="false" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ShopDTO" Context="Shop" Property="ShopName" Title="@Loc["Name"]" Type="string">
+                                                </RadzenGridColumn>
 
-                                                    <RadzenGridColumn TItem="ShopDTO" Context="Shop" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
-                                                        <Template Context="Shop">
-                                                            <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(Shop))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="ShopDTO" Context="Shop" Filterable="false" Sortable="false" Bubble="false" Width="70px">
-                                                        <Template Context="Shop">
-                                                            <RadzenButton @ref="gridDeleteButton" ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, Shop))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                </Columns>
-                                            </RadzenGrid>
-                                        </div>
+                                                <RadzenGridColumn TItem="ShopDTO" Context="Shop" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="Shop">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(Shop))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ShopDTO" Context="Shop" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="Shop">
+                                                        <RadzenButton @ref="gridDeleteButton" ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, Shop))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
                                     </div>
-                                </ChildContent>
-                            </RadzenContent>
-                        </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

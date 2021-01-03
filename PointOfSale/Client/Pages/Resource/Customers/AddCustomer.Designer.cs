@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PointOfSale.Client.Pages.Resource.Sessions {
+namespace PointOfSale.Client.Pages.Resource.Customers {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class PrintOrder {
+    public class AddCustomer {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal PrintOrder() {
+        internal AddCustomer() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.Sessions.PrintOrder", typeof(PrintOrder).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.Customers.AddCustomer", typeof(AddCustomer).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,33 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اضافة عميل.
+        /// </summary>
+        public static string AddCustomers {
+            get {
+                return ResourceManager.GetString("AddCustomers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع العميل.
+        /// </summary>
+        public static string CustomerType {
+            get {
+                return ResourceManager.GetString("CustomerType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to حفظ.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
     }

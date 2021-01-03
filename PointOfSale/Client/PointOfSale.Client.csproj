@@ -25,7 +25,7 @@
     <PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.0" />
     <PackageReference Include="Radzen.Blazor" Version="2.16.2" />
     <PackageReference Include="Tewr.Blazor.FileReader" Version="2.1.0.20274" />
-    <PackageReference Include="AKSoftware.Localization.MultiLanguages" Version="3.2.0" />
+    <PackageReference Include="AKSoftware.Localization.MultiLanguages" Version="4.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -157,11 +157,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CloseRegister.resx</DependentUpon>
     </Compile>
-    <Compile Update="Pages\Resource\Sessions\Create.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Create.resx</DependentUpon>
-    </Compile>
     <Compile Update="Pages\Resource\Sessions\HoldOrder.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -176,11 +171,6 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>PrintBill.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Resource\Sessions\PrintOrder.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>PrintOrder.resx</DependentUpon>
     </Compile>
     <Compile Update="Pages\Resource\Sessions\RegisterDetail.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -241,12 +231,12 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerConacts.resx">
-      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Customers\AddCustomer.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
+      <LastGenOutput>AddCustomer.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerContact.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -340,10 +330,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CloseRegister.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Resource\Sessions\Create.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Create.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Sessions\HoldOrder.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HoldOrder.Designer.cs</LastGenOutput>
@@ -355,10 +341,6 @@
     <EmbeddedResource Update="Pages\Resource\Sessions\PrintBill.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrintBill.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Resource\Sessions\PrintOrder.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>PrintOrder.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Sessions\RegisterDetail.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

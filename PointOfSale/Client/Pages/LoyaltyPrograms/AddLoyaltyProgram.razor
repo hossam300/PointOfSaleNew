@@ -9,7 +9,7 @@
         <div class="container">
             <!--begin::Card-->
             <div class="card card-custom">
-                <RadzenContent @ref="content1" Container="main" Style="text-align:right">
+                <RadzenContent @ref="content1" Container="main" Style="direction:rtl;text-align:right">
                     <ChildContent>
 
                         <RadzenTemplateForm @ref="formLoyaltyProgram" Data="@(LoyaltyProgram)" Visible="@(LoyaltyProgram != null)" TItem="LoyaltyProgram" Submit="@FormLoyaltyProgramSubmit">

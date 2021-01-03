@@ -44,7 +44,7 @@ namespace PointOfSale.Client.Pages.Products
         }
         async void PrintBarcode(string barcode)
         {
-            var result = await DialogService.OpenAsync<PrintBarcode>("Print Barcode", new Dictionary<string, object>() { { "Id", barcode } });
+            var result = await DialogService.OpenAsync<PrintBarcode>(Loc["PrintBarcode"], new Dictionary<string, object>() { { "Id", barcode } });
 
             await InvokeAsync(() => { StateHasChanged(); });
         }

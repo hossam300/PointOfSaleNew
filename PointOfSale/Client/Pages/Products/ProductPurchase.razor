@@ -186,7 +186,7 @@
                             <div class="col-xl-12 col-xxl-7">
                                 <!--begin::Form Wizard-->
                                 <div class="form" id="kt_projects_add_form">
-                                    <RadzenContent Container="main">
+                                    <RadzenContent Container="main" Style="direction:rtl;text-align:right">
                                         <ChildContent>
                                             <div class="row">
                                                 <div class="col-md-12">
@@ -233,7 +233,7 @@
                                                                 </div>*@
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <label class="col-md-4">Routes</label>
+                                                                    <label class="col-md-4">@Loc["Routes"]</label>
                                                                     <div class="col-xl-8">
                                                                         <RadzenLabel Text="@Loc2["Procurement"]" Component="Procurement" style="width: 100%">
                                                                         </RadzenLabel>
@@ -249,7 +249,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <RadzenLabel Text="@Loc2["VendorTaxes"]" Component="VendorTaxes" style="width: 100%">
+                                                                    <RadzenLabel Text="@Loc["VendorTaxes"]" Component="VendorTaxes" style="width: 100%">
                                                                     </RadzenLabel>
                                                                     @*<DisplayName For="@(() => product.VendorTaxes)"></DisplayName>*@
                                                                     <div class="col-xl-8">
