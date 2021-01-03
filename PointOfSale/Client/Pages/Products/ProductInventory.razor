@@ -195,11 +195,17 @@
                                                                 <div class="col-xl-6">
                                                                     <label class="col-md-4">@Loc["Routes"]</label>
                                                                     <div class="col-xl-8">
-                                                                        <Radzen.Blazor.RadzenCheckBox @bind-Value="product.Manufacture"></Radzen.Blazor.RadzenCheckBox>
-                                                                        <RadzenLabel Text="@Loc2["Manufacture"]" Component="Manufacture" style="width: 100%">
-                                                                        </RadzenLabel>
-                                                                        <Radzen.Blazor.RadzenCheckBox @bind-Value="product.Buy"></Radzen.Blazor.RadzenCheckBox><RadzenLabel Text="@Loc2["Buy"]" Component="Manufacture" style="width: 100%">
-</RadzenLabel>
+                                                                        <div class="row">
+                                                                            <div class="col-xl-6">
+                                                                                <Radzen.Blazor.RadzenCheckBox @bind-Value="product.Manufacture"></Radzen.Blazor.RadzenCheckBox>
+                                                                                <RadzenLabel Text="@Loc2["Manufacture"]" Component="Manufacture" style="width: 100%">
+                                                                                </RadzenLabel>
+                                                                            </div>
+                                                                            <div class="col-xl-6">
+                                                                                <Radzen.Blazor.RadzenCheckBox @bind-Value="product.Buy"></Radzen.Blazor.RadzenCheckBox><RadzenLabel Text="@Loc2["Buy"]" Component="Manufacture" style="width: 100%">
+                                                                                </RadzenLabel>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
@@ -236,7 +242,7 @@
                                                                 <div class="col-xl-6">
                                                                     <RadzenLabel Text="@Loc2["CustomerLeadTime"]" Component="Volume" style="width: 100%">
                                                                     </RadzenLabel>
-                                                                  @*  <DisplayName For="@(() => product.CustomerLeadTime)"></DisplayName>*@
+                                                                    @*  <DisplayName For="@(() => product.CustomerLeadTime)"></DisplayName>*@
                                                                     <div class="col-xl-8">
                                                                         <InputNumber @bind-Value="product.CustomerLeadTime" class="form-control" />
                                                                         <ValidationMessage For="() => product.CustomerLeadTime" class="text-danger" />

@@ -235,10 +235,10 @@
                                                                 <div class="col-xl-6">
                                                                     <label class="col-md-4">@Loc["Routes"]</label>
                                                                     <div class="col-xl-8">
-                                                                        <RadzenLabel Text="@Loc2["Procurement"]" Component="Procurement" style="width: 100%">
-                                                                        </RadzenLabel>
+                                                                        @*<RadzenLabel Text="@Loc2["Procurement"]" Component="Procurement" style="width: 100%">
+                                                                        </RadzenLabel>*@
                                                                         @*<DisplayName For="@(() => product.Procurement)"></DisplayName>*@
-                                                                        <div class="col-md-8" style="text-align:left">
+                                                                        <div class="col-md-8" style="text-align:right">
                                                                             <RadzenRadioButtonList @bind-Value="product.Procurement" TValue="PointOfSale.DAL.Domains.Procurement">
                                                                                 <Items>
                                                                                     <RadzenRadioButtonListItem Text="@Loc2[Procurement.CreateADraftPurchaseOrder.ToString()]" Value="@Procurement.CreateADraftPurchaseOrder" />
@@ -273,10 +273,11 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <RadzenLabel Text="@Loc2["ControlPolicy"]" Component="PurchaseDescription" style="width: 100%">
+                                                                    <RadzenLabel Text="@Loc2["ControlPolicy"]" Component="ControlPolicy" style="width: 100%">
                                                                     </RadzenLabel>
                                                                     @*<DisplayName For="@(() => product.ControlPolicy)"></DisplayName>*@
-                                                                    <div class="col-md-8" style="text-align:left">
+                                                                    <div class="col-md-8" style="        text-align: right
+">
                                                                         <RadzenRadioButtonList @bind-Value="product.ControlPolicy" TValue="PointOfSale.DAL.Domains.ControlPolicy">
                                                                             <Items>
                                                                                 <RadzenRadioButtonListItem Text="@Loc2[ControlPolicy.OnOrderedQuantities.ToString()]" Value="@ControlPolicy.OnOrderedQuantities" />

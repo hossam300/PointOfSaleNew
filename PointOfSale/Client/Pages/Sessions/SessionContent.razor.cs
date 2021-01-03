@@ -25,12 +25,12 @@ namespace PointOfSale.Client.Pages.Sessions
         //[Inject]
         //UserManager<SahlApplication> UserManager { get; set; }
 
-        List<ProductDTO> Products = new List<ProductDTO>();
-        List<ProductDTO> ProductCats = new List<ProductDTO>();
+        List<Product> Products = new List<Product>();
+        List<Product> ProductCats = new List<Product>();
         List<OrderItem> orderItems = new List<OrderItem>();
-        List<CustomerDTO> customers = new List<CustomerDTO>();
-        List<ProductCategoryDTO> Categories = new List<ProductCategoryDTO>();
-        List<ProductCategoryDTO> ProductCategories = new List<ProductCategoryDTO>();
+        List<Customer> customers = new List<Customer>();
+        List<ProductCategory> Categories = new List<ProductCategory>();
+        List<ProductCategory> ProductCategories = new List<ProductCategory>();
         Radzen.Blazor.RadzenLabel CustomerVaildation;
         Radzen.Blazor.RadzenLabel ItemsVaildation;
         Radzen.Blazor.RadzenAutoComplete BarcodeId;
@@ -59,9 +59,9 @@ namespace PointOfSale.Client.Pages.Sessions
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            Products = await Http.GetFromJsonAsync<List<ProductDTO>>("/api/Products/GetAllProductDTO");
-            customers = await Http.GetFromJsonAsync<List<CustomerDTO>>("/api/Customers/GetAllCustomerDTO");
-            Categories = await Http.GetFromJsonAsync<List<ProductCategoryDTO>>("/api/ProductCategories/GetAllProductCategory");
+            Products = await Http.GetFromJsonAsync<List<Product>>("/api/Products/GetAll");
+            customers = await Http.GetFromJsonAsync<List<Customer>>("/api/Customers/GetAll");
+            Categories = await Http.GetFromJsonAsync<List<ProductCategory>>("/api/ProductCategories/GetAll");
             ProductCats = GetProductsVyCategoryId(null);
             ProductCategories = GetProductCategories(0, 3, 0);
             DialogService.OnOpen += Open;
@@ -87,7 +87,7 @@ namespace PointOfSale.Client.Pages.Sessions
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }
         Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
-        List<ProductDTO> GetProductsVyCategoryId(int? CatId)
+        List<Product> GetProductsVyCategoryId(int? CatId)
         {
             if (CatId != null)
                 ProductCats = Products.Where(p => p.ProductCategoryId == CatId).ToList();
@@ -96,7 +96,7 @@ namespace PointOfSale.Client.Pages.Sessions
 
             return ProductCats;
         }
-        List<ProductCategoryDTO> GetProductCategories(int start, int count, int preNext)
+        List<ProductCategory> GetProductCategories(int start, int count, int preNext)
         {
             if (preNext == 1)
             {
@@ -353,7 +353,7 @@ namespace PointOfSale.Client.Pages.Sessions
             }
             await InvokeAsync(() => { StateHasChanged(); });
         }
-        public async void AddOrderItem(ProductDTO item, int Qyt)
+        public async void AddOrderItem(Product item, int Qyt)
         {
             if (orderItems == null)
             {

@@ -79,6 +79,15 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اختار عميل.
+        /// </summary>
+        public static string ChooseCustomer {
+            get {
+                return ResourceManager.GetString("ChooseCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اختار صنف.
         /// </summary>
         public static string ChooseOneProduct {
@@ -120,6 +129,15 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
         public static string Hold {
             get {
                 return ResourceManager.GetString("Hold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to رقم الفاتورة.
+        /// </summary>
+        public static string OrderNo {
+            get {
+                return ResourceManager.GetString("OrderNo", resourceCulture);
             }
         }
         

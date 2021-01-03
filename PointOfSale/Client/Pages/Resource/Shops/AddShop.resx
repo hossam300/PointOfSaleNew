@@ -135,6 +135,9 @@
   <data name="BillsReceipts" xml:space="preserve">
     <value>الفواتير والإيصالات</value>
   </data>
+  <data name="ConnectedDevices" xml:space="preserve">
+    <value>الاجهزة الموصلة</value>
+  </data>
   <data name="EnterShopDetailsAndSubmit" xml:space="preserve">
     <value>ادخل تفاصيل المتجر</value>
   </data>

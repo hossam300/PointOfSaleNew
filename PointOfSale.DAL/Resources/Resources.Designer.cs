@@ -1540,9 +1540,9 @@ namespace PointOfSale.DAL.Resources {
         /// <summary>
         ///   Looks up a localized string similar to الموقف المالي المحدد.
         /// </summary>
-        public static string SpecificFiscalPOSition {
+        public static string SpecificFiscalPosition {
             get {
-                return ResourceManager.GetString("SpecificFiscalPOSition", resourceCulture);
+                return ResourceManager.GetString("SpecificFiscalPosition", resourceCulture);
             }
         }
         
@@ -1570,6 +1570,15 @@ namespace PointOfSale.DAL.Resources {
         public static string StorableProduct {
             get {
                 return ResourceManager.GetString("StorableProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الموقف المالى لكل طلب.
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         
@@ -1615,6 +1624,15 @@ namespace PointOfSale.DAL.Resources {
         public static string Tags {
             get {
                 return ResourceManager.GetString("Tags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الضرائب.
+        /// </summary>
+        public static string Tax {
+            get {
+                return ResourceManager.GetString("Tax", resourceCulture);
             }
         }
         
@@ -1750,6 +1768,15 @@ namespace PointOfSale.DAL.Resources {
         public static string VATRequired {
             get {
                 return ResourceManager.GetString("VATRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المورد.
+        /// </summary>
+        public static string Vendor {
+            get {
+                return ResourceManager.GetString("Vendor", resourceCulture);
             }
         }
         

@@ -21,6 +21,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System;
 
 namespace PointOfSale.Server
 {
@@ -51,9 +53,15 @@ namespace PointOfSale.Server
             services.AddBlazoredLocalStorage();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddHttpContextAccessor();
+            services.AddLocalization();
             services.AddIdentity<SahlUserIdentity, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredUniqueChars = 0;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
             }).AddEntityFrameworkStores<POSContext>().AddDefaultTokenProviders();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
@@ -80,7 +88,48 @@ namespace PointOfSale.Server
             services.AddAutoMapper();
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+            var jwt_key = Configuration.GetSection("JwtSecurityKey").Value;
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwt_key));
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                // The signing key must match!
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
 
+                // Validate the JWT Issuer (iss) claim
+                ValidateIssuer = true,
+                ValidIssuer = Configuration.GetSection("JwtIssuer").Value ,
+
+                // Validate the JWT Audience (aud) claim
+                ValidateAudience = true,
+                ValidAudience = Configuration.GetSection("JwtAudience").Value ,
+
+                // Validate the token expiry
+                ValidateLifetime = true,
+
+                // If you want to allow a certain amount of clock drift, set that here:
+                ClockSkew = TimeSpan.Zero
+            };
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                int minute = 60;
+                int hour = minute * 60;
+                int day = hour * 24;
+                int week = day * 7;
+                int year = 365 * day;
+
+                options.LoginPath = "/auth/login";
+                options.AccessDeniedPath = "/auth/accessdenied";
+                options.Cookie.IsEssential = true;
+                options.SlidingExpiration = true;
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(day / 2);
+
+                options.Cookie.Name = "access_token";
+
+                options.TicketDataFormat = new CustomJwtDataFormat(
+                    SecurityAlgorithms.HmacSha256,
+                    tokenValidationParameters);
+            });
             services.AddControllersWithViews(options => options.Filters.Add(new AuthorizeFilter()))
                 .AddNewtonsoftJson(options =>
                 {

@@ -188,7 +188,7 @@
                             <!--end::Wizard Nav-->
                         </div>
                         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
-                            <div class="col-xl-12 col-xxl-7">
+                            <div class="col-xl-12">
                                 <!--begin::Form Wizard-->
                                 <div class="form" id="kt_projects_add_form">
                                     <RadzenContent Container="main" Style="text-align: right; direction: rtl;">
@@ -199,12 +199,12 @@
                                                         <ChildContent>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.TableManagement"></Radzen.Blazor.RadzenCheckBox>  
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.TableManagement"></Radzen.Blazor.RadzenCheckBox>
                                                                     <RadzenLabel Text="@Loc2["TableManagement"]" Component="TableManagement" style="width: 100%"></RadzenLabel>
                                                                     @*<DisplayName For="@(() => shop.TableManagement )"></DisplayName>*@
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.OrderlineNotes"></Radzen.Blazor.RadzenCheckBox> 
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.OrderlineNotes"></Radzen.Blazor.RadzenCheckBox>
                                                                     <RadzenLabel Text="@Loc2["OrderlineNotes"]" Component="TableManagement" style="width: 100%"></RadzenLabel>
                                                                     @*<DisplayName For="@(() => shop.OrderlineNotes)"></DisplayName>*@
                                                                 </div>
@@ -218,18 +218,18 @@
                                                                 </div>
                                                                 @if (shop.FloorsTables)
                                                                 {
-                                                            <div class="col-xl-6">
-                                                                <RadzenLabel Text="@Loc2["Floors"]" Component="FloorsTables" style="width: 100%"></RadzenLabel>
-                                                                @*<DisplayName For="@(() => shop.Floors)"></DisplayName>*@
-                                                                <div class="col-xl-8">
-                                                                    <RadzenDropDown AllowClear="true" Name="Floors"
-                                                                                    FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
-                                                                                    AllowFiltering="true" Placeholder="Select..." Multiple="true"
-                                                                                    Data="@Floors" @bind-Value="multipleFloors"
-                                                                                    Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
-                                                                    </RadzenDropDown>
-                                                                </div>
-                                                            </div>
+                                                                    <div class="col-xl-6">
+                                                                        <RadzenLabel Text="@Loc2["Floors"]" Component="FloorsTables" style="width: 100%"></RadzenLabel>
+                                                                        @*<DisplayName For="@(() => shop.Floors)"></DisplayName>*@
+                                                                        <div class="col-xl-8">
+                                                                            <RadzenDropDown AllowClear="true" Name="Floors"
+                                                                                            FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                                            AllowFiltering="true" Placeholder="Select..." Multiple="true"
+                                                                                            Data="@Floors" @bind-Value="multipleFloors"
+                                                                                            Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                            </RadzenDropDown>
+                                                                        </div>
+                                                                    </div>
                                                                 }
 
                                                             </div>
@@ -286,7 +286,7 @@
                                                                     </div>
                                                                 </div>
                                                             }
-                                                            <h3>Connected Devices</h3>
+                                                            <h3>@Loc["ConnectedDevices"]</h3>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
                                                                     <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.ConnectDevices"></Radzen.Blazor.RadzenCheckBox>
@@ -302,14 +302,14 @@
                                                             <div class="form-group row">
                                                                 @if (shop.ConnectDevices)
                                                                 {
-                                                                <div class="col-xl-6">
-                                                                    <RadzenLabel Text="@Loc2["PrinterIPAddress"]" Component="PrinterIPAddress" style="width: 100%"></RadzenLabel>
-                                                                    @*<label class="col-md-4">Epson Receipt Printer IP Address</label>*@
-                                                                    <div class="col-xl-8">
-                                                                        <InputText id="Name" @bind-Value="shop.PrinterIPAddress" class="form-control form-control-lg form-control-solid" />
-                                                                        <ValidationMessage For="() => shop.PrinterIPAddress" class="text-danger" />
+                                                                    <div class="col-xl-6">
+                                                                        <RadzenLabel Text="@Loc2["PrinterIPAddress"]" Component="PrinterIPAddress" style="width: 100%"></RadzenLabel>
+                                                                        @*<label class="col-md-4">Epson Receipt Printer IP Address</label>*@
+                                                                        <div class="col-xl-8">
+                                                                            <InputText id="Name" @bind-Value="shop.PrinterIPAddress" class="form-control form-control-lg form-control-solid" />
+                                                                            <ValidationMessage For="() => shop.PrinterIPAddress" class="text-danger" />
+                                                                        </div>
                                                                     </div>
-                                                                </div>
                                                                 }
                                                                 @if (shop.OrderPrinter)
                                                                 {
@@ -329,9 +329,9 @@
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
                                                                     <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.FiscalPointOfSaleitionPerOrder"></Radzen.Blazor.RadzenCheckBox>
-                                                                    <RadzenLabel Text="@Loc2["FiscalPointOfSaleitionPerOrder"]" Component="FiscalPointOfSaleitionPerOrder" style="width: 100%"></RadzenLabel>
+                                                                    <RadzenLabel Text="@Loc2["FiscalPositionPerOrder"]" Component="FiscalPointOfSaleitionPerOrder" style="width: 100%"></RadzenLabel>
 
-                                                                    <label class="col-xl-6 col-lg-6 col-form-label">Fiscal Position per Order</label>
+                                                                    @*<label class="col-xl-6 col-lg-6 col-form-label">Fiscal Position per Order</label>*@
                                                                 </div>
                                                                 <div class="col-xl-6">
                                                                     <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.SpecificFiscalPointOfSaleition"></Radzen.Blazor.RadzenCheckBox>

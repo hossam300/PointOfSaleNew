@@ -5,7 +5,7 @@
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
         <!--begin::Card-->
-        <div class="card card-custom"  style="width: 100%;direction:rtl;text-align:right">
+        <div class="card card-custom" style="width: 100%;direction:rtl;text-align:right">
             <div class="card-body p-9">
                 <div class="row">
                     <div class="col-xl-5">
@@ -22,13 +22,15 @@
                                             <div class="card-body p-9">
                                                 <div class="form-group row" style="width: 140%;">
                                                     <div class="col-xl-8">
-                                                        <RadzenDropDown AllowClear="true" TValue="int" Name="CustomerId"
+                                                        <RadzenDropDown AllowClear="true" TValue="int" Name="CustomerId" Placeholder="@Loc["ChooseCustomer"]"
                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
-                                                                        AllowFiltering="true" Placeholder="Select Customer"
+                                                                        AllowFiltering="true" SelectedItem="0"
                                                                         Data="@customers" TextProperty="Name" @bind-Value="@order.CustomerId"
                                                                         ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
-
-                                                            <option value="0">@Loc["WalkInClient"]</option>
+                                                            @*<Template>
+                                                                @Loc["Customer"]: @((context as Customer).Name)
+                                                            </Template>*@
+                                                            @*<option value="0" selected="selected">@Loc["WalkInClient"]</option>*@
                                                         </RadzenDropDown>
                                                         <RadzenLabel @ref="CustomerVaildation" Text="@Loc["CustomerIsRequired"]" Visible="false" />
                                                     </div>
@@ -60,7 +62,7 @@
                                                             <th>@Loc["Price"]</th>
                                                             <th>@Loc["Qty"]</th>
                                                             <th>@Loc["Subtotal"]</th>
-                                                        <th></th>
+                                                            <th></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -96,16 +98,16 @@
                                                                 <label class="control-label">@Loc["Discount"]</label>
                                                             </th>
                                                             <th>
-                                                                <RadzenNumeric TValue="double" @bind-Value="@Discount" Change="UpdateTotals" />
+                                                                <RadzenNumeric TValue="double" @bind-Value="@Discount" Disabled="true" Change="UpdateTotals" />
 
                                                             </th>
                                                             <th>
                                                                 <label class="control-label">@Loc["OrderTax"]</label>
                                                             </th>
-                                                            <th colspan="2">
-                                                                <RadzenNumeric TValue="double" @bind-Value="@OrderTax" Change="UpdateTotals" /> %
+                                                            <th>
+                                                                <RadzenNumeric TValue="double" @bind-Value="@OrderTax" Change="UpdateTotals" />
                                                             </th>
-
+                                                            <th> %</th>
                                                         </tr>
                                                         <tr>
                                                             <th colspan="2">
@@ -126,13 +128,13 @@
                                                         <div class="row">
                                                             <button type="button" class="btn btn-warning btn-block btn-flat" @onclick="HoldOrder"
                                                                     id="suspend">
-                                                                @Loc["Hold"] 
+                                                                @Loc["Hold"]
                                                             </button>
                                                         </div>
                                                         <div class="row">
                                                             <button type="button" class="btn btn-danger btn-block btn-flat" @onclick="CancelOrder"
                                                                     id="reset">
-                                                                @Loc["Cancel"] 
+                                                                @Loc["Cancel"]
                                                             </button>
                                                         </div>
 
@@ -141,20 +143,20 @@
                                                         <div class="row">
                                                             <button type="button" class="btn bg-purple btn-block btn-flat" @onclick="PrintOrder"
                                                                     id="print_order">
-                                                                @Loc["PrintOrder"]  
+                                                                @Loc["PrintOrder"]
                                                             </button>
                                                         </div>
                                                         <div class="row">
                                                             <button type="button" class="btn bg-navy btn-block btn-flat" @onclick="PrintBill"
                                                                     id="print_bill">
-                                                                @Loc["PrintBill"] 
+                                                                @Loc["PrintBill"]
                                                             </button>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-4">
                                                         <button type="button" class="btn btn-success btn-block btn-flat" @onclick="Payment"
                                                                 id="payment" style="height: 100%;">
-                                                            @Loc["Payment"]  
+                                                            @Loc["Payment"]
                                                         </button>
                                                     </div>
                                                 </div>
@@ -170,7 +172,7 @@
                             <div class="btn-group">
                                 <button class="btn btn-warning" @onclick="()=>GetProductCategories(i,2,1)"
                                         type="button" id="previous">
-                                    <i class="fa fa-chevron-left"></i>
+                                    <i class="fa fa-chevron-right"></i>
                                 </button>
                             </div>
                             <div class="btn-group"></div>
@@ -207,7 +209,7 @@
                             <div class="btn-group">
                                 <button class="btn btn-warning" @onclick="()=>GetProductCategories(i,2,2)"
                                         type="button" id="next">
-                                    <i class="fa fa-chevron-right"></i>
+                                    <i class="fa fa-chevron-left"></i>
                                 </button>
                             </div>
                         </div>

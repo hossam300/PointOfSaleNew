@@ -115,6 +115,15 @@ namespace PointOfSale.Client.Pages.Resource.Shops {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الاجهزة الموصلة.
+        /// </summary>
+        public static string ConnectedDevices {
+            get {
+                return ResourceManager.GetString("ConnectedDevices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ادخل تفاصيل المتجر.
         /// </summary>
         public static string EnterShopDetailsAndSubmit {

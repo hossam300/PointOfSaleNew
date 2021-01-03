@@ -183,7 +183,7 @@
                             <!--end::Wizard Nav-->
                         </div>
                         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
-                            <div class="col-xl-12 col-xxl-7">
+                            <div class="col-xl-12">
                                 <!--begin::Form Wizard-->
                                 <div class="form">
                                     <RadzenContent Container="main" Style="text-align: right; direction: rtl;">
@@ -221,7 +221,9 @@
                                                             {
                                                                 <div class="form-group row">
                                                                     <div class="col-xl-12">
-                                                                        <DisplayName For="@(() => shop.AllowedEmployees)"></DisplayName>
+                                                                        <RadzenLabel Text="@Loc2["AllowedEmployees"]" Component="AllowedEmployees" style="width: 100%">
+                                                                        </RadzenLabel>
+                                                                        @*<DisplayName For="@(() => shop.AllowedEmployees)"></DisplayName>*@
                                                                         <div class="col-xl-8">
                                                                             <RadzenDropDown AllowClear="true" Name="AllowedEmployees"
                                                                                             FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"

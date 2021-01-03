@@ -123,6 +123,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>الغاء</value>
   </data>
+  <data name="ChooseCustomer" xml:space="preserve">
+    <value>اختار عميل</value>
+  </data>
   <data name="ChooseOneProduct" xml:space="preserve">
     <value>اختار صنف</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="Hold" xml:space="preserve">
     <value>تعليق الفاتوره</value>
+  </data>
+  <data name="OrderNo" xml:space="preserve">
+    <value>رقم الفاتورة</value>
   </data>
   <data name="OrderTax" xml:space="preserve">
     <value>الضرائب</value>

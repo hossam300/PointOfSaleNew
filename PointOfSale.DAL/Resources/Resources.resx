@@ -610,7 +610,7 @@
   <data name="Shop" xml:space="preserve">
     <value>المتجر</value>
   </data>
-  <data name="SpecificFiscalPOSition" xml:space="preserve">
+  <data name="SpecificFiscalPosition" xml:space="preserve">
     <value>الموقف المالي المحدد</value>
   </data>
   <data name="StartCategory" xml:space="preserve">
@@ -621,6 +621,9 @@
   </data>
   <data name="StorableProduct" xml:space="preserve">
     <value>منتج قابل للتخزين</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>الموقف المالى لكل طلب</value>
   </data>
   <data name="SubscriptionProduct" xml:space="preserve">
     <value>منتج الاشتراك</value>
@@ -636,6 +639,9 @@
   </data>
   <data name="Tags" xml:space="preserve">
     <value>العلامات</value>
+  </data>
+  <data name="Tax" xml:space="preserve">
+    <value>الضرائب</value>
   </data>
   <data name="TaxExcludedPrice" xml:space="preserve">
     <value>السعر غير شامل</value>
@@ -681,6 +687,9 @@
   </data>
   <data name="VATRequired" xml:space="preserve">
     <value>ضريبة القيمة المضافة مطلوبة</value>
+  </data>
+  <data name="Vendor" xml:space="preserve">
+    <value>المورد</value>
   </data>
   <data name="VirtualKeyBoard" xml:space="preserve">
     <value>لوحة مفاتيح افتراضية</value>

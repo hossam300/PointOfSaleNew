@@ -70,7 +70,7 @@ namespace PointOfSale.Server.Controllers
         /// <param name="entity"></param>
         /// <returns></returns>
         [HttpPost, Route("Insert")]
-        public virtual IActionResult PointOfSalet([FromBody] TDbEntity entities)
+        public virtual IActionResult Post([FromBody] TDbEntity entities)
         {
             var entity = this._BusinessService.Insert(entities);
             return Ok(entity);

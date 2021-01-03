@@ -73,7 +73,7 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "Procurement", ResourceType = typeof(Resources.Resources))]
         public Procurement Procurement { get; set; }
         public virtual List<VendorTax> VendorTaxes { get; set; }
-        [Display(Name = "NControlPolicyame", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "ControlPolicy", ResourceType = typeof(Resources.Resources))]
         public ControlPolicy ControlPolicy { get; set; }
         [Display(Name = "PurchaseDescription", ResourceType = typeof(Resources.Resources))]
         public string PurchaseDescription { get; set; }

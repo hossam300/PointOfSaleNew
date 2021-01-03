@@ -182,7 +182,7 @@
                             <!--end::Wizard Nav-->
                         </div>
                         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
-                            <div class="col-xl-12 col-xxl-7">
+                            <div class="col-xl-12">
                                 <!--begin::Form Wizard-->
                                 <div class="form">
                                     <RadzenContent Container="main" Style="text-align: right; direction: rtl;">
@@ -215,7 +215,7 @@
                                                                     <div class="col-xl-6">
                                                                         <RadzenLabel Text="@Loc2["Header"]" Component="Header" style="width: 100%">
                                                                         </RadzenLabel>
-                                                                     @*   <DisplayName For="@(() => shop.Header)"></DisplayName>*@
+                                                                        @*   <DisplayName For="@(() => shop.Header)"></DisplayName>*@
                                                                         <div class="col-xl-8">
                                                                             <InputText id="Name" @bind-Value="shop.Header" class="form-control form-control-lg form-control-solid" />
                                                                             <ValidationMessage For="() => shop.Header" class="text-danger" />
