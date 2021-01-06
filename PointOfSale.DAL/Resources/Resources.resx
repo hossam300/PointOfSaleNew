@@ -412,6 +412,9 @@
   <data name="LargeScrollbars" xml:space="preserve">
     <value>أشرطة التمرير الكبيرة</value>
   </data>
+  <data name="LastModificationDate" xml:space="preserve">
+    <value>اخر تاريخ تعديل</value>
+  </data>
   <data name="LastModifiedDate" xml:space="preserve">
     <value>اخر تاريخ تعديل</value>
   </data>

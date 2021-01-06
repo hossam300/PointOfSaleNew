@@ -76,7 +76,7 @@
             {
                 // convert response data to JsonElement which can handle any JSON data
                 var data = await response.Content.ReadFromJsonAsync<Order>();
-                Order = null;
+                //   Order = null;
                 // get id property from JSON response data
                 //  var customerId = data.Id;
                 //  uriHelper.NavigateTo("/AddCustomerConacts/" + data.Id);
@@ -103,8 +103,8 @@
         //{
         //    item.Product = new Product { Id = item.Id, Name = Products.FirstOrDefault(p => p.Id == item.ProductId).Name };
         //}
-        await DialogService.OpenAsync<PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", Order } },
-                 new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+        //await DialogService.OpenAsync<PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", Order } },
+        //         new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
         await InvokeAsync(() => { StateHasChanged(); });
         //  await JSRuntime.InvokeVoidAsync("StopLoading");
         DialogService.Close(Order);

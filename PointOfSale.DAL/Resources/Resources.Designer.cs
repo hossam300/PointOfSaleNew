@@ -946,6 +946,15 @@ namespace PointOfSale.DAL.Resources {
         /// <summary>
         ///   Looks up a localized string similar to اخر تاريخ تعديل.
         /// </summary>
+        public static string LastModificationDate {
+            get {
+                return ResourceManager.GetString("LastModificationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اخر تاريخ تعديل.
+        /// </summary>
         public static string LastModifiedDate {
             get {
                 return ResourceManager.GetString("LastModifiedDate", resourceCulture);
