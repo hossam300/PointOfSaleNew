@@ -625,6 +625,9 @@
   <data name="String1" xml:space="preserve">
     <value>الموقف المالى لكل طلب</value>
   </data>
+  <data name="String2" xml:space="preserve">
+    <value>الموقف المالي المحدد</value>
+  </data>
   <data name="SubscriptionProduct" xml:space="preserve">
     <value>منتج الاشتراك</value>
   </data>

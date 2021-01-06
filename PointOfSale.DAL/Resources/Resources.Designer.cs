@@ -1583,6 +1583,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الموقف المالي المحدد.
+        /// </summary>
+        public static string String2 {
+            get {
+                return ResourceManager.GetString("String2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to منتج الاشتراك.
         /// </summary>
         public static string SubscriptionProduct {

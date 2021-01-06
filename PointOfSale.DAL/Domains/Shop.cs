@@ -72,7 +72,7 @@ namespace PointOfSale.DAL.Domains
         #region Taxes
         [Display(Name = "FiscalpositionPerOrder", ResourceType = typeof(Resources.Resources))]
         public bool FiscalPointOfSaleitionPerOrder { get; set; }
-        [Display(Name = "SpecificFiscalPOSition", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "SpecificFiscalPosition", ResourceType = typeof(Resources.Resources))]
         public bool SpecificFiscalPointOfSaleition { get; set; }
         [Display(Name = "Fiscalposition", ResourceType = typeof(Resources.Resources))]
         public int? FiscalPointOfSaleitionId { get; set; }
