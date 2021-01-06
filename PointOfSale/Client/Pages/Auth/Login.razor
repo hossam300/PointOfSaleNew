@@ -4,7 +4,7 @@
 @inject Blazored.LocalStorage.ILocalStorageService _localStorage;
 @inject AuthenticationStateProvider _authenticationStateProvider ;
 @using System.Net.Http.Headers;
-
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Auth.Login> Loc
 @layout SessionLayout
 @attribute [AllowAnonymous]
 
@@ -29,8 +29,8 @@
                     <!--begin::Signin-->
                     <div class="login-form login-signin">
                         <div class="text-center mb-10 mb-lg-20">
-                            <h2 class="font-weight-bold">Sign In</h2>
-                            <p class="text-muted font-weight-bold">Enter your username and password</p>
+                            <h2 class="font-weight-bold">@Loc["SignIn"]</h2>
+                            <p class="text-muted font-weight-bold">@Loc["EnterYourUsernameAndPassword"]</p>
                         </div>
                         <!--begin::Form-->
                         <EditForm Model="loginModel" OnValidSubmit="HandleLogin">
@@ -47,11 +47,11 @@
                             </div>
                             <div class="form-group d-flex flex-wrap justify-content-between align-items-center mt-3">
                                 <label class="checkbox checkbox-outline m-0 text-muted">
-                                    <InputCheckbox @bind-Value="loginModel.RememberMe" type="checkbox" name="remember" />Remember me
+                                    <InputCheckbox @bind-Value="loginModel.RememberMe" type="checkbox" name="remember" />@Loc["RememberMe"]
                                     <span></span>
                                 </label>
                             </div>
-                            <button type="submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3">Submit</button>
+                            <button type="submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3">@Loc["SignIn"]</button>
                         </EditForm>
 
                         <!--end::Form-->
@@ -60,11 +60,11 @@
                 <!--end::Aside body-->
                 <!--begin: Aside footer for desktop-->
                 <div class="d-flex flex-column-auto justify-content-between mt-15">
-                    <div class="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">© 2020 Metronic</div>
+                    <div class="text-dark-50 font-weight-bold order-2 order-sm-1 my-2">© 2020 @Loc["SahlERP"]</div>
                     <div class="d-flex order-1 order-sm-2 my-2">
-                        <a href="#" class="text-muted text-hover-primary">Privacy</a>
+                        @*<a href="#" class="text-muted text-hover-primary">Privacy</a>
                         <a href="#" class="text-muted text-hover-primary ml-4">Legal</a>
-                        <a href="#" class="text-muted text-hover-primary ml-4">Contact</a>
+                        <a href="#" class="text-muted text-hover-primary ml-4">Contact</a>*@
                     </div>
                 </div>
                 <!--end: Aside footer for desktop-->
@@ -77,10 +77,9 @@
             <!--begin::Content body-->
             <div class="d-flex flex-column-fluid flex-lg-center">
                 <div class="d-flex flex-column justify-content-center">
-                    <h3 class="display-3 font-weight-bold my-7 text-white">Welcome to Metronic!</h3>
+                    <h3 class="display-3 font-weight-bold my-7 text-white">@Loc["Welcome"]!</h3>
                     <p class="font-weight-bold font-size-lg text-white opacity-80">
-                        The ultimate Bootstrap, Angular 8, React &amp; VueJS admin theme
-                        <br />framework for next generation web apps.
+                        @Loc["Description"]
                     </p>
                 </div>
             </div>
