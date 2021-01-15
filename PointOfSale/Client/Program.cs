@@ -24,6 +24,7 @@ namespace PointOfSale.Client
     {
         public static async Task Main(string[] args)
         {
+            
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
@@ -34,7 +35,7 @@ namespace PointOfSale.Client
                 builder.Configuration.Bind("Local", options.ProviderOptions);
             });
             builder.Services.AddLocalization();
-            builder.Services.AddApiAuthorization();
+            builder.Services.AddApiAuthorization(o=>o.AuthenticationPaths.LogInCallbackPath="/Login");
             builder.Services.AddScoped<DialogService>();
             builder.Services.AddScoped<NotificationService>();
             builder.Services.AddScoped<TooltipService>();

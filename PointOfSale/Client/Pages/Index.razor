@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using System.Globalization;
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Index> Loc
+@inject NavigationManager Navigation
 <!--begin::Subheader-->
 <div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
     <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -138,8 +139,8 @@
                                     <div class="col-xl-4">
                                         <p>@Loc["LastClosingDate"] </p>
                                         @*@if (item.session.ClosedDate != null)
-                                        {*@
-                                            <p>@item.session.ClosedDate.Value.ToString("R") </p>
+                                            {*@
+                                        <p>@item.session.ClosedDate.Value.ToString("R") </p>
                                         @*}*@
                                     </div>
                                 }
@@ -174,8 +175,20 @@
     List<ShopDTO> shops = new List<ShopDTO>();
     [Inject]
     AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+    [CascadingParameter]
+    private Task<AuthenticationState> AuthenticationStateTask { get; set; }
     protected override async Task OnInitializedAsync()
     {
+        var authenticationState = await AuthenticationStateTask;
+        if (authenticationState?.User?.Identity is null || !authenticationState.User.Identity.IsAuthenticated)
+        {
+            var returnUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
+
+            if (string.IsNullOrWhiteSpace(returnUrl))
+                Navigation.NavigateTo("/logout", true);
+            else
+                Navigation.NavigateTo("/logout");
+        }
         await JSRuntime.InvokeVoidAsync("StartLoading");
         shops = await Http.GetFromJsonAsync<List<ShopDTO>>("/api/Shops/GetAllWithoutInclude");
         await JSRuntime.InvokeVoidAsync("StopLoading");

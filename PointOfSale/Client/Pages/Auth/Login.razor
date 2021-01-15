@@ -1,4 +1,5 @@
 ﻿@page "/login"
+@page "/Account/Login/{ReturnUrl}"
 @inject PointOfSale.Services.ISevices.IAuthService AuthService;
 @inject NavigationManager NavigationManager
 @inject Blazored.LocalStorage.ILocalStorageService _localStorage;
@@ -96,6 +97,8 @@
     private LoginModel loginModel = new LoginModel();
     private bool ShowErrors;
     private string Error = "";
+    [Parameter]
+    public string ReturnUrl { get; set; }
     protected override async Task OnInitializedAsync()
     {
         await JSRuntime.InvokeVoidAsync("StartLoading");

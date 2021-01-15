@@ -7,7 +7,6 @@
     [Parameter] public string Action { get; set; }
     protected override async Task OnInitializedAsync()
     {
-        // await AuthService.Logout();
-        navigationManager.NavigateTo("/Login");
+        navigationManager.NavigateTo("/logout");
     }
 }

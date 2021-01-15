@@ -23,6 +23,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace PointOfSale.Server
 {
@@ -42,9 +44,9 @@ namespace PointOfSale.Server
             services.AddDbContext<POSContext>(options =>
           options.UseSqlServer(
               Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
-          //  services.AddDbContext<ApplicationDbContext>(options =>
-          //options.UseLazyLoadingProxies().UseSqlServer(
-          //    Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
+            //  services.AddDbContext<ApplicationDbContext>(options =>
+            //options.UseLazyLoadingProxies().UseSqlServer(
+            //    Configuration.GetConnectionString("DefaultConnection")), ServiceLifetime.Transient);
             services.AddUnitOfWork<POSContext>();
             services.AddBusinessServices();
             services.AddScoped<DialogService>();
@@ -54,6 +56,7 @@ namespace PointOfSale.Server
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddHttpContextAccessor();
             services.AddLocalization();
+
             services.AddIdentity<SahlUserIdentity, IdentityRole>(options =>
             {
                 options.User.RequireUniqueEmail = false;
@@ -62,7 +65,12 @@ namespace PointOfSale.Server
                 options.Password.RequireLowercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
+
             }).AddEntityFrameworkStores<POSContext>().AddDefaultTokenProviders();
+            services.Configure<CookieAuthenticationOptions>(opt =>
+            {
+                opt.LoginPath = new PathString("/login");
+            });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
                     {
@@ -75,6 +83,17 @@ namespace PointOfSale.Server
                             ValidIssuer = Configuration["JwtIssuer"],
                             ValidAudience = Configuration["JwtAudience"],
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtSecurityKey"]))
+                        };
+                        options.Events = new JwtBearerEvents
+                        {
+                            OnAuthenticationFailed = context =>
+                            {
+                                if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                                {
+                                    context.Response.Headers.Add("Token-Expired", "true");
+                                }
+                                return Task.CompletedTask;
+                            }
                         };
                     });
             //services.AddIdentityServer()
@@ -98,11 +117,11 @@ namespace PointOfSale.Server
 
                 // Validate the JWT Issuer (iss) claim
                 ValidateIssuer = true,
-                ValidIssuer = Configuration.GetSection("JwtIssuer").Value ,
+                ValidIssuer = Configuration.GetSection("JwtIssuer").Value,
 
                 // Validate the JWT Audience (aud) claim
                 ValidateAudience = true,
-                ValidAudience = Configuration.GetSection("JwtAudience").Value ,
+                ValidAudience = Configuration.GetSection("JwtAudience").Value,
 
                 // Validate the token expiry
                 ValidateLifetime = true,
@@ -118,8 +137,7 @@ namespace PointOfSale.Server
                 int week = day * 7;
                 int year = 365 * day;
 
-                options.LoginPath = "/auth/login";
-                options.AccessDeniedPath = "/auth/accessdenied";
+                options.LoginPath = "/login";
                 options.Cookie.IsEssential = true;
                 options.SlidingExpiration = true;
                 options.ExpireTimeSpan = TimeSpan.FromSeconds(day / 2);
@@ -130,12 +148,14 @@ namespace PointOfSale.Server
                     SecurityAlgorithms.HmacSha256,
                     tokenValidationParameters);
             });
-            services.AddControllersWithViews(options => options.Filters.Add(new AuthorizeFilter()))
-                .AddNewtonsoftJson(options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                    options.SerializerSettings.Formatting = Formatting.Indented;
-                }
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(new AuthorizeFilter(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()));
+            }).AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.Formatting = Formatting.Indented;
+            }
 
         );
             services.AddRazorPages();
@@ -167,7 +187,7 @@ namespace PointOfSale.Server
             });
             app.UseRouting();
 
-        //    app.UseIdentityServer();
+            //    app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
 
