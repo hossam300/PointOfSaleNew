@@ -123,6 +123,9 @@
   <data name="AddressType" xml:space="preserve">
     <value>نوع العنوان</value>
   </data>
+  <data name="AddressTypeRequired" xml:space="preserve">
+    <value>نوع العنوان مطلوب</value>
+  </data>
   <data name="AdvancedPriceICollections" xml:space="preserve">
     <value>مجموعات الأسعار المتقدمة</value>
   </data>
@@ -292,11 +295,17 @@
   <data name="CustomerLeadTime" xml:space="preserve">
     <value>مهلة العميل</value>
   </data>
+  <data name="CustomerRequired" xml:space="preserve">
+    <value>اسم العميل مطلوب</value>
+  </data>
   <data name="CustomerTaxes" xml:space="preserve">
     <value>ضرائب العملاء</value>
   </data>
   <data name="CustomerType" xml:space="preserve">
     <value>نوع العميل</value>
+  </data>
+  <data name="CustomerTypeRequired" xml:space="preserve">
+    <value>نوع العميل مطلوب</value>
   </data>
   <data name="DeleteDate" xml:space="preserve">
     <value>تاريخ الحذف</value>
@@ -340,7 +349,7 @@
   <data name="FiscalPositionName" xml:space="preserve">
     <value>اسم الوظيفة المالية</value>
   </data>
-  <data name="FiscalpositionPerOrder" xml:space="preserve">
+  <data name="FiscalPositionPerOrder" xml:space="preserve">
     <value>طلب مسبق للوضع المالي</value>
   </data>
   <data name="Floor" xml:space="preserve">
@@ -613,6 +622,9 @@
   <data name="Shop" xml:space="preserve">
     <value>المتجر</value>
   </data>
+  <data name="ShopRequired" xml:space="preserve">
+    <value>اسم المتجر مطلوب</value>
+  </data>
   <data name="SpecificFiscalPosition" xml:space="preserve">
     <value>الموقف المالي المحدد</value>
   </data>
@@ -624,12 +636,6 @@
   </data>
   <data name="StorableProduct" xml:space="preserve">
     <value>منتج قابل للتخزين</value>
-  </data>
-  <data name="String1" xml:space="preserve">
-    <value>الموقف المالى لكل طلب</value>
-  </data>
-  <data name="String2" xml:space="preserve">
-    <value>الموقف المالي المحدد</value>
   </data>
   <data name="SubscriptionProduct" xml:space="preserve">
     <value>منتج الاشتراك</value>

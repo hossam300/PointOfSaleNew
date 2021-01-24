@@ -7,17 +7,17 @@ namespace PointOfSale.DAL.Domains
 {
     public class Shop
     {
-        //public Shop()
-        //{
-        //    AllowedEmployees = new ICollection<ShopEmployee>();
-        //    Floors = new ICollection<ShopFloor>();
-        //    AvailableCategories = new ICollection<ShopProductCategory>();
-        //    Printers = new ICollection<ShopPrinter>();
-        //    AvailablePriceICollections = new ICollection<ShopPriceICollection>();
-        //    PaymentMethods = new ICollection<ShopPaymentMethod>();
-        //}
+        public Shop()
+        {
+            AllowedEmployees = new List<ShopEmployee>();
+            Floors = new List<ShopFloor>();
+            AvailableCategories = new List<ShopProductCategory>();
+            Printers = new List<ShopPrinter>();
+            PaymentMethods = new List<ShopPaymentMethod>();
+        }
         #region Main Info
         public int Id { get; set; }
+        [Required(ErrorMessageResourceName = "ShopRequired", ErrorMessageResourceType = typeof(Resources.Resources))]
         [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
         [Display(Name = "Branch", ResourceType = typeof(Resources.Resources))]
@@ -28,7 +28,7 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "LoginWithEmployees", ResourceType = typeof(Resources.Resources))]
         public bool LoginWithEmployees { get; set; }
         [Display(Name = "AllowedEmployees", ResourceType = typeof(Resources.Resources))]
-        public virtual ICollection<ShopEmployee> AllowedEmployees { get; set; }
+        public virtual List<ShopEmployee> AllowedEmployees { get; set; }
         #endregion
         #region PointOfSale Interface
         [Display(Name = "TableManagement", ResourceType = typeof(Resources.Resources))]
@@ -36,7 +36,7 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "FloorsTables", ResourceType = typeof(Resources.Resources))]
         public bool FloorsTables { get; set; }
         [Display(Name = "Floors", ResourceType = typeof(Resources.Resources))]
-        public virtual ICollection<ShopFloor> Floors { get; set; }
+        public virtual List<ShopFloor> Floors { get; set; }
         [Display(Name = "OrderlineNotes", ResourceType = typeof(Resources.Resources))]
         public bool OrderlineNotes { get; set; }
         [Display(Name = "CategoryPictures", ResourceType = typeof(Resources.Resources))]
@@ -44,7 +44,7 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "RestrictAvailableCategories", ResourceType = typeof(Resources.Resources))]
         public bool RestrictAvailableCategories { get; set; }
         [Display(Name = "AvailableCategories", ResourceType = typeof(Resources.Resources))]
-        public virtual ICollection<ShopProductCategory> AvailableCategories { get; set; }
+        public virtual List<ShopProductCategory> AvailableCategories { get; set; }
         [Display(Name = "VirtualKeyBoard", ResourceType = typeof(Resources.Resources))]
         public bool VirtualKeyBoard { get; set; }
         [Display(Name = "SetStartCategory", ResourceType = typeof(Resources.Resources))]
@@ -67,16 +67,16 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "OrderPrinter", ResourceType = typeof(Resources.Resources))]
         public bool OrderPrinter { get; set; }
         [Display(Name = "Printers", ResourceType = typeof(Resources.Resources))]
-        public virtual ICollection<ShopPrinter> Printers { get; set; }
+        public virtual List<ShopPrinter> Printers { get; set; }
         #endregion
         #region Taxes
-        [Display(Name = "FiscalpositionPerOrder", ResourceType = typeof(Resources.Resources))]
-        public bool FiscalPointOfSaleitionPerOrder { get; set; }
+        [Display(Name = "FiscalPositionPerOrder", ResourceType = typeof(Resources.Resources))]
+        public bool FiscalPositionPerOrder { get; set; }
         [Display(Name = "SpecificFiscalPosition", ResourceType = typeof(Resources.Resources))]
-        public bool SpecificFiscalPointOfSaleition { get; set; }
+        public bool SpecificFiscalPosition { get; set; }
         [Display(Name = "Fiscalposition", ResourceType = typeof(Resources.Resources))]
-        public int? FiscalPointOfSaleitionId { get; set; }
-        public virtual FiscalPosition FiscalPointOfSaleition { get; set; }
+        public int? FiscalPositionId { get; set; }
+        public virtual FiscalPosition FiscalPosition { get; set; }
         #endregion
         #region Pricing
         [Display(Name = "Pricelist", ResourceType = typeof(Resources.Resources))]
@@ -99,7 +99,7 @@ namespace PointOfSale.DAL.Domains
         #endregion
         #region Payments
         [Display(Name = "PaymentMethods", ResourceType = typeof(Resources.Resources))]
-        public virtual ICollection<ShopPaymentMethod> PaymentMethods { get; set; }
+        public virtual List<ShopPaymentMethod> PaymentMethods { get; set; }
         [Display(Name = "PrefillCashPayment", ResourceType = typeof(Resources.Resources))]
         public bool PrefillCashPayment { get; set; }
         [Display(Name = "CashControl", ResourceType = typeof(Resources.Resources))]

@@ -328,28 +328,28 @@
 
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.FiscalPointOfSaleitionPerOrder"></Radzen.Blazor.RadzenCheckBox>
-                                                                    <RadzenLabel Text="@Loc2["FiscalPositionPerOrder"]" Component="FiscalPointOfSaleitionPerOrder" style="width: 100%"></RadzenLabel>
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.FiscalPositionPerOrder"></Radzen.Blazor.RadzenCheckBox>
+                                                                    <RadzenLabel Text="@Loc2["FiscalPositionPerOrder"]" Component="FiscalPositionPerOrder" style="width: 100%"></RadzenLabel>
 
                                                                     @*<label class="col-xl-6 col-lg-6 col-form-label">Fiscal Position per Order</label>*@
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.SpecificFiscalPointOfSaleition"></Radzen.Blazor.RadzenCheckBox>
-                                                                    <RadzenLabel Text="@Loc["FiscalPosition"]" Component="SpecificFiscalPointOfSaleition" style="width: 100%"></RadzenLabel>
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.SpecificFiscalPosition"></Radzen.Blazor.RadzenCheckBox>
+                                                                    <RadzenLabel Text="@Loc["FiscalPosition"]" Component="SpecificFiscalPosition" style="width: 100%"></RadzenLabel>
                                                                     @*<label class="col-xl-6 col-lg-6 col-form-label">Fiscal Position</label>*@
                                                                 </div>
                                                             </div>
-                                                            @if (shop.FiscalPointOfSaleitionPerOrder || shop.SpecificFiscalPointOfSaleition)
+                                                            @if (shop.FiscalPositionPerOrder || shop.SpecificFiscalPosition)
                                                             {
                                                                 <div class="form-group row">
                                                                     <div class="col-xl-6">
-                                                                        <RadzenLabel Text="@Loc["FiscalPosition"]" Component="FiscalPointOfSaleitionIdFiscalPointOfSaleitionId" style="width: 100%"></RadzenLabel>
+                                                                        <RadzenLabel Text="@Loc["FiscalPosition"]" Component="FiscalPositionId" style="width: 100%"></RadzenLabel>
                                                                         @*<label class="col-md-4">Fiscal Position</label>*@
                                                                         <div class="col-xl-8">
-                                                                            <RadzenDropDown AllowClear="true" Name="FiscalPointOfSaleitionId"
+                                                                            <RadzenDropDown AllowClear="true" Name="FiscalPositionId"
                                                                                             FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
                                                                                             AllowFiltering="true" Placeholder="Select..."
-                                                                                            Data="@FiscalPointOfSaleitions" @bind-Value="shop.FiscalPointOfSaleitionId"
+                                                                                            Data="@FiscalPositions" @bind-Value="shop.FiscalPositionId"
                                                                                             Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
                                                                             </RadzenDropDown>
                                                                         </div>

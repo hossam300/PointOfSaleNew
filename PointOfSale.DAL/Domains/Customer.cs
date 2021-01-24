@@ -10,17 +10,18 @@ namespace PointOfSale.DAL.Domains
         public Customer()
         {
             CustomerContacts = new List<CustomerContact>();
+            Orders = new List<Order>();
         }
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "CustomerRequired",ErrorMessageResourceType = typeof(Resources.Resources))]
         [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessageResourceName = "CustomerTypeRequired", ErrorMessageResourceType = typeof(Resources.Resources))]
         [Display(Name = "CustomerType", ResourceType = typeof(Resources.Resources))]
         public virtual CustomerType CustomerType { get; set; }
         [Display(Name = "CustomerImage", ResourceType = typeof(Resources.Resources))]
         public string CustomerImage { get; set; }
-        [Required( ErrorMessage ="Address Type Requird")]
+        [Required(ErrorMessageResourceName = "AddressTypeRequired", ErrorMessageResourceType = typeof(Resources.Resources))]
         [Display(Name = "AddressType", ResourceType = typeof(Resources.Resources))]
         public int AddressTypeId { get; set; }
         public virtual AddressType AddressType { get; set; }
@@ -53,6 +54,8 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "CreationDate", ResourceType = typeof(Resources.Resources))]
         public DateTime CreationDate { get; set; } = DateTime.Now;
         public virtual List<CustomerContact> CustomerContacts { get; set; }
+        public virtual List<Order> Orders { get; set; }
+
     }
     public enum CustomerType
     {

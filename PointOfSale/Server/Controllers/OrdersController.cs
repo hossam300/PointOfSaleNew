@@ -31,6 +31,11 @@ namespace PointOfSale.Server.Controllers
         {
             return Ok(_orderService.GetAllWithInclude().Where(c => c.ShopId == id).ToList());
         }
+        [HttpGet("GetAllWithIncludeToday")]
+        public IActionResult GetAllWithIncludeToday()
+        {
+            return Ok(_orderService.GetAllWithInclude().Where(c => c.OrderDate.Date == DateTime.Now.Date).ToList());
+        }
 
         public IActionResult GetAllWithIncludeByCustomerId(int id)
         {

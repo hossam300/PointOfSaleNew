@@ -20,11 +20,11 @@ namespace PointOfSale.Client.Pages.Shops
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            Load();
+            await Load();
             await JSRuntime.InvokeVoidAsync("StopLoading");
 
         }
-        async void Load()
+        async Task Load()
         {
 
             if (id != null)

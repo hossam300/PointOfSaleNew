@@ -190,17 +190,17 @@
                                         <ChildContent>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <RadzenTemplateForm Data="@(shop)" Visible="@(shop != null)" TItem="Shop" Submit="@FormShopSubmit">
+                                                    <RadzenTemplateForm Data="@(shop)" Visible="@(shop != null)" TItem="Shop"  Submit="@FormShopSubmit" InvalidSubmit="@OnInvalidSubmit">
                                                         <ChildContent>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-12">
                                                                     <RadzenLabel Text="@Loc2["Name"]" Component="Name" style="width: 100%">
                                                                     </RadzenLabel>
                                                                     @*<DisplayName For="@(() => shop.Name)"></DisplayName>*@
-                                                                    <div class="col-xl-8">
-                                                                        <InputText id="Name" @bind-Value="shop.Name" class="form-control form-control-lg form-control-solid" />
-                                                                        <ValidationMessage For="() => shop.Name" class="text-danger" />
-                                                                    </div>
+                                                                <div class="col-xl-8">
+                                                                    <InputText  @bind-Value="shop.Name" Requird="" class="form-control form-control-lg form-control-solid" />
+                                                                    <Radzen.Blazor.RadzenRequiredValidator @ref="ShopNameRequird" Text="@Loc2["ShopRequired"]" class="text-danger" />
+                                                                </div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -228,7 +228,7 @@
                                                                             <RadzenDropDown AllowClear="true" Name="AllowedEmployees"
                                                                                             FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
                                                                                             AllowFiltering="true" Placeholder="Select..."
-                                                                                            Data="@AllowedEmployees" @bind-Value="@(multipleValues)" TextProperty="Name" ValueProperty="Id" Multiple="true"
+                                                                                            Data="@AllowedEmployees" @bind-Value="@(multipleValues)" TextProperty="UserName" ValueProperty="Id" Multiple="true"
                                                                                             Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
 
 

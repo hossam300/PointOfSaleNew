@@ -79,6 +79,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to نوع العنوان مطلوب.
+        /// </summary>
+        public static string AddressTypeRequired {
+            get {
+                return ResourceManager.GetString("AddressTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مجموعات الأسعار المتقدمة.
         /// </summary>
         public static string AdvancedPriceICollections {
@@ -584,6 +593,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اسم العميل مطلوب.
+        /// </summary>
+        public static string CustomerRequired {
+            get {
+                return ResourceManager.GetString("CustomerRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ضرائب العملاء.
         /// </summary>
         public static string CustomerTaxes {
@@ -598,6 +616,15 @@ namespace PointOfSale.DAL.Resources {
         public static string CustomerType {
             get {
                 return ResourceManager.GetString("CustomerType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع العميل مطلوب.
+        /// </summary>
+        public static string CustomerTypeRequired {
+            get {
+                return ResourceManager.GetString("CustomerTypeRequired", resourceCulture);
             }
         }
         
@@ -730,9 +757,9 @@ namespace PointOfSale.DAL.Resources {
         /// <summary>
         ///   Looks up a localized string similar to طلب مسبق للوضع المالي.
         /// </summary>
-        public static string FiscalpositionPerOrder {
+        public static string FiscalPositionPerOrder {
             get {
-                return ResourceManager.GetString("FiscalpositionPerOrder", resourceCulture);
+                return ResourceManager.GetString("FiscalPositionPerOrder", resourceCulture);
             }
         }
         
@@ -1547,6 +1574,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اسم المتجر مطلوب.
+        /// </summary>
+        public static string ShopRequired {
+            get {
+                return ResourceManager.GetString("ShopRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الموقف المالي المحدد.
         /// </summary>
         public static string SpecificFiscalPosition {
@@ -1579,24 +1615,6 @@ namespace PointOfSale.DAL.Resources {
         public static string StorableProduct {
             get {
                 return ResourceManager.GetString("StorableProduct", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to الموقف المالى لكل طلب.
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to الموقف المالي المحدد.
-        /// </summary>
-        public static string String2 {
-            get {
-                return ResourceManager.GetString("String2", resourceCulture);
             }
         }
         

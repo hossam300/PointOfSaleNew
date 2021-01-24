@@ -100,13 +100,13 @@
                                                     </span>
                                                 </a>
                                             </li>
-                                            <li class="navi-item">
+                                            @*<li class="navi-item">
                                                 <a href="/Shops/EditShop/@item.Id" class="navi-link">
                                                     <span class="navi-text">
                                                         <span class="label label-xl label-inline label-light-dark">@Loc["Details"]</span>
                                                     </span>
                                                 </a>
-                                            </li>
+                                            </li>*@
                                             <li class="navi-separator mt-3 opacity-70"></li>
                                             <li class="navi-footer py-4">
                                                 <a class="btn btn-clean font-weight-bold btn-sm" href="/Shops/AddShop">
@@ -185,9 +185,9 @@
             var returnUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
 
             if (string.IsNullOrWhiteSpace(returnUrl))
-                Navigation.NavigateTo("/logout", true);
+                Navigation.NavigateTo("/Login", true);
             else
-                Navigation.NavigateTo("/logout");
+                Navigation.NavigateTo("/Login");
         }
         await JSRuntime.InvokeVoidAsync("StartLoading");
         shops = await Http.GetFromJsonAsync<List<ShopDTO>>("/api/Shops/GetAllWithoutInclude");

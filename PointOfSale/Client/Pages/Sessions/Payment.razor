@@ -19,7 +19,7 @@
                                     </tr>
                                     <tr>
                                         <td style="border-right-color: #FFF !important;">@Loc["TotalPaying"] </td>
-                                        <td class="text-right"><span id="total_paying">@{var pay = (Order.Total - Order.Discount) * Order.OrderTax / 100;}@pay</span></td>
+                                        <td class="text-right"><span id="total_paying">@{var pay = (Order.Total - Order.Discount) + (Order.OrderTax * Order.Total / 100);}@pay</span></td>
                                         <td style="border-right-color: #FFF !important;">@Loc["Balance"] </td>
                                         <td class="text-right"><span id="balance">@balance</span></td>
                                     </tr>
@@ -40,7 +40,7 @@
                             <div class="col-xl-4">
                                 <div class="form-group">
                                     <label for="amount">@Loc["Amount"]</label>
-                                    <Radzen.Blazor.RadzenNumeric @bind-Value="@Amount" class="pa form-control kb-pad amount"></Radzen.Blazor.RadzenNumeric>
+                                    <Radzen.Blazor.RadzenNumeric @bind-Value="@pay" class="pa form-control kb-pad amount"></Radzen.Blazor.RadzenNumeric>
                                 </div>
                             </div>
                             <div class="col-xl-4">
@@ -52,7 +52,6 @@
                                                     Data="@PaymentMethods" TextProperty="Name" @bind-Value="@PaymentMethodId"
                                                     ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
 
-                                        <option value="0">@Loc["WalkInClient"]</option>
                                     </RadzenDropDown>
                                 </div>
                             </div>

@@ -37,9 +37,9 @@ namespace PointOfSale.Services.Sevices
                 SessionId = x.SessionId,
                 ShopId = x.ShopId,
                 Total = x.Total,
-                TotalItemCount = x.TotalItemCount
-
-
+                TotalItemCount = x.TotalItemCount,
+                CustomerId=x.CustomerId,
+                OrderId=x.Id
             }).ToList();
         }
     }

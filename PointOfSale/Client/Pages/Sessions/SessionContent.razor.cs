@@ -26,6 +26,7 @@ namespace PointOfSale.Client.Pages.Sessions
         //UserManager<SahlApplication> UserManager { get; set; }
 
         List<Product> Products = new List<Product>();
+        List<Product> ProductsData = new List<Product>();
         List<Product> ProductCats = new List<Product>();
         List<OrderItem> orderItems = new List<OrderItem>();
         List<Customer> customers = new List<Customer>();
@@ -34,6 +35,7 @@ namespace PointOfSale.Client.Pages.Sessions
         Radzen.Blazor.RadzenLabel CustomerVaildation;
         Radzen.Blazor.RadzenLabel ItemsVaildation;
         Radzen.Blazor.RadzenAutoComplete BarcodeId;
+
         Order order = new Order();
         int TotalItems = 0;
         double Total = 0;
@@ -60,13 +62,15 @@ namespace PointOfSale.Client.Pages.Sessions
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Products = await Http.GetFromJsonAsync<List<Product>>("/api/Products/GetAll");
-            customers = await Http.GetFromJsonAsync<List<Customer>>("/api/Customers/GetAll");
+            ProductsData = Products;
+            customers = await LoadCustomers();
             Categories = await Http.GetFromJsonAsync<List<ProductCategory>>("/api/ProductCategories/GetAll");
             ProductCats = GetProductsVyCategoryId(null);
             ProductCategories = GetProductCategories(0, 3, 0);
+          //  BarcodeId.Value = "";
             DialogService.OnOpen += Open;
             DialogService.OnClose += Close;
-            await BarcodeId.Element.FocusAsync();
+       //     await BarcodeId.Element.FocusAsync();
             await JSRuntime.InvokeVoidAsync("Setfocus", "barcode2");
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
@@ -116,6 +120,11 @@ namespace PointOfSale.Client.Pages.Sessions
             events.Add(DateTime.Now, $"{name} value changed to {str}");
             InvokeAsync(StateHasChanged);
         }
+        async Task<List<Customer>> LoadCustomers()
+        {
+            customers = await Http.GetFromJsonAsync<List<Customer>>("/api/Customers/GetAll");
+            return customers;
+        }
         async void HoldOrder()
         {
             if (order.CustomerId == 0)
@@ -135,7 +144,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 order.CreationDate = DateTime.Now;
                 order.OrderDate = DateTime.Now;
                 order.ShopId = Id;
-                order.Customer =new Customer { Id = order.CustomerId, Name = customers.FirstOrDefault(c => c.Id == order.CustomerId).Name };
+                order.Customer = new Customer { Id = order.CustomerId, Name = customers.FirstOrDefault(c => c.Id == order.CustomerId).Name };
                 var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
                 var user = authState.User;
                 var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
@@ -290,13 +299,35 @@ namespace PointOfSale.Client.Pages.Sessions
         {
             events.Add(DateTime.Now, $"{eventName}: {value}");
         }
-        void OnChange(object value, string name)
+        void OnChangeProduct(object value, string name)
         {
-            var product = Products.FirstOrDefault(c => c.Barcode == value.ToString() || c.Name == value.ToString());
-            AddOrderItem(product, 1);
-            BarcodeId.Value = "";
+            if (value != null)
+            {
+                ProductsData = Products.Where(x => x.Barcode.Contains(value.ToString()) || x.Name.Contains(value.ToString())).ToList();
+                var product = Products.FirstOrDefault(c => c.Barcode == value.ToString() || c.Name == value.ToString());
+                AddOrderItem(product, 1);
+              //  BarcodeId.Value = "";
+            }
+            else
+            {
+                ProductsData = Products;
+            }
+
             Log($"{name} value changed to {value}", name);
         }
+        //List<Product> OnLoadData(object value, string name)
+        //{
+        //    if (value != null)
+        //    {
+        //        ProductsData = Products.Where(c => c.Barcode.Contains(value.ToString()) || c.Name.Contains(value.ToString())).ToList();
+        //    }
+        //    else
+        //    {
+        //        ProductsData = Products;
+        //    }
+        //    return ProductsData;
+        //    InvokeAsync(StateHasChanged);
+        //}
         async void ChangeOrderNo()
         {
             var Oldorder = await Http.GetFromJsonAsync<Order>("/api/Orders/GetOrderByNo/" + order.OrderNumber);
@@ -325,7 +356,7 @@ namespace PointOfSale.Client.Pages.Sessions
         void OnChangeQuantity(int value, int prodId)
         {
             var product = Products.FirstOrDefault(c => c.Id == prodId);
-            AddOrderItem(product, value);
+            AddOrderItemQunty(product, value);
         }
         async void OnSubmit(Order model)
         {
@@ -346,68 +377,132 @@ namespace PointOfSale.Client.Pages.Sessions
             events.Add(DateTime.Now, "Dialog closed. Result: " + result);
             if (result != null)
             {
-
+                customers = await LoadCustomers();
                 order = new Order();
                 orderItems = new List<OrderItem>();
                 UpdateTotals();
             }
             await InvokeAsync(() => { StateHasChanged(); });
         }
+        public async void AddOrderItemQunty(Product item, int Qyt)
+        {
+            if (item != null)
+            {
+                if (orderItems == null)
+                {
+                    orderItems = new List<OrderItem>();
+                }
+                else
+                {
+                    OrderItem orderItem = new OrderItem();
+                    if (orderItems.Any(c => c.ProductId == item.Id))
+                    {
+                        orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
+                        orderItems.Remove(orderItem);
+                        orderItem.Price = orderItem.Price;
+                        orderItem.Quantity = orderItem.Quantity;
+                        orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                        if (order.Id != 0)
+                        {
+                            orderItem.Product = null;
+                            orderItem.OrderId = order.Id;
+                            if (orderItem.Id != 0)
+                                await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                            else
+                                await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                        }
+                        orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                        orderItems.Add(orderItem);
+                    }
+                    else
+                    {
+                        orderItem = new OrderItem
+                        {
+                            Price = item.SalesPrice,
+                            Product = new Product { Id = item.Id, Name = item.Name },
+                            ProductId = item.Id,
+                            Quantity = Qyt,
+                        };
+                        orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                        if (order.Id != 0)
+                        {
+                            orderItem.Product = null;
+                            orderItem.OrderId = order.Id;
+                            if (orderItem.Id != 0)
+                                await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                            else
+                                await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                        }
+                        orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                        orderItems.Add(orderItem);
+                    }
+
+                    TotalItems = orderItems.Sum(c => c.Quantity);
+                    Total = orderItems.Sum(c => c.SubTotal);
+                    TotalPayable = Total - Discount + (OrderTax * Total / 100);
+                }
+                await InvokeAsync(() => { StateHasChanged(); });
+            }
+        }
         public async void AddOrderItem(Product item, int Qyt)
         {
-            if (orderItems == null)
+            if (item != null)
             {
-                orderItems = new List<OrderItem>();
-            }
-            OrderItem orderItem = new OrderItem();
-            if (orderItems.Any(c => c.ProductId == item.Id))
-            {
-                orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
-                orderItems.Remove(orderItem);
-                orderItem.Quantity = orderItem.Quantity + Qyt;
-                orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
-                if (order.Id != 0)
+                if (orderItems == null)
                 {
-                    orderItem.Product = null;
-                    orderItem.OrderId = order.Id;
-                    if (orderItem.Id != 0)
-                        await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
-                    else
-                        await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                    orderItems = new List<OrderItem>();
                 }
-                orderItem.Product =new Product { Id = item.Id, Name = item.Name };
-                orderItems.Add(orderItem);
-            }
-            else
-            {
-                orderItem = new OrderItem
+                else
                 {
-                    Price = item.SalesPrice,
-                    Product = new Product { Id = item.Id, Name = item.Name },
-                    ProductId = item.Id,
-                    Quantity = Qyt,
-                };
-                orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
-                if (order.Id != 0)
-                {
-                    orderItem.Product = null;
-                    orderItem.OrderId = order.Id;
-                    if (orderItem.Id != 0)
-                        await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                    OrderItem orderItem = new OrderItem();
+                    if (orderItems.Any(c => c.ProductId == item.Id))
+                    {
+                        orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
+                        orderItems.Remove(orderItem);
+                        orderItem.Price = orderItem.Price;
+                        orderItem.Quantity = orderItem.Quantity + Qyt;
+                        orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                        if (order.Id != 0)
+                        {
+                            orderItem.Product = null;
+                            orderItem.OrderId = order.Id;
+                            if (orderItem.Id != 0)
+                                await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                            else
+                                await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                        }
+                        orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                        orderItems.Add(orderItem);
+                    }
                     else
-                        await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                    {
+                        orderItem = new OrderItem
+                        {
+                            Price = item.SalesPrice,
+                            Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice },
+                            ProductId = item.Id,
+                            Quantity = Qyt,
+                        };
+                        orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                        if (order.Id != 0)
+                        {
+                            orderItem.Product = null;
+                            orderItem.OrderId = order.Id;
+                            if (orderItem.Id != 0)
+                                await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                            else
+                                await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                        }
+                        orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                        orderItems.Add(orderItem);
+                    }
+
+                    TotalItems = orderItems.Sum(c => c.Quantity);
+                    Total = orderItems.Sum(c => c.SubTotal);
+                    TotalPayable = Total - Discount + (OrderTax * Total / 100);
                 }
-                orderItem.Product = new Product { Id = item.Id, Name = item.Name };
-                orderItems.Add(orderItem);
+                await InvokeAsync(() => { StateHasChanged(); });
             }
-
-            TotalItems = orderItems.Sum(c => c.Quantity);
-            Total = orderItems.Sum(c => c.SubTotal);
-            TotalPayable = Total - Discount + (OrderTax * Total / 100);
-
-
-            await InvokeAsync(() => { StateHasChanged(); });
-
         }
         async void DeleteItem(OrderItem item)
         {

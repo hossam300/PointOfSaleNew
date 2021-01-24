@@ -13,7 +13,7 @@
                     @*  <img alt="Logo" src="assets/media/logos/logo-letter-9.png" class="max-h-35px" />*@
                 </NavLink>
                 <!--end::Logo-->
-                <ul class="header-tabs nav align-self-end font-size-lg" role="tablist">
+                <ul class="header-tabs nav align-self-end font-size-lg" role="tablist" style="padding-left:250px">
                     <li class="nav-item">
                         <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2">
                             <a @onclick="@StartCountdown">
@@ -23,7 +23,7 @@
                             </a>
                         </div>
                     </li>
-                    <li class="nav-item mr-3">
+                    @*<li class="nav-item mr-3">
                         <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2">
                             <a @onclick="@OpenRegisterDetails">
                                 <div class="d-flex flex-column text-right pr-3">
@@ -31,7 +31,7 @@
                                 </div>
                             </a>
                         </div>
-                    </li>
+                    </li>*@
                     <li class="nav-item mr-3">
                         <div class="btn btn-icon btn-hover-transparent-white w-auto d-flex align-items-center btn-lg px-2">
                             <a @onclick="@OpenTodaySale">
@@ -52,9 +52,9 @@
                     </li>
                 </ul>
                 <div class="topbar bg-primary">
-                    <Notifications></Notifications>
-                    <HeaderQuickPanel></HeaderQuickPanel>
-                    <QuickPanel></QuickPanel>
+                    @*<Notifications></Notifications>*@
+                    @*<HeaderQuickPanel></HeaderQuickPanel>
+                    <QuickPanel></QuickPanel>*@
                     <Language></Language>
                     <LoginDisplay></LoginDisplay>
                 </div>

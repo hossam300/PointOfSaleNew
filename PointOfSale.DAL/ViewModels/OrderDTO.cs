@@ -6,8 +6,10 @@ namespace PointOfSale.DAL.ViewModels
     public class OrderDTO
     {
         public int Id { get; set; }
+        public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string OrderNumber { get; set; }
+        public int OrderId { get; set; }
         public OrderType OrderType { get; set; }
         public DateTime OrderDate { get; set; }
         public double? Total { get; set; }

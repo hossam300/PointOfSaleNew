@@ -25,9 +25,9 @@
             var returnUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
 
             if (string.IsNullOrWhiteSpace(returnUrl))
-                Navigation.NavigateTo("/logout", true);
+                Navigation.NavigateTo("/Login", true);
             else
-                Navigation.NavigateTo("/logout");
+                Navigation.NavigateTo("/Login");
         }
     }
 }

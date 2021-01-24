@@ -4,6 +4,7 @@ using PointOfSale.DAL.Domains;
 using Radzen;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace PointOfSale.Client.Pages.Sessions
             DialogService.OnClose += Close;
             new Timer(new TimerCallback(_ =>
             {
-                Date = DateTime.Now.ToString("f");
+                Date = DateTime.Now.ToString("f",new CultureInfo("ar-EG"));
 
                 // Note that the following line is necessary because otherwise
                 // Blazor would not recognize the state change and not refresh the UI
@@ -54,7 +55,7 @@ namespace PointOfSale.Client.Pages.Sessions
         }
         public async void OpenTodaySale()
         {
-            var result = await DialogService.OpenAsync<TodaySale>("Today's Sale", null);
+            var result = await DialogService.OpenAsync<TodaySale>("Today's Sale", null, new Radzen.DialogOptions() { Width = "80%", Height = "600px" });
             await InvokeAsync(() => { StateHasChanged(); });
         }
         public async void OpenRegisterDetails()

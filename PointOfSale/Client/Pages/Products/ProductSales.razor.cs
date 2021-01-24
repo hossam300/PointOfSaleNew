@@ -21,6 +21,7 @@ namespace PointOfSale.Client.Pages.Products
             await JSRuntime.InvokeVoidAsync("StartLoading");
             product = await Http.GetFromJsonAsync<Product>("api/Products/GetById/" + id);
             products = await Http.GetFromJsonAsync<List<Product>>("api/Products/GetAll/");
+            products = products.Where(c => c.Id != id).ToList();
             multipleValues = product.OptionalProducts.Select(x => x.OptionalProductId);
             await JSRuntime.InvokeVoidAsync("StopLoading");
 

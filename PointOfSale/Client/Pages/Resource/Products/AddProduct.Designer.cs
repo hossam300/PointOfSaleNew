@@ -169,7 +169,7 @@ namespace PointOfSale.Client.Pages.Resource.Products {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ضراءب المورد.
+        ///   Looks up a localized string similar to ضرائب المورد.
         /// </summary>
         public static string VendorTaxes {
             get {

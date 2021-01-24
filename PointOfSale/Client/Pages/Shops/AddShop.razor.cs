@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
+using Radzen.Blazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace PointOfSale.Client.Pages.Shops
         Shop shop = new Shop();
         List<SahlUserIdentity> AllowedEmployees = new List<SahlUserIdentity>();
         IEnumerable<string> multipleValues = new string[] { };
+        protected RadzenRequiredValidator ShopNameRequird;
         [Parameter] public int? id { get; set; }
         protected override async Task OnInitializedAsync()
         {
@@ -45,18 +47,31 @@ namespace PointOfSale.Client.Pages.Shops
         {
             events.Add(DateTime.Now, $"{eventName}: {value}");
         }
+        void OnInvalidSubmit(Radzen.FormInvalidSubmitEventArgs args)
+        {
+            Log("InvalidSubmit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
+        }
         public async void FormShopSubmit(Shop model)
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
+            bool formIsValid = (model.Name == "" || model.Name == null);
+            if (formIsValid)
+            {
+                ShopNameRequird.Text = Loc2["ShopRequired"];
+                ShopNameRequird.Visible = true;
+               
+                await JSRuntime.InvokeVoidAsync("StopLoading");
+                return;
+            }
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
-            if (shop.Floors!=null)
+            if (shop.Floors != null)
             {
                 shop.Floors = shop.Floors.Select(x => new ShopFloor
                 {
                     FloorId = x.FloorId,
                     ShopId = x.ShopId
-                }).ToList(); 
+                }).ToList();
             }
             if (shop.Id == 0)
             {

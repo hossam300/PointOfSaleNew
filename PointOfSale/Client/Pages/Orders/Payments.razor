@@ -67,10 +67,10 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>
-                                                                    <strong>@((context.Value as OrderDTO).CustomerName)</strong>
+                                                                    <a href="/CustomerDetails/@((context.Value as OrderDTO).CustomerId)"> <strong>@((context.Value as OrderDTO).CustomerName)</strong></a>
                                                                 </td>
                                                                 <td>
-                                                                    <strong>@((context.Value as OrderDTO).OrderNumber)</strong>
+                                                                    <button class="btn btn-link" @onclick="()=>PrintBill((context.Value as OrderDTO).OrderNumber)"><strong>@((context.Value as OrderDTO).OrderNumber)</strong></button>
                                                                 </td>
                                                                 <td>
                                                                     <strong>@((context.Value as OrderDTO).OrderDate)</strong>
@@ -83,13 +83,6 @@
                                                     </table>
                                                 </Template>
                                             </RadzenTreeLevel>
-
-                                            @*<RadzenTreeLevel TextProperty="CustomerName">
-                                                </RadzenTreeLevel>
-                                                <RadzenTreeLevel TextProperty="OrderDate">
-                                                </RadzenTreeLevel>
-                                                <RadzenTreeLevel TextProperty="Total">
-                                                </RadzenTreeLevel>*@
                                         </RadzenTree>
                                     </div>
                                 </div>
@@ -102,6 +95,8 @@
     </div>
 </div>
 @code {
+    [Inject]
+    protected DialogService DialogService { get; set; }
     List<PaymentMethodDTO> OrderPayments;
     protected override async Task OnInitializedAsync()
     {
@@ -109,5 +104,13 @@
         OrderPayments = await Http.GetFromJsonAsync<List<PaymentMethodDTO>>("/api/OrderPayments/GetAllGroubByMethod");
         await JSRuntime.InvokeVoidAsync("StopLoading");
     }
+    async void PrintBill(string OrderNumber)
+    {
+        var order = await Http.GetFromJsonAsync<Order>("/api/Orders/GetOrderByNo/" + OrderNumber);
+        var result = await DialogService.OpenAsync<Sessions.PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", order } },
+             new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+        await InvokeAsync(() => { StateHasChanged(); });
+    }
+
 
 }

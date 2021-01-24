@@ -12,7 +12,7 @@
             <!--begin::Page Heading-->
             <div class="d-flex align-items-baseline mr-5">
                 <!--begin::Page Title-->
-                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc2["AddCustomers"]</h5>
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["AddCustomers"]</h5>
                 <!--end::Page Title-->
                 <!--begin::Breadcrumb-->
                 <!--end::Breadcrumb-->
@@ -46,14 +46,15 @@
                                         <RadzenLabel Text="@Loc["CustomerType"]" Component="CustomerType" style="width: 100%">
                                         </RadzenLabel>
                                         @*<DisplayName For="@(() => customer.CustomerType)"></DisplayName>*@
-                                        <div class="col-md-9">
-                                            <RadzenRadioButtonList @bind-Value="customer.CustomerType" TValue="PointOfSale.DAL.Domains.CustomerType" Change="@((args) => RadioSelection(args))">
-                                                <Items>
-                                                    <RadzenRadioButtonListItem Text="@Loc2[PointOfSale.DAL.Domains.CustomerType.Individual.ToString()]" Value="@PointOfSale.DAL.Domains.CustomerType.Individual" />
-                                                    <RadzenRadioButtonListItem Text="@Loc2[PointOfSale.DAL.Domains.CustomerType.Company.ToString()]" Value="@PointOfSale.DAL.Domains.CustomerType.Company" />
-                                                </Items>
-                                            </RadzenRadioButtonList>
-                                        </div>
+                                    <div class="col-md-9">
+                                        <RadzenRadioButtonList @bind-Value="customer.CustomerType" TValue="PointOfSale.DAL.Domains.CustomerType" Change="@((args) => RadioSelection(args))">
+                                            <Items>
+                                                <RadzenRadioButtonListItem Text="@Loc2[PointOfSale.DAL.Domains.CustomerType.Individual.ToString()]" Value="@PointOfSale.DAL.Domains.CustomerType.Individual" />
+                                                <RadzenRadioButtonListItem Text="@Loc2[PointOfSale.DAL.Domains.CustomerType.Company.ToString()]" Value="@PointOfSale.DAL.Domains.CustomerType.Company" />
+                                            </Items>
+                                        </RadzenRadioButtonList>
+                                        <ValidationMessage For="() => customer.CustomerType" class="text-danger" />
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -98,7 +99,7 @@
 
                                             </RadzenDropDown>
 
-                                            <RadzenRequiredValidator DefaultValue="0" Component="AddressTypeId" Text="Address Type is required" Popup="@popup" Style="position: absolute" />
+                                            <RadzenRequiredValidator DefaultValue="0" Component="AddressTypeId" Text="@Loc2["AddressTypeRequired"]" Popup="@popup" Style="position: absolute" />
                                             @*<ValidationMessage For="() => customer.AddressTypeId" class="text-danger" />*@
                                         </div>
                                     </div>

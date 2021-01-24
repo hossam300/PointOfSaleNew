@@ -8,7 +8,7 @@
             <!--begin::Details-->
             <div class="d-flex align-items-center flex-wrap mr-2">
                 <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Loc["AddShops"]</h5>
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">@Loc["AddShops"]</h5>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
@@ -199,7 +199,8 @@
 
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.HeaderFooter"></Radzen.Blazor.RadzenCheckBox>  <RadzenLabel Text="@Loc2["HeaderFooter"]" Component="HeaderFooter" style="width: 100%">
+                                                                    <Radzen.Blazor.RadzenCheckBox @bind-Value="shop.HeaderFooter"></Radzen.Blazor.RadzenCheckBox>  
+                                                                    <RadzenLabel Text="@Loc2["HeaderFooter"]" Component="HeaderFooter" style="width: 100%">
                                                                     </RadzenLabel>
                                                                 </div>
                                                                 <div class="col-xl-6">
@@ -244,7 +245,7 @@
 
                                                             <div class="d-flex justify-content-between border-top mt-5 pt-10">
                                                                 <div class="mr-2">
-                                                                    <a href="/ShopPricingPayment/@shop.Id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">@Loc["Previous"]</a>
+                                                                    <a href="/ShopPricingPayment/@id" class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4">@Loc["Previous"]</a>
                                                                 </div>
                                                                 <div>
                                                                     <button class="btn btn-primary font-weight-bold text-uppercase px-9 py-4" type="submit">@Loc["NextStep"]</button>

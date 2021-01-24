@@ -9,7 +9,8 @@ window.StopLoading = function () {
     StopLoding();
 }
 window.requied = (ele) => {
-    alert(ele);
+    Swal.fire(ele);
+  //  alert(ele);
 }
 window.PrintElem = (elem) => {
     var mywindow = window.open('', 'PRINT', 'height=600,width=900');

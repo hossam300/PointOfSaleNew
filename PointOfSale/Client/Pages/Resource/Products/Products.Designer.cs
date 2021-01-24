@@ -142,24 +142,6 @@ namespace PointOfSale.Client.Pages.Resource.Products {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string Selected {
-            get {
-                return ResourceManager.GetString("Selected", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to .
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to العدد الكلى.
         /// </summary>
         public static string Total {

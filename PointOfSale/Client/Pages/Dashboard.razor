@@ -40,11 +40,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <RadzenChart>
-                        <RadzenColumnSeries Data="Categories" CategoryProperty="Text" LineType="LineType.Dashed" ValueProperty="Value" />
+                    <RadzenChart >
+                        <RadzenColumnSeries Data="Categories" CategoryProperty="Text" LineType="LineType.Dashed" Title="الفئات"  ValueProperty="Value" />
                         <RadzenColumnOptions Radius="5" />
-                        <RadzenValueAxis Formatter="@FormatAsUSD">
-                            <RadzenGridLines Visible="true" />
+                        <RadzenValueAxis Formatter="@FormatAsUSD" >
+                            <RadzenGridLines Visible="false" />
                             <RadzenAxisTitle Text="@Loc["RevenueInEG"]" />
                         </RadzenValueAxis>
                     </RadzenChart>

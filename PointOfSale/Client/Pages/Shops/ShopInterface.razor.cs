@@ -16,7 +16,7 @@ namespace PointOfSale.Client.Pages.Shops
         Shop shop = new Shop();
         List<DropDownList> Floors = new List<DropDownList>();
         List<DropDownList> Printers = new List<DropDownList>();
-        List<DropDownList> FiscalPointOfSaleitions = new List<DropDownList>();
+        List<DropDownList> FiscalPositions = new List<DropDownList>();
         List<DropDownList> AvailableCategories = new List<DropDownList>();
         IEnumerable<int> multipleFloors = new int[] { };
         IEnumerable<int> multiplePrinters = new int[] { };
@@ -33,7 +33,7 @@ namespace PointOfSale.Client.Pages.Shops
         {
             Floors = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Floors/GetDropDownListAll");
             Printers = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Printers/GetDropDownListAll");
-            FiscalPointOfSaleitions = await Http.GetFromJsonAsync<List<DropDownList>>("/api/FiscalPositions/GetDropDownListAll");
+            FiscalPositions = await Http.GetFromJsonAsync<List<DropDownList>>("/api/FiscalPositions/GetDropDownListAll");
             AvailableCategories = await Http.GetFromJsonAsync<List<DropDownList>>("/api/ProductCategories/GetDropDownListAll");
             if (id != null)
             {
@@ -79,7 +79,7 @@ namespace PointOfSale.Client.Pages.Shops
             {
                 item.User = null;
             }
-            shop.FiscalPointOfSaleition = null;
+            shop.FiscalPosition = null;
             using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
             {
 

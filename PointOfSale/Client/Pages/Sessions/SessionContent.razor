@@ -24,13 +24,9 @@
                                                     <div class="col-xl-8">
                                                         <RadzenDropDown AllowClear="true" TValue="int" Name="CustomerId" Placeholder="@Loc["ChooseCustomer"]"
                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
-                                                                        AllowFiltering="true" SelectedItem="0"
+                                                                        AllowFiltering="true" SelectedItem="1"
                                                                         Data="@customers" TextProperty="Name" @bind-Value="@order.CustomerId"
                                                                         ValueProperty="Id" Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
-                                                            @*<Template>
-                                                                @Loc["Customer"]: @((context as Customer).Name)
-                                                            </Template>*@
-                                                            @*<option value="0" selected="selected">@Loc["WalkInClient"]</option>*@
                                                         </RadzenDropDown>
                                                         <RadzenLabel @ref="CustomerVaildation" Text="@Loc["CustomerIsRequired"]" Visible="false" />
                                                     </div>
@@ -48,8 +44,20 @@
                                                 </div>
                                                 <div class="form-group row" style="width: 140%;">
                                                     <div class="col-xl-8">
-                                                        <RadzenAutoComplete @ref="BarcodeId" Data=@Products TextProperty="Barcode" Placeholder="@Loc["EnterBarcodeOrProductName"]" id="barcode2"
-                                                                            Style="margin-bottom: 20px;width:100%" Change=@(args => OnChange(args, "AutoComplete")) />
+
+                                                        <RadzenDropDownDataGrid AllowClear="true" TValue="int" Name="BarcodeId"
+                                                                                FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="Radzen.StringFilterOperator.StartsWith" 
+                                                                                AllowFiltering="true" SelectedItem="1"
+                                                                                Data="@ProductsData" TextProperty="Barcode"
+                                                                                ValueProperty="Id" Placeholder="@Loc["EnterBarcodeOrProductName"]" id="barcode2" Style="margin-bottom: 20px;width:100%" Change=@(args => OnChangeProduct(args, "AutoComplete with custom filter operator"))>
+                                                            <Columns>
+                                                                <RadzenDropDownDataGridColumn Property="Barcode" Filterable="true"  Title="Barcode" Width="100px" />
+                                                                <RadzenDropDownDataGridColumn Property="Name" Filterable="true" Title="Name" Width="200px" />
+                                                            </Columns>
+                                                        </RadzenDropDownDataGrid>
+
+
+                                                        
                                                     </div>
 
                                                 </div>
@@ -98,7 +106,7 @@
                                                                 <label class="control-label">@Loc["Discount"]</label>
                                                             </th>
                                                             <th>
-                                                                <RadzenNumeric TValue="double" @bind-Value="@Discount" Disabled="true" Change="UpdateTotals" />
+                                                                <RadzenNumeric TValue="double" @bind-Value="@Discount" Change="UpdateTotals" />
 
                                                             </th>
                                                             <th>
@@ -170,7 +178,7 @@
                     <div class="col-xl-7">
                         <div class="btn-group btn-group">
                             <div class="btn-group">
-                                <button class="btn btn-warning" @onclick="()=>GetProductCategories(i,2,1)"
+                                <button class="btn btn-warning" @onclick="()=>GetProductCategories(i,3,1)"
                                         type="button" id="previous">
                                     <i class="fa fa-chevron-right"></i>
                                 </button>
@@ -207,7 +215,7 @@
                             }
                             <div class="btn-group"></div>
                             <div class="btn-group">
-                                <button class="btn btn-warning" @onclick="()=>GetProductCategories(i,2,2)"
+                                <button class="btn btn-warning" @onclick="()=>GetProductCategories(i,3,2)"
                                         type="button" id="next">
                                     <i class="fa fa-chevron-left"></i>
                                 </button>
@@ -223,11 +231,14 @@
                                             <img src="@item.ProductImage"
                                                  alt="@item.Name"
                                                  style="width: 100%; height: 100px;">
+
+                                         @*   <span style="font-family: 'Libre Barcode 39 Extended Text', cursive;font-size: 40px;"> @item.Barcode</span>*@
                                         </span>
                                         <span>
                                             <span>
                                                 @item.Name
                                             </span>
+
                                         </span>
                                     </button>
                                 </Virtualize>
