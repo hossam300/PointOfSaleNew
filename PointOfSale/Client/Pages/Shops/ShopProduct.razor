@@ -1,0 +1,102 @@
+﻿@page "/ShopProduct/{id:int}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Shops.ShopProduct> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent @ref="content1" Container="main" Style="direction:rtl;text-align:right">
+                    <ChildContent>
+
+                        <RadzenTemplateForm @ref="formShopProduct" Data="@(ShopProducts)" Visible="@(ShopProducts != null)" TItem="IEnumerable<DAL.Domains.ShopProduct>" Submit="@FormShopProductSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@InsertRow" />
+                                    <RadzenGrid @ref="ShopProducts" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" EditMode="Radzen.DataGridEditMode.Single"
+                                                Data="@ShopProducts" TItem="DAL.Domains.ShopProduct" RowUpdate="@OnUpdateRow" RowCreate="@OnCreateRow">
+                                        <Columns>
+                                            <RadzenGridColumn Width="100px" TItem="DAL.Domains.ShopProduct" Property="Id" Visible="false" Title="Order ID" />
+                                            <RadzenGridColumn Width="200px" TItem="DAL.Domains.ShopProduct" Property="Product.Name" Title="Customer">
+                                                <EditTemplate Context="shopProduct">
+                                                    <RadzenDropDown @bind-Value="@shopProduct.ProductId" Data="@Products" TextProperty="Name" ValueProperty="Id" Style="width:100%" />
+                                                </EditTemplate>
+                                            </RadzenGridColumn>
+                                            <RadzenGridColumn Width="200px" TItem="DAL.Domains.ShopProduct" Property="Product.Name" Title="Customer">
+                                                <EditTemplate Context="shopProduct">
+                                                    <RadzenDropDown @bind-Value="@shopProduct.ShopId" Data="@Shops" TextProperty="Name" ValueProperty="Id" Style="width:100%" />
+                                                </EditTemplate>
+                                            </RadzenGridColumn>
+                                            <RadzenGridColumn TItem="DAL.Domains.ShopProduct" Property="CurrentQuantity" Title="Current Quantity">
+                                                <Template Context="shopProduct">
+                                                    @shopProduct.CurrentQuantity
+                                                </Template>
+                                                <EditTemplate Context="shopProduct">
+                                                    <RadzenNumeric @bind-Value="shopProduct.CurrentQuantity" Style="width:100%" />
+                                                </EditTemplate>
+                                            </RadzenGridColumn>
+                                            <RadzenGridColumn TItem="DAL.Domains.ShopProduct" Property="OldQuantity" Title="Current Quantity">
+                                                <Template Context="shopProduct">
+                                                    @shopProduct.OldQuantity
+                                                </Template>
+                                                <EditTemplate Context="shopProduct">
+                                                    <RadzenNumeric @bind-Value="shopProduct.OldQuantity" Style="width:100%" />
+                                                </EditTemplate>
+                                            </RadzenGridColumn>
+                                            <RadzenGridColumn TItem="DAL.Domains.ShopProduct" Property="ActualQuantity" Title="Current Quantity">
+                                                <Template Context="shopProduct">
+                                                    @shopProduct.ActualQuantity
+                                                </Template>
+                                                <EditTemplate Context="shopProduct">
+                                                    <RadzenNumeric @bind-Value="shopProduct.ActualQuantity" Style="width:100%" />
+                                                </EditTemplate>
+                                            </RadzenGridColumn>
+                                            <RadzenGridColumn TItem="DAL.Domains.ShopProduct" Context="sampleBlazorModelsSampleOrder" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                <Template Context="shopProduct">
+                                                    <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(shopProduct))">
+                                                    </RadzenButton>
+                                                </Template>
+                                                <EditTemplate Context="shopProduct">
+                                                    <RadzenButton Icon="save" Size="Radzen.ButtonSize.Small" Click="@((args) => SaveRow(shopProduct))">
+                                                    </RadzenButton>
+                                                    <RadzenButton Icon="cancel" Size="Radzen.ButtonSize.Small" ButtonStyle="Radzen.ButtonStyle.Secondary" Click="@((args) => CancelEdit(shopProduct))">
+                                                    </RadzenButton>
+                                                </EditTemplate>
+                                            </RadzenGridColumn>
+                                            <RadzenGridColumn TItem="DAL.Domains.ShopProduct" Context="order" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="70px">
+                                                <Template Context="shopProduct">
+                                                    <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(shopProduct))">
+                                                    </RadzenButton>
+                                                </Template>
+                                                <EditTemplate Context="shopProduct">
+                                                    <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@(args => DeleteRow(shopProduct))">
+                                                    </RadzenButton>
+                                                </EditTemplate>
+                                            </RadzenGridColumn>
+                                        </Columns>
+                                    </RadzenGrid>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

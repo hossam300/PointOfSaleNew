@@ -183,6 +183,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Products.resx</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Resource\PurchaseOrders\AddPurchaseOrder.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddPurchaseOrder.resx</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Resource\PurchaseOrders\PurchaseOrders.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -267,6 +272,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>ShopPricingPayment.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Shops\ShopProduct.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShopProduct.resx</DependentUpon>
     </Compile>
     <Compile Update="Pages\Resource\Suppliers\AddSupplier.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -411,6 +421,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Products.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\PurchaseOrders\AddPurchaseOrder.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddPurchaseOrder.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\PurchaseOrders\PurchaseOrders.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PurchaseOrders.Designer.cs</LastGenOutput>
@@ -478,6 +492,10 @@
     <EmbeddedResource Update="Pages\Resource\Shops\ShopPricingPayment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ShopPricingPayment.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Shops\ShopProduct.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShopProduct.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Suppliers\AddSupplier.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

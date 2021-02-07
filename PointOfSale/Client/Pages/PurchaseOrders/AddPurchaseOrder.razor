@@ -1,5 +1,54 @@
-﻿<h3>AddPurchaseOrder</h3>
+﻿@page "/addPurchaseOrder/{Id:int?}"
+@using Radzen
+@using Radzen.Blazor
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.PurchaseOrders.AddPurchaseOrder> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
-@code {
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent @ref="content1" Container="main" Style="direction:rtl;text-align:right">
+                    <ChildContent>
 
-}
+                        <RadzenTemplateForm @ref="formPurchaseOrder" Data="@(PurchaseOrder)" Visible="@(PurchaseOrder != null)" TItem="PurchaseOrder" Submit="@FormPurchaseOrderSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <div class="col-md-12">
+                                        <div style="margin-bottom: 1rem" class="row">
+                                            <RadzenLabel @ref="label1" Text="@Loc2["OrderNumber"]" Component="OrderNumber" style="width: 100%">
+                                            </RadzenLabel>
+                                            @*<DisplayName For="@(() => PurchaseOrder.Type)"></DisplayName>*@
+                                            <div class="col-md-9">
+                                                <RadzenTextBox @bind-Value="PurchaseOrder.OrderNumber" style="width: 100%" Name="Type">
+                                                </RadzenTextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>
