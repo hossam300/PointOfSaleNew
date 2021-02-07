@@ -1,0 +1,48 @@
+﻿@page "/ContactTypesList"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.ContactTypes.ContactTypeList> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main" Style="direction:rtl;text-align:right">
+                            <ChildContent>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenButton Icon="add_circle_outline" class="btn btn-light-primary font-weight-bold ml-2" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@btnContactTypesClick">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="gridContactTypes" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(ContactTypes)" TItem="ContactType">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="ContactType" Context="ContactType" Property="Id" Title="Id" Visible="false" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ContactType" Context="ContactType" Property="Type" Title="@Loc2["Type"]" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ContactType" Context="ContactType" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="ContactType">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(ContactType))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="ContactType" Context="ContactType" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="ContactType">
+                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, ContactType))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

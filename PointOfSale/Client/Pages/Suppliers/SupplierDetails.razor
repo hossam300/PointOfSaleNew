@@ -1,0 +1,287 @@
+﻿@page "/SupplierDetails/{id:int}"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Suppliers.SupplierDetails> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="card card-custom">
+    <div class="card-header">
+        @*<div class="card-title">
+                <h3 class="card-label">@Supplier.Name</h3>
+            </div>*@
+        <div class="card-toolbar">
+            <ul class="nav nav-bold nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#kt_tab_pane_7_1">@Loc["SupplierDetail"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_2">@Loc["SupplierContacts"]</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#kt_tab_pane_7_3">@Loc["SupplierSales"]</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="kt_tab_pane_7_1" role="tabpanel" aria-labelledby="kt_tab_pane_7_1">
+                <div class="flex-row-fluid ml-lg-8">
+                    <!--begin::Card-->
+                    <div class="card card-custom card-stretch">
+                        <!--begin::Header-->
+                        <div class="card-header py-3">
+                            <div class="card-title align-items-start flex-column">
+                                <h3 class="card-label font-weight-bolder text-dark">@Loc["Information"] @Supplier.Name </h3>
+                            </div>
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Form-->
+                        <!--begin::Body-->
+                        <div class="card-body" style="text-align: right;">
+                            <div class="row">
+                                <h5 class="font-weight-bold mb-6">@Loc["SupplierInfo"]</h5>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label text-right">@Loc2["SupplierImage"]</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    @if (Supplier.SupplierImage == "" || Supplier.SupplierImage == null)
+                                    {
+                                        <img src="assets/media/users/300_21.jpg" style="width:200px" />
+                                    }
+                                    else
+                                    { <img src="@Supplier.SupplierImage" style="width:200px" />}
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["Name"]" Component="Name" style="width: 100%">
+                                    </RadzenLabel>
+                                    @*<DisplayName For="@(() => Supplier.Name)"></DisplayName>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.Name</label>
+                                        @*<InputText id="Name" @bind-Value="Supplier.Name" class="form-control" />*@
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["AddressType"]" Component="AddressType" style="width: 100%">
+                                    </RadzenLabel>
+                                    @*<DisplayName For="@(() => Supplier.AddressTypeId)"></DisplayName>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@addressType.Type</label>
+                                        @*<RadzenDropDown AllowClear="true" TValue="int" Name="AddressTypeId"
+                                                            FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive"
+                                                            AllowFiltering="true" Placeholder="Select..."
+                                                            Data="@addressTypes" TextProperty="Type" @bind-Value="@Supplier.AddressTypeId"
+                                                            ValueProperty="Id"  class="form-control" Style="margin-bottom: 20px">
+                                            </RadzenDropDown>*@
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["Phone"]" Component="Phone" style="width: 100%">
+                                    </RadzenLabel>
+                                    @*<DisplayName For="@(() => Supplier.Phone)"></DisplayName>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.Phone</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["Mobile"]" Component="Mobile" style="width: 100%">
+                                    </RadzenLabel>
+                                    @*<DisplayName For="@(() => Supplier.Mobile)"></DisplayName>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.Mobile</label>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["EmailAddress"]" Component="Email" style="width: 100%">
+                                    </RadzenLabel>
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.Email</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["CompanyAddressStreet1"]" Component="CompanyAddressStreet1" style="width: 100%">
+                                    </RadzenLabel>
+                                    @* <DisplayName For="@(() => Supplier.CompanyAddressStreet1)"></DisplayName>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.CompanyAddressStreet1</label>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["CompanyAddressStreet2"]" Component="CompanyAddressStreet2" style="width: 100%">
+                                    </RadzenLabel>
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.CompanyAddressStreet2</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["City"]" Component="City" style="width: 100%">
+                                    </RadzenLabel>
+                                    @*<DisplayName For="@(() => Supplier.City)"></DisplayName>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.City</label>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["Country"]" Component="Country" style="width: 100%">
+                                    </RadzenLabel>
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.Country</label>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["TaxID"]" Component="TaxID" style="width: 100%">
+                                    </RadzenLabel>
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.TaxID</label>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["JobPosition"]" Component="JobPosition" style="width: 100%">
+                                    </RadzenLabel>
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.JobPosition</label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["Website"]" Component="WebsiteLink" style="width: 100%">
+                                    </RadzenLabel>
+                                    @*<DisplayName For="@(() => Supplier.WebsiteLink)"></DisplayName>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.WebsiteLink</label>
+
+                                    </div>
+                                </div>
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["Title"]" Component="Title" style="width: 100%">
+                                    </RadzenLabel>
+                                    @*<DisplayName For="@(() => Supplier.Title)"></DisplayName>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.Title</label>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-xl-6">
+                                    <RadzenLabel Text="@Loc2["Tags"]" Component="Tags" style="width: 100%">
+                                    </RadzenLabel>
+                                    @*<DisplayName For="@(() => Supplier.Tags)"></DisplayName>*@
+                                    @*<label class="col-xl-4 col-lg-4 col-form-label">Tags</label>*@
+                                    <div class="col-xl-8">
+                                        <label class="form-control">@Supplier.Tags</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Body-->
+                        <!--end::Form-->
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="kt_tab_pane_7_2" role="tabpanel" aria-labelledby="kt_tab_pane_7_2">
+                <AddSupplierConacts id="@id"></AddSupplierConacts>
+            </div>
+            <div class="tab-pane fade" id="kt_tab_pane_7_3" role="tabpanel" aria-labelledby="kt_tab_pane_7_3">
+                <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(Supplier.PurchaseOrders)" TItem="PurchaseOrder">
+                    <Columns>
+                        <RadzenGridColumn TItem="PurchaseOrder" Context="Order" Property="Id" Title="Id" Visible="false" Type="integer">
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="PurchaseOrder" Context="Order" Property="OrderNumber" Title="@Loc2["OrderNumber"]" Type="string">
+                        </RadzenGridColumn>
+                        <RadzenGridColumn Width="200px" TItem="Order" Context="Order" Title="@Loc2["Supplier"]">
+                            <Template>
+                                @Supplier.Name
+                            </Template>
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="PurchaseOrder" Property="OrderDate" Title="@Loc2["OrderDate"]"></RadzenGridColumn>
+                        <RadzenGridColumn TItem="PurchaseOrder" Property="Total" Title="@Loc2["Total"]"></RadzenGridColumn>
+                        <RadzenGridColumn TItem="PurchaseOrder" Context="order" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px" Title="@Loc["PrintBill"]">
+                            <Template Context="order">
+                                <RadzenButton Icon="print" Size="Radzen.ButtonSize.Small" Click="@(args => PrintBill(order.OrderNumber))">
+                                </RadzenButton>
+                            </Template>
+                        </RadzenGridColumn>
+                        <RadzenGridColumn TItem="PurchaseOrder" Context="order" Filterable="false" Sortable="false" Bubble="false" Width="70px" Title="@Loc["PrintOrder"]">
+                            <Template Context="order">
+                                <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="print" Size="Radzen.ButtonSize.Small" Click="@((args) =>PrintOrder(order.OrderNumber))">
+                                </RadzenButton>
+                            </Template>
+                        </RadzenGridColumn>
+                    </Columns>
+                    @*<Template Context="order">
+                            <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(order.OrderItem)" TItem="OrderItem">
+                                <Columns>
+                                    <RadzenGridColumn TItem="OrderItem" Context="Order" Property="Id" Visible="false" Title="Id" Type="integer">
+                                    </RadzenGridColumn>
+                                    <RadzenGridColumn TItem="OrderItem" Property="Product.Name" Title="@Loc2["Product"]"></RadzenGridColumn>
+                                    <RadzenGridColumn TItem="OrderItem" Property="Quantity" Title="@Loc2["Quantity"]"></RadzenGridColumn>
+                                    <RadzenGridColumn TItem="OrderItem" Property="Price" Title="@Loc2["Price"]"></RadzenGridColumn>
+                                    <RadzenGridColumn TItem="OrderItem" Property="SubTotal" Title="@Loc2["SubTotal"]"></RadzenGridColumn>
+                                    <RadzenGridColumn TItem="OrderItem" Property="ProductDiscount" Title="@Loc2["ProductDiscount"]"></RadzenGridColumn>
+                                </Columns>
+                            </RadzenGrid>
+                        </Template>*@
+                </RadzenGrid>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    [Inject]
+    protected NavigationManager UriHelper { get; set; }
+
+    [Inject]
+    protected Radzen.DialogService DialogService { get; set; }
+
+    [Inject]
+    protected Radzen.NotificationService NotificationService { get; set; }
+    [Parameter] public int id { get; set; }
+    Supplier Supplier = new Supplier();
+    AddressType addressType = new AddressType();
+    protected override async Task OnInitializedAsync()
+    {
+        await JSRuntime.InvokeVoidAsync("StartLoading");
+        Supplier = await Http.GetFromJsonAsync<Supplier>("/api/Suppliers/GetById/" + id);
+        addressType = await Http.GetFromJsonAsync<AddressType>("/api/AddressTypes/GetById/" + Supplier.AddressTypeId);
+        await JSRuntime.InvokeVoidAsync("StopLoading");
+    }
+    async void PrintOrder(string id)
+    {
+        var order = await Http.GetFromJsonAsync<Order>("/api/Orders/GetOrderByNo/" + id);
+        var result = await DialogService.OpenAsync<Sessions.PrintOrder>("Print Order", new Dictionary<string, object>() { { "Order", order } },
+                new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+        await InvokeAsync(() => { StateHasChanged(); });
+    }
+    async void PrintBill(string id)
+    {
+        var order = await Http.GetFromJsonAsync<Order>("/api/Orders/GetOrderByNo/" + id);
+        var result = await DialogService.OpenAsync<Sessions.PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", order } },
+             new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
+        await InvokeAsync(() => { StateHasChanged(); });
+    }
+}

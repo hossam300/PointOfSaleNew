@@ -61,6 +61,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الكمية الفعلية.
+        /// </summary>
+        public static string ActualQuantity {
+            get {
+                return ResourceManager.GetString("ActualQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to العنوان.
         /// </summary>
         public static string Address {
@@ -566,6 +575,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الكمية الحالية.
+        /// </summary>
+        public static string CurrentQuantity {
+            get {
+                return ResourceManager.GetString("CurrentQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to العميل.
         /// </summary>
         public static string Customer {
@@ -1061,6 +1079,24 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تاريخ التعديل.
+        /// </summary>
+        public static string ModfiedDate {
+            get {
+                return ResourceManager.GetString("ModfiedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to عدلت بواسطة.
+        /// </summary>
+        public static string ModfiedUserId {
+            get {
+                return ResourceManager.GetString("ModfiedUserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to عدل بواسطة.
         /// </summary>
         public static string ModifiedByID {
@@ -1093,6 +1129,15 @@ namespace PointOfSale.DAL.Resources {
         public static string Notes {
             get {
                 return ResourceManager.GetString("Notes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الكمية القديمة.
+        /// </summary>
+        public static string OldQuantity {
+            get {
+                return ResourceManager.GetString("OldQuantity", resourceCulture);
             }
         }
         
@@ -1448,6 +1493,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to فاتورة مشتريات.
+        /// </summary>
+        public static string PurchaseOrder {
+            get {
+                return ResourceManager.GetString("PurchaseOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الكمية.
         /// </summary>
         public static string Quantity {
@@ -1633,6 +1687,42 @@ namespace PointOfSale.DAL.Resources {
         public static string SubTotal {
             get {
                 return ResourceManager.GetString("SubTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to مورد.
+        /// </summary>
+        public static string Supplier {
+            get {
+                return ResourceManager.GetString("Supplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to صورة المورد.
+        /// </summary>
+        public static string SupplierImage {
+            get {
+                return ResourceManager.GetString("SupplierImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المورد مطلوب.
+        /// </summary>
+        public static string SupplierRequired {
+            get {
+                return ResourceManager.GetString("SupplierRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to نوع المورد.
+        /// </summary>
+        public static string SupplierType {
+            get {
+                return ResourceManager.GetString("SupplierType", resourceCulture);
             }
         }
         

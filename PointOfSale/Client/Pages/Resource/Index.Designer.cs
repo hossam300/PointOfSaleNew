@@ -70,6 +70,15 @@ namespace PointOfSale.Client.Pages.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to انواع العنوان.
+        /// </summary>
+        public static string AddressTypes {
+            get {
+                return ResourceManager.GetString("AddressTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اضافة محل.
         /// </summary>
         public static string AddShop {
@@ -102,6 +111,15 @@ namespace PointOfSale.Client.Pages.Resource {
         public static string Configuration {
             get {
                 return ResourceManager.GetString("Configuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to انواع الاتصال.
+        /// </summary>
+        public static string ContactTypes {
+            get {
+                return ResourceManager.GetString("ContactTypes", resourceCulture);
             }
         }
         
@@ -147,6 +165,15 @@ namespace PointOfSale.Client.Pages.Resource {
         public static string EGP {
             get {
                 return ResourceManager.GetString("EGP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ادوار المطعم.
+        /// </summary>
+        public static string Floors {
+            get {
+                return ResourceManager.GetString("Floors", resourceCulture);
             }
         }
         
@@ -259,6 +286,24 @@ namespace PointOfSale.Client.Pages.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تقرير المشتريات.
+        /// </summary>
+        public static string PurchaseOrderReports {
+            get {
+                return ResourceManager.GetString("PurchaseOrderReports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المشتريات.
+        /// </summary>
+        public static string PurchaseOrders {
+            get {
+                return ResourceManager.GetString("PurchaseOrders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to التقراير.
         /// </summary>
         public static string Reporting {
@@ -309,6 +354,15 @@ namespace PointOfSale.Client.Pages.Resource {
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الموردين.
+        /// </summary>
+        public static string Suppliers {
+            get {
+                return ResourceManager.GetString("Suppliers", resourceCulture);
             }
         }
     }

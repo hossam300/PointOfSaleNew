@@ -1,0 +1,149 @@
+﻿@page "/Supplierdialogcard/{id:int?}/{SupplierContactId:int?}"
+
+@inject Radzen.DialogService dialogService
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Suppliers.AddSupplierConacts> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="row">
+    <div class="col-md-12">
+        <RadzenTemplateForm Data="@(Suppliercontact)" Visible="@(Suppliercontact != null)" TItem="SupplierContact" Submit="@SuppliercontactFormSubmit">
+            <ChildContent>
+                @*<div style="margin-bottom: 1rem;display:none" class="row">
+                        <div class="col-md-3">
+                            <RadzenLabel Text="Supplier" Component="SupplierId" style="width: 100%">
+                            </RadzenLabel>
+                        </div>
+                        <div class="col-md-9">
+                            <InputNumber @bind-Value="Suppliercontasct.SupplierId" type="hidden" Name="SupplierId"></InputNumber>
+
+                        </div>
+                    </div>*@
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["ContactType"]" Component="ContactTypeId" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => Suppliercontact.ContactTypeId)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenDropDown @bind-Value="Suppliercontact.ContactTypeId" Data="@(getContactTypesResult)" TextProperty="Type" ValueProperty="Id" Placeholder="@Loc["ChooseContactType"]" style="display: block; width: 100%" Name="ContactTypeId">
+                        </RadzenDropDown>
+                        <RadzenRequiredValidator Component="ContactTypeId" Text="ContactTypeId is required" style="position: absolute">
+                        </RadzenRequiredValidator>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["ContactName"]" Component="ContactName" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => Suppliercontact.ContactName)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox @bind-Value="Suppliercontact.ContactName" style="width: 100%" Name="ContactName">
+                        </RadzenTextBox>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["ContactImage"]" Component="ContactImage" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => Suppliercontact.ContactImage)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <input type="file" @ref="_input" @onchange="HandleSelected" accept=".jpg, .jpeg, png" />
+                        @if (ImgUrl != null)
+                        {
+                            <div>
+                                <img src="@ImgUrl" style="width:300px" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["Phone"]" Component="Phone" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => Suppliercontact.Phone)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox @bind-Value="Suppliercontact.Phone" style="width: 100%" Name="Phone">
+                        </RadzenTextBox>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["Mobile"]" Component="Mobile" style="width: 100%">
+                        </RadzenLabel>
+                        @*  <DisplayName For="@(() => Suppliercontact.Mobile)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox @bind-Value="Suppliercontact.Mobile" style="width: 100%" Name="Mobile">
+                        </RadzenTextBox>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["EmailAddress"]" Component="Email" style="width: 100%">
+                        </RadzenLabel>
+                        @* <DisplayName For="@(() => Suppliercontact.Email)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox @bind-Value="Suppliercontact.Email" style="width: 100%" Name="Email">
+                        </RadzenTextBox>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["CompanyAddressStreet1"]" Component="CompanyAddressStreet1" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => Suppliercontact.CompanyAddressStreet1)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox @bind-Value="Suppliercontact.CompanyAddressStreet1" style="width: 100%" Name="CompanyAddressStreet1">
+                        </RadzenTextBox>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["CompanyAddressStreet2"]" Component="CompanyAddressStreet2" style="width: 100%">
+                        </RadzenLabel>
+                        @* <DisplayName For="@(() => Suppliercontact.CompanyAddressStreet2)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox @bind-Value="Suppliercontact.CompanyAddressStreet2" style="width: 100%" Name="CompanyAddressStreet2">
+                        </RadzenTextBox>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["City"]" Component="City" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => Suppliercontact.City)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox @bind-Value="Suppliercontact.City" style="width: 100%" Name="City">
+                        </RadzenTextBox>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1rem" class="row">
+                    <div class="col-md-3">
+                        <RadzenLabel Text="@Loc2["Country"]" Component="Country" style="width: 100%">
+                        </RadzenLabel>
+                        @*<DisplayName For="@(() => Suppliercontact.Country)"></DisplayName>*@
+                    </div>
+                    <div class="col-md-9">
+                        <RadzenTextBox @bind-Value="Suppliercontact.Country" style="width: 100%" Name="Country">
+                        </RadzenTextBox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col offset-sm-3">
+                        <RadzenButton ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
+                        </RadzenButton>
+                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
+                        </RadzenButton>
+                    </div>
+                </div>
+            </ChildContent>
+        </RadzenTemplateForm>
+    </div>
+</div>
+

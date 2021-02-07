@@ -66,6 +66,13 @@ namespace PointOfSale.BLL.Contexts
         public virtual DbSet<OrderItem> OrderItems { get; set; }
         public virtual DbSet<OrderPayment> OrderPayments { get; set; }
 
+        public virtual DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public virtual DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; }
+        public virtual DbSet<PurchaseOrderPayment> PurchaseOrderPayments { get; set; }
+        public virtual DbSet<ShopProduct> ShopProducts { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<SupplierContact> SupplierContacts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

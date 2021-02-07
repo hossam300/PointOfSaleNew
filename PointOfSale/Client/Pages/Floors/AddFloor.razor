@@ -1,9 +1,10 @@
-﻿@page "/addAddressType/{Id:int?}"
+﻿@page "/addFloor/{Id:int?}"
+
 @using Radzen
 @using Radzen.Blazor
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Authorization
-@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.AddressTypes.AddAddressType> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Floors.AddFloor> Loc
 @inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 
@@ -16,16 +17,16 @@
                 <RadzenContent @ref="content1" Container="main" Style="direction:rtl;text-align:right">
                     <ChildContent>
 
-                        <RadzenTemplateForm @ref="formAddressType" Data="@(addresstype)" Visible="@(addresstype != null)" TItem="AddressType" Submit="@FormAddressTypeSubmit">
+                        <RadzenTemplateForm @ref="formFloor" Data="@(Floor)" Visible="@(Floor != null)" TItem="Floor" Submit="@FormFloorSubmit">
                             <ChildContent>
                                 <div class="card-body p-9">
                                     <div class="col-md-12">
                                         <div style="margin-bottom: 1rem" class="row">
-                                            <RadzenLabel @ref="label1" Text="@Loc2["Type"]" Component="MehtodName" style="width: 100%">
+                                            <RadzenLabel @ref="label1" Text="@Loc2["FloorName"]" Component="FloorName" style="width: 100%">
                                             </RadzenLabel>
-                                            @*<DisplayName For="@(() => addresstype.Type)"></DisplayName>*@
+                                            @*<DisplayName For="@(() => Floor.FloorName)"></DisplayName>*@
                                             <div class="col-md-9">
-                                                <RadzenTextBox @bind-Value="addresstype.Type" style="width: 100%" Name="Type">
+                                                <RadzenTextBox @bind-Value="Floor.FloorName" style="width: 100%" Name="Type">
                                                 </RadzenTextBox>
                                             </div>
                                         </div>
@@ -34,9 +35,9 @@
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col offset-sm-3">
-                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="Radzen.ButtonStyle.Primary">
                                             </RadzenButton>
-                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="Cancel" Click="@btnCancelClick">
                                             </RadzenButton>
                                         </div>
                                     </div>

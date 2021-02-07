@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActualQuantity" xml:space="preserve">
+    <value>الكمية الفعلية</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>العنوان</value>
   </data>
@@ -286,6 +289,9 @@
   <data name="Currency" xml:space="preserve">
     <value>العملة</value>
   </data>
+  <data name="CurrentQuantity" xml:space="preserve">
+    <value>الكمية الحالية</value>
+  </data>
   <data name="Customer" xml:space="preserve">
     <value>العميل</value>
   </data>
@@ -451,6 +457,12 @@
   <data name="Mobile" xml:space="preserve">
     <value>المحمول</value>
   </data>
+  <data name="ModfiedDate" xml:space="preserve">
+    <value>تاريخ التعديل</value>
+  </data>
+  <data name="ModfiedUserId" xml:space="preserve">
+    <value>عدلت بواسطة</value>
+  </data>
   <data name="ModifiedByID" xml:space="preserve">
     <value>عدل بواسطة</value>
   </data>
@@ -462,6 +474,9 @@
   </data>
   <data name="Notes" xml:space="preserve">
     <value>ملاحظات</value>
+  </data>
+  <data name="OldQuantity" xml:space="preserve">
+    <value>الكمية القديمة</value>
   </data>
   <data name="OnOrderedQuantities" xml:space="preserve">
     <value>على الكميات المطلوبة</value>
@@ -580,6 +595,9 @@
   <data name="PurchaseDescription" xml:space="preserve">
     <value>وصف الشراء</value>
   </data>
+  <data name="PurchaseOrder" xml:space="preserve">
+    <value>فاتورة مشتريات</value>
+  </data>
   <data name="Quantity" xml:space="preserve">
     <value>الكمية</value>
   </data>
@@ -642,6 +660,18 @@
   </data>
   <data name="SubTotal" xml:space="preserve">
     <value>المجموع</value>
+  </data>
+  <data name="Supplier" xml:space="preserve">
+    <value>مورد</value>
+  </data>
+  <data name="SupplierImage" xml:space="preserve">
+    <value>صورة المورد</value>
+  </data>
+  <data name="SupplierRequired" xml:space="preserve">
+    <value>المورد مطلوب</value>
+  </data>
+  <data name="SupplierType" xml:space="preserve">
+    <value>نوع المورد</value>
   </data>
   <data name="TableManagement" xml:space="preserve">
     <value>ادارة الطاولات</value>

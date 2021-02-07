@@ -38,10 +38,30 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Pages\Resource\AddressTypes\AddAddressType.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddAddressType.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\AddressTypes\AddressTypesList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddressTypesList.resx</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Resource\Auth\Login.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Login.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\ContactTypes\AddContactType.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddContactType.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\ContactTypes\ContactTypeList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ContactTypeList.resx</DependentUpon>
     </Compile>
     <Compile Update="Pages\Resource\Customers\AddCustomerConacts.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -67,6 +87,16 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Dashboard.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Floors\AddFloor.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddFloor.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Floors\FloorList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>FloorList.resx</DependentUpon>
     </Compile>
     <Compile Update="Pages\Resource\Index.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -153,6 +183,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Products.resx</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Resource\PurchaseOrders\PurchaseOrders.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PurchaseOrders.resx</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Resource\Sessions\CancelOrder.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -233,12 +268,48 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ShopPricingPayment.resx</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Resource\Suppliers\AddSupplier.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddSupplier.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Suppliers\AddSupplierConacts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddSupplierConacts.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Suppliers\SupplierDetails.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SupplierDetails.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Suppliers\SuppliersList.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SuppliersList.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="Pages\Resource\AddressTypes\AddAddressType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddAddressType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\AddressTypes\AddressTypesList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddressTypesList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Auth\Login.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Login.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\ContactTypes\AddContactType.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddContactType.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\ContactTypes\ContactTypeList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ContactTypeList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerConacts.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -263,6 +334,14 @@
     <EmbeddedResource Update="Pages\Resource\Dashboard.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Dashboard.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Floors\AddFloor.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddFloor.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Floors\FloorList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FloorList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -332,6 +411,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Products.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\PurchaseOrders\PurchaseOrders.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PurchaseOrders.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Sessions\CancelOrder.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CancelOrder.Designer.cs</LastGenOutput>
@@ -395,6 +478,22 @@
     <EmbeddedResource Update="Pages\Resource\Shops\ShopPricingPayment.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ShopPricingPayment.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Suppliers\AddSupplier.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddSupplier.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Suppliers\AddSupplierConacts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddSupplierConacts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Suppliers\SupplierDetails.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SupplierDetails.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Suppliers\SuppliersList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuppliersList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

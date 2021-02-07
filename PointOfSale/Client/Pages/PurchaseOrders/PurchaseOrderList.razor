@@ -1,0 +1,92 @@
+﻿@page "/PurchaseOrderList"
+@page "/PurchaseOrders/{id:int?}/{SupplierId:int?}"
+
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.PurchaseOrders.PurchaseOrders> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+    <!--begin::Subheader-->
+<div class="subheader py-2 py-lg-4 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <!--begin::Info-->
+        <div class="d-flex align-items-center flex-wrap mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold my-2 mr-5">@Loc["PurchaseOrder"]</h5>
+                <!--end::Page Title-->
+                <!--begin::Breadcrumb-->
+                @*<ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                        <li class="breadcrumb-item">
+                            <a href="/PurchaseOrders" class="text-muted"></a>
+                        </li>
+                    </ul>*@
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <!--end::Toolbar-->
+    </div>
+</div>
+<!--end::Subheader-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main" Style="direction:rtl;text-align:right">
+                            <ChildContent>
+                                <RadzenHeading Size="H1" Text="@Loc["PurchaseOrder"]" Style="text-align:right">
+                                </RadzenHeading>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenGrid @ref="gridPurchaseOrders" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(PurchaseOrders)" TItem="PurchaseOrder">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="PurchaseOrder" Context="PurchaseOrder" Property="Id" Title="Id" Visible="false" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrder" Context="PurchaseOrder" Property="OrderNumber" Title="@Loc2["OrderNumber"]" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn Width="200px" TItem="PurchaseOrder" Property="Supplier.Name" Title="@Loc2["Supplier"]" />
+                                                <RadzenGridColumn TItem="PurchaseOrder" Property="OrderDate" Title="@Loc2["OrderDate"]"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrder" Property="Total" Title="@Loc2["Total"]"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrder" Context="PurchaseOrder" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px" Title="@Loc["PrintBill"]">
+                                                    <Template Context="PurchaseOrder">
+                                                        <RadzenButton Icon="print" Size="Radzen.ButtonSize.Small" Click="@(args => PrintBill(PurchaseOrder.OrderNumber))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrder" Context="PurchaseOrder" Filterable="false" Sortable="false" Bubble="false" Width="70px" Title="@Loc["PrintPurchaseOrder"]">
+                                                    <Template Context="PurchaseOrder">
+                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="print" Size="Radzen.ButtonSize.Small" Click="@((args) =>PrintPurchaseOrder(PurchaseOrder.OrderNumber))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                            <Template Context="PurchaseOrder">
+                                                <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(PurchaseOrder.PurchaseOrderItem)" TItem="PurchaseOrderItem">
+                                                    <Columns>
+                                                        <RadzenGridColumn TItem="PurchaseOrderItem" Context="PurchaseOrder" Property="Id" Visible="false" Title="Id" Type="integer">
+                                                        </RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="PurchaseOrderItem" Property="Product.Name" Title="@Loc2["Product"]"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="PurchaseOrderItem" Property="Quantity" Title="@Loc2["Quantity"]"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="PurchaseOrderItem" Property="Price" Title="@Loc2["Price"]"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="PurchaseOrderItem" Property="SubTotal" Title="@Loc2["SubTotal"]"></RadzenGridColumn>
+                                                        <RadzenGridColumn TItem="PurchaseOrderItem" Property="ProductDiscount" Title="@Loc2["ProductDiscount"]"></RadzenGridColumn>
+                                                    </Columns>
+                                                </RadzenGrid>
+                                            </Template>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

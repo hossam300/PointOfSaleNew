@@ -1,0 +1,48 @@
+﻿@page "/FloorsList"
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Floors.FloorList> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main" Style="direction:rtl;text-align:right">
+                            <ChildContent>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenButton Icon="add_circle_outline" class="btn btn-light-primary font-weight-bold ml-2" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@btnFloorsClick">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="gridFloors" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(Floors)" TItem="Floor">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="Floor" Context="Floor" Property="Id" Visible="false" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Floor" Context="Floor" Property="FloorName" Title="@Loc2["FloorName"]" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Floor" Context="Floor" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="Floor">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(Floor))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="Floor" Context="Floor" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="Floor">
+                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, Floor))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

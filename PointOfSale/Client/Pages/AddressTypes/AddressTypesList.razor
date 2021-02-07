@@ -1,46 +1,48 @@
 ﻿@page "/AddressTypesList"
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        <!--begin::Entry-->
-        <div class="d-flex flex-column-fluid">
-            <!--begin::Container-->
-            <!--begin::Card-->
-            <div class="card card-custom">
-                <div class="card-body p-9">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <RadzenContent Container="main">
-                                <ChildContent>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <RadzenButton Icon="add_circle_outline" class="btn btn-light-primary font-weight-bold ml-2" style="margin-bottom: 10px" Text="Add" Click="@btnAddressTypesClick">
-                                            </RadzenButton>
-                                            <RadzenGrid @ref="gridAddressTypes" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(AddressTypes)" TItem="AddressType">
-                                                <Columns>
-                                                    <RadzenGridColumn TItem="AddressType" Context="addressType" Property="Id" Title="Id" Type="integer">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="AddressType" Context="addressType" Property="Type" Title="Type" Type="string">
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="AddressType" Context="addressType" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
-                                                        <Template Context="addressType">
-                                                            <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(addressType))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                    <RadzenGridColumn TItem="AddressType" Context="addressType" Filterable="false" Sortable="false" Bubble="false" Width="70px">
-                                                        <Template Context="addressType">
-                                                            <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, addressType))">
-                                                            </RadzenButton>
-                                                        </Template>
-                                                    </RadzenGridColumn>
-                                                </Columns>
-                                            </RadzenGrid>
-                                        </div>
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.AddressTypes.AddressTypesList> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <!--begin::Card-->
+        <div class="card card-custom">
+            <div class="card-body p-9">
+                <div class="row">
+                    <div class="col-md-12">
+                        <RadzenContent Container="main" Style="direction:rtl;text-align:right">
+                            <ChildContent>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <RadzenButton Icon="add_circle_outline" class="btn btn-light-primary font-weight-bold ml-2" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@btnAddressTypesClick">
+                                        </RadzenButton>
+                                        <RadzenGrid @ref="gridAddressTypes" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(AddressTypes)" TItem="AddressType">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="AddressType" Context="addressType" Property="Id" Title="Id" Visible="false" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="AddressType" Context="addressType" Property="Type" Title="@Loc2["Type"]" Type="string">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="AddressType" Context="addressType" Bubble="false" Filterable="false" Sortable="false" TextAlign="Radzen.TextAlign.Center" Width="100px">
+                                                    <Template Context="addressType">
+                                                        <RadzenButton Icon="edit" Size="Radzen.ButtonSize.Small" Click="@(args => EditRow(addressType))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="AddressType" Context="addressType" Filterable="false" Sortable="false" Bubble="false" Width="70px">
+                                                    <Template Context="addressType">
+                                                        <RadzenButton ButtonStyle="Radzen.ButtonStyle.Danger" Icon="close" Size="Radzen.ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, addressType))">
+                                                        </RadzenButton>
+                                                    </Template>
+                                                </RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
                                     </div>
-                                </ChildContent>
-                            </RadzenContent>
-                        </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenContent>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
