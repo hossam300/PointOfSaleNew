@@ -1,4 +1,4 @@
-﻿@page "/ShopProduct/{id:int}"
+﻿@page "/ShopProductList/{id:int}"
 @inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Shops.ShopProduct> Loc
 @inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -16,7 +16,7 @@
                             <ChildContent>
                                 <div class="card-body p-9">
                                     <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@InsertRow" />
-                                    <RadzenGrid @ref="ShopProducts" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" EditMode="Radzen.DataGridEditMode.Single"
+                                    <RadzenGrid @ref="ShopProductsGrid" AllowFiltering="true" AllowPaging="true" PageSize="3" AllowSorting="true" EditMode="Radzen.DataGridEditMode.Single"
                                                 Data="@ShopProducts" TItem="DAL.Domains.ShopProduct" RowUpdate="@OnUpdateRow" RowCreate="@OnCreateRow">
                                         <Columns>
                                             <RadzenGridColumn Width="100px" TItem="DAL.Domains.ShopProduct" Property="Id" Visible="false" Title="Order ID" />

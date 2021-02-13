@@ -5,13 +5,14 @@ using Radzen.Blazor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PointOfSale.Client.Pages.Shops
 {
-    public partial class ShopProduct : ComponentBase
+    public partial class ShopProductList : ComponentBase
     {
         RadzenGrid<DAL.Domains.ShopProduct> ShopProductsGrid;
         IEnumerable<DAL.Domains.ShopProduct> ShopProducts;
@@ -21,7 +22,7 @@ namespace PointOfSale.Client.Pages.Shops
         [Parameter] public int? id { get; set; }
         protected RadzenContent content1;
 
-        protected RadzenTemplateForm<ShopProduct> formShopProduct;
+        protected RadzenTemplateForm<IEnumerable<DAL.Domains.ShopProduct>> formShopProduct;
 
         protected RadzenLabel label1;
 
@@ -30,8 +31,12 @@ namespace PointOfSale.Client.Pages.Shops
         protected RadzenButton button1;
 
         protected RadzenButton button2;
-
-
+        [Inject]
+        protected HttpClient Http { get; set; }
+        [Inject]
+        protected JSRuntime JSRuntime { get; set; }
+        [Inject]
+        protected NavigationManager UriHelper { get; set; }
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
@@ -127,7 +132,7 @@ namespace PointOfSale.Client.Pages.Shops
 
         void OnCreateRow(DAL.Domains.ShopProduct shopProduct)
         {
-           // dbContext.Add(order);
+            // dbContext.Add(order);
 
             // For demo purposes only
             //order.Customer = dbContext.Customers.Find(order.CustomerID);
@@ -163,7 +168,7 @@ namespace PointOfSale.Client.Pages.Shops
                         // convert response data to JsonElement which can handle any JSON data
                         var data = await response.Content.ReadFromJsonAsync<Shop>();
 
-                        uriHelper.NavigateTo("/ShopInterface/" + data.Id);
+                        UriHelper.NavigateTo("/ShopInterface/" + data.Id);
                     }
 
                 }
@@ -177,7 +182,7 @@ namespace PointOfSale.Client.Pages.Shops
 
                         // get id property from JSON response data
                         //  var customerId = data[0].Id;
-                        uriHelper.NavigateTo("/ShopInterface/" + data.Id);
+                        UriHelper.NavigateTo("/ShopInterface/" + data.Id);
                     }
                 }
             }
