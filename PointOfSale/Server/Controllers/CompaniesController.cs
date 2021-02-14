@@ -20,5 +20,11 @@ namespace PointOfSale.Server.Controllers
         {
             this._companyService = businessService;
         }
+        [HttpGet("GetAllCompanyDTO")]
+        public IActionResult GetAllCompanyDTO()
+        {
+            var CompanyDTOs = _companyService.GetAllWithoutInclude().Select(x => new CompanyDTO { Id = x.Id, Name = x.Name }).ToList();
+            return Ok(CompanyDTOs);
+        }
     }
 }

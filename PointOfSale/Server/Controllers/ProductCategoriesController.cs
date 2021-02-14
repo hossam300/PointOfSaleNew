@@ -25,5 +25,10 @@ namespace PointOfSale.Server.Controllers
         {
             return Ok(this._BusinessService.GetAll<ProductCategory>().Select(x => new DropDownList { Id = x.Id, Name = x.CategoryName }));
         }
+        [HttpGet("GetAllProductCategoryDTO")]
+        public virtual IActionResult GetAllProductCategoryDTO()
+        {
+            return Ok(this._BusinessService.GetAll<ProductCategory>().Select(x => new ProductCategoryDTO { Id = x.Id, CategoryName = x.CategoryName, ImagePath = x.ImagePath, ParentCategoryId = x.ParentCategoryId }).ToList());
+        }
     }
 }

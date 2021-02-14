@@ -17,10 +17,10 @@ namespace PointOfSale.Client.Pages.Products
     public partial class AddProduct : ComponentBase
     {
         private ElementReference _input;
-        Product product = new Product();
+        AddProductDTO product = new AddProductDTO();
         IEnumerable<CompanyDTO> companies = new List<CompanyDTO>();
         IEnumerable<CustomerTaxDTO> customerTaxes = new List<CustomerTaxDTO>();
-        List<Tax> Taxes = new List<Tax>();
+        List<TaxDTO> Taxes = new List<TaxDTO>();
         int productType;
         IEnumerable<DropDownList> productTypes = Enum.GetValues(typeof(ProductType)).Cast<ProductType>().Select(x => new DropDownList
         {
@@ -28,7 +28,7 @@ namespace PointOfSale.Client.Pages.Products
             Name = x.ToString()
         });
         IEnumerable<int> multipleValues = new int[] { };
-        List<ProductCategory> productCategory = new List<ProductCategory>();
+        List<ProductCategoryDTO> productCategory = new List<ProductCategoryDTO>();
         bool popup = false;
         [Inject]
         public IFileReaderService FileReaderService { get; set; }
@@ -36,18 +36,18 @@ namespace PointOfSale.Client.Pages.Products
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            companies = await Http.GetFromJsonAsync<List<CompanyDTO>>("/api/Companies/GetAll");
-            Taxes = await Http.GetFromJsonAsync<List<Tax>>("/api/Taxs/GetAll");
+            companies = await Http.GetFromJsonAsync<List<CompanyDTO>>("/api/Companies/GetAllCompanyDTO");
+            Taxes = await Http.GetFromJsonAsync<List<TaxDTO>>("/api/Taxs/GetAllTaxDTO");
             customerTaxes = Taxes.Select(x => new CustomerTaxDTO
             {
                 TaxId = x.Id,
                 TaxName = x.Name
             }).ToList();
-            productCategory = await Http.GetFromJsonAsync<List<ProductCategory>>("/api/ProductCategories/GetAll");
+            productCategory = await Http.GetFromJsonAsync<List<ProductCategoryDTO>>("/api/ProductCategories/GetAllProductCategoryDTO");
 
             if (id != null)
             {
-                product = await Http.GetFromJsonAsync<Product>("api/Products/GetById/" + id);
+                product = await Http.GetFromJsonAsync<AddProductDTO>("api/Products/GetAddProductDTOById/" + id);
                 ImgUrl = product.ProductImage;
                 productType = (int)product.ProductType;
                 multipleValues = product.CustomerTaxes.Select(x => x.TaxId);
@@ -122,7 +122,7 @@ namespace PointOfSale.Client.Pages.Products
             }
         }
         Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
-        public async void FormProductSubmit(Product model)
+        public async void FormProductSubmit(AddProductDTO model)
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
@@ -132,10 +132,10 @@ namespace PointOfSale.Client.Pages.Products
             {
                 foreach (var item in multipleValues)
                 {
-                    product.CustomerTaxes.Add(new CustomerTax { TaxId = item });
+                    product.CustomerTaxes.Add(new CustomerTaxDTO { TaxId = item });
                 }
                 product.ProductType = (ProductType)productType;
-                using (var response = await Http.PostAsJsonAsync<Product>("/api/Products/Insert", product))
+                using (var response = await Http.PostAsJsonAsync<AddProductDTO>("/api/Products/InsertAddProductDTO", product))
                 {
                     // convert response data to JsonElement which can handle any JSON data
                     var data = await response.Content.ReadFromJsonAsync<Product>();
@@ -148,11 +148,11 @@ namespace PointOfSale.Client.Pages.Products
             }
             else
             {
-                product.CustomerTaxes = new List<CustomerTax>();
+                product.CustomerTaxes = new List<CustomerTaxDTO>();
                 //product.Company = null;
                 foreach (var item in multipleValues)
                 {
-                    product.CustomerTaxes.Add(new CustomerTax { TaxId = item });
+                    product.CustomerTaxes.Add(new CustomerTaxDTO { TaxId = item, ProductId = (int)id });
                 }
                 product.ProductType = (ProductType)productType;
                 product.Company = null;
@@ -160,7 +160,7 @@ namespace PointOfSale.Client.Pages.Products
                 //{
                 //    item.Product.Company = null;
                 //}
-                using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))
+                using (var response = await Http.PostAsJsonAsync<AddProductDTO>("/api/Products/UpdateAddProductDTO", product))
                 {
 
                     // convert response data to JsonElement which can handle any JSON data
