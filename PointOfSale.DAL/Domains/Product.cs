@@ -15,7 +15,7 @@ namespace PointOfSale.DAL.Domains
         }
         public int Id { get; set; }
         #region General Information
-        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "ProductName", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
         [Display(Name = "ProductImage", ResourceType = typeof(Resources.Resources))]
         public string ProductImage { get; set; }

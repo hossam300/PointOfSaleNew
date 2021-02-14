@@ -18,7 +18,7 @@ namespace PointOfSale.DAL.Domains
         #region Main Info
         public int Id { get; set; }
         [Required(ErrorMessageResourceName = "ShopRequired", ErrorMessageResourceType = typeof(Resources.Resources))]
-        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "ShopName", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
         [Display(Name = "Branch", ResourceType = typeof(Resources.Resources))]
         public int? BranchId { get; set; }
@@ -45,7 +45,7 @@ namespace PointOfSale.DAL.Domains
         public bool RestrictAvailableCategories { get; set; }
         [Display(Name = "AvailableCategories", ResourceType = typeof(Resources.Resources))]
         public List<ShopProductCategory> AvailableCategories { get; set; }
-        [Display(Name = "KeyBoard", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "VirtualKeyBoard", ResourceType = typeof(Resources.Resources))]
         public bool VirtualKeyBoard { get; set; }
         [Display(Name = "SetStartCategory", ResourceType = typeof(Resources.Resources))]
         public bool SetStartCategory { get; set; }

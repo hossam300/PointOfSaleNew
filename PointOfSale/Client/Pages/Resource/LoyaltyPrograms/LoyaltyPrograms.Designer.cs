@@ -70,24 +70,6 @@ namespace PointOfSale.Client.Pages.Resource.LoyaltyPrograms {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اضافة نظام النقاط.
-        /// </summary>
-        public static string AddLoyaltyProgram {
-            get {
-                return ResourceManager.GetString("AddLoyaltyProgram", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to تعديل نظام النقاط.
-        /// </summary>
-        public static string EditLoyaltyProgram {
-            get {
-                return ResourceManager.GetString("EditLoyaltyProgram", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to نظام النقاط.
         /// </summary>
         public static string LoyaltyProgram {

@@ -260,6 +260,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اسم الفرع.
+        /// </summary>
+        public static string BranchName {
+            get {
+                return ResourceManager.GetString("BranchName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to مشترى.
         /// </summary>
         public static string Buy {
@@ -409,6 +418,15 @@ namespace PointOfSale.DAL.Resources {
         public static string CompanyAddressStreet2 {
             get {
                 return ResourceManager.GetString("CompanyAddressStreet2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسم الشركة.
+        /// </summary>
+        public static string CompanyName {
+            get {
+                return ResourceManager.GetString("CompanyName", resourceCulture);
             }
         }
         
@@ -575,6 +593,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اسم العملة.
+        /// </summary>
+        public static string CurrencyName {
+            get {
+                return ResourceManager.GetString("CurrencyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الكمية الحالية.
         /// </summary>
         public static string CurrentQuantity {
@@ -607,6 +634,15 @@ namespace PointOfSale.DAL.Resources {
         public static string CustomerLeadTime {
             get {
                 return ResourceManager.GetString("CustomerLeadTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسم العميل.
+        /// </summary>
+        public static string CustomerName {
+            get {
+                return ResourceManager.GetString("CustomerName", resourceCulture);
             }
         }
         
@@ -674,6 +710,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اسم الادارة.
+        /// </summary>
+        public static string DepartmentName {
+            get {
+                return ResourceManager.GetString("DepartmentName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to وصف لأوامر التسليم.
         /// </summary>
         public static string DescriptionForDeliveryOrders {
@@ -715,6 +760,15 @@ namespace PointOfSale.DAL.Resources {
         public static string Draft {
             get {
                 return ResourceManager.GetString("Draft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الاسم.
+        /// </summary>
+        public static string DropDownListName {
+            get {
+                return ResourceManager.GetString("DropDownListName", resourceCulture);
             }
         }
         
@@ -1030,6 +1084,15 @@ namespace PointOfSale.DAL.Resources {
         public static string LoyaltyProgram {
             get {
                 return ResourceManager.GetString("LoyaltyProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الاسم.
+        /// </summary>
+        public static string LoyaltyProgramName {
+            get {
+                return ResourceManager.GetString("LoyaltyProgramName", resourceCulture);
             }
         }
         
@@ -1367,6 +1430,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الاسم.
+        /// </summary>
+        public static string PricelistName {
+            get {
+                return ResourceManager.GetString("PricelistName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to طابعه.
         /// </summary>
         public static string Printer {
@@ -1381,6 +1453,15 @@ namespace PointOfSale.DAL.Resources {
         public static string PrinterIPAddress {
             get {
                 return ResourceManager.GetString("PrinterIPAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسم الطابعة.
+        /// </summary>
+        public static string PrinterName {
+            get {
+                return ResourceManager.GetString("PrinterName", resourceCulture);
             }
         }
         
@@ -1444,6 +1525,15 @@ namespace PointOfSale.DAL.Resources {
         public static string ProductImage {
             get {
                 return ResourceManager.GetString("ProductImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسم المنتج.
+        /// </summary>
+        public static string ProductName {
+            get {
+                return ResourceManager.GetString("ProductName", resourceCulture);
             }
         }
         
@@ -1628,6 +1718,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اسم المتجر.
+        /// </summary>
+        public static string ShopName {
+            get {
+                return ResourceManager.GetString("ShopName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اسم المتجر مطلوب.
         /// </summary>
         public static string ShopRequired {
@@ -1709,6 +1808,15 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اسم المورد.
+        /// </summary>
+        public static string SupplierName {
+            get {
+                return ResourceManager.GetString("SupplierName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to المورد مطلوب.
         /// </summary>
         public static string SupplierRequired {
@@ -1786,6 +1894,15 @@ namespace PointOfSale.DAL.Resources {
         public static string TaxIncludedPrice {
             get {
                 return ResourceManager.GetString("TaxIncludedPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسم الضريبة.
+        /// </summary>
+        public static string TaxName {
+            get {
+                return ResourceManager.GetString("TaxName", resourceCulture);
             }
         }
         
@@ -1903,6 +2020,15 @@ namespace PointOfSale.DAL.Resources {
         public static string Vendor {
             get {
                 return ResourceManager.GetString("Vendor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الاسم.
+        /// </summary>
+        public static string VendorName {
+            get {
+                return ResourceManager.GetString("VendorName", resourceCulture);
             }
         }
         

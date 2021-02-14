@@ -120,19 +120,13 @@
   <data name="Add" xml:space="preserve">
     <value>اضافة</value>
   </data>
-  <data name="AddCustomerContact" xml:space="preserve">
-    <value>اضافة اتصال جديد</value>
-  </data>
   <data name="AddNewCustomer" xml:space="preserve">
     <value>اضافة عميل جديد</value>
   </data>
   <data name="BackToList" xml:space="preserve">
-    <value>الرجوع للقائمة</value>
+    <value>الرجوع</value>
   </data>
   <data name="CustomerContacts" xml:space="preserve">
-    <value>اتصالات العملاء</value>
-  </data>
-  <data name="EditCustomerContact" xml:space="preserve">
-    <value>تعديل اتصال العميل</value>
+    <value>اتصال العميل</value>
   </data>
 </root>

@@ -123,9 +123,6 @@
   <data name="ChooseContactType" xml:space="preserve">
     <value>اختار نوع الاتصال</value>
   </data>
-  <data name="EditCustomerContact" xml:space="preserve">
-    <value />
-  </data>
   <data name="Save" xml:space="preserve">
     <value>حفظ</value>
   </data>

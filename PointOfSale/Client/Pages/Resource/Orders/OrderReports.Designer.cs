@@ -97,16 +97,7 @@ namespace PointOfSale.Client.Pages.Resource.Orders {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الطلبات لكل فئة.
-        /// </summary>
-        public static string OrdersPerCategory {
-            get {
-                return ResourceManager.GetString("OrdersPerCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to الطلبات لكل طريقة دفع.
+        ///   Looks up a localized string similar to المبيعات لكل طرية دفع.
         /// </summary>
         public static string OrdersPerPaymentMethod {
             get {
@@ -124,7 +115,7 @@ namespace PointOfSale.Client.Pages.Resource.Orders {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الايرادات بالجنيه.
+        ///   Looks up a localized string similar to الارباح بالجنيه.
         /// </summary>
         public static string RevenueInUSD {
             get {
@@ -133,7 +124,7 @@ namespace PointOfSale.Client.Pages.Resource.Orders {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تقرير المبيعات.
+        ///   Looks up a localized string similar to تفاصيل المبيعات.
         /// </summary>
         public static string SalesDetails {
             get {
@@ -151,7 +142,7 @@ namespace PointOfSale.Client.Pages.Resource.Orders {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تاريخ البدأ.
+        ///   Looks up a localized string similar to تاريخ البدء.
         /// </summary>
         public static string StartDate {
             get {

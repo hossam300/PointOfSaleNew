@@ -70,15 +70,6 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اضافة اتصال جديد.
-        /// </summary>
-        public static string AddCustomerContact {
-            get {
-                return ResourceManager.GetString("AddCustomerContact", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to اضافة عميل جديد.
         /// </summary>
         public static string AddNewCustomer {
@@ -88,7 +79,7 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الرجوع للقائمة.
+        ///   Looks up a localized string similar to الرجوع.
         /// </summary>
         public static string BackToList {
             get {
@@ -97,20 +88,11 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اتصالات العملاء.
+        ///   Looks up a localized string similar to اتصال العميل.
         /// </summary>
         public static string CustomerContacts {
             get {
                 return ResourceManager.GetString("CustomerContacts", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to تعديل اتصال العميل.
-        /// </summary>
-        public static string EditCustomerContact {
-            get {
-                return ResourceManager.GetString("EditCustomerContact", resourceCulture);
             }
         }
     }

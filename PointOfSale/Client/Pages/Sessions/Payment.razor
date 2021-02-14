@@ -13,7 +13,7 @@
                                 <tbody>
                                     <tr>
                                         <td width="25%" style="border-right-color: #FFF !important;">@Loc["TotalItems"]</td>
-                                        <td width="25%" class="text-right"><span id="item_count">@Order.OrderItem.Count</span></td>
+                                        <td width="25%" class="text-right"><span id="item_count">@Order.OrderItem.Sum(x => x.Quantity)</span></td>
                                         <td width="25%" style="border-right-color: #FFF !important;">@Loc["TotalPayable"] </td>
                                         <td width="25%" class="text-right"><span id="twt">@Order.Total (0.00)</span></td>
                                     </tr>
@@ -167,6 +167,10 @@
                 Amount = Amount,
             };
             orderPayments.Add(orderPayment);
+        }
+        if (orderPayments.Sum(c => c.Amount) > Order.Total)
+        {
+            await JSRuntime.InvokeVoidAsync("requied", "المبلغ المدفوع اكبر من الاجمالى");
         }
         if (Order.Id != 0)
         {

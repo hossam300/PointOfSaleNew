@@ -79,7 +79,7 @@ namespace PointOfSale.Client.Pages.Resource.Orders {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to طياعة الطلب.
+        ///   Looks up a localized string similar to طباعة الايصال.
         /// </summary>
         public static string PrintOrder {
             get {

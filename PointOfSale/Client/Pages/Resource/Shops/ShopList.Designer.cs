@@ -70,20 +70,20 @@ namespace PointOfSale.Client.Pages.Resource.Shops {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to الاسم.
-        /// </summary>
-        public static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to المتاجر.
         /// </summary>
         public static string PointOfSale {
             get {
                 return ResourceManager.GetString("PointOfSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الاسم.
+        /// </summary>
+        public static string ShopName {
+            get {
+                return ResourceManager.GetString("ShopName", resourceCulture);
             }
         }
     }

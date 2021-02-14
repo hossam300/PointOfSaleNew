@@ -184,6 +184,9 @@
   <data name="Branch" xml:space="preserve">
     <value>الفرع</value>
   </data>
+  <data name="BranchName" xml:space="preserve">
+    <value>اسم الفرع</value>
+  </data>
   <data name="Buy" xml:space="preserve">
     <value>مشترى</value>
   </data>
@@ -234,6 +237,9 @@
   </data>
   <data name="CompanyAddressStreet2" xml:space="preserve">
     <value>عنوان 2</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>اسم الشركة</value>
   </data>
   <data name="ConnectDevices" xml:space="preserve">
     <value>توصيل الأجهزة</value>
@@ -289,6 +295,9 @@
   <data name="Currency" xml:space="preserve">
     <value>العملة</value>
   </data>
+  <data name="CurrencyName" xml:space="preserve">
+    <value>اسم العملة</value>
+  </data>
   <data name="CurrentQuantity" xml:space="preserve">
     <value>الكمية الحالية</value>
   </data>
@@ -300,6 +309,9 @@
   </data>
   <data name="CustomerLeadTime" xml:space="preserve">
     <value>مهلة العميل</value>
+  </data>
+  <data name="CustomerName" xml:space="preserve">
+    <value>اسم العميل</value>
   </data>
   <data name="CustomerRequired" xml:space="preserve">
     <value>اسم العميل مطلوب</value>
@@ -322,6 +334,9 @@
   <data name="DeliveredQuantities" xml:space="preserve">
     <value>الكميات المسلمة</value>
   </data>
+  <data name="DepartmentName" xml:space="preserve">
+    <value>اسم الادارة</value>
+  </data>
   <data name="DescriptionForDeliveryOrders" xml:space="preserve">
     <value>وصف لأوامر التسليم</value>
   </data>
@@ -336,6 +351,9 @@
   </data>
   <data name="Draft" xml:space="preserve">
     <value>غير مدفوع</value>
+  </data>
+  <data name="DropDownListName" xml:space="preserve">
+    <value>الاسم</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>البريد الالكترونى</value>
@@ -441,6 +459,9 @@
   </data>
   <data name="LoyaltyProgram" xml:space="preserve">
     <value>برنامج النقاط</value>
+  </data>
+  <data name="LoyaltyProgramName" xml:space="preserve">
+    <value>الاسم</value>
   </data>
   <data name="ManualDiscounts" xml:space="preserve">
     <value>الخصم يدوي</value>
@@ -553,11 +574,17 @@
   <data name="Pricelist" xml:space="preserve">
     <value>قائمة الاسعار</value>
   </data>
+  <data name="PricelistName" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
   <data name="Printer" xml:space="preserve">
     <value>طابعه</value>
   </data>
   <data name="PrinterIPAddress" xml:space="preserve">
     <value>عنوان IP للطابعة</value>
+  </data>
+  <data name="PrinterName" xml:space="preserve">
+    <value>اسم الطابعة</value>
   </data>
   <data name="Printers" xml:space="preserve">
     <value>الطابعات</value>
@@ -579,6 +606,9 @@
   </data>
   <data name="ProductImage" xml:space="preserve">
     <value>صورة المنتج</value>
+  </data>
+  <data name="ProductName" xml:space="preserve">
+    <value>اسم المنتج</value>
   </data>
   <data name="ProductPrices" xml:space="preserve">
     <value>أسعار المنتجات</value>
@@ -640,6 +670,9 @@
   <data name="Shop" xml:space="preserve">
     <value>المتجر</value>
   </data>
+  <data name="ShopName" xml:space="preserve">
+    <value>اسم المتجر</value>
+  </data>
   <data name="ShopRequired" xml:space="preserve">
     <value>اسم المتجر مطلوب</value>
   </data>
@@ -667,6 +700,9 @@
   <data name="SupplierImage" xml:space="preserve">
     <value>صورة المورد</value>
   </data>
+  <data name="SupplierName" xml:space="preserve">
+    <value>اسم المورد</value>
+  </data>
   <data name="SupplierRequired" xml:space="preserve">
     <value>المورد مطلوب</value>
   </data>
@@ -693,6 +729,9 @@
   </data>
   <data name="TaxIncludedPrice" xml:space="preserve">
     <value>السعر شامل الضريبة</value>
+  </data>
+  <data name="TaxName" xml:space="preserve">
+    <value>اسم الضريبة</value>
   </data>
   <data name="TaxOnProduct" xml:space="preserve">
     <value>الضريبة على المنتج</value>
@@ -732,6 +771,9 @@
   </data>
   <data name="Vendor" xml:space="preserve">
     <value>المورد</value>
+  </data>
+  <data name="VendorName" xml:space="preserve">
+    <value>الاسم</value>
   </data>
   <data name="VirtualKeyBoard" xml:space="preserve">
     <value>لوحة مفاتيح افتراضية</value>

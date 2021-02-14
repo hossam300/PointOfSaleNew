@@ -70,7 +70,7 @@ namespace PointOfSale.Client.Pages.Resource.LoyaltyPrograms {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حفظ.
+        ///   Looks up a localized string similar to حفظ .
         /// </summary>
         public static string Save {
             get {

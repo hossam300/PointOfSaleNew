@@ -58,7 +58,7 @@ namespace PointOfSale.Client.Pages.Shops
             }
            
             var shopId = 0;
-            using (var response = await Http.PutAsJsonAsync<ShopPricingPaymentDTO>("/api/Shops/UpdateShopPricingPaymentDTO", shop))
+            using (var response = await Http.PostAsJsonAsync<ShopPricingPaymentDTO>("/api/Shops/UpdateShopPricingPaymentDTO", shop))
             {
                 // convert response data to JsonElement which can handle any JSON data
                 var data = await response.Content.ReadFromJsonAsync<Shop>();

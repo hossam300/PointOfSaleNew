@@ -17,7 +17,7 @@ namespace  PointOfSale.DAL.Domains
 
         [StringLength(500)]
         [Required]
-        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "DepartmentName", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
         [Display(Name = "Company", ResourceType = typeof(Resources.Resources))]
         public int CompanyId { get; set; }

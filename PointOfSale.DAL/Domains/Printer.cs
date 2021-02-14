@@ -10,7 +10,7 @@ namespace PointOfSale.DAL.Domains
             PrintedProductCategories = new List<ProductCategory>();
         }
         public int Id { get; set; }
-        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "PrinterName", ResourceType = typeof(Resources.Resources))]
         public string PrinterName { get; set; }
         [Display(Name = "PrinterType", ResourceType = typeof(Resources.Resources))]
         public virtual PrinterType PrinterType { get; set; }

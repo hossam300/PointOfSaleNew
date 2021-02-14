@@ -124,6 +124,6 @@
     <value>طباعة الفاتورة</value>
   </data>
   <data name="PrintOrder" xml:space="preserve">
-    <value>طياعة الطلب</value>
+    <value>طباعة الايصال</value>
   </data>
 </root>

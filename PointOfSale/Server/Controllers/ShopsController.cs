@@ -64,12 +64,19 @@ namespace PointOfSale.Server.Controllers
         public IActionResult GetShopPricingPaymentDTOById(int id)
         {
             ShopPricingPaymentDTO shop = _shopService.GetShopPricingPaymentDTOById(id);
-            return Ok(new ShopPricingPaymentDTO { Id = shop.Id,/* Name = shop.Name, AllowedEmployees = shop.AllowedEmployees, BranchId = null, IsRestaurant = shop.IsRestaurant, LoginWithEmployees = shop.LoginWithEmployees */});
+            return Ok(shop);
+        }
+        //GetShopBillsReceiptDTOById
+        [HttpGet("GetShopBillsReceiptDTOById/{id}")]
+        public IActionResult GetShopBillsReceiptDTOById(int id)
+        {
+            ShopBillsReceiptDTO shop = _shopService.GetShopBillsReceiptDTOById(id);
+            return Ok(shop);
         }
         [HttpPost("InsertAddShop")]
         public IActionResult InsertAddShop([FromBody] AddShopDTO addShop)
         {
-            var shop = _shopService.GetDetails(addShop.Id);
+            var shop = new Shop();
             shop.Name = addShop.Name;
             shop.AllowedEmployees = addShop.AllowedEmployees.Select(x => new ShopEmployee { ShopId = x.ShopId, UserId = x.UserId, Id = x.Id }).ToList();
             shop.BranchId = addShop.BranchId;
@@ -78,7 +85,7 @@ namespace PointOfSale.Server.Controllers
             _shopService.Insert(shop);
             return Ok(new AddShopDTO { Id = shop.Id, Name = shop.Name, AllowedEmployees = shop.AllowedEmployees.Select(x => new ShopEmployeeDTO { ShopId = x.ShopId, UserId = x.UserId, Id = x.Id }).ToList(), BranchId = null, IsRestaurant = shop.IsRestaurant, LoginWithEmployees = shop.LoginWithEmployees });
         }
-        [HttpPut("UpdateShopInterfaceDTO")]
+        [HttpPost("UpdateShopInterfaceDTO")]
         public IActionResult UpdateShopInterfaceDTO([FromBody] ShopInterfaceDTO shopInterface)
         {
             _shopService.UpdateShopInterfaceDTO(shopInterface);
@@ -96,6 +103,26 @@ namespace PointOfSale.Server.Controllers
             //shop.LoginWithEmployees = addShop.LoginWithEmployees;
             _shopService.UpdateAddShopDTO(addShop);
             return Ok(addShop);
+        }
+        [HttpPost("UpdateShopPricingPaymentDTO")]
+        public IActionResult UpdateShopPricingPaymentDTO([FromBody] ShopPricingPaymentDTO shopPricing)
+        {
+            //var shop = _shopService.GetDetails(addShop.Id);
+            //shop.Name = addShop.Name;
+            //shop.AllowedEmployees = addShop.AllowedEmployees;
+            //shop.BranchId = addShop.BranchId;
+            //shop.Branch = addShop.Branch;
+            //shop.IsRestaurant = addShop.IsRestaurant;
+            //shop.LoginWithEmployees = addShop.LoginWithEmployees;
+            _shopService.UpdateShopPricingPaymentDTO(shopPricing);
+            return Ok(shopPricing);
+        }
+        //UpdateShopBillsReceiptDTO
+        [HttpPost("UpdateShopBillsReceiptDTO")]
+        public IActionResult UpdateShopBillsReceiptDTO([FromBody] ShopBillsReceiptDTO shopBills)
+        {
+            _shopService.UpdateShopBillsReceiptDTO(shopBills);
+            return Ok(shopBills);
         }
         [HttpGet("GetByIdWithoutInclude/{id}")]
         public IActionResult GetByIdWithoutInclude(int id)

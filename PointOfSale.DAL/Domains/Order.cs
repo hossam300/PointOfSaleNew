@@ -34,7 +34,7 @@ namespace PointOfSale.DAL.Domains
         public int? LoyaltyProgramId { get; set; }
         public virtual LoyaltyProgram LoyaltyProgram { get; set; }
         [Display(Name = "TotalItemCount", ResourceType = typeof(Resources.Resources))]
-        public int TotalItemCount { get; set; }
+        public double TotalItemCount { get; set; }
         [Display(Name = "Session", ResourceType = typeof(Resources.Resources))]
         public int? SessionId { get; set; }
         public virtual Session Session { get; set; }

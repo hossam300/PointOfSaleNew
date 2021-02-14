@@ -13,7 +13,7 @@ namespace PointOfSale.DAL.ViewModels
         }
         public int Id { get; set; }
         [Required]
-        [Display(Name = "Name")]
+        [Display(Name = "CustomerName")]
         public string Name { get; set; }
         [Required]
         [Display(Name = "Customer Type")]

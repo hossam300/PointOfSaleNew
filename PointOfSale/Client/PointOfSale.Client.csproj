@@ -68,15 +68,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>ContactTypeList.resx</DependentUpon>
     </Compile>
+    <Compile Update="Pages\Resource\Customers\AddCustomer.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddCustomer.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\Resource\Customers\AddCustomerConact.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddCustomerConact.resx</DependentUpon>
+    </Compile>
     <Compile Update="Pages\Resource\Customers\AddCustomerConacts.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AddCustomerConacts.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Pages\Resource\Customers\AddCustomerContact.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AddCustomerContact.resx</DependentUpon>
     </Compile>
     <Compile Update="Pages\Resource\Customers\CustomerDetails.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -326,17 +331,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ContactTypeList.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerConacts.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Customers\AddCustomer.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddCustomer.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerContact.resx">
+    <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerConact.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>AddCustomerContact.Designer.cs</LastGenOutput>
+      <LastGenOutput>AddCustomerConact.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Pages\Resource\Customers\AddCustomerConacts.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddCustomerConacts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Pages\Resource\Customers\CustomerDetails.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -129,25 +129,22 @@
   <data name="NumberOfCustomer" xml:space="preserve">
     <value>عدد العملاء</value>
   </data>
-  <data name="OrdersPerCategory" xml:space="preserve">
-    <value>الطلبات لكل فئة</value>
-  </data>
   <data name="OrdersPerPaymentMethod" xml:space="preserve">
-    <value>الطلبات لكل طريقة دفع</value>
+    <value>المبيعات لكل طرية دفع</value>
   </data>
   <data name="Payments" xml:space="preserve">
     <value>المدفوعات</value>
   </data>
   <data name="RevenueInUSD" xml:space="preserve">
-    <value>الايرادات بالجنيه</value>
+    <value>الارباح بالجنيه</value>
   </data>
   <data name="SalesDetails" xml:space="preserve">
-    <value>تقرير المبيعات</value>
+    <value>تفاصيل المبيعات</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>بحث</value>
   </data>
   <data name="StartDate" xml:space="preserve">
-    <value>تاريخ البدأ</value>
+    <value>تاريخ البدء</value>
   </data>
 </root>

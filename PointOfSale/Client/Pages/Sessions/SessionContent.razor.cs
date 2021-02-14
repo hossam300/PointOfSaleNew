@@ -37,7 +37,7 @@ namespace PointOfSale.Client.Pages.Sessions
         Radzen.Blazor.RadzenAutoComplete BarcodeId;
 
         Order order = new Order();
-        int TotalItems = 0;
+        double TotalItems = 0;
         double Total = 0;
         double Discount = 0;
         double OrderTax = 0;
@@ -130,11 +130,11 @@ namespace PointOfSale.Client.Pages.Sessions
         {
             if (order.CustomerId == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Customer Is Requird");
+                await JSRuntime.InvokeVoidAsync("requied", "العميل مطلوب");
             }
             else if (orderItems.Count == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Choose One Product at Least");
+                await JSRuntime.InvokeVoidAsync("requied", "اختار منتج على الاقل");
             }
             else
             {
@@ -159,7 +159,7 @@ namespace PointOfSale.Client.Pages.Sessions
                     item.Product.ProductCategory = null;
                     item.Order = null;
                 }
-                var result = await DialogService.OpenAsync<HoldOrder>("Suspend Sale", new Dictionary<string, object>() { { "Order", order } },
+                var result = await DialogService.OpenAsync<HoldOrder>("تعليق البيع", new Dictionary<string, object>() { { "Order", order } },
                       new Radzen.DialogOptions() { Width = "500px", Height = "325px" });
                 await InvokeAsync(() => { StateHasChanged(); });
             }
@@ -168,11 +168,11 @@ namespace PointOfSale.Client.Pages.Sessions
         {
             if (order.CustomerId == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Customer Is Requird");
+                await JSRuntime.InvokeVoidAsync("requied", "العميل مطلوب");
             }
             else if (orderItems.Count == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Choose One Product at Least");
+                await JSRuntime.InvokeVoidAsync("requied", "اختار منتج على الاقل");
             }
             else
             {
@@ -194,7 +194,7 @@ namespace PointOfSale.Client.Pages.Sessions
                     item.Product.Category = null;
                     item.Product.ProductCategory = null;
                 }
-                var result = await DialogService.OpenAsync<CancelOrder>("Cancel Order", new Dictionary<string, object>() { { "Order", order } },
+                var result = await DialogService.OpenAsync<CancelOrder>("الغاء الفاتورة", new Dictionary<string, object>() { { "Order", order } },
                         new Radzen.DialogOptions() { Width = "400px", Height = "250px" });
                 await InvokeAsync(() => { StateHasChanged(); });
             }
@@ -203,11 +203,11 @@ namespace PointOfSale.Client.Pages.Sessions
         {
             if (order.CustomerId == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Customer Is Requird");
+                await JSRuntime.InvokeVoidAsync("requied", "العميل مطلوب");
             }
             else if (orderItems.Count == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Choose One Product at Least");
+                await JSRuntime.InvokeVoidAsync("requied", "اختار منتج على الاقل");
             }
             else
             {
@@ -224,7 +224,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
                 order.CreatorId = users;
                 order.OrderItem = orderItems;
-                var result = await DialogService.OpenAsync<PrintOrder>("Print Order", new Dictionary<string, object>() { { "Order", order } },
+                var result = await DialogService.OpenAsync<PrintOrder>("طباعة الطلب", new Dictionary<string, object>() { { "Order", order } },
                         new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
                 await InvokeAsync(() => { StateHasChanged(); });
             }
@@ -233,11 +233,11 @@ namespace PointOfSale.Client.Pages.Sessions
         {
             if (order.CustomerId == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Customer Is Requird");
+                await JSRuntime.InvokeVoidAsync("requied", "العميل مطلوب");
             }
             else if (orderItems.Count == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Choose One Product at Least");
+                await JSRuntime.InvokeVoidAsync("requied", "اختار منتج على الاقل");
             }
             else
             {
@@ -254,7 +254,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
                 order.CreatorId = users;
                 order.OrderItem = orderItems;
-                var result = await DialogService.OpenAsync<PrintBill>("Print Bill", new Dictionary<string, object>() { { "Order", order } },
+                var result = await DialogService.OpenAsync<PrintBill>("طباعة الايصال", new Dictionary<string, object>() { { "Order", order } },
                      new Radzen.DialogOptions() { Width = "400px", Height = "500px" });
                 await InvokeAsync(() => { StateHasChanged(); });
             }
@@ -263,11 +263,11 @@ namespace PointOfSale.Client.Pages.Sessions
         {
             if (order.CustomerId == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Customer Is Requird");
+                await JSRuntime.InvokeVoidAsync("requied", "العميل مطلوب");
             }
             else if (orderItems.Count == 0)
             {
-                await JSRuntime.InvokeVoidAsync("requied", "Choose One Product at Least");
+                await JSRuntime.InvokeVoidAsync("requied", "اختار منتج على الاقل");
             }
             else
             {
@@ -284,7 +284,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
                 order.CreatorId = users;
                 order.OrderItem = orderItems;
-                var result = await DialogService.OpenAsync<Payment>("Payment", new Dictionary<string, object>() { { "Order", order } },
+                var result = await DialogService.OpenAsync<Payment>("الدفع", new Dictionary<string, object>() { { "Order", order } },
                            new Radzen.DialogOptions() { Width = "600px", Height = "400px" });
                 await InvokeAsync(() => { StateHasChanged(); });
             }
@@ -354,7 +354,7 @@ namespace PointOfSale.Client.Pages.Sessions
             return new ItemsProviderResult<OrderItem>(orderItems, orderItems.Count);
         }
 
-        void OnChangeQuantity(int value, int prodId)
+        void OnChangeQuantity(double value, int prodId)
         {
             var product = Products.FirstOrDefault(c => c.Id == prodId);
             AddOrderItemQunty(product, value);
@@ -385,7 +385,7 @@ namespace PointOfSale.Client.Pages.Sessions
             }
             await InvokeAsync(() => { StateHasChanged(); });
         }
-        public async void AddOrderItemQunty(Product item, int Qyt)
+        public async void AddOrderItemQunty(Product item, double Qyt)
         {
             if (item != null)
             {
@@ -414,7 +414,7 @@ namespace PointOfSale.Client.Pages.Sessions
                                 await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
                         }
                         orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
-                        orderItems.Insert(index,orderItem);
+                        orderItems.Insert(index, orderItem);
                     }
                     else
                     {

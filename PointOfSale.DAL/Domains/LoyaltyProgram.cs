@@ -8,7 +8,7 @@ namespace PointOfSale.DAL.Domains
     public class LoyaltyProgram
     {
         public int Id { get; set; }
-        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "LoyaltyProgramName", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
         [Display(Name = "PointPerMoneySpent", ResourceType = typeof(Resources.Resources))]
         public double PointPerMoneySpent { get; set; }

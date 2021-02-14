@@ -120,10 +120,10 @@
   <data name="Add" xml:space="preserve">
     <value>اضافة</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>الاسم</value>
-  </data>
   <data name="PointOfSale" xml:space="preserve">
     <value>المتاجر</value>
+  </data>
+  <data name="ShopName" xml:space="preserve">
+    <value>الاسم</value>
   </data>
 </root>

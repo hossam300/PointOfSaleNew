@@ -16,7 +16,7 @@ namespace PointOfSale.DAL.ViewModels
         public double? Discount { get; set; }
         public double? OrderTax { get; set; }
         public string Notes { get; set; }
-        public int TotalItemCount { get; set; }
+        public double TotalItemCount { get; set; }
         public int? SessionId { get; set; }
         public string CreatorId { get; set; }
         public DateTime CreationDate { get; set; }

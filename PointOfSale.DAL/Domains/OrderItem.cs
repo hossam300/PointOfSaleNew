@@ -16,7 +16,7 @@ namespace PointOfSale.DAL.Domains
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
         [Display(Name = "Quantity", ResourceType = typeof(Resources.Resources))]
-        public int Quantity { get; set; }
+        public double Quantity { get; set; }
         [Display(Name = "Price", ResourceType = typeof(Resources.Resources))]
         public double Price { get; set; }
         [Display(Name = "SubTotal", ResourceType = typeof(Resources.Resources))]

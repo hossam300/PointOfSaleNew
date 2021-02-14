@@ -46,7 +46,7 @@
                                                     <div class="col-xl-8">
 
                                                         <RadzenDropDownDataGrid AllowClear="true" TValue="int" Name="BarcodeId"
-                                                                                FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="Radzen.StringFilterOperator.StartsWith" 
+                                                                                FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="Radzen.StringFilterOperator.Contains" 
                                                                                 AllowFiltering="true" SelectedItem="1"
                                                                                 Data="@ProductsData" TextProperty="Barcode"
                                                                                 ValueProperty="Id" Placeholder="@Loc["EnterBarcodeOrProductName"]" id="barcode2" Style="margin-bottom: 20px;width:100%" Change=@(args => OnChangeProduct(args, "AutoComplete with custom filter operator"))>
@@ -79,7 +79,7 @@
                                                             <tr>
                                                                 <td>@item.Product.Name</td>
                                                                 <td>@item.Product.SalesPrice</td>
-                                                                <td> <RadzenNumeric TValue="int" @bind-Value="@item.Quantity" Change=@(args => OnChangeQuantity(args,item.ProductId)) /></td>
+                                                                <td> <RadzenNumeric TValue="double" Min="0"  @bind-Value="@item.Quantity" Change=@(args => OnChangeQuantity(args,item.ProductId)) /></td>
                                                                 <td>@item.SubTotal</td>
                                                                 <td><button class="btn btn-sm btn-danger" @onclick="()=>DeleteItem(item)"><i class="fa fa-trash"></i></button></td>
                                                             </tr>

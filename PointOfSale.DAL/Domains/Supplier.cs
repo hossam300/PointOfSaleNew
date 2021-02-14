@@ -13,7 +13,7 @@ namespace PointOfSale.DAL.Domains
         }
         public int Id { get; set; }
         [Required(ErrorMessageResourceName = "SupplierRequired", ErrorMessageResourceType = typeof(Resources.Resources))]
-        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "SupplierName", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
         [Required(ErrorMessageResourceName = "CustomerTypeRequired", ErrorMessageResourceType = typeof(Resources.Resources))]
         [Display(Name = "SupplierType", ResourceType = typeof(Resources.Resources))]

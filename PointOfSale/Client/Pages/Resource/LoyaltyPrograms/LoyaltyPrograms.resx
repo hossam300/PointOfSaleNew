@@ -120,12 +120,6 @@
   <data name="Add" xml:space="preserve">
     <value>اضافة</value>
   </data>
-  <data name="AddLoyaltyProgram" xml:space="preserve">
-    <value>اضافة نظام النقاط</value>
-  </data>
-  <data name="EditLoyaltyProgram" xml:space="preserve">
-    <value>تعديل نظام النقاط</value>
-  </data>
   <data name="LoyaltyProgram" xml:space="preserve">
     <value>نظام النقاط</value>
   </data>

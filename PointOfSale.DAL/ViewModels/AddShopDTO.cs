@@ -9,8 +9,8 @@ namespace PointOfSale.DAL.ViewModels
     public class AddShopDTO
     {
         public int Id { get; set; }
-        //[Required(ErrorMessageResourceName = "ShopRequired", ErrorMessageResourceType = typeof(Resources.Resources))]
-      //  [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Required(ErrorMessageResourceName = "ShopRequired", ErrorMessageResourceType = typeof(Resources.Resources))]
+        [Display(Name = "ShopName", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
         [Display(Name = "Branch", ResourceType = typeof(Resources.Resources))]
         public int? BranchId { get; set; }

@@ -16,5 +16,8 @@ namespace PointOfSale.Services.ISevices
         ShopInterfaceDTO GetShopInterfaceDTOById(int id);
         void UpdateShopInterfaceDTO(ShopInterfaceDTO shopInterface);
         ShopPricingPaymentDTO GetShopPricingPaymentDTOById(int id);
+        void UpdateShopPricingPaymentDTO(ShopPricingPaymentDTO shopPricing);
+        ShopBillsReceiptDTO GetShopBillsReceiptDTOById(int id);
+        void UpdateShopBillsReceiptDTO(ShopBillsReceiptDTO shopBills);
     }
 }

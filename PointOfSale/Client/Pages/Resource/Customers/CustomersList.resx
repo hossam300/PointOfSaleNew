@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Active" xml:space="preserve">
-    <value>مفعل</value>
-  </data>
   <data name="AddCustomer" xml:space="preserve">
     <value>اضافة عميل</value>
   </data>
@@ -130,7 +127,7 @@
     <value>حذف</value>
   </data>
   <data name="DeleteAll" xml:space="preserve">
-    <value>حذف الكل</value>
+    <value>مسح الكل</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>تعديل</value>
@@ -139,15 +136,15 @@
     <value>بحث</value>
   </data>
   <data name="Selected" xml:space="preserve">
-    <value>محدد</value>
+    <value />
   </data>
   <data name="Total" xml:space="preserve">
     <value>الاجمالى</value>
   </data>
   <data name="UpdateStatus" xml:space="preserve">
-    <value>تحديث الحالة</value>
+    <value>تعديل الحالة</value>
   </data>
   <data name="ViewCustomer" xml:space="preserve">
-    <value>تفاصيل العميل</value>
+    <value>تفاصيل</value>
   </data>
 </root>

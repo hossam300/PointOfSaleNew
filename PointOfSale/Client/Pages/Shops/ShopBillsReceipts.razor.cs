@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
+using PointOfSale.DAL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace PointOfSale.Client.Pages.Shops
 {
     public partial class ShopBillsReceipts : ComponentBase
     {
-        Shop shop = new Shop();
+        ShopBillsReceiptDTO shop = new ShopBillsReceiptDTO();
 
 
         IEnumerable<int> multipleAvailableCategories = new int[] { };
@@ -29,7 +30,7 @@ namespace PointOfSale.Client.Pages.Shops
 
             if (id != null)
             {
-                shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + id);
+                shop = await Http.GetFromJsonAsync<ShopBillsReceiptDTO>("/api/Shops/GetShopBillsReceiptDTOById/" + id);
 
             }
         }
@@ -45,18 +46,15 @@ namespace PointOfSale.Client.Pages.Shops
         {
             events.Add(DateTime.Now, $"{eventName}: {value}");
         }
-        public async void FormShopSubmit(Shop model)
+        public async void FormShopSubmit(ShopBillsReceiptDTO model)
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
 
-            foreach (var item in multipleAvailableCategories)
-            {
-                shop.AvailableCategories.Add(new ShopProductCategory { Id = item });
-            }
+           
             //bool formIsValid = model.Validate();
-            using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
+            using (var response = await Http.PostAsJsonAsync<ShopBillsReceiptDTO>("/api/Shops/UpdateShopBillsReceiptDTO", shop))
             {
                 // convert response data to JsonElement which can handle any JSON data
                 var data = await response.Content.ReadFromJsonAsync<Shop>();

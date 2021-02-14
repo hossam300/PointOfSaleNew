@@ -5,7 +5,7 @@ namespace PointOfSale.DAL.ViewModels
     public class PricelistDTO
     {
         public int Id { get; set; }
-        [Display(Name = "Name", ResourceType = typeof(Resources.Resources))]
+        [Display(Name = "PricelistName", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
         [Display(Name = "Currency", ResourceType = typeof(Resources.Resources))]
         public int CurrencyId { get; set; }

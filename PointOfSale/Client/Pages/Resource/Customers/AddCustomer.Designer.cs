@@ -61,7 +61,7 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اضافة عميل.
+        ///   Looks up a localized string similar to اصافة عميل.
         /// </summary>
         public static string AddCustomers {
             get {

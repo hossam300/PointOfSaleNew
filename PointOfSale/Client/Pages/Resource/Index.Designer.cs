@@ -304,7 +304,7 @@ namespace PointOfSale.Client.Pages.Resource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to التقراير.
+        ///   Looks up a localized string similar to التقارير.
         /// </summary>
         public static string Reporting {
             get {

@@ -153,9 +153,6 @@
   <data name="LoginWithEmployees" xml:space="preserve">
     <value>الموظفين</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>الاسم</value>
-  </data>
   <data name="NextStep" xml:space="preserve">
     <value>التالى</value>
   </data>

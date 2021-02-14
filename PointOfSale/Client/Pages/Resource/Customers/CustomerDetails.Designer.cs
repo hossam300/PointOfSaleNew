@@ -104,5 +104,23 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
                 return ResourceManager.GetString("Information", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طباعة فاتورة.
+        /// </summary>
+        public static string PrintBill {
+            get {
+                return ResourceManager.GetString("PrintBill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to طباعة ايصال.
+        /// </summary>
+        public static string PrintOrder {
+            get {
+                return ResourceManager.GetString("PrintOrder", resourceCulture);
+            }
+        }
     }
 }

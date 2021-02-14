@@ -41,6 +41,66 @@ namespace PointOfSale.Services.Sevices
         {
             return _unitOfWork.GetRepository<OrderPayment>().GetAll().AsNoTracking().Where(c => c.Order.SessionId == id).ToList().Sum(c => c.Amount);
         }
+        public ShopPricingPaymentDTO GetShopPricingPaymentDTOById(int id)
+        {
+            return _unitOfWork.GetRepository<Shop>().GetAllWithoutInclude().Include(x => x.Pricelist)
+                .Include(x => x.AvailablePriceLists).Include(x => x.PaymentMethods).Include(x => x.TipProduct)
+                .AsNoTracking().Where(c => c.Id == id).Select(shop => new ShopPricingPaymentDTO
+                {
+                    Id = shop.Id,
+                    AdvancedPriceICollections = shop.AdvancedPriceICollections,
+                    AuthorizedDifference = shop.AuthorizedDifference,
+                    AvailablePriceLists = shop.AvailablePriceLists.Select(z => new ShopPricelistDTO { Id = z.Id, PricelistId = z.PricelistId, ShopId = z.ShopId }).ToList(),
+                    CashControl = shop.CashControl,
+                    GlobalDiscounts = shop.GlobalDiscounts,
+                    LoyaltyProgram = shop.LoyaltyProgram,
+                    ManualDiscounts = shop.ManualDiscounts,
+                    PaymentMethods = shop.PaymentMethods.Select(z => new ShopPaymentMethodDTO { Id = z.Id, PaymentMethodId = z.PaymentMethodId, ShopId = z.ShopId }).ToList(),
+                    PrefillCashPayment = shop.PrefillCashPayment,
+                    PriceControl = shop.PriceControl,
+                    Pricelist = (shop.PricelistId != null) ? GetPricelistDTO(shop.Pricelist) : null,
+                    PricelistId = shop.PricelistId,
+                    ProductPrices = shop.ProductPrices,
+                    TipProduct = (shop.TipProductId != null) ? GetTipProductDTO(shop.TipProduct) : null,
+                    TipProductId = shop.TipProductId,
+                    Tips = shop.Tips
+                }).FirstOrDefault();
+        }
+        public ShopBillsReceiptDTO GetShopBillsReceiptDTOById(int id)
+        {
+            return _unitOfWork.GetRepository<Shop>().GetAllWithoutInclude()
+                 .AsNoTracking().Where(c => c.Id == id).Select(shop => new ShopBillsReceiptDTO
+                 {
+                     Id = shop.Id,
+                     AutomaticReceiptPrinting = shop.AutomaticReceiptPrinting,
+                     BillPrinting = shop.BillPrinting,
+                     BillSpliitting = shop.BillSpliitting,
+                     Footer = shop.Footer,
+                     Header = shop.Header,
+                     HeaderFooter = shop.HeaderFooter,
+                     Invoicing = shop.Invoicing,
+                     ReprintReceipt = shop.ReprintReceipt
+                 }).FirstOrDefault();
+        }
+
+        public static ProductDTO GetTipProductDTO(Product tipProduct)
+        {
+            return new ProductDTO
+            {
+                Id = tipProduct.Id,
+                Name = tipProduct.Name
+            };
+        }
+
+        public static PricelistDTO GetPricelistDTO(Pricelist pricelist)
+        {
+            return new PricelistDTO
+            {
+                CurrencyId = pricelist.CurrencyId,
+                Name = pricelist.Name,
+                Id = pricelist.Id
+            };
+        }
 
         public ShopInterfaceDTO GetShopInterfaceDTOById(int id)
         {
@@ -70,7 +130,8 @@ namespace PointOfSale.Services.Sevices
                     FiscalPosition = (shop.FiscalPositionId == null) ? null : GetFiscalPositionDTO(shop.FiscalPosition),
                     FiscalPositionId = shop.FiscalPositionId,
                     FiscalPositionPerOrder = shop.FiscalPositionPerOrder,
-                    SpecificFiscalPosition = shop.SpecificFiscalPosition
+                    SpecificFiscalPosition = shop.SpecificFiscalPosition,
+                    Name = shop.Name
                 }).FirstOrDefault();
         }
 
@@ -124,8 +185,8 @@ namespace PointOfSale.Services.Sevices
             _UnitOfWork.SaveChanges();
             shop.Id = ShopInterfaceDTO.Id;
             shop.AvailableCategories = new List<ShopProductCategory>();
-            shop.AvailableCategories = ShopInterfaceDTO.AvailableCategories.Select(x => new ShopProductCategory { Id = x.Id, ProductCategoryId = x.ProductCategoryId, ShopId = x.ShopId }).ToList();
-            shop.BarcodeScanner = GetBarcodeScanner(ShopInterfaceDTO.BarcodeScanner);
+            shop.AvailableCategories = ShopInterfaceDTO.AvailableCategories.Select(x => new ShopProductCategory { ProductCategoryId = x.ProductCategoryId, ShopId = x.ShopId }).ToList();
+            shop.BarcodeScanner = (shop.BarcodeScannerId != null) ? GetBarcodeScanner(ShopInterfaceDTO.BarcodeScanner) : null;
             shop.BarcodeScannerId = ShopInterfaceDTO.BarcodeScannerId;
             shop.CategoryPictures = ShopInterfaceDTO.CategoryPictures;
             shop.ConnectDevices = ShopInterfaceDTO.ConnectDevices;
@@ -140,11 +201,11 @@ namespace PointOfSale.Services.Sevices
             shop.Printers = ShopInterfaceDTO.Printers.Select(x => new ShopPrinter { Id = x.Id, PrinterId = x.PrinterId, ShopId = x.ShopId }).ToList();
             shop.RestrictAvailableCategories = ShopInterfaceDTO.RestrictAvailableCategories;
             shop.SetStartCategory = ShopInterfaceDTO.SetStartCategory;
-            shop.StartCategory = GetStartCategory(ShopInterfaceDTO.StartCategory);
+            shop.StartCategory = (shop.StartCategoryId != null) ? GetStartCategory(ShopInterfaceDTO.StartCategory) : null;
             shop.StartCategoryId = ShopInterfaceDTO.StartCategoryId;
             shop.TableManagement = ShopInterfaceDTO.TableManagement;
             shop.VirtualKeyBoard = ShopInterfaceDTO.VirtualKeyBoard;
-            shop.FiscalPosition = GetFiscalPosition(ShopInterfaceDTO.FiscalPosition);
+            shop.FiscalPosition = (shop.FiscalPositionId != null) ? GetFiscalPosition(ShopInterfaceDTO.FiscalPosition) : null;
             shop.FiscalPositionId = ShopInterfaceDTO.FiscalPositionId;
             shop.FiscalPositionPerOrder = ShopInterfaceDTO.FiscalPositionPerOrder;
             shop.SpecificFiscalPosition = ShopInterfaceDTO.SpecificFiscalPosition;
@@ -170,7 +231,6 @@ namespace PointOfSale.Services.Sevices
             return new ProductCategory
             {
                 CategoryName = startCategory.CategoryName,
-                Id = startCategory.Id,
                 ImagePath = startCategory.ImagePath,
                 ParentCategoryId = startCategory.ParentCategoryId
             };
@@ -209,9 +269,73 @@ namespace PointOfSale.Services.Sevices
             _UnitOfWork.SaveChanges();
         }
 
-        public ShopPricingPaymentDTO GetShopPricingPaymentDTOById(int id)
+        public void UpdateShopPricingPaymentDTO(ShopPricingPaymentDTO shopPricing)
         {
-            throw new NotImplementedException();
+            var shop = _unitOfWork.GetRepository<Shop>().GetAllWithoutInclude().Include(x => x.AvailablePriceLists).Include(x => x.Pricelist)
+                .Include(x => x.PaymentMethods).Include(x => x.TipProduct)
+                .AsNoTracking().Where(c => c.Id == shopPricing.Id).FirstOrDefault();
+            shop.Id = shopPricing.Id;
+            _unitOfWork.GetRepository<ShopPricelist>().Delete(shop.AvailablePriceLists);
+            _UnitOfWork.SaveChanges();
+            shop.AvailablePriceLists = shopPricing.AvailablePriceLists.Select(x => new ShopPricelist
+            {
+                Id = x.Id,
+                ShopId = x.ShopId,
+                PricelistId = x.PricelistId,
+            }).ToList();
+            shop.PricelistId = shopPricing.PricelistId;
+            shop.Pricelist = (shop.PricelistId != null) ? GetPricelist(shopPricing.Pricelist) : null;
+            shop.AdvancedPriceICollections = shopPricing.AdvancedPriceICollections;
+            _unitOfWork.GetRepository<ShopPricelist>().Delete(shop.AvailablePriceLists);
+            _UnitOfWork.SaveChanges();
+            shop.AvailablePriceLists = shopPricing.AvailablePriceLists.Select(x => new ShopPricelist { Id = x.Id, PricelistId = x.PricelistId, ShopId = x.ShopId }).ToList();
+            shop.ProductPrices = shopPricing.ProductPrices;
+            shop.GlobalDiscounts = shopPricing.GlobalDiscounts;
+            shop.ManualDiscounts = shopPricing.ManualDiscounts;
+            shop.LoyaltyProgram = shopPricing.LoyaltyProgram;
+            shop.PriceControl = shopPricing.PriceControl;
+            _unitOfWork.GetRepository<ShopPaymentMethod>().Delete(shop.PaymentMethods);
+            _UnitOfWork.SaveChanges();
+            shop.PaymentMethods = shopPricing.PaymentMethods.Select(z => new ShopPaymentMethod { Id = z.Id, PaymentMethodId = z.PaymentMethodId, ShopId = z.ShopId }).ToList();
+            shop.PrefillCashPayment = shopPricing.PrefillCashPayment;
+            shop.CashControl = shopPricing.CashControl;
+            shop.AuthorizedDifference = shopPricing.AuthorizedDifference;
+            shop.TipProductId = shopPricing.TipProductId;
+            shop.TipProduct = (shop.PricelistId != null) ? GetTipProduct(shopPricing.TipProduct) : null;
+
+            _unitOfWork.GetRepository<Shop>().Update(shop);
+            _UnitOfWork.SaveChanges();
+        }
+
+        public static Product GetTipProduct(ProductDTO tipProduct)
+        {
+            return new Product
+            {
+                Id = tipProduct.Id,
+                Name = tipProduct.Name
+            };
+        }
+
+        public static Pricelist GetPricelist(PricelistDTO pricelist)
+        {
+            return new Pricelist { Id = pricelist.Id, CurrencyId = pricelist.CurrencyId, Name = pricelist.Name };
+        }
+
+        public void UpdateShopBillsReceiptDTO(ShopBillsReceiptDTO shopBills)
+        {
+            var shop = _unitOfWork.GetRepository<Shop>().GetAllWithoutInclude()
+                .AsNoTracking().Where(c => c.Id == shopBills.Id).FirstOrDefault();
+            shop.Id = shopBills.Id;
+            shop.HeaderFooter = shopBills.HeaderFooter;
+            shop.Header = shopBills.Header;
+            shop.Footer = shopBills.Footer;
+            shop.AutomaticReceiptPrinting = shopBills.AutomaticReceiptPrinting;
+            shop.ReprintReceipt = shopBills.ReprintReceipt;
+            shop.BillPrinting = shopBills.BillPrinting;
+            shop.BillSpliitting = shopBills.BillSpliitting;
+            shop.Invoicing = shopBills.Invoicing;
+            _unitOfWork.GetRepository<Shop>().Update(shop);
+            _UnitOfWork.SaveChanges();
         }
     }
 }

@@ -61,15 +61,6 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to مفعل.
-        /// </summary>
-        public static string Active {
-            get {
-                return ResourceManager.GetString("Active", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to اضافة عميل.
         /// </summary>
         public static string AddCustomer {
@@ -97,7 +88,7 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حذف الكل.
+        ///   Looks up a localized string similar to مسح الكل.
         /// </summary>
         public static string DeleteAll {
             get {
@@ -124,7 +115,7 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to محدد.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Selected {
             get {
@@ -142,7 +133,7 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تحديث الحالة.
+        ///   Looks up a localized string similar to تعديل الحالة.
         /// </summary>
         public static string UpdateStatus {
             get {
@@ -151,7 +142,7 @@ namespace PointOfSale.Client.Pages.Resource.Customers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to تفاصيل العميل.
+        ///   Looks up a localized string similar to تفاصيل.
         /// </summary>
         public static string ViewCustomer {
             get {

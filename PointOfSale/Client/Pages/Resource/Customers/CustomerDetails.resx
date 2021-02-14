@@ -132,4 +132,10 @@
   <data name="Information" xml:space="preserve">
     <value>معلومات</value>
   </data>
+  <data name="PrintBill" xml:space="preserve">
+    <value>طباعة فاتورة</value>
+  </data>
+  <data name="PrintOrder" xml:space="preserve">
+    <value>طباعة ايصال</value>
+  </data>
 </root>
