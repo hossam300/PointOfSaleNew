@@ -11,5 +11,10 @@ namespace PointOfSale.Services.ISevices
     {
         List<Session> GetAllSessionByShopId(int id);
         double GetOrderCashBySessionId(int id);
+        AddShopDTO GetAddShopDTOById(int id);
+        void UpdateAddShopDTO(AddShopDTO shop);
+        ShopInterfaceDTO GetShopInterfaceDTOById(int id);
+        void UpdateShopInterfaceDTO(ShopInterfaceDTO shopInterface);
+        ShopPricingPaymentDTO GetShopPricingPaymentDTOById(int id);
     }
 }

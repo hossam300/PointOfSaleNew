@@ -122,7 +122,7 @@ namespace PointOfSale.Services.Sevices
             //   object MappedEntity = _Mapper.Map(Entity, OldEntity, typeof(TDetailsDTO), typeof(TDbEntity));
             this._UnitOfWork.GetRepository<TDbEntity>().Update(Entity as TDbEntity);
             //}
-            // this._UnitOfWork.SaveChanges();
+             this._UnitOfWork.SaveChanges();
             #region commented
             try
             {

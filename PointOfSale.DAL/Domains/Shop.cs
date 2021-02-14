@@ -22,13 +22,13 @@ namespace PointOfSale.DAL.Domains
         public string Name { get; set; }
         [Display(Name = "Branch", ResourceType = typeof(Resources.Resources))]
         public int? BranchId { get; set; }
-        public virtual Branch Branch { get; set; }
+        public Branch Branch { get; set; }
         [Display(Name = "IsRestaurant", ResourceType = typeof(Resources.Resources))]
         public bool IsRestaurant { get; set; }
         [Display(Name = "LoginWithEmployees", ResourceType = typeof(Resources.Resources))]
         public bool LoginWithEmployees { get; set; }
         [Display(Name = "AllowedEmployees", ResourceType = typeof(Resources.Resources))]
-        public virtual List<ShopEmployee> AllowedEmployees { get; set; }
+        public List<ShopEmployee> AllowedEmployees { get; set; }
         #endregion
         #region PointOfSale Interface
         [Display(Name = "TableManagement", ResourceType = typeof(Resources.Resources))]
@@ -36,7 +36,7 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "FloorsTables", ResourceType = typeof(Resources.Resources))]
         public bool FloorsTables { get; set; }
         [Display(Name = "Floors", ResourceType = typeof(Resources.Resources))]
-        public virtual List<ShopFloor> Floors { get; set; }
+        public List<ShopFloor> Floors { get; set; }
         [Display(Name = "OrderlineNotes", ResourceType = typeof(Resources.Resources))]
         public bool OrderlineNotes { get; set; }
         [Display(Name = "CategoryPictures", ResourceType = typeof(Resources.Resources))]
@@ -44,14 +44,14 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "RestrictAvailableCategories", ResourceType = typeof(Resources.Resources))]
         public bool RestrictAvailableCategories { get; set; }
         [Display(Name = "AvailableCategories", ResourceType = typeof(Resources.Resources))]
-        public virtual List<ShopProductCategory> AvailableCategories { get; set; }
-        [Display(Name = "VirtualKeyBoard", ResourceType = typeof(Resources.Resources))]
+        public List<ShopProductCategory> AvailableCategories { get; set; }
+        [Display(Name = "KeyBoard", ResourceType = typeof(Resources.Resources))]
         public bool VirtualKeyBoard { get; set; }
         [Display(Name = "SetStartCategory", ResourceType = typeof(Resources.Resources))]
         public bool SetStartCategory { get; set; }
         [Display(Name = "StartCategory", ResourceType = typeof(Resources.Resources))]
         public int? StartCategoryId { get; set; }
-        public virtual ProductCategory StartCategory { get; set; }
+        public ProductCategory StartCategory { get; set; }
         [Display(Name = "LargeScrollbars", ResourceType = typeof(Resources.Resources))]
         public bool LargeScrollbars { get; set; }
         #endregion
@@ -63,11 +63,11 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "BarcodeScanner", ResourceType = typeof(Resources.Resources))]
         public int? BarcodeScannerId { get; set; }
 
-        public virtual BarcodeScanner BarcodeScanner { get; set; }
+        public BarcodeScanner BarcodeScanner { get; set; }
         [Display(Name = "OrderPrinter", ResourceType = typeof(Resources.Resources))]
         public bool OrderPrinter { get; set; }
         [Display(Name = "Printers", ResourceType = typeof(Resources.Resources))]
-        public virtual List<ShopPrinter> Printers { get; set; }
+        public List<ShopPrinter> Printers { get; set; }
         #endregion
         #region Taxes
         [Display(Name = "FiscalPositionPerOrder", ResourceType = typeof(Resources.Resources))]
@@ -76,18 +76,18 @@ namespace PointOfSale.DAL.Domains
         public bool SpecificFiscalPosition { get; set; }
         [Display(Name = "Fiscalposition", ResourceType = typeof(Resources.Resources))]
         public int? FiscalPositionId { get; set; }
-        public virtual FiscalPosition FiscalPosition { get; set; }
+        public FiscalPosition FiscalPosition { get; set; }
         #endregion
         #region Pricing
         [Display(Name = "Pricelist", ResourceType = typeof(Resources.Resources))]
         public int? PricelistId { get; set; }
-        public virtual Pricelist Pricelist { get; set; }
+        public Pricelist Pricelist { get; set; }
         [Display(Name = "AdvancedPriceICollections", ResourceType = typeof(Resources.Resources))]
         public bool AdvancedPriceICollections { get; set; }
         [Display(Name = "AvailablePriceLists", ResourceType = typeof(Resources.Resources))]
-        public virtual ICollection<ShopPricelist> AvailablePriceLists { get; set; }
+        public ICollection<ShopPricelist> AvailablePriceLists { get; set; }
         [Display(Name = "ProductPrices", ResourceType = typeof(Resources.Resources))]
-        public virtual ProductPrices ProductPrices { get; set; }
+        public ProductPrices ProductPrices { get; set; }
         [Display(Name = "GlobalDiscounts", ResourceType = typeof(Resources.Resources))]
         public bool GlobalDiscounts { get; set; }
         [Display(Name = "ManualDiscounts", ResourceType = typeof(Resources.Resources))]
@@ -99,7 +99,7 @@ namespace PointOfSale.DAL.Domains
         #endregion
         #region Payments
         [Display(Name = "PaymentMethods", ResourceType = typeof(Resources.Resources))]
-        public virtual List<ShopPaymentMethod> PaymentMethods { get; set; }
+        public List<ShopPaymentMethod> PaymentMethods { get; set; }
         [Display(Name = "PrefillCashPayment", ResourceType = typeof(Resources.Resources))]
         public bool PrefillCashPayment { get; set; }
         [Display(Name = "CashControl", ResourceType = typeof(Resources.Resources))]
@@ -111,7 +111,7 @@ namespace PointOfSale.DAL.Domains
         public bool Tips { get; set; }
         [Display(Name = "TipProduct", ResourceType = typeof(Resources.Resources))]
         public int? TipProductId { get; set; }
-        public virtual Product TipProduct { get; set; }
+        public Product TipProduct { get; set; }
         #endregion
         #region Bills & Receipts
         [Display(Name = "HeaderFooter", ResourceType = typeof(Resources.Resources))]

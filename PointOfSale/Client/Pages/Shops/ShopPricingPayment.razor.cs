@@ -13,7 +13,7 @@ namespace PointOfSale.Client.Pages.Shops
 {
     public partial class ShopPricingPayment : ComponentBase
     {
-        Shop shop = new Shop();
+        ShopPricingPaymentDTO shop = new ShopPricingPaymentDTO();
         List<DropDownList> PaymentMethods = new List<DropDownList>();
        
         IEnumerable<int> multipleValues = new int[] { };
@@ -30,7 +30,7 @@ namespace PointOfSale.Client.Pages.Shops
             PaymentMethods = await Http.GetFromJsonAsync<List<DropDownList>>("/api/PaymentMethods/GetDropDownListAll");
             if (id != null)
             {
-                shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + id);
+                shop = await Http.GetFromJsonAsync<ShopPricingPaymentDTO>("/api/Shops/GetShopPricingPaymentDTOById/" + id);
                 multipleValues = shop.PaymentMethods.Select(x => x.PaymentMethodId);
             }
         }
@@ -46,32 +46,27 @@ namespace PointOfSale.Client.Pages.Shops
         {
             events.Add(DateTime.Now, $"{eventName}: {value}");
         }
-        public async void FormShopSubmit(Shop model)
+        public async void FormShopSubmit(ShopPricingPaymentDTO model)
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
-            shop.PaymentMethods = new List<ShopPaymentMethod>();
+            shop.PaymentMethods = new List<ShopPaymentMethodDTO>();
             foreach (var paymentMethod in multipleValues)
             {
-                shop.PaymentMethods.Add(new ShopPaymentMethod { PaymentMethodId = paymentMethod });
+                shop.PaymentMethods.Add(new ShopPaymentMethodDTO { PaymentMethodId = paymentMethod,ShopId=(int)id});
             }
-            foreach (var item in shop.AllowedEmployees)
-            {
-                item.User = null;
-            }
-            foreach (var item in shop.AvailableCategories)
-            {
-                item.ProductCategory = null;
-            }
-            using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
+           
+            var shopId = 0;
+            using (var response = await Http.PutAsJsonAsync<ShopPricingPaymentDTO>("/api/Shops/UpdateShopPricingPaymentDTO", shop))
             {
                 // convert response data to JsonElement which can handle any JSON data
                 var data = await response.Content.ReadFromJsonAsync<Shop>();
                 // get id property from JSON response data
-                //  var customerId = data[0].Id;
-                uriHelper.NavigateTo("/ShopBillsReceipts/" + data.Id);
+                shopId = data.Id;
+               
             }
+            uriHelper.NavigateTo("/ShopBillsReceipts/" + shopId);
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }
     }

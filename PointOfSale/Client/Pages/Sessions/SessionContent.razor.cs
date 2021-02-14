@@ -67,10 +67,10 @@ namespace PointOfSale.Client.Pages.Sessions
             Categories = await Http.GetFromJsonAsync<List<ProductCategory>>("/api/ProductCategories/GetAll");
             ProductCats = GetProductsVyCategoryId(null);
             ProductCategories = GetProductCategories(0, 3, 0);
-          //  BarcodeId.Value = "";
+            //  BarcodeId.Value = "";
             DialogService.OnOpen += Open;
             DialogService.OnClose += Close;
-       //     await BarcodeId.Element.FocusAsync();
+            //     await BarcodeId.Element.FocusAsync();
             await JSRuntime.InvokeVoidAsync("Setfocus", "barcode2");
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
             var user = authState.User;
@@ -110,7 +110,8 @@ namespace PointOfSale.Client.Pages.Sessions
             {
                 i++;
             }
-            ProductCategories = Categories.Skip(start * count).Take(count).ToList();
+            List<ProductCategory> categories = Categories.Skip(start * count).Take(count).ToList();
+            ProductCategories = (categories == null) ? ProductCategories : categories;
             return ProductCategories;
         }
         void Change(object value, string name)
@@ -291,7 +292,7 @@ namespace PointOfSale.Client.Pages.Sessions
         }
         async void AddCustomer()
         {
-            var result = await DialogService.OpenAsync<Customers.AddCustomer>("Add Customer", new Dictionary<string, object>() { { "Modal", true } },
+            var result = await DialogService.OpenAsync<Customers.AddCustomer>(Loc["AddCustomer"], new Dictionary<string, object>() { { "Modal", true } },
                       new Radzen.DialogOptions() { Width = "80%", Height = "80%" });
             await InvokeAsync(() => { StateHasChanged(); });
         }
@@ -306,7 +307,7 @@ namespace PointOfSale.Client.Pages.Sessions
                 ProductsData = Products.Where(x => x.Barcode.Contains(value.ToString()) || x.Name.Contains(value.ToString())).ToList();
                 var product = Products.FirstOrDefault(c => c.Barcode == value.ToString() || c.Name == value.ToString());
                 AddOrderItem(product, 1);
-              //  BarcodeId.Value = "";
+                //  BarcodeId.Value = "";
             }
             else
             {
@@ -397,6 +398,7 @@ namespace PointOfSale.Client.Pages.Sessions
                     OrderItem orderItem = new OrderItem();
                     if (orderItems.Any(c => c.ProductId == item.Id))
                     {
+                        int index = orderItems.FindIndex(a => a.ProductId == item.Id);
                         orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
                         orderItems.Remove(orderItem);
                         orderItem.Price = orderItem.Price;
@@ -412,7 +414,7 @@ namespace PointOfSale.Client.Pages.Sessions
                                 await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
                         }
                         orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
-                        orderItems.Add(orderItem);
+                        orderItems.Insert(index,orderItem);
                     }
                     else
                     {

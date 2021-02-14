@@ -13,7 +13,7 @@ namespace PointOfSale.Client.Pages.Shops
 {
     public partial class ShopInterface : ComponentBase
     {
-        Shop shop = new Shop();
+        ShopInterfaceDTO shop = new ShopInterfaceDTO();
         List<DropDownList> Floors = new List<DropDownList>();
         List<DropDownList> Printers = new List<DropDownList>();
         List<DropDownList> FiscalPositions = new List<DropDownList>();
@@ -37,7 +37,7 @@ namespace PointOfSale.Client.Pages.Shops
             AvailableCategories = await Http.GetFromJsonAsync<List<DropDownList>>("/api/ProductCategories/GetDropDownListAll");
             if (id != null)
             {
-                shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + id);
+                shop = await Http.GetFromJsonAsync<ShopInterfaceDTO>("/api/Shops/GetShopInterfaceDTOById/" + id);
                 multipleFloors = shop.Floors.Select(x => x.FloorId);
                 multiplePrinters = shop.Printers.Select(x => x.PrinterId);
                 multipleAvailableCategories = shop.AvailableCategories.Select(x => x.ProductCategoryId);
@@ -55,41 +55,39 @@ namespace PointOfSale.Client.Pages.Shops
         {
             events.Add(DateTime.Now, $"{eventName}: {value}");
         }
-        public async void FormShopSubmit(Shop model)
+        public async void FormShopSubmit(ShopInterfaceDTO model)
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
-            shop.Floors = new List<ShopFloor>();
-            shop.Printers = new List<ShopPrinter>();
-            shop.AvailableCategories = new List<ShopProductCategory>();
+            shop.Floors = new List<ShopFloorDTO>();
+            shop.Printers = new List<ShopPrinterDTO>();
+            shop.AvailableCategories = new List<ShopProductCategoryDTO>();
             foreach (var Floor in multipleFloors)
             {
-                shop.Floors.Add(new ShopFloor { FloorId = Floor, ShopId = shop.Id });
+                shop.Floors.Add(new ShopFloorDTO { FloorId = Floor, ShopId = shop.Id });
             }
             foreach (var Printer in multiplePrinters)
             {
-                shop.Printers.Add(new ShopPrinter { PrinterId = Printer, ShopId = shop.Id });
+                shop.Printers.Add(new ShopPrinterDTO { PrinterId = Printer, ShopId = shop.Id });
             }
             foreach (var item in multipleAvailableCategories)
             {
-                shop.AvailableCategories.Add(new ShopProductCategory { ProductCategoryId = item, ShopId = shop.Id });
+                shop.AvailableCategories.Add(new ShopProductCategoryDTO { ProductCategoryId = item, ShopId = shop.Id });
             }
-            foreach (var item in shop.AllowedEmployees)
-            {
-                item.User = null;
-            }
-            shop.FiscalPosition = null;
-            using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
+           
+            var shopId = 0;
+            using (var response = await Http.PutAsJsonAsync<ShopInterfaceDTO>("/api/Shops/UpdateShopInterfaceDTO", shop))
             {
 
                 // convert response data to JsonElement which can handle any JSON data
-                var data = await response.Content.ReadFromJsonAsync<Shop>();
+                var data = await response.Content.ReadFromJsonAsync<ShopInterfaceDTO>();
 
                 // get id property from JSON response data
-                //  var customerId = data[0].Id;
-                uriHelper.NavigateTo("/ShopPricingPayment/" + data.Id);
+                shopId = data.Id;
+                
             }
+            uriHelper.NavigateTo("/ShopPricingPayment/" + shopId);
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }
     }

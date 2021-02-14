@@ -61,6 +61,15 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to اضافة عميل.
+        /// </summary>
+        public static string AddCustomer {
+            get {
+                return ResourceManager.GetString("AddCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الكل.
         /// </summary>
         public static string All {

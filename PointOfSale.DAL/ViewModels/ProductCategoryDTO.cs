@@ -11,6 +11,6 @@ namespace PointOfSale.DAL.ViewModels
         public string ImagePath { get; set; }
         public string CategoryName { get; set; }
         public int? ParentCategoryId { get; set; }
-        public virtual ProductCategory ParentCategory { get; set; }
+        public virtual ProductCategoryDTO ParentCategory { get; set; }
     }
 }

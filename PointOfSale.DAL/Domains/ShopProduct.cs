@@ -11,10 +11,10 @@ namespace PointOfSale.DAL.Domains
         [Display(Name = "Product", ResourceType = typeof(Resources.Resources))]
         public int ProductId { get; set; }
 
-        public Product Product { get; set; }
+        public virtual Product Product { get; set; }
         [Display(Name = "Shop", ResourceType = typeof(Resources.Resources))]
         public int ShopId { get; set; }
-        public Shop Shop { get; set; }
+        public virtual Shop Shop { get; set; }
         [Display(Name = "CurrentQuantity", ResourceType = typeof(Resources.Resources))]
         public int CurrentQuantity { get; set; }
         [Display(Name = "OldQuantity", ResourceType = typeof(Resources.Resources))]

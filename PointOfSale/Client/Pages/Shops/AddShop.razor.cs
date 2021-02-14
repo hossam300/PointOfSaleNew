@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
+using PointOfSale.DAL.ViewModels;
 using Radzen.Blazor;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace PointOfSale.Client.Pages.Shops
 {
     public partial class AddShop : ComponentBase
     {
-        Shop shop = new Shop();
+        AddShopDTO shop = new AddShopDTO();
         List<SahlUserIdentity> AllowedEmployees = new List<SahlUserIdentity>();
         IEnumerable<string> multipleValues = new string[] { };
         protected RadzenRequiredValidator ShopNameRequird;
@@ -30,7 +31,7 @@ namespace PointOfSale.Client.Pages.Shops
             AllowedEmployees = await Http.GetFromJsonAsync<List<SahlUserIdentity>>("/api/Users/GetAll");
             if (id != null)
             {
-                shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + id);
+                shop = await Http.GetFromJsonAsync<AddShopDTO>("/api/Shops/GetAddShopDTOById/" + id);
                 multipleValues = shop.AllowedEmployees.Select(x => x.UserId);
             }
 
@@ -51,7 +52,7 @@ namespace PointOfSale.Client.Pages.Shops
         {
             Log("InvalidSubmit", JsonSerializer.Serialize(args, new JsonSerializerOptions() { WriteIndented = true }));
         }
-        public async void FormShopSubmit(Shop model)
+        public async void FormShopSubmit(AddShopDTO model)
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
@@ -60,55 +61,44 @@ namespace PointOfSale.Client.Pages.Shops
             {
                 ShopNameRequird.Text = Loc2["ShopRequired"];
                 ShopNameRequird.Visible = true;
-               
+
                 await JSRuntime.InvokeVoidAsync("StopLoading");
                 return;
             }
             Log("Submit", JsonSerializer.Serialize(model, new JsonSerializerOptions() { WriteIndented = true }));
-            if (shop.Floors != null)
-            {
-                shop.Floors = shop.Floors.Select(x => new ShopFloor
-                {
-                    FloorId = x.FloorId,
-                    ShopId = x.ShopId
-                }).ToList();
-            }
             if (shop.Id == 0)
             {
-                shop.AllowedEmployees = new List<ShopEmployee>();
+                shop.AllowedEmployees = new List<ShopEmployeeDTO>();
                 foreach (var item in multipleValues)
                 {
-                    shop.AllowedEmployees.Add(new ShopEmployee { UserId = item });
+                    shop.AllowedEmployees.Add(new ShopEmployeeDTO { UserId = item });
                 }
-
-                using (var response = await Http.PostAsJsonAsync<Shop>("/api/Shops/Insert", shop))
+                var shopId = 0;
+                using (var response = await Http.PostAsJsonAsync<AddShopDTO>("/api/Shops/InsertAddShop", shop))
                 {
                     // convert response data to JsonElement which can handle any JSON data
-                    var data = await response.Content.ReadFromJsonAsync<Shop>();
+                    var data = await response.Content.ReadFromJsonAsync<AddShopDTO>();
 
                     // get id property from JSON response data
-                    //  var customerId = data.Id;
-                    uriHelper.NavigateTo("/ShopInterface/" + data.Id);
-                }
+                    shopId = data.Id;
 
+                }
+                uriHelper.NavigateTo("/ShopInterface/" + shopId);
             }
             else
             {
-                shop.AllowedEmployees = new List<ShopEmployee>();
+                shop.AllowedEmployees = new List<ShopEmployeeDTO>();
                 //product.Company = null;
                 foreach (var item in multipleValues)
                 {
-                    shop.AllowedEmployees.Add(new ShopEmployee { UserId = item });
+                    shop.AllowedEmployees.Add(new ShopEmployeeDTO { UserId = item, ShopId =(int) id });
                 }
-                foreach (var item in shop.AvailableCategories)
-                {
-                    item.ProductCategory = null;
-                }
-                using (var response = await Http.PutAsJsonAsync<Shop>("/api/Shops/Update", shop))
+
+                using (var response = await Http.PostAsJsonAsync<AddShopDTO>("/api/Shops/UpdateAddShop", shop))
                 {
 
                     // convert response data to JsonElement which can handle any JSON data
-                    var data = await response.Content.ReadFromJsonAsync<Shop>();
+                    var data = await response.Content.ReadFromJsonAsync<AddShopDTO>();
 
                     // get id property from JSON response data
                     //  var customerId = data[0].Id;

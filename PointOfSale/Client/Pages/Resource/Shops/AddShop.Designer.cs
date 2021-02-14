@@ -169,6 +169,15 @@ namespace PointOfSale.Client.Pages.Resource.Shops {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الاسم.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to التالى.
         /// </summary>
         public static string NextStep {
@@ -210,6 +219,15 @@ namespace PointOfSale.Client.Pages.Resource.Shops {
         public static string ShopDetails {
             get {
                 return ResourceManager.GetString("ShopDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to اسم المتجر مطلوب.
+        /// </summary>
+        public static string ShopRequired {
+            get {
+                return ResourceManager.GetString("ShopRequired", resourceCulture);
             }
         }
         
