@@ -190,7 +190,7 @@
                                         <ChildContent>
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <RadzenTemplateForm Data="@(product)" Visible="@(product != null)" TItem="Product" Submit="@FormProductSubmit">
+                                                    <RadzenTemplateForm Data="@(product)" Visible="@(product != null)" TItem="ProductPurchaseDTO" Submit="@FormProductSubmit">
                                                         <ChildContent>
                                                             @*<div class="row">
                                                                     <div class="col-md-12">
@@ -276,8 +276,7 @@
                                                                     <RadzenLabel Text="@Loc2["ControlPolicy"]" Component="ControlPolicy" style="width: 100%">
                                                                     </RadzenLabel>
                                                                     @*<DisplayName For="@(() => product.ControlPolicy)"></DisplayName>*@
-                                                                    <div class="col-md-8" style="        text-align: right
-">
+                                                                    <div class="col-md-8" style="text-align: right">
                                                                         <RadzenRadioButtonList @bind-Value="product.ControlPolicy" TValue="PointOfSale.DAL.Domains.ControlPolicy">
                                                                             <Items>
                                                                                 <RadzenRadioButtonListItem Text="@Loc2[ControlPolicy.OnOrderedQuantities.ToString()]" Value="@ControlPolicy.OnOrderedQuantities" />

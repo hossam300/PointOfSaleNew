@@ -12,12 +12,12 @@ namespace PointOfSale.Client.Pages.Products
 {
     public partial class ProductInventory : ComponentBase
     {
-        Product product = new Product();
+        ProductInventoryDTO product = new ProductInventoryDTO();
         [Parameter] public int id { get; set; }
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            product = await Http.GetFromJsonAsync<Product>("api/Products/GetById/" + id);
+            product = await Http.GetFromJsonAsync<ProductInventoryDTO>("api/Products/GetProductInventoryDTOById/" + id);
             await JSRuntime.InvokeVoidAsync("StopLoading");
 
         }
@@ -29,20 +29,19 @@ namespace PointOfSale.Client.Pages.Products
             events.Add(DateTime.Now, $"{name} value changed to {str}");
             InvokeAsync(StateHasChanged);
         }
-        public async void FormProductSubmit(Product model)
+        public async void FormProductSubmit(ProductInventoryDTO model)
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
             //bool formIsValid = model.Validate();
-            product.Company = null;
             //foreach (var item in product.OptionalProducts)
             //{
             //    item.Product.Company = null;
             //}
-            using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))
+            using (var response = await Http.PutAsJsonAsync<ProductInventoryDTO>("/api/Products/UpdateProductInventoryDTO", product))
             {
                 // convert response data to JsonElement which can handle any JSON data
-                var data = await response.Content.ReadFromJsonAsync<Product>();
+                var data = await response.Content.ReadFromJsonAsync<ProductInventoryDTO>();
 
                 // get id property from JSON response data
                 //  var customerId = data[0].Id;

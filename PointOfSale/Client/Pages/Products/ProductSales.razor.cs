@@ -12,15 +12,15 @@ namespace PointOfSale.Client.Pages.Products
 {
     public partial class ProductSales : ComponentBase
     {
-        Product product = new Product();
+        ProductSalesDTO product = new ProductSalesDTO();
         [Parameter] public int id { get; set; }
         IEnumerable<int> multipleValues = new int[] { };
-        IEnumerable<Product> products;
+        IEnumerable<DropDownList> products;
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            product = await Http.GetFromJsonAsync<Product>("api/Products/GetById/" + id);
-            products = await Http.GetFromJsonAsync<List<Product>>("api/Products/GetAll/");
+            product = await Http.GetFromJsonAsync<ProductSalesDTO>("api/Products/GetProductSalesDTOById/" + id);
+            products = await Http.GetFromJsonAsync<List<DropDownList>>("api/Products/GetDropDownListAll/");
             products = products.Where(c => c.Id != id).ToList();
             multipleValues = product.OptionalProducts.Select(x => x.OptionalProductId);
             await JSRuntime.InvokeVoidAsync("StopLoading");
@@ -34,31 +34,20 @@ namespace PointOfSale.Client.Pages.Products
             events.Add(DateTime.Now, $"{name} value changed to {str}");
             InvokeAsync(StateHasChanged);
         }
-        public async void FormProductSubmit(Product model)
+        public async void FormProductSubmit(ProductSalesDTO model)
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            product.OptionalProducts = new List<OptionalProduct>();
+            product.OptionalProducts = new List<OptionalProductDTO>();
             foreach (var item in multipleValues)
             {
-                product.OptionalProducts.Add(new OptionalProduct { OptionalProductId = item });
+                product.OptionalProducts.Add(new OptionalProductDTO { OptionalProductId = item });
             }
-          
-            foreach (var item in product.CustomerTaxes)
-            {
-                item.Tax = null;
-            }
-            foreach (var item in product.VendorTaxes)
-            {
-                item.Tax = null;
-            }
-            product.Company = null;
-            
-            using (var response = await Http.PutAsJsonAsync<Product>("/api/Products/Update", product))
+            using (var response = await Http.PutAsJsonAsync<ProductSalesDTO>("/api/Products/UpdateProductSalesDTO", product))
             {
 
                 // convert response data to JsonElement which can handle any JSON data
-                var data = await response.Content.ReadFromJsonAsync<Product>();
+                var data = await response.Content.ReadFromJsonAsync<ProductSalesDTO>();
 
                 // get id property from JSON response data
                 //  var customerId = data[0].Id;
