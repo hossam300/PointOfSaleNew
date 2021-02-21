@@ -159,7 +159,7 @@ namespace PointOfSale.Client.Pages.Sessions
                     item.Product.ProductCategory = null;
                     item.Order = null;
                 }
-                var result = await DialogService.OpenAsync<HoldOrder>("تعليق البيع", new Dictionary<string, object>() { { "Order", order } },
+                var result = await DialogService.OpenAsync<PointOfSale.Client.Pages.Sessions.HoldOrder>("تعليق البيع", new Dictionary<string, object>() { { "Order", order } },
                       new Radzen.DialogOptions() { Width = "500px", Height = "325px" });
                 await InvokeAsync(() => { StateHasChanged(); });
             }

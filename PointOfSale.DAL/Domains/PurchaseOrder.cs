@@ -11,6 +11,7 @@ namespace PointOfSale.DAL.Domains
         {
             PurchaseOrderItem = new List<PurchaseOrderItem>();
             PurchaseOrderPayments = new List<PurchaseOrderPayment>();
+            PurchaseOrderInstallments = new List<PurchaseOrderInstallment>();
         }
         public int Id { get; set; }
         [Display(Name = "Supplier", ResourceType = typeof(Resources.Resources))]
@@ -44,6 +45,7 @@ namespace PointOfSale.DAL.Domains
         public DateTime LastModificationDate { get; set; }
         public virtual List<PurchaseOrderItem> PurchaseOrderItem { get; set; }
         public virtual List<PurchaseOrderPayment> PurchaseOrderPayments { get; set; }
+        public virtual List<PurchaseOrderInstallment> PurchaseOrderInstallments { get; set; }
         [Display(Name = "Shop", ResourceType = typeof(Resources.Resources))]
         public int ShopId { get; set; }
     }

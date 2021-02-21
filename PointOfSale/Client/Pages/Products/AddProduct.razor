@@ -219,8 +219,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row" style="line-height:2.3">
-                                                                <div class="col-xl-12">
-                                                                    <div class="col-md-8 col-md-offset-4" style="text-align:right;margin-left:2%;">
+                                                                <div class="col-xl-6">
+                                                                    <div class="col-md-12" style="text-align:right;margin-left:2%;">
                                                                         <div class="col-md-3">
                                                                             <Radzen.Blazor.RadzenCheckBox @bind-Value="product.CanBeSold"></Radzen.Blazor.RadzenCheckBox>
                                                                             <RadzenLabel Text="@Loc2["CanBeSold"]" Component="CanBeSold" >
@@ -241,6 +241,15 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                    <div class="col-xl-6">
+                                                                        <RadzenLabel Text="@Loc2["InternalReference"]" Component="InternalReference" style="width: 100%">
+                                                                        </RadzenLabel>
+                                                                        @*  <DisplayName For="@(() => product.InternalReference)"></DisplayName>*@
+                                                                        <div class="col-xl-8">
+                                                                            <InputText id="Name" @bind-Value="product.InternalReference" class="form-control" />
+                                                                            <ValidationMessage For="() => product.InternalReference" class="text-danger" />
+                                                                        </div>
+                                                                    </div>
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
@@ -272,31 +281,29 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <div class="col-xl-6">
-                                                                    <RadzenLabel Text="@Loc2["InternalReference"]" Component="InternalReference" style="width: 100%">
-                                                                    </RadzenLabel>
-                                                                  @*  <DisplayName For="@(() => product.InternalReference)"></DisplayName>*@
-                                                                    <div class="col-xl-8">
-                                                                        <InputText id="Name" @bind-Value="product.InternalReference" class="form-control" />
-                                                                        <ValidationMessage For="() => product.InternalReference" class="text-danger" />
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-xl-6">
+                                                               
+                                                                <!--<div class="col-xl-6">
                                                                     <RadzenLabel Text="@Loc2["CustomerTaxes"]" Component="CustomerTaxes" style="width: 100%">
                                                                     </RadzenLabel>
                                                                     <div class="col-xl-8">
-                                                                        <RadzenDropDown AllowClear="true" Name="CustomerTaxes"
+                                                                        <RadzenDropDown AllowClear="true" Name="Taxes"
                                                                                         FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="TaxName" ValueProperty="TaxId"
                                                                                         AllowFiltering="true" Placeholder="Select..."
-                                                                                        Data="@customerTaxes" @bind-Value="multipleValues" Multiple="true"
+                                                                                        Data="@customerTaxes" @bind-Value="@(multipleValues)" Multiple="true"
+                                                                                        Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                                        </RadzenDropDown>-->
+                                                                        @*<RadzenDropDown AllowClear="true" Name="CustomerTaxes"
+                                                                                        FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                                        AllowFiltering="true" Placeholder="Select..."
+                                                                                        Data="@Taxes" @bind-Value="@(multipleValues)" Multiple="true"
                                                                                         Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px;text-align: right">
-                                                                        </RadzenDropDown>
-                                                                    </div>
-                                                                </div>
+                                                                        </RadzenDropDown>*@
+                                                                    <!--</div>
+                                                                </div>-->
                                                             </div>
                                                             <div class="form-group row">
                                                                 <div class="col-xl-6">
-                                                                    <RadzenLabel Text="@Loc2["Barcode"]" Component="CustomerTaxes" style="width: 100%">
+                                                                    <RadzenLabel Text="@Loc2["Barcode"]" Component="Barcode" style="width: 100%">
                                                                     </RadzenLabel>  <Radzen.Blazor.RadzenCheckBox @bind-Value="product.GenerateBarcode" Change="@(args => changeBarCode(args, "TriState CheckBox"))" TValue="bool"></Radzen.Blazor.RadzenCheckBox><RadzenLabel Text="@Loc2["GenerateBarcode"]" Component="GenerateBarcode" style="width: 100%">
                                                                     </RadzenLabel>
                                                                     <div class="col-xl-8">

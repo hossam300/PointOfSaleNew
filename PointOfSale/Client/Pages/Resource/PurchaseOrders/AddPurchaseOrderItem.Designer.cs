@@ -22,14 +22,14 @@ namespace PointOfSale.Client.Pages.Resource.PurchaseOrders {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AddPurchaseOrder {
+    public class AddPurchaseOrderItem {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AddPurchaseOrder() {
+        internal AddPurchaseOrderItem() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace PointOfSale.Client.Pages.Resource.PurchaseOrders {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.PurchaseOrders.AddPurchaseOrder", typeof(AddPurchaseOrder).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PointOfSale.Client.Pages.Resource.PurchaseOrders.AddPurchaseOrderItem", typeof(AddPurchaseOrderItem).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,15 +61,6 @@ namespace PointOfSale.Client.Pages.Resource.PurchaseOrders {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to اضافة.
-        /// </summary>
-        public static string Add {
-            get {
-                return ResourceManager.GetString("Add", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to الغاء.
         /// </summary>
         public static string Cancel {
@@ -79,20 +70,20 @@ namespace PointOfSale.Client.Pages.Resource.PurchaseOrders {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to دفع كاش.
+        ///   Looks up a localized string similar to المنتجات.
         /// </summary>
-        public static string PayCash {
+        public static string Products {
             get {
-                return ResourceManager.GetString("PayCash", resourceCulture);
+                return ResourceManager.GetString("Products", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to حفظ.
+        ///   Looks up a localized string similar to حفظ .
         /// </summary>
-        public static string save {
+        public static string Save {
             get {
-                return ResourceManager.GetString("save", resourceCulture);
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
     }

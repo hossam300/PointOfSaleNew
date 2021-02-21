@@ -412,6 +412,12 @@
   <data name="Individual" xml:space="preserve">
     <value>فردى</value>
   </data>
+  <data name="InstallmentAmount" xml:space="preserve">
+    <value>قيمة القسط</value>
+  </data>
+  <data name="InstallmentDate" xml:space="preserve">
+    <value>تاريخ استحقاق القسط</value>
+  </data>
   <data name="Instalment" xml:space="preserve">
     <value>تقسيط</value>
   </data>

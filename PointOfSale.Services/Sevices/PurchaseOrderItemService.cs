@@ -10,7 +10,7 @@ using System.Text;
 
 namespace PointOfSale.Services.Sevices
 {
-    class PurchaseOrderItemService : BusinessService<PurchaseOrderItem, PurchaseOrderItem>, IPurchaseOrderItemService
+    public class PurchaseOrderItemService : BusinessService<PurchaseOrderItem, PurchaseOrderItem>, IPurchaseOrderItemService
     {
         IUnitOfWork _unitOfWork;
         private IRePointOfSaleitory<PurchaseOrderItem> _rePointOfSaleitory;

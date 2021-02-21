@@ -1,0 +1,76 @@
+﻿@using Radzen
+@using Radzen.Blazor
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.PurchaseOrders.AddPurchaseOrderItem> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent @ref="content1" Container="main" Style="direction:rtl;text-align:right">
+                    <ChildContent>
+
+                        <RadzenTemplateForm @ref="formPurchaseOrderInstallment" Data="@(PurchaseOrderInstallment)" Visible="@(PurchaseOrderInstallment != null)" TItem="PurchaseOrderInstallment" Submit="@FormPurchaseOrderInstallmentSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <RadzenLabel Text="@Loc2["InstallmentAmount"]" Component="Quantity" style="width: 100%">
+                                            </RadzenLabel>
+                                            @*<DisplayName For="@(() => addresstype.Type)"></DisplayName>*@
+                                            <div class="col-md-9">
+                                                <RadzenNumeric Step="0.5" Min="0"   @bind-Value="PurchaseOrderInstallment.InstallmentAmount" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <RadzenLabel Text="@Loc2["InstallmentDate"]" Component="Price" style="width: 100%">
+                                            </RadzenLabel>
+                                            @*<DisplayName For="@(() => addresstype.Type)"></DisplayName>*@
+                                            <div class="col-md-9">
+                                                <RadzenDatePicker   @bind-Value="PurchaseOrderInstallment.InstallmentDate" style="width: 100%" Name="Type">
+                                                </RadzenDatePicker>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@AddPurchaseOrderInstallmentToGrid" />
+                                        <RadzenGrid @ref="gridPurchaseOrderPurchaseOrderInstallment" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(PurchaseOrderInstallments)" TItem="PurchaseOrderInstallment"
+                                                    EditMode="DataGridEditMode.Single">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="PurchaseOrderInstallment" Context="PurchaseOrder" Property="Id" Visible="false" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrderInstallment" Property="InstallmentAmount" Title="@Loc2["InstallmentAmount"]"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrderInstallment" Property="InstallmentDate" Title="@Loc2["InstallmentDate"]"></RadzenGridColumn>
+
+                                            </Columns>
+                                        </RadzenGrid>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

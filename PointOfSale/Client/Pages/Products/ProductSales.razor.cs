@@ -43,16 +43,18 @@ namespace PointOfSale.Client.Pages.Products
             {
                 product.OptionalProducts.Add(new OptionalProductDTO { OptionalProductId = item });
             }
-            using (var response = await Http.PutAsJsonAsync<ProductSalesDTO>("/api/Products/UpdateProductSalesDTO", product))
+            int productId = 0;
+            using (var response = await Http.PostAsJsonAsync<ProductSalesDTO>("/api/Products/UpdateProductSalesDTO", product))
             {
 
                 // convert response data to JsonElement which can handle any JSON data
                 var data = await response.Content.ReadFromJsonAsync<ProductSalesDTO>();
 
                 // get id property from JSON response data
-                //  var customerId = data[0].Id;
-                uriHelper.NavigateTo("/ProductPOS/" + data.Id);
+                //  var productId = data[0].Id;
+              
             }
+            uriHelper.NavigateTo("/ProductPOS/" + id);
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }
     }

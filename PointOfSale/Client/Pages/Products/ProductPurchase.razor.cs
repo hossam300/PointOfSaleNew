@@ -19,22 +19,22 @@ namespace PointOfSale.Client.Pages.Products
         List<VendorProductDTO> vendorProducs = new List<VendorProductDTO>();
         VendorProduct vendorProduct = new VendorProduct();
         [Parameter] public int id { get; set; }
-        IEnumerable<VendorTaxDTO> vendorTaxes = new List<VendorTaxDTO>();
-        List<Tax> Taxes = new List<Tax>();
+        //IEnumerable<VendorTaxDTO> vendorTaxes = new List<VendorTaxDTO>();
+        //List<Tax> Taxes = new List<Tax>();
 
         IEnumerable<int> multipleValues = new int[] { };
         protected override async Task OnInitializedAsync()
         {
             await JSRuntime.InvokeVoidAsync("StartLoading");
             await Getdata();
-            Taxes = await Http.GetFromJsonAsync<List<Tax>>("/api/Taxs/GetAll");
-            //vendorProducs = product.VendorProducts;
-            vendorTaxes = Taxes.Select(x => new VendorTaxDTO
-            {
-                TaxId = x.Id,
-                TaxName = x.Name
-            }).ToList();
-            multipleValues = product.VendorTaxes.Select(x => x.TaxId);
+            //Taxes = await Http.GetFromJsonAsync<List<Tax>>("/api/Taxs/GetAll");
+            ////vendorProducs = product.VendorProducts;
+            //vendorTaxes = Taxes.Select(x => new VendorTaxDTO
+            //{
+            //    TaxId = x.Id,
+            //    TaxName = x.Name
+            //}).ToList();
+            //multipleValues = product.VendorTaxes.Select(x => x.TaxId);
             dialogService.OnOpen += Open;
             dialogService.OnClose += Close;
             await JSRuntime.InvokeVoidAsync("StopLoading");
@@ -113,13 +113,13 @@ namespace PointOfSale.Client.Pages.Products
         {
 
             await JSRuntime.InvokeVoidAsync("StartLoading");
-            product.VendorTaxes = new List<VendorTaxDTO>();
-            foreach (var item in multipleValues)
-            {
-                product.VendorTaxes.Add(new VendorTaxDTO { TaxId = item ,ProductId=(int) id});
-            }
+           // product.VendorTaxes = new List<VendorTaxDTO>();
+            //foreach (var item in multipleValues)
+            //{
+            //    product.VendorTaxes.Add(new VendorTaxDTO { TaxId = item ,ProductId=(int) id});
+            //}
           
-            using (var response = await Http.PutAsJsonAsync<ProductPurchaseDTO>("/api/Products/UpdateProductPurchaseDTO", product))
+            using (var response = await Http.PostAsJsonAsync<ProductPurchaseDTO>("/api/Products/UpdateProductPurchaseDTO", product))
             {
 
                 // convert response data to JsonElement which can handle any JSON data

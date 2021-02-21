@@ -1,4 +1,5 @@
-﻿@page "/addPurchaseOrder/{Id:int?}"
+﻿@page "/EditPurchaseOrder/{Id:int?}"
+@page "/AddPurchaseOrder/{ShopId:int?}"
 @using Radzen
 @using Radzen.Blazor
 @using Microsoft.AspNetCore.Identity
@@ -19,23 +20,60 @@
                         <RadzenTemplateForm @ref="formPurchaseOrder" Data="@(PurchaseOrder)" Visible="@(PurchaseOrder != null)" TItem="PurchaseOrder" Submit="@FormPurchaseOrderSubmit">
                             <ChildContent>
                                 <div class="card-body p-9">
-                                    <div class="col-md-12">
-                                        <div style="margin-bottom: 1rem" class="row">
-                                            <RadzenLabel @ref="label1" Text="@Loc2["OrderNumber"]" Component="OrderNumber" style="width: 100%">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div style="margin-bottom: 1rem" class="row">
+                                                <RadzenLabel @ref="label1" Text="@Loc2["OrderNumber"]" Component="OrderNumber" style="width: 100%">
+                                                </RadzenLabel>
+                                                @*<DisplayName For="@(() => PurchaseOrder.Type)"></DisplayName>*@
+                                            <div class="col-md-9">
+                                                <InputNumber @bind-Value="OrderNumber" class="form-control form-control-lg form-control-solid" />
+                                                @*<RadzenLabel style="width: 100%">
+                                                    @OrderNumber
+                                                </RadzenLabel>*@
+                                            </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <RadzenLabel @ref="label1" Text="@Loc2["Supplier"]" Component="SupplierId" style="width: 100%">
                                             </RadzenLabel>
                                             @*<DisplayName For="@(() => PurchaseOrder.Type)"></DisplayName>*@
                                             <div class="col-md-9">
-                                                <RadzenTextBox @bind-Value="PurchaseOrder.OrderNumber" style="width: 100%" Name="Type">
-                                                </RadzenTextBox>
+                                                <RadzenDropDown AllowClear="true" Name="Suppliers"
+                                                                FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                AllowFiltering="true" Placeholder="Select..."
+                                                                Data="@Suppliers" @bind-Value="PurchaseOrder.SupplierId"
+                                                                Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                </RadzenDropDown>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@btnAddressTypesClick" />
+                                        <RadzenGrid @ref="gridPurchaseOrders" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(PurchaseOrder.PurchaseOrderItem)" TItem="PurchaseOrderItem"
+                                                    EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow" RowCreate="@OnCreateRow">
+                                            <Columns>
+                                                <RadzenGridColumn TItem="PurchaseOrderItem" Context="PurchaseOrder" Property="Id" Visible="false" Title="Id" Type="integer">
+                                                </RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrderItem" Property="Product.Name" Title="@Loc2["Product"]"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrderItem" Property="Quantity" Title="@Loc2["Quantity"]"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrderItem" Property="Price" Title="@Loc2["Price"]"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrderItem" Property="SubTotal" Title="@Loc2["SubTotal"]"></RadzenGridColumn>
+                                                <RadzenGridColumn TItem="PurchaseOrderItem" Property="ProductDiscount" Title="@Loc2["ProductDiscount"]"></RadzenGridColumn>
+                                            </Columns>
+                                        </RadzenGrid>
+
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
-                                        <div class="col offset-sm-3">
-                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                        <div style="padding:3%">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
                                             </RadzenButton>
+                                            @*<button type="button" class="btn btn-bg-primary btn-block btn-flat" @onclick="OpenInstalmentAsync">@Loc["PayInstallment"]</button>
+                                            <button type="button" class="btn btn-info btn-block btn-flat" @onclick="PayWithMuiltMethod">@Loc["PayWithMuiltMethod"]</button>
+                                            <button type="button" class="btn btn-success btn-block btn-flat" @onclick="PayCash">@Loc["PayCash"]</button>*@
+
                                             <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
                                             </RadzenButton>
                                         </div>

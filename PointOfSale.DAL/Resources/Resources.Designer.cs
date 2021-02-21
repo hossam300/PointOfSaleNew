@@ -944,6 +944,24 @@ namespace PointOfSale.DAL.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to قيمة القسط.
+        /// </summary>
+        public static string InstallmentAmount {
+            get {
+                return ResourceManager.GetString("InstallmentAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تاريخ استحقاق القسط.
+        /// </summary>
+        public static string InstallmentDate {
+            get {
+                return ResourceManager.GetString("InstallmentDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تقسيط.
         /// </summary>
         public static string Instalment {

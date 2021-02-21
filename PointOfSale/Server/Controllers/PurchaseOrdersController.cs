@@ -25,6 +25,14 @@ namespace PointOfSale.Server.Controllers
         {
             return Ok(_purchaseOrderService.GetAllWithInclude());
         }
+        [HttpPost("InsertPurchaseOrders")]
+        public IActionResult InsertPurchaseOrders([FromBody] PurchaseOrder purchaseOrder)
+        {
+            _purchaseOrderService.InsertPurchaseOrder(purchaseOrder);
+
+            return Ok(purchaseOrder);
+        }
+
         [HttpGet("GetAllWithIncludeByShopId/{id}")]
 
         public IActionResult GetAllWithIncludeByShopId(int id)
@@ -35,6 +43,12 @@ namespace PointOfSale.Server.Controllers
         public IActionResult GetAllWithIncludeToday()
         {
             return Ok(_purchaseOrderService.GetAllWithInclude().Where(c => c.OrderDate.Date == DateTime.Now.Date).ToList());
+        }
+        [HttpGet("GetOrderNumber")]
+        public IActionResult GetOrderNumber()
+        {
+            var orderNum = (_purchaseOrderService.GetAllWithInclude().Max(x => x.Id) + 1);
+            return Ok(orderNum);
         }
 
         public IActionResult GetAllWithIncludeByCustomerId(int id)

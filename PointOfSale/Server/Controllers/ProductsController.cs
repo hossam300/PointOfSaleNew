@@ -29,7 +29,7 @@ namespace PointOfSale.Server.Controllers
                 AvailableInPOS = x.AvailableInPOS,
                 CategoryId = x.CategoryId,
                 InvoicingPolicy = x.InvoicingPolicy,
-                Category = (x.CategoryId != null) ? GetProductCategory(x.Category) : null,
+               // Category = (x.CategoryId != null) ? GetProductCategory(x.Category) : null,
                 IsEventTicket = x.IsEventTicket,
                 OptionalProducts = x.OptionalProducts.Select(z => new OptionalProductDTO { Id = z.Id, OptionalProductId = z.OptionalProductId, ProductId = z.ProductId }).ToList(),
                 SalesDescription = x.SalesDescription,
@@ -45,22 +45,22 @@ namespace PointOfSale.Server.Controllers
                 Id = x.Id,
                 AvailableInPOS = x.AvailableInPOS,
                 CategoryId = x.CategoryId,
-                Category = (x.CategoryId != null) ? GetProductCategory(x.Category) : null,
+               // Category = (x.CategoryId != null) ? GetProductCategory(x.Category) : null,
                 ToWeighWithScale = x.ToWeighWithScale,
 
             }).FirstOrDefault(x => x.Id == id));
         }
 
-        public static ProductCategoryDTO GetProductCategory(ProductCategory category)
-        {
-            return new ProductCategoryDTO
-            {
-                CategoryName = category.CategoryName,
-                Id = category.Id,
-                ImagePath = category.ImagePath,
-                ParentCategoryId = category.ParentCategoryId
-            };
-        }
+        //public static ProductCategoryDTO GetProductCategory(ProductCategory category)
+        //{
+        //    return new ProductCategoryDTO
+        //    {
+        //        CategoryName = category.CategoryName,
+        //        Id = category.Id,
+        //        ImagePath = category.ImagePath,
+        //        ParentCategoryId = category.ParentCategoryId
+        //    };
+        //}
         [HttpGet("GetProductPurchaseDTOById/{id}")]
         public IActionResult GetProductPurchaseDTOById(int id)
         {
@@ -70,7 +70,6 @@ namespace PointOfSale.Server.Controllers
                 ControlPolicy = x.ControlPolicy,
                 Procurement = x.Procurement,
                 PurchaseDescription = x.PurchaseDescription,
-                VendorTaxes = x.VendorTaxes.Select(z => new VendorTaxDTO { Id = z.Id, ProductId = z.ProductId, TaxId = z.TaxId, TaxName = z.Tax.Name }).ToList()
             }).FirstOrDefault(x => x.Id == id));
         }
         [HttpGet("GetProductInventoryDTOById/{id}")]
@@ -99,28 +98,7 @@ namespace PointOfSale.Server.Controllers
         [HttpGet, Route("GetAddProductDTOById/{id}")]
         public virtual IActionResult GetAddProductDTOById(int id)
         {
-            return Ok(_productsService.GetAll<Product>().Select(x => new AddProductDTO
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Barcode = x.Barcode,
-                CanBeExpensed = x.CanBeExpensed,
-                CanBePurchased = x.CanBePurchased,
-                CanBeRented = x.CanBeRented,
-                CanBeSold = x.CanBeSold,
-                CompanyId = x.CompanyId,
-                Cost = x.Cost,
-                CustomerTaxes = x.CustomerTaxes.Select(z => new CustomerTaxDTO { Id = z.Id, ProductId = z.ProductId, TaxId = z.TaxId, TaxName = z.Tax.Name }).ToList(),
-                GenerateBarcode = x.GenerateBarcode,
-                InternalReference = x.InternalReference,
-                Notes = x.Notes,
-                ProductCategoryId = x.ProductCategoryId,
-                ProductImage = x.ProductImage,
-                ProductType = x.ProductType,
-                SalesPrice = x.SalesPrice,
-                Company = GetCompany(x.Company),
-                ProductCategory = (x.ProductCategoryId != null) ? GetProductCategoryDTO(x.ProductCategory) : null
-            }).FirstOrDefault(x => x.Id == id));
+            return Ok(_productsService.GetAddProductDTOById(id));
         }
         [HttpPost("InsertAddProductDTO")]
         public IActionResult InsertAddProductDTO([FromBody] AddProductDTO addProduct)
@@ -159,25 +137,6 @@ namespace PointOfSale.Server.Controllers
             _productsService.UpdateProductInventoryDTO(productInventory);
             return Ok(productInventory);
         }
-        public static ProductCategoryDTO GetProductCategoryDTO(ProductCategory productCategory)
-        {
-            return new ProductCategoryDTO
-            {
-
-                CategoryName = productCategory.CategoryName,
-                Id = productCategory.Id,
-                ImagePath = productCategory.ImagePath,
-                ParentCategoryId = productCategory.ParentCategoryId,
-            };
-        }
-
-        public static CompanyDTO GetCompany(Company company)
-        {
-            return new CompanyDTO
-            {
-                Id = company.Id,
-                Name = company.Name
-            };
-        }
+     
     }
 }

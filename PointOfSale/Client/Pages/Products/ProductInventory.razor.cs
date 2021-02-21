@@ -38,7 +38,7 @@ namespace PointOfSale.Client.Pages.Products
             //{
             //    item.Product.Company = null;
             //}
-            using (var response = await Http.PutAsJsonAsync<ProductInventoryDTO>("/api/Products/UpdateProductInventoryDTO", product))
+            using (var response = await Http.PostAsJsonAsync<ProductInventoryDTO>("/api/Products/UpdateProductInventoryDTO", product))
             {
                 // convert response data to JsonElement which can handle any JSON data
                 var data = await response.Content.ReadFromJsonAsync<ProductInventoryDTO>();

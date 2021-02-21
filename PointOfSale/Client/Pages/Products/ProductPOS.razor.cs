@@ -37,14 +37,14 @@ namespace PointOfSale.Client.Pages.Products
             await JSRuntime.InvokeVoidAsync("StartLoading");
             //bool formIsValid = model.Validate(); 
           
-            using (var response = await Http.PutAsJsonAsync<ProductPOSDTO>("/api/Products/UpdateProductPOSDTO", product))
+            using (var response = await Http.PostAsJsonAsync<ProductPOSDTO>("/api/Products/UpdateProductPOSDTO", product))
             {
                 // convert response data to JsonElement which can handle any JSON data
                 var data = await response.Content.ReadFromJsonAsync<ProductPOSDTO>();
 
                 // get id property from JSON response data
                 //  var customerId = data[0].Id;
-                uriHelper.NavigateTo("/ProductPurchase/" + data.Id);
+                uriHelper.NavigateTo("/ProductPurchase/" + id);
             }
             await JSRuntime.InvokeVoidAsync("StopLoading");
         }

@@ -1,0 +1,89 @@
+﻿@using Radzen
+@using Radzen.Blazor
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authorization
+@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.PurchaseOrders.AddPurchaseOrderItem> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom">
+                <RadzenContent @ref="content1" Container="main" Style="direction:rtl;text-align:right">
+                    <ChildContent>
+
+                        <RadzenTemplateForm @ref="formPurchaseOrderItem" Data="@(PurchaseOrderItem)" Visible="@(PurchaseOrderItem != null)" TItem="PurchaseOrderItem" Submit="@FormPurchaseOrderItemSubmit">
+                            <ChildContent>
+                                <div class="card-body p-9">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div style="margin-bottom: 1rem" class="row">
+                                                <RadzenLabel @ref="label1" Text="@Loc["Products"]" Component="MehtodName" style="width: 100%">
+                                                </RadzenLabel>
+                                                @*<DisplayName For="@(() => PurchaseOrderItem.Type)"></DisplayName>*@
+                                                <div class="col-md-9">
+                                                    <RadzenDropDown AllowClear="true" Name="Products"
+                                                                    FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" TextProperty="Name" ValueProperty="Id"
+                                                                    AllowFiltering="true" Placeholder="Select..."
+                                                                    Data="@Products" @bind-Value="PurchaseOrderItem.ProductId"
+                                                                    Change="@(args => Change(args, "DropDown with placeholder"))" class="form-control" Style="margin-bottom: 20px">
+                                                    </RadzenDropDown>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <RadzenLabel  Text="@Loc2["Quantity"]" Component="Quantity" style="width: 100%">
+                                            </RadzenLabel>
+                                            @*<DisplayName For="@(() => addresstype.Type)"></DisplayName>*@
+                                            <div class="col-md-9">
+                                                <RadzenNumeric Step="1" Min="0" @bind-Value="PurchaseOrderItem.Quantity" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <RadzenLabel Text="@Loc2["Price"]" Component="Price" style="width: 100%">
+                                            </RadzenLabel>
+                                            @*<DisplayName For="@(() => addresstype.Type)"></DisplayName>*@
+                                            <div class="col-md-9">
+                                                <RadzenNumeric Step="1" Min="0" @bind-Value="PurchaseOrderItem.Price" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <RadzenLabel Text="@Loc2["ProductDiscount"]" Component="ProductDiscount" style="width: 100%">
+                                            </RadzenLabel>
+                                            @*<DisplayName For="@(() => addresstype.Type)"></DisplayName>*@
+                                            <div class="col-md-9">
+                                                <RadzenNumeric Step="1" Min="0" @bind-Value="PurchaseOrderItem.ProductDiscount" style="width: 100%" Name="Type">
+                                                </RadzenNumeric>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row">
+                                        <div class="col offset-sm-3">
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["Save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
+                                            </RadzenButton>
+                                            <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
+                                            </RadzenButton>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ChildContent>
+                        </RadzenTemplateForm>
+                    </ChildContent>
+                </RadzenContent>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+</div>

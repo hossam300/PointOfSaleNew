@@ -10,5 +10,6 @@ namespace PointOfSale.Services.ISevices
     {
         List<PurchaseOrder> GetAllWithInclude();
         Task<PurchaseOrder> GetOrderByNo(string id);
+        PurchaseOrder InsertPurchaseOrder(PurchaseOrder purchaseOrder);
     }
 }

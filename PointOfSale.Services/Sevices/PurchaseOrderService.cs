@@ -11,14 +11,16 @@ using System.Threading.Tasks;
 
 namespace PointOfSale.Services.Sevices
 {
-   public class PurchaseOrderService : BusinessService<PurchaseOrder, PurchaseOrder>, IPurchaseOrderService
+    public class PurchaseOrderService : BusinessService<PurchaseOrder, PurchaseOrder>, IPurchaseOrderService
     {
         private readonly IUnitOfWork _unitOfWork;
         private IRePointOfSaleitory<PurchaseOrder> _rePointOfSaleitory;
+        private IRePointOfSaleitory<ShopProduct> _shopProductReo;
         public PurchaseOrderService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper)
         {
             _unitOfWork = unitOfWork;
             _rePointOfSaleitory = _unitOfWork.GetRepository<PurchaseOrder>();
+            _shopProductReo = _unitOfWork.GetRepository<ShopProduct>();
         }
         public List<PurchaseOrder> GetAllWithInclude()
         {
@@ -28,6 +30,41 @@ namespace PointOfSale.Services.Sevices
         public async Task<PurchaseOrder> GetOrderByNo(string id)
         {
             return await _rePointOfSaleitory.GetAll().Include(c => c.PurchaseOrderItem).ThenInclude(o => o.Product).FirstOrDefaultAsync(c => c.OrderNumber == id);
+        }
+
+        public PurchaseOrder InsertPurchaseOrder(PurchaseOrder purchaseOrder)
+        {
+            base.Insert(purchaseOrder);
+            foreach (var item in purchaseOrder.PurchaseOrderItem)
+            {
+                var shopProduct = _shopProductReo.GetAll().Where(c => c.ProductId == item.ProductId && c.ShopId == purchaseOrder.ShopId).FirstOrDefault();
+                if (shopProduct != null)
+                {
+                    shopProduct.OldQuantity = shopProduct.CurrentQuantity;
+                    shopProduct.CurrentQuantity = shopProduct.CurrentQuantity + item.Quantity;
+                    shopProduct.ActualQuantity = shopProduct.CurrentQuantity ;
+                    
+                    _shopProductReo.Update(shopProduct);
+                    _unitOfWork.SaveChanges();
+                }
+                else
+                {
+                    shopProduct = new ShopProduct
+                    {
+                        ActualQuantity=item.Quantity,
+                        OldQuantity=item.Quantity,
+                        ProductId=item.ProductId,
+                        ShopId=purchaseOrder.ShopId,
+                        CreationDate=DateTime.Now,
+                        CreatorId=purchaseOrder.CreatorId,
+                        CurrentQuantity=item.Quantity,
+                        ModfiedDate=DateTime.Now
+                    };
+                    _shopProductReo.Insert(shopProduct);
+                    _unitOfWork.SaveChanges();
+                }
+            }
+            return purchaseOrder;
         }
     }
 }
