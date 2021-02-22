@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using PointOfSale.DAL.Domains;
+using PointOfSale.DAL.ViewModels;
 using Radzen;
 using Radzen.Blazor;
 using System;
@@ -22,7 +23,7 @@ namespace PointOfSale.Client.Pages.Shops
 
         [Inject]
         protected NotificationService NotificationService { get; set; }
-
+        List<DropDownList> Products = new List<DropDownList>();
 
 
         protected RadzenContent content1;
@@ -31,12 +32,13 @@ namespace PointOfSale.Client.Pages.Shops
 
         protected RadzenButton button0;
 
-        protected RadzenGrid<ShopProduct> grid0;
+        protected RadzenGrid<ShopProductDTO> grid0;
 
         protected RadzenButton gridDeleteButton;
 
-        IEnumerable<ShopProduct> _getShopsResult;
-        protected IEnumerable<ShopProduct> getShopsResult
+        IEnumerable<ShopProductDTO> _getShopsResult;
+        [Parameter] public int? Id { get; set; }
+        protected IEnumerable<ShopProductDTO> getShopsResult
         {
             get
             {
@@ -70,8 +72,18 @@ namespace PointOfSale.Client.Pages.Shops
         }
         protected async void Load()
         {
-            var sahlErpGetShopsResult = await Http.GetFromJsonAsync<List<ShopProduct>>("/api/ShopProducts/GetAllWithoutInclude");
+            var sahlErpGetShopsResult = await Http.GetFromJsonAsync<List<ShopProductDTO>>("/api/ShopProducts/GetAllByShopId/" + Id);
+            Products = await Http.GetFromJsonAsync<List<DropDownList>>("/api/Products/GetDropDownListAll/");
             getShopsResult = sahlErpGetShopsResult;
+        }
+        public async void SaveRow(ShopProductDTO args)
+        {
+            await grid0.UpdateRow(args);
+        }
+        void CancelEdit(ShopProductDTO shopProduct)
+        {
+            grid0.CancelEditRow(shopProduct);
+
         }
 
         protected async void Button0Click(MouseEventArgs args)
@@ -79,12 +91,15 @@ namespace PointOfSale.Client.Pages.Shops
             UriHelper.NavigateTo("/Shops/AddShop");
         }
 
-        protected async void EditRow(ShopProduct args)
+        protected async void EditRow(ShopProductDTO args)
         {
-            //UriHelper.NavigateTo("/Shops/EditShop/" + args.Id);
+            grid0.EditRow(args);
         }
-
-        protected async void GridDeleteButtonClick(MouseEventArgs args, ShopProduct data)
+        public async Task OnUpdateRow(ShopProductDTO shopProduct)
+        {
+            await Http.PostAsJsonAsync<ShopProductDTO>("/api/ShopProducts/EditShopProduct/", shopProduct);
+        }
+        protected async void GridDeleteButtonClick(MouseEventArgs args, ShopProductDTO data)
         {
             try
             {

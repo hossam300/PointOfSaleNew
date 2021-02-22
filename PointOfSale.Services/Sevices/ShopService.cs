@@ -300,6 +300,7 @@ namespace PointOfSale.Services.Sevices
             shop.PrefillCashPayment = shopPricing.PrefillCashPayment;
             shop.CashControl = shopPricing.CashControl;
             shop.AuthorizedDifference = shopPricing.AuthorizedDifference;
+            shop.Tips = shopPricing.Tips;
             shop.TipProductId = shopPricing.TipProductId;
             shop.TipProduct = (shop.PricelistId != null) ? GetTipProduct(shopPricing.TipProduct) : null;
 

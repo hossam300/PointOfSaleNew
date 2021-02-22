@@ -22,8 +22,8 @@ namespace PointOfSale.Client.Pages.Sessions
         [Parameter] public int Id { get; set; }
         [Inject]
         AuthenticationStateProvider AuthenticationStateProvider { get; set; }
-        //[Inject]
-        //UserManager<SahlApplication> UserManager { get; set; }
+        [Inject]
+        protected NotificationService NotificationService { get; set; }
 
         List<Product> Products = new List<Product>();
         List<Product> ProductsData = new List<Product>();
@@ -35,7 +35,7 @@ namespace PointOfSale.Client.Pages.Sessions
         Radzen.Blazor.RadzenLabel CustomerVaildation;
         Radzen.Blazor.RadzenLabel ItemsVaildation;
         Radzen.Blazor.RadzenAutoComplete BarcodeId;
-
+        Radzen.Blazor.RadzenNumeric<double> Qty;
         Order order = new Order();
         double TotalItems = 0;
         double Total = 0;
@@ -354,10 +354,11 @@ namespace PointOfSale.Client.Pages.Sessions
             return new ItemsProviderResult<OrderItem>(orderItems, orderItems.Count);
         }
 
-        void OnChangeQuantity(double value, int prodId)
+       async void OnChangeQuantity(double value, int prodId)
         {
             var product = Products.FirstOrDefault(c => c.Id == prodId);
             AddOrderItemQunty(product, value);
+            
         }
         async void OnSubmit(Order model)
         {
@@ -387,123 +388,181 @@ namespace PointOfSale.Client.Pages.Sessions
         }
         public async void AddOrderItemQunty(Product item, double Qyt)
         {
-            if (item != null)
+            var shopproduct = item.ShopProducts.FirstOrDefault(x => x.ShopId == Id && x.ProductId == item.Id);
+            if (shopproduct != null)
             {
-                if (orderItems == null)
+                if (item != null)
                 {
-                    orderItems = new List<OrderItem>();
-                }
-                else
-                {
-                    OrderItem orderItem = new OrderItem();
-                    if (orderItems.Any(c => c.ProductId == item.Id))
+                    if (orderItems == null)
                     {
-                        int index = orderItems.FindIndex(a => a.ProductId == item.Id);
-                        orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
-                        orderItems.Remove(orderItem);
-                        orderItem.Price = orderItem.Price;
-                        orderItem.Quantity = orderItem.Quantity;
-                        orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
-                        if (order.Id != 0)
-                        {
-                            orderItem.Product = null;
-                            orderItem.OrderId = order.Id;
-                            if (orderItem.Id != 0)
-                                await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
-                            else
-                                await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
-                        }
-                        orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
-                        orderItems.Insert(index, orderItem);
+                        orderItems = new List<OrderItem>();
                     }
                     else
                     {
-                        orderItem = new OrderItem
+                        OrderItem orderItem = new OrderItem();
+                        if (orderItems.Any(c => c.ProductId == item.Id))
                         {
-                            Price = item.SalesPrice,
-                            Product = new Product { Id = item.Id, Name = item.Name },
-                            ProductId = item.Id,
-                            Quantity = Qyt,
-                        };
-                        orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
-                        if (order.Id != 0)
-                        {
-                            orderItem.Product = null;
-                            orderItem.OrderId = order.Id;
-                            if (orderItem.Id != 0)
-                                await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                            if (Qyt> shopproduct.ActualQuantity)
+                            {
+                                NotificationService.Notify(NotificationSeverity.Error, $"Error", $"لايوجد كمية متاحة");
+                                
+                                int index = orderItems.FindIndex(a => a.ProductId == item.Id);
+                                orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
+                                orderItems.Remove(orderItem);
+                                orderItem.Quantity = shopproduct.ActualQuantity;
+                                orderItem.Price = orderItem.Price;
+                                orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                                if (order.Id != 0)
+                                {
+                                    orderItem.Product = null;
+                                    orderItem.OrderId = order.Id;
+                                    if (orderItem.Id != 0)
+                                        await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                                    else
+                                        await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                                }
+                                orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                                orderItems.Insert(index, orderItem);
+                            }
                             else
-                                await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                            {
+                                orderItem.Quantity = orderItem.Quantity;
+                                int index = orderItems.FindIndex(a => a.ProductId == item.Id);
+                                orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
+                                orderItems.Remove(orderItem);
+                                orderItem.Price = orderItem.Price;
+                                orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                                if (order.Id != 0)
+                                {
+                                    orderItem.Product = null;
+                                    orderItem.OrderId = order.Id;
+                                    if (orderItem.Id != 0)
+                                        await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                                    else
+                                        await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                                }
+                                orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                                orderItems.Insert(index, orderItem);
+                            }
+                           
                         }
-                        orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
-                        orderItems.Add(orderItem);
-                    }
+                        else
+                        {
+                            if (Qyt > shopproduct.ActualQuantity)
+                            {
+                                orderItem = new OrderItem
+                                {
+                                    Price = item.SalesPrice,
+                                    Product = new Product { Id = item.Id, Name = item.Name },
+                                    ProductId = item.Id,
+                                    Quantity = shopproduct.ActualQuantity,
+                                };
+                            }
+                            else
+                            {
+                                orderItem = new OrderItem
+                                {
+                                    Price = item.SalesPrice,
+                                    Product = new Product { Id = item.Id, Name = item.Name },
+                                    ProductId = item.Id,
+                                    Quantity = Qyt,
+                                };
+                            }
+                            orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                            if (order.Id != 0)
+                            {
+                                orderItem.Product = null;
+                                orderItem.OrderId = order.Id;
+                                if (orderItem.Id != 0)
+                                    await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                                else
+                                    await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                            }
+                            orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                            orderItems.Add(orderItem);
+                        }
 
-                    TotalItems = orderItems.Sum(c => c.Quantity);
-                    Total = orderItems.Sum(c => c.SubTotal);
-                    TotalPayable = Total - Discount + (OrderTax * Total / 100);
+                        TotalItems = orderItems.Sum(c => c.Quantity);
+                        Total = orderItems.Sum(c => c.SubTotal);
+                        TotalPayable = Total - Discount + (OrderTax * Total / 100);
+                    }
+                    await InvokeAsync(() => { StateHasChanged(); });
                 }
-                await InvokeAsync(() => { StateHasChanged(); });
+               
             }
+            else
+            {
+                NotificationService.Notify(NotificationSeverity.Error, $"Error", $"لايوجد كمية متاحة");
+                return;
+            }
+          
         }
         public async void AddOrderItem(Product item, int Qyt)
         {
-            if (item != null)
+            var shopproduct = item.ShopProducts.FirstOrDefault(x => x.ShopId == Id && x.ProductId == item.Id);
+            if (shopproduct != null)
             {
-                if (orderItems == null)
+                if (item != null)
                 {
-                    orderItems = new List<OrderItem>();
-                }
-                else
-                {
-                    OrderItem orderItem = new OrderItem();
-                    if (orderItems.Any(c => c.ProductId == item.Id))
+                    if (orderItems == null)
                     {
-                        orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
-                        orderItems.Remove(orderItem);
-                        orderItem.Price = orderItem.Price;
-                        orderItem.Quantity = orderItem.Quantity + Qyt;
-                        orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
-                        if (order.Id != 0)
-                        {
-                            orderItem.Product = null;
-                            orderItem.OrderId = order.Id;
-                            if (orderItem.Id != 0)
-                                await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
-                            else
-                                await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
-                        }
-                        orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
-                        orderItems.Add(orderItem);
+                        orderItems = new List<OrderItem>();
                     }
                     else
                     {
-                        orderItem = new OrderItem
+                        OrderItem orderItem = new OrderItem();
+                        if (orderItems.Any(c => c.ProductId == item.Id))
                         {
-                            Price = item.SalesPrice,
-                            Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice },
-                            ProductId = item.Id,
-                            Quantity = Qyt,
-                        };
-                        orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
-                        if (order.Id != 0)
-                        {
-                            orderItem.Product = null;
-                            orderItem.OrderId = order.Id;
-                            if (orderItem.Id != 0)
-                                await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
-                            else
-                                await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                            orderItem = orderItems.FirstOrDefault(c => c.ProductId == item.Id);
+                            orderItems.Remove(orderItem);
+                            orderItem.Price = orderItem.Price;
+                            orderItem.Quantity = orderItem.Quantity + Qyt;
+                            orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                            if (order.Id != 0)
+                            {
+                                orderItem.Product = null;
+                                orderItem.OrderId = order.Id;
+                                if (orderItem.Id != 0)
+                                    await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                                else
+                                    await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                            }
+                            orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                            orderItems.Add(orderItem);
                         }
-                        orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
-                        orderItems.Add(orderItem);
-                    }
+                        else
+                        {
+                            orderItem = new OrderItem
+                            {
+                                Price = item.SalesPrice,
+                                Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice },
+                                ProductId = item.Id,
+                                Quantity = Qyt,
+                            };
+                            orderItem.SubTotal = orderItem.Price * orderItem.Quantity;
+                            if (order.Id != 0)
+                            {
+                                orderItem.Product = null;
+                                orderItem.OrderId = order.Id;
+                                if (orderItem.Id != 0)
+                                    await Http.PutAsJsonAsync<OrderItem>("/api/orderItems/Update", orderItem);
+                                else
+                                    await Http.PostAsJsonAsync<OrderItem>("/api/orderItems/Insert", orderItem);
+                            }
+                            orderItem.Product = new Product { Id = item.Id, Name = item.Name, SalesPrice = item.SalesPrice };
+                            orderItems.Add(orderItem);
+                        }
 
-                    TotalItems = orderItems.Sum(c => c.Quantity);
-                    Total = orderItems.Sum(c => c.SubTotal);
-                    TotalPayable = Total - Discount + (OrderTax * Total / 100);
+                        TotalItems = orderItems.Sum(c => c.Quantity);
+                        Total = orderItems.Sum(c => c.SubTotal);
+                        TotalPayable = Total - Discount + (OrderTax * Total / 100);
+                    }
+                    await InvokeAsync(() => { StateHasChanged(); });
                 }
-                await InvokeAsync(() => { StateHasChanged(); });
+            }
+            else
+            {
+                NotificationService.Notify(NotificationSeverity.Error, $"Error", $"لايوجد كمية متاحة");
             }
         }
         async void DeleteItem(OrderItem item)

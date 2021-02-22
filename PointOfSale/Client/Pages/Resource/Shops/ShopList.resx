@@ -117,13 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActualQuantity" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
   <data name="Add" xml:space="preserve">
     <value>اضافة</value>
   </data>
   <data name="PointOfSale" xml:space="preserve">
     <value>المتاجر</value>
   </data>
+  <data name="Product" xml:space="preserve">
+    <value>المنتج</value>
+  </data>
   <data name="ShopName" xml:space="preserve">
     <value>الاسم</value>
+  </data>
+  <data name="ShopProducts" xml:space="preserve">
+    <value>كميات المنتجات فى المتجر</value>
   </data>
 </root>

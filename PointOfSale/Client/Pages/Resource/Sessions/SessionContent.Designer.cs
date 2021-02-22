@@ -61,6 +61,15 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الكمية المتاحة.
+        /// </summary>
+        public static string ActualQuantity {
+            get {
+                return ResourceManager.GetString("ActualQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اضافة عميل.
         /// </summary>
         public static string AddCustomer {
@@ -138,6 +147,15 @@ namespace PointOfSale.Client.Pages.Resource.Sessions {
         public static string Hold {
             get {
                 return ResourceManager.GetString("Hold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to غير متاح.
+        /// </summary>
+        public static string NoAvailble {
+            get {
+                return ResourceManager.GetString("NoAvailble", resourceCulture);
             }
         }
         

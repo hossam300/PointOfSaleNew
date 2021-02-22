@@ -12,6 +12,7 @@ namespace PointOfSale.DAL.Domains
             OptionalProducts = new List<OptionalProduct>();
             VendorProducts = new List<VendorProduct>();
             VendorTaxes = new List<VendorTax>();
+            ShopProducts = new List<ShopProduct>();
         }
         public int Id { get; set; }
         #region General Information
@@ -100,6 +101,7 @@ namespace PointOfSale.DAL.Domains
         [NotMapped]
         [Display(Name = "GenerateBarcode", ResourceType = typeof(Resources.Resources))]
         public bool GenerateBarcode { get; set; }
+        public virtual List<ShopProduct> ShopProducts { get; set; }
         #endregion
         #region Account
         // TODO ADD GLAccounts
