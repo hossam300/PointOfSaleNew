@@ -11,4 +11,10 @@ namespace PointOfSale.DAL.ViewModels
         [Display(Name = "DropDownListName", ResourceType = typeof(Resources.Resources))]
         public string Name { get; set; }
     }
+    public class DropDownListString
+    {
+        public string Id { get; set; }
+        [Display(Name = "DropDownListName", ResourceType = typeof(Resources.Resources))]
+        public string Name { get; set; }
+    }
 }

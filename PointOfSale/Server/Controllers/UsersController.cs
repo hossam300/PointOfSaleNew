@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PointOfSale.DAL.Domains;
+using PointOfSale.DAL.ViewModels;
 using PointOfSale.Services.ISevices;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace PointOfSale.Server.Controllers
         public UsersController(IUserService businessService) : base(businessService)
         {
             this._userService = businessService;
+        }
+        [HttpGet("GetDropDownListAll")]
+        public IActionResult GetDropDownListAll()
+        {
+            return Ok(_userService.GetAll<SahlUserIdentity>().Select(x => new DropDownListString { Id = x.Id, Name = x.Name_AR }).ToList());
         }
     }
 }

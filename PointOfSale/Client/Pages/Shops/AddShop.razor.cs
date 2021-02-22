@@ -15,7 +15,7 @@ namespace PointOfSale.Client.Pages.Shops
     public partial class AddShop : ComponentBase
     {
         AddShopDTO shop = new AddShopDTO();
-        List<SahlUserIdentity> AllowedEmployees = new List<SahlUserIdentity>();
+        List<DropDownListString> AllowedEmployees = new List<DropDownListString>();
         IEnumerable<string> multipleValues = new string[] { };
         protected RadzenRequiredValidator ShopNameRequird;
         [Parameter] public int? id { get; set; }
@@ -28,7 +28,7 @@ namespace PointOfSale.Client.Pages.Shops
         }
         async Task Load()
         {
-            AllowedEmployees = await Http.GetFromJsonAsync<List<SahlUserIdentity>>("/api/Users/GetAll");
+            AllowedEmployees = await Http.GetFromJsonAsync<List<DropDownListString>>("/api/Users/GetDropDownListAll");
             if (id != null)
             {
                 shop = await Http.GetFromJsonAsync<AddShopDTO>("/api/Shops/GetAddShopDTOById/" + id);
