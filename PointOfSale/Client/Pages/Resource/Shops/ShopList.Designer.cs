@@ -61,6 +61,15 @@ namespace PointOfSale.Client.Pages.Resource.Shops {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الكمية.
+        /// </summary>
+        public static string ActualQuantity {
+            get {
+                return ResourceManager.GetString("ActualQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to اضافة.
         /// </summary>
         public static string Add {
@@ -79,11 +88,29 @@ namespace PointOfSale.Client.Pages.Resource.Shops {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to المنتج.
+        /// </summary>
+        public static string Product {
+            get {
+                return ResourceManager.GetString("Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to الاسم.
         /// </summary>
         public static string ShopName {
             get {
                 return ResourceManager.GetString("ShopName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to كميات المنتجات فى المتجر.
+        /// </summary>
+        public static string ShopProducts {
+            get {
+                return ResourceManager.GetString("ShopProducts", resourceCulture);
             }
         }
     }

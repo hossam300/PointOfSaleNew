@@ -46,18 +46,18 @@
                                                     <div class="col-xl-8">
 
                                                         <RadzenDropDownDataGrid AllowClear="true" TValue="int" Name="BarcodeId"
-                                                                                FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="Radzen.StringFilterOperator.Contains" 
+                                                                                FilterCaseSensitivity="Radzen.FilterCaseSensitivity.CaseInsensitive" FilterOperator="Radzen.StringFilterOperator.Contains"
                                                                                 AllowFiltering="true" SelectedItem="1"
                                                                                 Data="@ProductsData" TextProperty="Barcode"
-                                                                                ValueProperty="Id" Placeholder="@Loc["EnterBarcodeOrProductName"]" id="barcode2" Style="margin-bottom: 20px;width:100%" Change=@(args => OnChangeProduct(args, "AutoComplete with custom filter operator"))>
+                                                                                ValueProperty="Barcode" Placeholder="@Loc["EnterBarcodeOrProductName"]" id="barcode2" Style="margin-bottom: 20px;width:100%" Change=@(args => OnChangeProduct(args, "AutoComplete with custom filter operator"))>
                                                             <Columns>
-                                                                <RadzenDropDownDataGridColumn Property="Barcode" Filterable="true"  Title="Barcode" Width="100px" />
+                                                                <RadzenDropDownDataGridColumn Property="Barcode" Filterable="true" Title="Barcode" Width="100px" />
                                                                 <RadzenDropDownDataGridColumn Property="Name" Filterable="true" Title="Name" Width="200px" />
                                                             </Columns>
                                                         </RadzenDropDownDataGrid>
 
 
-                                                        
+
                                                     </div>
 
                                                 </div>
@@ -76,10 +76,11 @@
                                                     <tbody>
                                                         @foreach (var item in orderItems)
                                                         {
+                                                        //    var shopActualQuantity = (item.Product.ShopProducts.FirstOrDefault(x => x.ShopId == Id && x.ProductId == item.ProductId) != null) ? item.Product.ShopProducts.FirstOrDefault(x => x.ShopId == Id && x.ProductId == item.ProductId).ActualQuantity : 0;
                                                             <tr>
                                                                 <td>@item.Product.Name</td>
                                                                 <td>@item.Product.SalesPrice</td>
-                                                                <td> <RadzenNumeric TValue="double" Min="0"  @bind-Value="@item.Quantity" Change=@(args => OnChangeQuantity(args,item.ProductId)) /></td>
+                                                                <td> <RadzenNumeric @ref="Qty" TValue="double" Min="0" @bind-Value="@item.Quantity" Change=@(args => OnChangeQuantity(args,item.ProductId)) /></td>
                                                                 <td>@item.SubTotal</td>
                                                                 <td><button class="btn btn-sm btn-danger" @onclick="()=>DeleteItem(item)"><i class="fa fa-trash"></i></button></td>
                                                             </tr>
@@ -225,22 +226,46 @@
                         <div id="item-list">
                             <div class="items">
                                 <Virtualize Context="item" Items="@ProductCats">
-                                    <button type="button" data-name="@item.Name" id="product-@item.Name" @onclick="()=>AddOrderItem(item,1)"
-                                            value='@item.Name' class="btn btn-both btn-flat product">
-                                        <span class="bg-img">
-                                            <img src="@item.ProductImage"
-                                                 alt="@item.Name"
-                                                 style="width: 100%; height: 100px;">
+                                    @{var ShopProducts = item.ShopProducts.FirstOrDefault(x => x.ShopId == Id && x.ProductId == item.Id);}
+                                    @if (ShopProducts != null)
+                                    {
+                                        <button type="button" data-name="@item.Name" id="product-@item.Name" @onclick="()=>AddOrderItem(item,1)"
+                                                value='@item.Name' class="btn btn-both btn-flat product">
+                                            <span class="bg-img">
+                                                <img src="@item.ProductImage"
+                                                     alt="@item.Name"
+                                                     style="width: 100%; height: 100px;">
 
-                                         @*   <span style="font-family: 'Libre Barcode 39 Extended Text', cursive;font-size: 40px;"> @item.Barcode</span>*@
-                                        </span>
-                                        <span>
-                                            <span>
-                                                @item.Name
+                                                @*   <span style="font-family: 'Libre Barcode 39 Extended Text', cursive;font-size: 40px;"> @item.Barcode</span>*@
                                             </span>
+                                            <span>
+                                                <span>
+                                                    @item.Name <br /> @Loc["ActualQuantity"] : @ShopProducts.ActualQuantity
+                                                </span>
 
-                                        </span>
-                                    </button>
+                                            </span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" data-name="@item.Name" id="product-@item.Name" @onclick="()=>AddOrderItem(item,1)"
+                                                value='@item.Name' class="btn btn-both btn-flat product">
+                                            <span class="bg-img">
+                                                <img src="@item.ProductImage"
+                                                     alt="@item.Name"
+                                                     style="width: 100%; height: 100px;">
+
+                                                @*   <span style="font-family: 'Libre Barcode 39 Extended Text', cursive;font-size: 40px;"> @item.Barcode</span>*@
+                                            </span>
+                                            <span>
+                                                <span>
+                                                    @item.Name  <br />   @Loc["ActualQuantity"] : @Loc["NoAvailble"]
+                                                </span>
+
+                                            </span>
+                                        </button>
+                                    }
+
                                 </Virtualize>
                             </div>
                         </div>

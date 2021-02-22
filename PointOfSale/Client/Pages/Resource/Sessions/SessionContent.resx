@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActualQuantity" xml:space="preserve">
+    <value>الكمية المتاحة</value>
+  </data>
   <data name="AddCustomer" xml:space="preserve">
     <value>اضافة عميل</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="Hold" xml:space="preserve">
     <value>تعليق الفاتوره</value>
+  </data>
+  <data name="NoAvailble" xml:space="preserve">
+    <value>غير متاح</value>
   </data>
   <data name="OrderNo" xml:space="preserve">
     <value>رقم الفاتورة</value>
