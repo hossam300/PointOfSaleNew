@@ -67,14 +67,18 @@ namespace PointOfSale.Client.Pages.PurchaseOrders
         }
         protected async void Load()
         {
-            PurchaseOrderInstallment.InstallmentAmount = PurchaseOrder.PurchaseOrderItem.Sum(x => x.SubTotal);
-            PurchaseOrderInstallment.InstallmentDate = DateTime.Now;
+            PurchaseOrderInstallments = new List<PurchaseOrderInstallment>();
             if (Id != null)
             {
                 PurchaseOrderInstallment = await Http.GetFromJsonAsync<PurchaseOrderInstallment>("/api/PurchaseOrderInstallments/GetById/" + Id);
             }
 
-            else PurchaseOrderInstallment = new PurchaseOrderInstallment();
+            else
+            {
+                PurchaseOrderInstallment = new PurchaseOrderInstallment();
+                PurchaseOrderInstallment.InstallmentAmount = PurchaseOrder.PurchaseOrderItem.Sum(x => x.SubTotal);
+                PurchaseOrderInstallment.InstallmentDate = DateTime.Now;
+            };
         }
         Dictionary<DateTime, string> events = new Dictionary<DateTime, string>();
         void Change(object value, string name)
@@ -86,41 +90,54 @@ namespace PointOfSale.Client.Pages.PurchaseOrders
         }
         public async void AddPurchaseOrderInstallmentToGrid()
         {
-            PurchaseOrderInstallments.Add(PurchaseOrderInstallment);
-            await gridPurchaseOrderPurchaseOrderInstallment.Reload();
-           // DialogService.Close(PurchaseOrderInstallment);
+            PurchaseOrderInstallment.PurchaseOrder = PurchaseOrder;
+            PurchaseOrderInstallment.PurchaseOrderId = PurchaseOrder.Id;
+            try
+            {
+                PurchaseOrderInstallments.Add(PurchaseOrderInstallment);
+                await gridPurchaseOrderPurchaseOrderInstallment.Reload();
+            }
+            catch (Exception ex)
+            {
+
+                NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new PurchaseOrderInstallment!");
+            }
+           
+            // DialogService.Close(PurchaseOrderInstallment);
         }
         protected async void FormPurchaseOrderInstallmentSubmit(PurchaseOrderInstallment args)
         {
             try
             {
-                //if (PurchaseOrderInstallment.Id != 0)
-                //{
-                //    using (var response = await Http.PutAsJsonAsync<PurchaseOrderInstallment>("/api/PurchaseOrderInstallments/Update", PurchaseOrderInstallment))
-                //    {
-                //        // convert response data to JsonElement which can handle any JSON data
-                //        var data = await response.Content.ReadFromJsonAsync<PurchaseOrderInstallment>();
+                if (PurchaseOrderInstallment.Id != 0)
+                {
+                    using (var response = await Http.PutAsJsonAsync<PurchaseOrderInstallment>("/api/PurchaseOrderInstallments/Update", PurchaseOrderInstallment))
+                    {
+                        // convert response data to JsonElement which can handle any JSON data
+                        var data = await response.Content.ReadFromJsonAsync<PurchaseOrderInstallment>();
 
-                //        // get id property from JSON response data
-                //        //  var customerId = data.Id;
-                //        //   UriHelper.NavigateTo("/PurchaseOrderInstallmentsList");
-                //    }
-                //}
-                //else
-                //{
-                //    using (var response = await Http.PostAsJsonAsync<PurchaseOrderInstallment>("/api/PurchaseOrderInstallments/Insert", PurchaseOrderInstallment))
-                //    {
-                //        // convert response data to JsonElement which can handle any JSON data
-                //        var data = await response.Content.ReadFromJsonAsync<PurchaseOrderInstallment>();
+                        // get id property from JSON response data
+                        //  var customerId = data.Id;
+                        //   UriHelper.NavigateTo("/PurchaseOrderInstallmentsList");
+                    }
+                }
+                else
+                {
+                    PurchaseOrderInstallment.PurchaseOrder = null;
+                    using (var response = await Http.PostAsJsonAsync<PurchaseOrderInstallment>("/api/PurchaseOrderInstallments/Insert", PurchaseOrderInstallment))
+                    {
+                        // convert response data to JsonElement which can handle any JSON data
+                        var data = await response.Content.ReadFromJsonAsync<PurchaseOrderInstallment>();
 
-                //        // get id property from JSON response data
-                //        //  var customerId = data.Id;
-                //        //  UriHelper.NavigateTo("/PurchaseOrderInstallmentsList");
-                //    }
-                // }
-                PurchaseOrderInstallments.Add(PurchaseOrderInstallment);
-                await gridPurchaseOrderPurchaseOrderInstallment.Reload();
-                DialogService.Close(PurchaseOrderInstallment);
+                        // get id property from JSON response data
+                        //  var customerId = data.Id;
+                        //  UriHelper.NavigateTo("/PurchaseOrderInstallmentsList");
+                    }
+                }
+                //PurchaseOrderInstallments.Add(PurchaseOrderInstallment);
+                //await gridPurchaseOrderPurchaseOrderInstallment.Reload();
+                UriHelper.NavigateTo("/PurchaseOrderList");
+               // DialogService.Close(null);
             }
             catch (Exception ex)
             {

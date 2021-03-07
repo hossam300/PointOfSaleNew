@@ -83,7 +83,7 @@ namespace PointOfSale.Client.Pages.PurchaseOrders
             else
             {
                 PurchaseOrder = new PurchaseOrder();
-                OrderNumber= await Http.GetFromJsonAsync<int>("/api/PurchaseOrders/GetOrderNumber/");
+                OrderNumber = await Http.GetFromJsonAsync<int>("/api/PurchaseOrders/GetOrderNumber/");
             }
             await InvokeAsync(() => { StateHasChanged(); });
         }
@@ -111,118 +111,144 @@ namespace PointOfSale.Client.Pages.PurchaseOrders
         }
         protected async void FormPurchaseOrderSubmit(PurchaseOrder args)
         {
-            try
+            PurchaseOrder.OrderNumber = OrderNumber.ToString();
+            if (PurchaseOrder.OrderNumber == "0" || PurchaseOrder.OrderNumber == null || PurchaseOrder.OrderNumber == "")
             {
-                PurchaseOrder.OrderNumber = OrderNumber.ToString();
-                PurchaseOrder.ShopId = (int)ShopId;
-                PurchaseOrder.OrderDate = DateTime.Now;
-                PurchaseOrder.OrderType = OrderType.Payed;
-                PurchaseOrder.CreationDate = DateTime.Now;
-                var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                var user = authState.User;
-                var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
-                PurchaseOrder.CreatorId = users;
-                PurchaseOrder.Total = PurchaseOrder.PurchaseOrderItem.Sum(x => (x.Price * x.Quantity) - x.ProductDiscount);
-                PurchaseOrder.TotalItemCount = PurchaseOrder.PurchaseOrderItem.Sum(x => x.Quantity);
-                foreach (var item in PurchaseOrder.PurchaseOrderItem)
-                {
-                    item.Product = null;
-                }
-                if (PurchaseOrder.Id != 0)
-                {
-                    using (var response = await Http.PutAsJsonAsync<PurchaseOrder>("/api/PurchaseOrders/Update", PurchaseOrder))
-                    {
-                        // convert response data to JsonElement which can handle any JSON data
-                        var data = await response.Content.ReadFromJsonAsync<PurchaseOrder>();
-
-                        // get id property from JSON response data
-                        //  var customerId = data.Id;
-                        UriHelper.NavigateTo("/PurchaseOrderList");
-                    }
-                }
-                else
-                {
-
-                    using (var response = await Http.PostAsJsonAsync<PurchaseOrder>("/api/PurchaseOrders/InsertPurchaseOrders", PurchaseOrder))
-                    {
-                        // convert response data to JsonElement which can handle any JSON data
-                        var data = await response.Content.ReadFromJsonAsync<PurchaseOrder>();
-
-                        // get id property from JSON response data
-                        //  var customerId = data.Id;
-                        UriHelper.NavigateTo("/PurchaseOrderList");
-                    }
-                }
-                DialogService.Close(PurchaseOrder);
+                await JSRuntime.InvokeVoidAsync("requied", "رقم الطلب مطلوب");
             }
-            catch (Exception ex)
+            else if (PurchaseOrder.SupplierId == 0)
             {
-                NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new PurchaseOrder!");
+                await JSRuntime.InvokeVoidAsync("requied", "المورد مطلوب");
+            }
+            else
+            {
+                try
+                {
+                    PurchaseOrder.OrderNumber = OrderNumber.ToString();
+                    PurchaseOrder.ShopId = (int)ShopId;
+                    PurchaseOrder.OrderDate = DateTime.Now;
+                    PurchaseOrder.OrderType = OrderType.Payed;
+                    PurchaseOrder.CreationDate = DateTime.Now;
+                    var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                    var user = authState.User;
+                    var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                    PurchaseOrder.CreatorId = users;
+                    PurchaseOrder.Total = PurchaseOrder.PurchaseOrderItem.Sum(x => (x.Price * x.Quantity) - x.ProductDiscount);
+                    PurchaseOrder.TotalItemCount = PurchaseOrder.PurchaseOrderItem.Sum(x => x.Quantity);
+                    foreach (var item in PurchaseOrder.PurchaseOrderItem)
+                    {
+                        item.Product = null;
+                    }
+                    if (PurchaseOrder.Id != 0)
+                    {
+                        using (var response = await Http.PutAsJsonAsync<PurchaseOrder>("/api/PurchaseOrders/Update", PurchaseOrder))
+                        {
+                            // convert response data to JsonElement which can handle any JSON data
+                            var data = await response.Content.ReadFromJsonAsync<PurchaseOrder>();
+
+                            // get id property from JSON response data
+                            //  var customerId = data.Id;
+                            UriHelper.NavigateTo("/PurchaseOrderList");
+                        }
+                    }
+                    else
+                    {
+
+                        using (var response = await Http.PostAsJsonAsync<PurchaseOrder>("/api/PurchaseOrders/InsertPurchaseOrders", PurchaseOrder))
+                        {
+                            // convert response data to JsonElement which can handle any JSON data
+                            var data = await response.Content.ReadFromJsonAsync<PurchaseOrder>();
+
+                            // get id property from JSON response data
+                            //  var customerId = data.Id;
+                            UriHelper.NavigateTo("/PurchaseOrderList");
+                        }
+                    }
+                    DialogService.Close(PurchaseOrder);
+                }
+                catch (Exception ex)
+                {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new PurchaseOrder!");
+                }
             }
         }
-        //public async Task OpenInstalmentAsync()
-        //{
-        //    try
-        //    {
-        //        PurchaseOrder.ShopId = (int)ShopId;
-        //        PurchaseOrder.OrderDate = DateTime.Now;
-        //        PurchaseOrder.OrderType = OrderType.Payed;
-        //        PurchaseOrder.CreationDate = DateTime.Now;
-        //        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        //        var user = authState.User;
-        //        var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
-        //        PurchaseOrder.CreatorId = users;
-        //        PurchaseOrder.Total = PurchaseOrder.PurchaseOrderItem.Sum(x => (x.Price * x.Quantity) - x.ProductDiscount);
-        //        PurchaseOrder.TotalItemCount = PurchaseOrder.PurchaseOrderItem.Sum(x => x.Quantity);
-        //        foreach (var item in PurchaseOrder.PurchaseOrderItem)
-        //        {
-        //            item.Product = null;
-        //        }
-        //        if (PurchaseOrder.Id != 0)
-        //        {
-        //            using (var response = await Http.PutAsJsonAsync<PurchaseOrder>("/api/PurchaseOrders/Update", PurchaseOrder))
-        //            {
-        //                //// convert response data to JsonElement which can handle any JSON data
-        //                //var data = await response.Content.ReadFromJsonAsync<PurchaseOrder>();
+        public async Task OpenInstalmentAsync()
+        {
+            PurchaseOrder.OrderNumber = OrderNumber.ToString();
+            if (PurchaseOrder.OrderNumber == "0" || PurchaseOrder.OrderNumber == null || PurchaseOrder.OrderNumber == "")
+            {
+                await JSRuntime.InvokeVoidAsync("requied", "رقم الطلب مطلوب");
+            }
+            else if (PurchaseOrder.SupplierId == 0)
+            {
+                await JSRuntime.InvokeVoidAsync("requied", "المورد مطلوب");
+            }
+            else
+            {
+                try
+                {
 
-        //                //// get id property from JSON response data
-        //                ////  var customerId = data.Id;
-        //                //UriHelper.NavigateTo("/PurchaseOrderList");
-        //            }
-        //        }
-        //        else
-        //        {
+                    PurchaseOrder.ShopId = (int)ShopId;
+                    PurchaseOrder.OrderDate = DateTime.Now;
+                    PurchaseOrder.OrderType = OrderType.Payed;
+                    PurchaseOrder.CreationDate = DateTime.Now;
+                    var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                    var user = authState.User;
+                    var users = user.Claims.FirstOrDefault(c => c.Type == "UserId").Value;
+                    PurchaseOrder.CreatorId = users;
+                    PurchaseOrder.Total = PurchaseOrder.PurchaseOrderItem.Sum(x => (x.Price * x.Quantity) - x.ProductDiscount);
+                    PurchaseOrder.TotalItemCount = PurchaseOrder.PurchaseOrderItem.Sum(x => x.Quantity);
+                    foreach (var item in PurchaseOrder.PurchaseOrderItem)
+                    {
+                        item.Product = null;
+                    }
+                    if (PurchaseOrder.Id != 0)
+                    {
+                        using (var response = await Http.PutAsJsonAsync<PurchaseOrder>("/api/PurchaseOrders/Update", PurchaseOrder))
+                        {
+                            //// convert response data to JsonElement which can handle any JSON data
+                            var data = await response.Content.ReadFromJsonAsync<PurchaseOrder>();
 
-        //            using (var response = await Http.PostAsJsonAsync<PurchaseOrder>("/api/PurchaseOrders/Insert", PurchaseOrder))
-        //            {
-        //                //// convert response data to JsonElement which can handle any JSON data
-        //                //var data = await response.Content.ReadFromJsonAsync<PurchaseOrder>();
+                            //// get id property from JSON response data
+                            PurchaseOrder.Id = data.Id;
+                            //UriHelper.NavigateTo("/PurchaseOrderList");
+                        }
+                    }
+                    else
+                    {
 
-        //                //// get id property from JSON response data
-        //                ////  var customerId = data.Id;
-        //                //UriHelper.NavigateTo("/PurchaseOrderList");
-        //            }
-        //        }
-        //        DialogService.Close(PurchaseOrder);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new PurchaseOrder!");
-        //    }
-        //    var result = await DialogService.OpenAsync<AddPurchaseOrderInstallment>("اضافة دفعات التسديد", new Dictionary<string, object>() { { "PurchaseOrder", PurchaseOrder } },
-        //              new Radzen.DialogOptions() { Width = "500px", Height = "325px" });
-        //    //await gridPurchaseOrders.Reload();
+                        using (var response = await Http.PostAsJsonAsync<PurchaseOrder>("/api/PurchaseOrders/Insert", PurchaseOrder))
+                        {
+                            //// convert response data to JsonElement which can handle any JSON data
+                            var data = await response.Content.ReadFromJsonAsync<PurchaseOrder>();
 
-        //    await InvokeAsync(() => { StateHasChanged(); });
-        //}
-        //public void PayWithMuiltMethod()
-        //{
+                            //// get id property from JSON response data
+                            PurchaseOrder.Id = data.Id;
+                            //UriHelper.NavigateTo("/PurchaseOrderList");
+                        }
+                    }
 
-        //}
-        //public void PayCash()
-        //{
+                    // DialogService.Close(PurchaseOrder);
+                }
+                catch (Exception ex)
+                {
+                    NotificationService.Notify(NotificationSeverity.Error, $"Error", $"Unable to create new PurchaseOrder!");
+                }
+                var result = await DialogService.OpenAsync<AddPurchaseOrderInstallment>("اضافة دفعات التسديد", new Dictionary<string, object>() { { "PurchaseOrder", PurchaseOrder } },
+                          new Radzen.DialogOptions() { Width = "800px", Height = "325px" });
+                //await gridPurchaseOrders.Reload();
 
-        //}
+                await InvokeAsync(() => { StateHasChanged(); });
+            }
+        }
+        public void PayWithMuiltMethod()
+        {
+
+        }
+        public void PayCash()
+        {
+
+        }
         void Change(object value, string name)
         {
             var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;

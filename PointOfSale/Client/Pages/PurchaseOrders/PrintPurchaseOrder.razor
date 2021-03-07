@@ -1,5 +1,107 @@
-﻿<h3>PrintPurchaseOrder</h3>
+﻿@inject Microsoft.Extensions.Localization.IStringLocalizer<Resource.Sessions.PrintBill> Loc
+@inject Microsoft.Extensions.Localization.IStringLocalizer<PointOfSale.DAL.Resources.Resources> Loc2
+<div class="card-content" style="direction:rtl;text-align:right">
+    <button type="button" class="close mr10" @onclick="Print"><i class="fa fa-print"></i></button>
 
+    <div class="card-body">
+        <div id="print-body">
+            <div id="PurchaseOrder_span">
+                <div style="text-align:center;">
+                    <h3>@shop.Name</h3>
+                    <h4>@shop.Header</h4>
+                </div>
+                <h5>@Loc["Customer"]: @PurchaseOrder.Supplier.Name</h5>
+                <h5>@Loc["Cashir"]: @userName</h5>
+                <h5>@Loc["Time"]: @PurchaseOrder.OrderDate.ToString("f")</h5>
+            </div>
+            <table id="PurchaseOrder-table" class="prT table table-condensed" style="width:100%;margin-bottom:0;">
+                <thead>
+                    <tr>
+                        <th>@Loc["Product"]</th>
+                        <th>@Loc["Qty"]</th>
+                        <th>@Loc["Price"]</th>
+                        <th>@Loc["SubTotal"]</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < PurchaseOrder.PurchaseOrderItem.Count; i++)
+                    {
+                        <tr class="bb row_1">
+                            <td>#@(i + 1) @PurchaseOrder.PurchaseOrderItem[i].Product.Name</td>
+                            <td>[ @PurchaseOrder.PurchaseOrderItem[i].Quantity ]</td>
+                            <td>[ @PurchaseOrder.PurchaseOrderItem[i].Price ]</td>
+                            <td>[ @{ var total = PurchaseOrder.PurchaseOrderItem[i].Quantity * PurchaseOrder.PurchaseOrderItem[i].Price;} @total  ]</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            <label class="control-label">@Loc["TotalItems"]</label>
+                        </th>
+                        <th>
+                            <label class="control-label">@PurchaseOrder.PurchaseOrderItem.Count</label>
+                        </th>
+                        <th>
+                            <label class="control-label">@Loc["Total"]</label>
+                        </th>
+                        <th colspan="2">
+                            <label class="control-label">@PurchaseOrder.Total</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label class="control-label">@Loc["Discount"]</label>
+                        </th>
+                        <th>
+                            <label class="control-label">@PurchaseOrder.Discount</label>
+
+                        </th>
+                        <th>
+                            <label class="control-label">@Loc["PurchaseOrderTax"]</label>
+                        </th>
+                        <th colspan="2">
+                            <label class="control-label">@PurchaseOrder.OrderTax %</label>
+
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th colspan="2">
+                            <label class="control-label">@Loc["TotalPayable"]</label>
+                        </th>
+                        <th colspan="3">
+                            <label class="control-label">
+                                @{var total2 = PurchaseOrder.PurchaseOrderItem.Sum(x => x.SubTotal);}
+                                @{var totalpayment = total2 - PurchaseOrder.Discount + (PurchaseOrder.OrderTax * total2 / 100);}@totalpayment
+                            </label>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+            <div style="text-align:center">
+                <h4>@shop.Footer</h4>
+            </div>
+        </div>
+    </div>
+</div>
 @code {
+    [Parameter] public PurchaseOrder PurchaseOrder { get; set; }
+    [Inject]
+    AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+    Shop shop = new Shop();
+    string userName = "";
+    protected override async Task OnInitializedAsync()
+    {
+        shop = await Http.GetFromJsonAsync<Shop>("/api/Shops/GetById/" + PurchaseOrder.ShopId);
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        userName = user.Identity.Name;
+        await JSRuntime.InvokeVoidAsync("PrintElem", "print-body");
+    }
+    async void Print()
+    {
+        await JSRuntime.InvokeVoidAsync("PrintElem", "print-body");
 
+    }
 }

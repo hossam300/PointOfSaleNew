@@ -15,5 +15,6 @@ namespace PointOfSale.DAL.Domains
         public double InstallmentAmount { get; set; }
         [Display(Name = "InstallmentDate", ResourceType = typeof(Resources.Resources))]
         public DateTime InstallmentDate { get; set; }
+        public bool Payed { get; set; } = false;
     }
 }

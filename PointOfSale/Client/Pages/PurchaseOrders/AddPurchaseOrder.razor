@@ -49,6 +49,31 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-md-6">
+                                            <div style="margin-bottom: 1rem" class="row">
+                                                <RadzenLabel @ref="label1" Text="@Loc2["Discount"]" Component="Discount" style="width: 100%">
+                                                </RadzenLabel>
+                                                <div class="col-md-9">
+                                                    <InputNumber @bind-Value="PurchaseOrder.Discount" class="form-control form-control-lg form-control-solid" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <RadzenLabel @ref="label1" Text="@Loc2["OrderTax"]" Component="OrderTax" style="width: 100%">
+                                            </RadzenLabel>
+                                            <div class="col-md-9">
+                                                <InputNumber @bind-Value="PurchaseOrder.OrderTax" class="form-control form-control-lg form-control-solid" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <RadzenLabel @ref="label1" Text="@Loc2["Notes"]" Component="OrderTax" style="width: 100%">
+                                        </RadzenLabel>
+                                        <div class="col-md-9">
+                                            <RadzenTextArea @bind-Value="PurchaseOrder.Notes" class="form-control form-control-lg form-control-solid" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="@Loc["Add"]" Click="@btnAddressTypesClick" />
                                         <RadzenGrid @ref="gridPurchaseOrders" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@(PurchaseOrder.PurchaseOrderItem)" TItem="PurchaseOrderItem"
                                                     EditMode="DataGridEditMode.Single" RowUpdate="@OnUpdateRow" RowCreate="@OnCreateRow">
@@ -70,8 +95,10 @@
                                         <div style="padding:3%">
                                             <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="@Loc["save"]" ButtonStyle="Radzen.ButtonStyle.Primary">
                                             </RadzenButton>
-                                            @*<button type="button" class="btn btn-bg-primary btn-block btn-flat" @onclick="OpenInstalmentAsync">@Loc["PayInstallment"]</button>
-                                            <button type="button" class="btn btn-info btn-block btn-flat" @onclick="PayWithMuiltMethod">@Loc["PayWithMuiltMethod"]</button>
+                                            <RadzenButton @ref="button1" ButtonType="Radzen.ButtonType.Button"  Click=@(args => OpenInstalmentAsync())   Text="@Loc["PayInstallment"]" ButtonStyle="Radzen.ButtonStyle.Info">
+                                            </RadzenButton>
+                                            @*<button type="button" class="btn btn-bg-primary btn-block btn-flat" @onclick="OpenInstalmentAsync">@Loc["PayInstallment"]</button>*@
+                                            @*<button type="button" class="btn btn-info btn-block btn-flat" @onclick="PayWithMuiltMethod">@Loc["PayWithMuiltMethod"]</button>
                                             <button type="button" class="btn btn-success btn-block btn-flat" @onclick="PayCash">@Loc["PayCash"]</button>*@
 
                                             <RadzenButton @ref="button2" ButtonStyle="Radzen.ButtonStyle.Light" Text="@Loc["Cancel"]" Click="@btnCancelClick">
