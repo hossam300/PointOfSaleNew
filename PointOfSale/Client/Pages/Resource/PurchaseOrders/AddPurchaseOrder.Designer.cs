@@ -88,6 +88,15 @@ namespace PointOfSale.Client.Pages.Resource.PurchaseOrders {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تقسيط.
+        /// </summary>
+        public static string PayInstallment {
+            get {
+                return ResourceManager.GetString("PayInstallment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to حفظ.
         /// </summary>
         public static string save {

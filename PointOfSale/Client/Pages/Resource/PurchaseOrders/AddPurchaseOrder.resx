@@ -126,6 +126,9 @@
   <data name="PayCash" xml:space="preserve">
     <value>دفع كاش</value>
   </data>
+  <data name="PayInstallment" xml:space="preserve">
+    <value>تقسيط</value>
+  </data>
   <data name="save" xml:space="preserve">
     <value>حفظ</value>
   </data>

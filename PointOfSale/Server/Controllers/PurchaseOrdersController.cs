@@ -32,7 +32,17 @@ namespace PointOfSale.Server.Controllers
 
             return Ok(purchaseOrder);
         }
+        [HttpGet("GetPurchaseOrderByNo/{id}")]
+        public async Task<IActionResult> GetPurchaseOrderByNo(string id)
+        {
 
+            var order = await _purchaseOrderService.GetOrderByNo(id);
+            if (order == null)
+            {
+                order = new PurchaseOrder();
+            }
+            return Ok(order);
+        }
         [HttpGet("GetAllWithIncludeByShopId/{id}")]
 
         public IActionResult GetAllWithIncludeByShopId(int id)
